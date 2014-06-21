@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"path": "/D/Code/Euler",
+			"file_exclude_patterns": [".tags", ".tags_sorted_by_file", ".gemtags", "go.sh", "*.sublime*"]
+		}
+	]
+}

@@ -34,7 +34,7 @@ int32 main(int32 argc, const char **argv)
 	ScopeTimer timer("Runtime");
 	try
 	{
-		cout << problem24(1e6) << endl;
+		cout << problem30(5) << endl;
 		return 0;
 	}
 	catch(string e)
@@ -737,7 +737,7 @@ string problem24(int32 n)
 		return "-1";
 	}
 
-	if(n > factorial<int32>(10))
+	if(n > factorial(10))
 	{
 		throw string("Can't find the zero-th permuatation or a negative permutation");
 		return "-1";
@@ -754,7 +754,7 @@ string problem24(int32 n)
 	stringstream ss;
 	for(int32 i = 10; i > 0; i--)
 	{
-		int32 f = factorial<int32>(i - 1);
+		int32 f = factorial(i - 1);
 		ss << digits[n / f];
 		digits.erase(digits.begin() + (n / f));
 		n %= f;
@@ -789,6 +789,280 @@ int32 problem25(int32 n)
 	}
 
 	return c;
+}
+int32 problem26(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Bad number for counting reciprocal decimal digit period");
+		return -1;
+	}
+
+	if(n == 1)
+	{
+		return 1;
+	}
+
+	int32 highestRepeater = 1;
+	int32 highestPeriod = -1;
+
+	for (int32 i = n; i > highestPeriod; i--)
+	{
+		int32 remainder = 1;
+		vector<bool> hasSeen(i, false);
+		vector<int32> whenSeen(i, -1);
+
+		int32 c = 0;
+		while(true)
+		{
+			int32 ix = remainder;
+			if(hasSeen[ix])
+			{
+				break;
+			}
+
+			hasSeen[ix] = true;
+			whenSeen[ix] = c;
+			c++;
+			remainder = (10 * remainder) % i;
+		}
+
+		int32 period = c - whenSeen[remainder];
+		if(period > highestPeriod)
+		{
+			highestPeriod = period;
+			highestRepeater = i;
+		}
+	}
+
+	return highestRepeater;
+}
+int32 problem27(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Bad restrictions on a and b (they belong to an empty set)");
+		return -1;
+	}
+
+	if(n == 1)
+	{
+		return 0;
+	}
+
+	if(n == 2)
+	{
+		// Every permutation does not generate any primes, so let's say a = b = 0
+		return 0;
+	}
+
+	vector<bool> isPrime;
+	sieveOfErotosthenes(n, isPrime);
+
+	int32 bestA = 0;
+	int32 bestB = 0;
+	int32 bestPrimeCount = 0;
+
+	for(int32 b = 0; b < n; b++)
+	{
+		if(!isPrime[b])
+		{
+			continue;
+		}
+
+		for(int32 a = 1 + (b == 2 ? -1 : 0); a < n; a += 2)
+		{
+			int32 x = 0;
+			while(isNumberPrime(x * x + a * x + b))
+			{
+				x++;
+			}
+
+			if(x > bestPrimeCount)
+			{
+				bestPrimeCount = x;
+				bestA = a;
+				bestB = b;
+			}
+		}
+
+		for(int32 a = 0; a < n; a++)
+		{
+			int32 x = 0;
+			while(isNumberPrime(x * x - a * x + b))
+			{
+				x++;
+			}
+
+			if(x > bestPrimeCount)
+			{
+				bestPrimeCount = x;
+				bestA = -a;
+				bestB = b;
+			}
+		}
+	}
+
+	cout << bestA << endl;
+	cout << bestB << endl;
+	cout << bestPrimeCount << endl;
+
+	return bestA * bestB;
+}
+int32 problem28(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Cannot have a spiral with a width less than one");
+		return -1;
+	}
+
+	if(n % 2 == 0)
+	{
+		throw string("Spiral with even side length is undefined");
+		return -1;
+	}
+
+	int32 x = (n - 1) / 2;
+	return 4 * (4 * x * x * x + 12 * x * x + 11 * x + 3) / 3 - 6 * x * (x + 1) - 3;
+}
+int32 problem29(int32 n)
+{
+	if(n < 2)
+	{
+		throw string("A number cannot be at least 2 and less than 2 at the same time");
+		return -1;
+	}
+
+	vector<vector<int32> > primeFactor(n + 1, vector<int32>(n + 1, 0));
+	for(int32 i = 2; i <= n; i++)
+	{
+		int32 remainder = i;
+		int32 j = 2;
+
+		while(j <= remainder)
+		{
+			if(remainder % j == 0)
+			{
+				primeFactor[i][j]++;
+				remainder /= j;
+				j = 2;
+			}
+			else
+			{
+				j++;
+			}
+		}
+	}
+
+	unordered_set<vector<int32> > uniqueValues;
+	for(int32 a = 2; a <= n; a++)
+	{
+		for(int32 b = 2; b <= n; b++)
+		{
+			vector<int32> factors = primeFactor[a];
+			for(int32 i = 0; i < factors.size(); i++)
+			{
+				factors[i] *= b;
+			}
+
+			uniqueValues.insert(factors);
+		}
+	}
+
+	return uniqueValues.size();
+}
+int32 problem30(int32 n)
+{
+	if(n < 0)
+	{
+		throw string("Negative powers of digits is uninteresting; result is 0");
+		return 0;
+	}
+
+	if(n == 0)
+	{
+		return 0;
+	}
+
+	if(n == 1)
+	{
+		return 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9;
+	}
+
+	int32 maxDigits = 1;
+	double nLogNine = n * log10(9.0);
+	while(nLogNine >= maxDigits - log10(static_cast<double>(maxDigits)))
+	{
+		maxDigits++;
+	}
+
+	vector<int32> cachedPowers(10);
+	for(int32 i = 0; i < 10; i++)
+	{
+		cachedPowers[i] = pow(static_cast<double>(i), n);
+	}
+
+	int32 iterationCount = 10;
+	for(int32 i = 11; i < 10 + maxDigits; i++)
+	{
+		iterationCount *= i;
+	}
+
+	iterationCount /= factorial(maxDigits);
+
+	vector<int32> goodNumbers;
+	vector<int32> sortedNumber(maxDigits, 0);
+	for(int32 i = 0; i < iterationCount; i++)
+	{
+		int32 sum = 0;
+		for(int32 j = 0; j < sortedNumber.size(); j++)
+		{
+			sum += cachedPowers[sortedNumber[j]];
+		}
+
+		int32 tempSum = sum;
+		if(sum > 1)
+		{
+			vector<int32> sortedSum(maxDigits);
+			for(int32 j = 0; j < sortedSum.size(); j++)
+			{
+				sortedSum[j] = tempSum % 10;
+				tempSum /= 10;
+			}
+
+			sort(sortedSum.begin(), sortedSum.end());
+
+			if(sortedNumber == sortedSum)
+			{
+				goodNumbers.push_back(sum);
+			}
+		}
+
+		int32 ix = sortedNumber.size() - 1;
+		while(sortedNumber[ix] == 9)
+		{
+			ix--;
+			if(ix < 0)
+			{
+				ix = 0;
+				break;
+			}
+		}
+
+		sortedNumber[ix]++;
+		if(sortedNumber[ix] == 10)
+		{
+			sortedNumber[ix] = 0;
+		}
+
+		for(int32 j = ix + 1; j < sortedNumber.size(); j++)
+		{
+			sortedNumber[j] = sortedNumber[ix];
+		}
+	}
+
+	return vectorSum(goodNumbers);
 }
 
 #pragma warning( pop )

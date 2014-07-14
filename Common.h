@@ -15,6 +15,7 @@
 #include <exception>
 #include <fstream>
 #include <iostream>
+#include <map>
 #include <sstream>
 #include <string>
 #include <unordered_set>
@@ -455,7 +456,7 @@ N sumOfDivisors(N n)
 }
 
 template <typename N>
-N factorial(int32 n)
+N factorial(N n)
 {
 	if(n < 0)
 	{
@@ -470,4 +471,75 @@ N factorial(int32 n)
 	}
 
 	return product;
+}
+
+template<typename T>
+size_t make_hash(const T& v)
+{
+    return hash<T>()(v);
+}
+
+// adapted from boost::hash_combine
+inline void hash_combine(size_t& h, const size_t& v)
+{
+    h ^= v + 0x9e3779b9 + (h << 6) + (h >> 2);
+}
+
+template<typename T>
+struct hash_container
+{
+    size_t operator()(const T& v) const
+    {
+        size_t h = 0;
+        for(typename T::const_iterator i = v.cbegin(); i != v.cend(); i++)
+        {
+            hash_combine(h, make_hash(*i));
+        }
+
+        return h;
+    }
+};
+
+namespace std
+{
+    template<typename T, typename U>
+    struct hash<pair<T, U> >
+    {
+        size_t operator()(const pair<T,U>& v) const
+        {
+            size_t h=make_hash(v.first);
+            hash_combine(h, make_hash(v.second));
+            return h;
+        }
+    };
+
+#ifndef _MSC_VER
+
+    template<typename... T>
+    struct hash<vector<T...> > : hash_container<vector<T...> > {};
+
+    template<typename... T>
+    struct hash<map<T...> > : hash_container<map<T...> > {};
+
+#else
+
+	template<typename T>
+	struct hash<vector<T> > : hash_container<vector<T> > {};
+
+	template<typename T, typename U>
+	struct hash<map<T, U> > : hash_container<map<T, U> > {};
+
+#endif
+}
+
+template<typename T>
+T vectorSum(const vector<T>& v)
+{
+	T sum(0);
+	for(typename vector<T>::const_iterator i = v.cbegin(); i != v.cend(); i++)
+	{
+		sum += *i;
+	}
+
+	return sum;
 }

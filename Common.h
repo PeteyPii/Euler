@@ -7,7 +7,8 @@
 
 *******************************************************************************/
 
-#pragma once
+#ifndef COMMON_H
+#define COMMON_H
 
 #include <algorithm>
 #include <cmath>
@@ -543,3 +544,5 @@ T vectorSum(const vector<T>& v)
 
 	return sum;
 }
+
+#endif

@@ -7,7 +7,8 @@
 
 *******************************************************************************/
 
-#pragma once
+#ifndef EULER_H
+#define EULER_H
 
 #include "Common.h"
 
@@ -41,3 +42,5 @@ int32		problem27(int32 n);				// Product of a and b where x^2+ax+b yields the mo
 int32		problem28(int32 n);				// Sum of the diagonals in a n*n spiral of consecutive numbers.
 int32		problem29(int32 n);				// Number of distinct powers of a^b where a and b are between 2 and n (inclusive).
 int32		problem30(int32 n);				// Sum of all the numbers that can be written as the sum of nth powers of their digits.
+
+#endif

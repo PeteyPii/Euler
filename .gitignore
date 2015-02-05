@@ -21,5 +21,4 @@
 *.unsuccessfulbuild
 .tags*
 *.sublime-workspace
-go.sh
 *.filters

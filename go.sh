@@ -1,1 +1,0 @@
-g++ -std=c++11 -Wall -ansi Euler.cpp Common.cpp -o Euler && ./Euler

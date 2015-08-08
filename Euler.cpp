@@ -34,7 +34,42 @@ int32 main(int32 argc, const char **argv)
 	ScopeTimer timer("Runtime");
 	try
 	{
-		cout << problem30(5) << endl;
+		// cout << problem1(1000) << endl;
+		// cout << problem2(4000000) << endl;
+		// cout << problem3(600851475143) << endl;
+		// cout << problem4(3) << endl;
+		// cout << problem5(20) << endl;
+
+		// cout << problem6(100) << endl;
+		// cout << problem7(10001) << endl;
+		// cout << problem8(13) << endl;
+		// cout << problem9() << endl;
+		// cout << problem10(2000000) << endl;
+
+		// cout << problem11(4, 20) << endl;
+		// cout << problem12(500) << endl;
+		// cout << problem13(10) << endl;
+		// cout << problem14(1000000) << endl;
+		// cout << problem15(20, 20) << endl;
+
+		// cout << problem16(1000) << endl;
+		// cout << problem17(1000) << endl;
+		// cout << problem18(15) << endl;
+		// cout << problem19(2000) << endl;
+		// cout << problem20(100) << endl;
+
+		// cout << problem21(10000) << endl;
+		// cout << problem22() << endl;
+		// cout << problem23() << endl;
+		// cout << problem24(1000000) << endl;
+		// cout << problem25(1000) << endl;
+
+		// cout << problem26(1000) << endl;
+		// cout << problem27(1000) << endl;
+		// cout << problem28(1001) << endl;
+		// cout << problem29(100) << endl;
+		// cout << problem30(5) << endl;
+
 		return 0;
 	}
 	catch(string e)
@@ -194,7 +229,7 @@ int64 problem7(int64 n)
 
 	return -1;
 }
-int32 problem8(int32 n)
+int64 problem8(int32 n)
 {
 	ifstream fin("p8.txt");
 	assertFileOpened(fin);
@@ -206,10 +241,10 @@ int32 problem8(int32 n)
 		full += temp;
 	}
 
-	int32 max = 0;
+	int64 max = 0;
 	for(int32 i = 0; i <= full.length() - n; i++)
 	{
-		int32 x = productOfDigits(stringToNumber<int32>(full.substr(i, n)));
+		int64 x = productOfDigits(stringToNumber<int64>(full.substr(i, n)));
 		if(x > max)
 		{
 			max = x;
@@ -385,7 +420,7 @@ string problem13(int32 n)
 
 	stringstream ss;
 	ss << x;
-	return ss.str();
+	return ss.str().substr(0, n);
 }
 int32 problem14(int32 n)
 {
@@ -633,7 +668,6 @@ int32 problem20(int32 n)
 	for(int32 i = 1; i <= n; i++)
 	{
 		x *= i;
-		cout << x << endl;
 	}
 
 	return x.sumOfDigits();
@@ -652,7 +686,8 @@ int32 problem21(int32 n)
 	}
 
 	int32 sum = 0;
-	for(int32 i = 1; i < n; i++)
+	// start at 2 since 1 isn't an amicable number
+	for(int32 i = 2; i < n; i++)
 	{
 		int32 x = sumOfDivisors(i);
 
@@ -902,10 +937,6 @@ int32 problem27(int32 n)
 			}
 		}
 	}
-
-	cout << bestA << endl;
-	cout << bestB << endl;
-	cout << bestPrimeCount << endl;
 
 	return bestA * bestB;
 }

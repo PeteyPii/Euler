@@ -20,7 +20,7 @@ int64		problem5(int64 n);				// Smallest multiple of numbers up to n.
 
 int64		problem6(int64 n);				// Difference between square of sum and sum of squares up to n.
 int64		problem7(int64 n);				// Find the nth prime.
-int32		problem8(int32 n);				// Max product of n-digit number within extremely long number.
+int64		problem8(int32 n);				// Max product of n-digit number within extremely long number.
 int32		problem9();						// a+b+c=1000 and a^2+b^2=c^2, find a*b*c.
 int64		problem10(int64 n);				// Sum of every prime up to n.
 

@@ -67,7 +67,7 @@ int32 BigInteger::numberOfDigits() const
 
 uint8 BigInteger::getNthDigitFromRight(int32 n) const	// n is zero based
 {
-	if(n >= m_vnDigits.size())
+	if(n >= static_cast<int32>(m_vnDigits.size()))
 	{
 		return 0;
 	}
@@ -89,7 +89,7 @@ uint8 BigInteger::getNthDigitFromLeft(int32 n) const	// n is zero based
 		return 0;
 	}
 
-	int32 i = 0;
+	uint32 i = 0;
 	while(i < m_vnDigits.size() && m_vnDigits[m_vnDigits.size() - 1 - i] == 0)
 	{
 		i++;
@@ -111,7 +111,7 @@ uint8 BigInteger::getNthDigitFromLeft(int32 n) const	// n is zero based
 
 bool BigInteger::isZero() const
 {
-	for(int32 i = 0; i < m_vnDigits.size(); i++)
+	for(uint32 i = 0; i < m_vnDigits.size(); i++)
 	{
 		if(m_vnDigits[i] != 0)
 		{
@@ -125,7 +125,7 @@ bool BigInteger::isZero() const
 int32 BigInteger::sumOfDigits() const
 {
 	int32 sum = 0;
-	for(int32 i = 0; i < m_vnDigits.size(); i++)
+	for(uint32 i = 0; i < m_vnDigits.size(); i++)
 	{
 		sum += m_vnDigits[i];
 	}
@@ -135,7 +135,7 @@ int32 BigInteger::sumOfDigits() const
 int32 BigInteger::productOfDigits() const
 {
 	int32 product = 1;
-	for(int32 i = 0; i < m_vnDigits.size(); i++)
+	for(uint32 i = 0; i < m_vnDigits.size(); i++)
 	{
 		product *= m_vnDigits[i];
 		if(product == 0)
@@ -155,7 +155,7 @@ BigInteger BigInteger::operator+(const BigInteger& obj) const
 	digits.resize(1 + (maxVal(m_vnDigits.size(), obj.m_vnDigits.size())));
 
 	int32 carry = 0;
-	for(int32 i = 0; i < digits.size(); i++)
+	for(uint32 i = 0; i < digits.size(); i++)
 	{
 		uint16 sum = getNthDigitFromRight(i) + obj.getNthDigitFromRight(i) + carry;
 		digits[i] = sum % retVal.m_nBase;
@@ -198,7 +198,7 @@ BigInteger BigInteger::operator*(const BigInteger& obj) const
 		uint8 carry = 0;
 		uint8 factor = obj.m_vnDigits[0];
 
-		for(int32 i = 0; i < m_vnDigits.size(); i++)
+		for(uint32 i = 0; i < m_vnDigits.size(); i++)
 		{
 			uint16 val = factor * m_vnDigits[i] + carry;
 			digits[i] = val % m_nBase;
@@ -211,7 +211,7 @@ BigInteger BigInteger::operator*(const BigInteger& obj) const
 		return retVal;
 	}
 
-	for(int32 i = 0; i < obj.m_vnDigits.size(); i++)
+	for(uint32 i = 0; i < obj.m_vnDigits.size(); i++)
 	{
 		uint8 factor = obj.m_vnDigits[i];
 
@@ -223,13 +223,13 @@ BigInteger BigInteger::operator*(const BigInteger& obj) const
 		BigInteger temp(0, m_nBase);
 		temp.m_vnDigits.resize(m_vnDigits.size() + i + 1);
 
-		for(int32 j = 0; j < i; j++)
+		for(uint32 j = 0; j < i; j++)
 		{
 			temp.m_vnDigits[j] = 0;
 		}
 
 		uint8 carry = 0;
-		for(int32 j = 0; j <= m_vnDigits.size(); j++)
+		for(uint32 j = 0; j <= m_vnDigits.size(); j++)
 		{
 			uint16 val = factor * getNthDigitFromRight(j) + carry;
 			temp.m_vnDigits[j + i] = val % m_nBase;

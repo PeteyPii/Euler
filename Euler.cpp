@@ -244,7 +244,7 @@ int64 problem8(int32 n)
 	}
 
 	int64 max = 0;
-	for(int32 i = 0; i <= full.length() - n; i++)
+	for(uint32 i = 0; i <= full.length() - n; i++)
 	{
 		int64 x = productOfDigits(stringToNumber<int64>(full.substr(i, n)));
 		if(x > max)
@@ -716,16 +716,16 @@ int64 problem22()
 	sort(names.begin(), names.end());
 
 	int64 totalScore = 0;
-	for(int32 i = 0; i < names.size(); i++)
+	for(uint32 i = 0; i < names.size(); i++)
 	{
 		string& name = names[i];
-		int32 sum = 0;
-		for(int32 j = 0; j < name.size(); j++)
+		uint32 sum = 0;
+		for(uint32 j = 0; j < name.size(); j++)
 		{
 			sum += name[j] - 'A' + 1;
 		}
 
-		totalScore += sum * (i + 1);
+		totalScore += static_cast<int64>(sum * (i + 1));
 	}
 
 	return totalScore;
@@ -742,9 +742,9 @@ int32 problem23()
 	}
 
 	vector<bool> hasSum(28123 + 1, false);
-	for(int32 i = 0; i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123; i++)
+	for(uint32 i = 0; i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123; i++)
 	{
-		for(int32 j = i; j < abundantNumbers.size(); j++)
+		for(uint32 j = i; j < abundantNumbers.size(); j++)
 		{
 			if(abundantNumbers[i] + abundantNumbers[j] > 28123)
 			{
@@ -994,7 +994,7 @@ int32 problem29(int32 n)
 		for(int32 b = 2; b <= n; b++)
 		{
 			vector<int32> factors = primeFactor[a];
-			for(int32 i = 0; i < factors.size(); i++)
+			for(uint32 i = 0; i < factors.size(); i++)
 			{
 				factors[i] *= b;
 			}
@@ -1049,7 +1049,7 @@ int32 problem30(int32 n)
 	for(int32 i = 0; i < iterationCount; i++)
 	{
 		int32 sum = 0;
-		for(int32 j = 0; j < sortedNumber.size(); j++)
+		for(uint32 j = 0; j < sortedNumber.size(); j++)
 		{
 			sum += cachedPowers[sortedNumber[j]];
 		}
@@ -1058,7 +1058,7 @@ int32 problem30(int32 n)
 		if(sum > 1)
 		{
 			vector<int32> sortedSum(maxDigits);
-			for(int32 j = 0; j < sortedSum.size(); j++)
+			for(uint32 j = 0; j < sortedSum.size(); j++)
 			{
 				sortedSum[j] = tempSum % 10;
 				tempSum /= 10;
@@ -1089,7 +1089,7 @@ int32 problem30(int32 n)
 			sortedNumber[ix] = 0;
 		}
 
-		for(int32 j = ix + 1; j < sortedNumber.size(); j++)
+		for(uint32 j = ix + 1; j < sortedNumber.size(); j++)
 		{
 			sortedNumber[j] = sortedNumber[ix];
 		}
@@ -1119,7 +1119,7 @@ int32 problem31(int32 n)
 	// value using a number of each coin. The code goes through the evaluation of B(x) and
 	// then its inverse, A(x), to get the coefficient values.
 
-	for(int32 i = 0; i < coinValues.size(); i++)
+	for(uint32 i = 0; i < coinValues.size(); i++)
 	{
 		map<int32, int32> tempFps;
 		for(auto it = fps.begin(); it != fps.end(); it++)

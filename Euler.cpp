@@ -29,48 +29,73 @@ using namespace std;
 
 *******************************************************************************/
 
+void verifyResults(int32 begin, int32 end)
+{
+	typedef bool (*fpCheck)();
+	const fpCheck checks[] =
+	{
+		[] () -> bool { return true; },
+
+		[] () -> bool { return problem1(1000) == 233168; },
+		[] () -> bool { return problem2(4000000) == 4613732; },
+		[] () -> bool { return problem3(600851475143) == 6857; },
+		[] () -> bool { return problem4(3) == 906609; },
+		[] () -> bool { return problem5(20) == 232792560; },
+
+		[] () -> bool { return problem6(100) == 25164150; },
+		[] () -> bool { return problem7(10001) == 104743; },
+		[] () -> bool { return problem8(13) == 23514624000; },
+		[] () -> bool { return problem9() == 31875000; },
+		[] () -> bool { return problem10(2000000) == 142913828922; },
+
+		[] () -> bool { return problem11(4, 20) == 70600674; },
+		[] () -> bool { return problem12(500) == 76576500; },
+		[] () -> bool { return problem13(10) == "5537376230"; },
+		[] () -> bool { return problem14(1000000) == 837799; },
+		[] () -> bool { return problem15(20, 20) == 137846528820; },
+
+		[] () -> bool { return problem16(1000) == 1366; },
+		[] () -> bool { return problem17(1000) == 21124; },
+		[] () -> bool { return problem18(15) == 1074; },
+		[] () -> bool { return problem19(2000) == 171; },
+		[] () -> bool { return problem20(100) == 648; },
+
+		[] () -> bool { return problem21(10000) == 31626; },
+		[] () -> bool { return problem22() == 871198282; },
+		[] () -> bool { return problem23() == 4179871; },
+		[] () -> bool { return problem24(1000000) == "2783915460"; },
+		[] () -> bool { return problem25(1000) == 4782; },
+
+		[] () -> bool { return problem26(1000) == 983; },
+		[] () -> bool { return problem27(1000) == -59231; },
+		[] () -> bool { return problem28(1001) == 669171001; },
+		[] () -> bool { return problem29(100) == 9183; },
+		[] () -> bool { return problem30(5) == 443839; },
+
+		[] () -> bool { return problem31(200) == 73682; },
+
+		[] () -> bool { return false; }
+	};
+
+	for (int32 i = begin; i <= end; i++)
+	{
+		if (checks[i]())
+		{
+			cout << "Problem " << i << " SUCCEEDED!" << endl;
+		}
+		else
+		{
+			cout << "Problem " << i << " FAILED!" << endl;
+		}
+	}
+}
+
 int32 main(int32 argc, const char **argv)
 {
 	ScopeTimer timer("Runtime");
 	try
 	{
-		// cout << problem1(1000) << endl;
-		// cout << problem2(4000000) << endl;
-		// cout << problem3(600851475143) << endl;
-		// cout << problem4(3) << endl;
-		// cout << problem5(20) << endl;
-
-		// cout << problem6(100) << endl;
-		// cout << problem7(10001) << endl;
-		// cout << problem8(13) << endl;
-		// cout << problem9() << endl;
-		// cout << problem10(2000000) << endl;
-
-		// cout << problem11(4, 20) << endl;
-		// cout << problem12(500) << endl;
-		// cout << problem13(10) << endl;
-		// cout << problem14(1000000) << endl;
-		// cout << problem15(20, 20) << endl;
-
-		// cout << problem16(1000) << endl;
-		// cout << problem17(1000) << endl;
-		// cout << problem18(15) << endl;
-		// cout << problem19(2000) << endl;
-		// cout << problem20(100) << endl;
-
-		// cout << problem21(10000) << endl;
-		// cout << problem22() << endl;
-		// cout << problem23() << endl;
-		// cout << problem24(1000000) << endl;
-		// cout << problem25(1000) << endl;
-
-		// cout << problem26(1000) << endl;
-		// cout << problem27(1000) << endl;
-		// cout << problem28(1001) << endl;
-		// cout << problem29(100) << endl;
-		// cout << problem30(5) << endl;
-
-		cout << problem31(200) << endl;
+		verifyResults(1, 31);
 
 		return 0;
 	}

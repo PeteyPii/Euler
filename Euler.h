@@ -49,5 +49,6 @@ int32		problem29(int32 n);				// Number of distinct powers of a^b where a and b 
 int32		problem30(int32 n);				// Sum of all the numbers that can be written as the sum of nth powers of their digits.
 
 int32		problem31(int32 n);				// Number of ways to make n pence with British currency.
+int32		problem32();					// Sum of all 1-9 pandigital multiplicand/multiplier/product identities.
 
 #endif

@@ -31,6 +31,20 @@ using namespace std;
 
 *******************************************************************************/
 
+template <typename N, typename T>
+bool checkEquality(N a, T b)
+{
+	if (a == b)
+	{
+		return true;
+	}
+	else
+	{
+		cout << "BAD: " << a << " != " << b << endl;
+		return false;
+	}
+}
+
 void verifyResults(int32 begin, int32 end)
 {
 	typedef bool (*fpCheck)();
@@ -38,43 +52,44 @@ void verifyResults(int32 begin, int32 end)
 	{
 		[] () -> bool { return true; },
 
-		[] () -> bool { return problem1(1000) == 233168; },
-		[] () -> bool { return problem2(4000000) == 4613732; },
-		[] () -> bool { return problem3(600851475143) == 6857; },
-		[] () -> bool { return problem4(3) == 906609; },
-		[] () -> bool { return problem5(20) == 232792560; },
+		[] () -> bool { return checkEquality(problem1(1000), 233168); },
+		[] () -> bool { return checkEquality(problem2(4000000), 4613732); },
+		[] () -> bool { return checkEquality(problem3(600851475143), 6857); },
+		[] () -> bool { return checkEquality(problem4(3), 906609); },
+		[] () -> bool { return checkEquality(problem5(20), 232792560); },
 
-		[] () -> bool { return problem6(100) == 25164150; },
-		[] () -> bool { return problem7(10001) == 104743; },
-		[] () -> bool { return problem8(13) == 23514624000; },
-		[] () -> bool { return problem9() == 31875000; },
-		[] () -> bool { return problem10(2000000) == 142913828922; },
+		[] () -> bool { return checkEquality(problem6(100), 25164150); },
+		[] () -> bool { return checkEquality(problem7(10001), 104743); },
+		[] () -> bool { return checkEquality(problem8(13), 23514624000); },
+		[] () -> bool { return checkEquality(problem9(), 31875000); },
+		[] () -> bool { return checkEquality(problem10(2000000), 142913828922); },
 
-		[] () -> bool { return problem11(4, 20) == 70600674; },
-		[] () -> bool { return problem12(500) == 76576500; },
-		[] () -> bool { return problem13(10) == "5537376230"; },
-		[] () -> bool { return problem14(1000000) == 837799; },
-		[] () -> bool { return problem15(20, 20) == 137846528820; },
+		[] () -> bool { return checkEquality(problem11(4, 20), 70600674); },
+		[] () -> bool { return checkEquality(problem12(500), 76576500); },
+		[] () -> bool { return checkEquality(problem13(10), "5537376230"); },
+		[] () -> bool { return checkEquality(problem14(1000000), 837799); },
+		[] () -> bool { return checkEquality(problem15(20, 20), 137846528820); },
 
-		[] () -> bool { return problem16(1000) == 1366; },
-		[] () -> bool { return problem17(1000) == 21124; },
-		[] () -> bool { return problem18(15) == 1074; },
-		[] () -> bool { return problem19(2000) == 171; },
-		[] () -> bool { return problem20(100) == 648; },
+		[] () -> bool { return checkEquality(problem16(1000), 1366); },
+		[] () -> bool { return checkEquality(problem17(1000), 21124); },
+		[] () -> bool { return checkEquality(problem18(15), 1074); },
+		[] () -> bool { return checkEquality(problem19(2000), 171); },
+		[] () -> bool { return checkEquality(problem20(100), 648); },
 
-		[] () -> bool { return problem21(10000) == 31626; },
-		[] () -> bool { return problem22() == 871198282; },
-		[] () -> bool { return problem23() == 4179871; },
-		[] () -> bool { return problem24(1000000) == "2783915460"; },
-		[] () -> bool { return problem25(1000) == 4782; },
+		[] () -> bool { return checkEquality(problem21(10000), 31626); },
+		[] () -> bool { return checkEquality(problem22(), 871198282); },
+		[] () -> bool { return checkEquality(problem23(), 4179871); },
+		[] () -> bool { return checkEquality(problem24(1000000), "2783915460"); },
+		[] () -> bool { return checkEquality(problem25(1000), 4782); },
 
-		[] () -> bool { return problem26(1000) == 983; },
-		[] () -> bool { return problem27(1000) == -59231; },
-		[] () -> bool { return problem28(1001) == 669171001; },
-		[] () -> bool { return problem29(100) == 9183; },
-		[] () -> bool { return problem30(5) == 443839; },
+		[] () -> bool { return checkEquality(problem26(1000), 983); },
+		[] () -> bool { return checkEquality(problem27(1000), -59231); },
+		[] () -> bool { return checkEquality(problem28(1001), 669171001); },
+		[] () -> bool { return checkEquality(problem29(100), 9183); },
+		[] () -> bool { return checkEquality(problem30(5), 443839); },
 
-		[] () -> bool { return problem31(200) == 73682; },
+		[] () -> bool { return checkEquality(problem31(200), 73682); },
+		[] () -> bool { return checkEquality(problem32(), 45228); },
 
 		[] () -> bool { return false; }
 	};
@@ -97,7 +112,7 @@ int32 main(int32 argc, const char **argv)
 	ScopeTimer timer("Runtime");
 	try
 	{
-		verifyResults(1, 31);
+		verifyResults(32, 32);
 
 		return 0;
 	}
@@ -1163,7 +1178,7 @@ int32 problem31(int32 n)
 	for(int32 i = 1; i < last->first; i++)
 	{
 		int32 sum = 0;
-		for (int32 j = 0; j < i; j++)
+		for(int32 j = 0; j < i; j++)
 		{
 			sum += generatingFunction[j] * fps[i - j];
 		}
@@ -1173,6 +1188,39 @@ int32 problem31(int32 n)
 	// Note: if n >= sum of all distinct coin values, the function needs to be extended
 	// to evalutate the n-th term of a recurrence relation defined by fps
 	return generatingFunction[n];
+}
+int32 problem32()
+{
+	string permutation = "123456789";
+	sort(permutation.begin(), permutation.end());
+	set<int32> pandigitalIdentities;
+
+	// Break up every permutation of "123456789" and check if a product is achieved. THe first part will be the
+	// product and the second part will be split into two factors. The first factor can always be the smallest since
+	// we will eventually check the equivalent permutation where that factor is the second one
+	do
+	{
+		int32 product;
+		int32 multiplicand;
+		int32 multiplier;
+
+		for(int32 j : {1, 2})
+		{
+			// Product can only be 4 digits since 5 digits is above what can be multiplied to by a total of 4 digits
+			// and 3 digits is below what can be multiplied to with a total of 6 digits
+			product = stringToNumber<int32>(permutation.substr(0, 4));
+			multiplicand = stringToNumber<int32>(permutation.substr(4, j));
+			multiplier = stringToNumber<int32>(permutation.substr(4 + j));
+
+			if(product == multiplicand * multiplier)
+			{
+				pandigitalIdentities.insert(product);
+			}
+		}
+	}
+	while(next_permutation(permutation.begin(), permutation.end()));
+
+	return accumulate(pandigitalIdentities.begin(), pandigitalIdentities.end(), 0);
 }
 
 #ifdef _MSC_VER

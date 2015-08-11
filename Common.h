@@ -18,6 +18,8 @@
 #include <fstream>
 #include <iostream>
 #include <map>
+#include <numeric>
+#include <set>
 #include <sstream>
 #include <string>
 #include <unordered_set>

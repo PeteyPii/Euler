@@ -7,9 +7,11 @@
 
 *******************************************************************************/
 
+#ifdef _MSC_VER
 #pragma warning( push )
 #pragma warning( disable : 4244 )	// conversion, possible loss of data
 #pragma warning( disable : 4018 )	// signed/unsigned mismatch
+#endif
 
 #include "Euler.h"
 
@@ -1173,4 +1175,6 @@ int32 problem31(int32 n)
 	return generatingFunction[n];
 }
 
+#ifdef _MSC_VER
 #pragma warning( pop )
+#endif

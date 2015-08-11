@@ -7,9 +7,11 @@
 
 *******************************************************************************/
 
+#ifdef _MSC_VER
 #pragma warning( push )
 #pragma warning( disable : 4244 )	// conversion, possible loss of data
 #pragma warning( disable : 4018 )	// signed/unsigned mismatch
+#endif
 
 #include "Common.h"
 
@@ -431,4 +433,6 @@ void printProgress(uint64 current, uint64 total, int32 intervals)
 	}
 }
 
+#ifdef _MSC_VER
 #pragma warning( pop )
+#endif

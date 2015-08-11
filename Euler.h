@@ -48,6 +48,6 @@ int32		problem28(int32 n);				// Sum of the diagonals in a n*n spiral of consecu
 int32		problem29(int32 n);				// Number of distinct powers of a^b where a and b are between 2 and n (inclusive).
 int32		problem30(int32 n);				// Sum of all the numbers that can be written as the sum of nth powers of their digits.
 
-int32		problem31(int32 n);				// Number of ways to make n pence with British currency
+int32		problem31(int32 n);				// Number of ways to make n pence with British currency.
 
 #endif

@@ -15,36 +15,35 @@
 
 using namespace std;
 
-#ifndef _MSC_VER
-
-ScopeTimer::ScopeTimer(string name) :
+ScopeTimer::ScopeTimer(string name, bool isVerbose) :
 	m_t0(chrono::high_resolution_clock::now()),
-	m_sName(name)
+	m_sName(name),
+	m_bIsVerbose(isVerbose)
 {
-	cout << m_sName << " timer began now." << endl;
+	if (m_bIsVerbose)
+	{
+		cout << m_sName << " timer began now." << endl;
+	}
 }
+
 ScopeTimer::~ScopeTimer()
+{
+	if (m_bIsVerbose)
+	{
+		cout << m_sName << " timer finished after " << getElapsedMilliseconds() << " ms." << endl;
+	}
+}
+
+int64 ScopeTimer::getElapsedMilliseconds() const
 {
 	chrono::milliseconds timeElapsed =
-	chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - m_t0);
+		chrono::duration_cast<chrono::milliseconds>(chrono::high_resolution_clock::now() - m_t0);
 
-	cout << m_sName << " timer finished after " << timeElapsed.count() << " ms." << endl;
+	return timeElapsed.count();
 }
-
-#else
-
-ScopeTimer::ScopeTimer(string name)
-{
-}
-ScopeTimer::~ScopeTimer()
-{
-}
-
-#endif
 
 BigInteger::~BigInteger()
 {
-
 }
 
 int32 BigInteger::numberOfDigits() const

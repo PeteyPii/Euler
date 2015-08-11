@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <chrono>
 #include <exception>
 #include <fstream>
 #include <iostream>
@@ -21,10 +22,6 @@
 #include <string>
 #include <unordered_set>
 #include <vector>
-
-#ifndef _MSC_VER
-#include <chrono>
-#endif
 
 /*******************************************************************************
 
@@ -49,29 +46,19 @@ typedef		int64_t		int64;
 
 using namespace std;
 
-#ifndef _MSC_VER
-
 class ScopeTimer
 {
 public:
-	ScopeTimer(string name);
+	ScopeTimer(string name, bool isVerbose = true);
 	~ScopeTimer();
+
+	int64 getElapsedMilliseconds() const;
 
 private:
 	chrono::high_resolution_clock::time_point m_t0;
 	string m_sName;
+	bool m_bIsVerbose;
 };
-
-#else
-
-class ScopeTimer
-{
-public:
-	ScopeTimer(string name);
-	~ScopeTimer();
-};
-
-#endif
 
 class BigInteger
 {
@@ -104,9 +91,6 @@ private:
 	}
 
 public:
-
-#ifndef _MSC_VER
-
 	template <typename N>
 	BigInteger(N n, uint8 base = 10) :
 	 	m_nBase(base),
@@ -118,28 +102,7 @@ public:
 	BigInteger() :
 		BigInteger(0)
 	{
-
 	}
-
-#else
-
-	template <typename N>
-	BigInteger(N n, uint8 base = 10) :
-	 	m_nBase(base),
-		m_vnDigits(1, 0),
-		m_bIsNegative(false)
-	{
-		init(n);
-	}
-	BigInteger() :
-		m_nBase(10),
-		m_vnDigits(1, 0),
-		m_bIsNegative(false)
-	{
-		init(0);
-	}
-
-#endif
 
 	~BigInteger();
 

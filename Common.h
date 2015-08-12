@@ -248,6 +248,19 @@ inline T maxVal(const T& a, const T& b)
 }
 
 template <typename N>
+N gcd(N a, N b)
+{
+	while (b != N(0))
+	{
+		N temp = b;
+		b = a % b;
+		a = temp;
+	}
+
+	return a;
+}
+
+template <typename N>
 bool isNumberPrime(N n)
 {
 	if(n < 2)
@@ -501,13 +514,14 @@ namespace std
 template<typename T>
 T vectorSum(const vector<T>& v)
 {
-	T sum(0);
-	for(typename vector<T>::const_iterator i = v.cbegin(); i != v.cend(); i++)
-	{
-		sum += *i;
-	}
-
-	return sum;
+	return accumulate(v.cbegin(), v.cend(), T(0));
 }
+
+template<typename T>
+T vectorProduct(const vector<T>& v)
+{
+	return accumulate(v.cbegin(), v.cend(), T(1), [] (T product, T item) -> T { return product * item; });
+}
+
 
 #endif

@@ -50,5 +50,6 @@ int32		problem30(int32 n);				// Sum of all the numbers that can be written as t
 
 int32		problem31(int32 n);				// Number of ways to make n pence with British currency.
 int32		problem32();					// Sum of all 1-9 pandigital multiplicand/multiplier/product identities.
+int32		problem33();					// Denominator of product of faulty division rule fractions.
 
 #endif

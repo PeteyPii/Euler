@@ -91,6 +91,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem31(200), 73682); },
 		[] () -> bool { return checkEquality(problem32(), 45228); },
 		[] () -> bool { return checkEquality(problem33(), 100); },
+		[] () -> bool { return checkEquality(problem34(), 40730); },
 
 		[] () -> bool { return false; }
 	};
@@ -113,7 +114,7 @@ int32 main(int32 argc, const char **argv)
 	ScopeTimer timer("Runtime");
 	try
 	{
-		verifyResults(33, 33);
+		verifyResults(34, 34);
 
 		return 0;
 	}
@@ -1263,6 +1264,38 @@ int32 problem33()
 	int32 productDenominator = vectorProduct(denominators);
 
 	return productDenominator / gcd(productNumerator, productDenominator);
+}
+int32 problem34()
+{
+	// 8 * 9! = 2903040 so less than 7 digits
+	// 7 * 9! = 2540160 <-- highest number that could possibly work
+
+	vector<int32> digitFactorials;
+	for(int32 i = 0; i < 10; i++)
+	{
+		digitFactorials.push_back(factorial(i));
+	}
+
+	int32 total = 0;
+
+	// Don't do one digit numbers as per the spec
+	for(int32 i = 10; i <= 2540160; i++)
+	{
+		int32 n = i;
+		int32 sum = 0;
+		while(n > 0)
+		{
+			sum += digitFactorials[n % 10];
+			n /= 10;
+		}
+
+		if (sum == i)
+		{
+			total += sum;
+		}
+	}
+
+	return total;
 }
 
 #ifdef _MSC_VER

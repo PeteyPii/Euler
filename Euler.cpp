@@ -40,7 +40,7 @@ bool checkEquality(N a, T b)
 	}
 	else
 	{
-		cout << "BAD: " << a << " != " << b << endl;
+		cout << "BAD! " << a << " != " << b << endl;
 		return false;
 	}
 }
@@ -96,22 +96,55 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return false; }
 	};
 
-	for (int32 i = begin; i <= end; i++)
+	if (end - begin + 1 > 0)
 	{
-		if (checks[i]())
+		int64 total = 0;
+		int64 maxTime = -1;
+		int32 maxProblem = -1;
+
+		for (int32 i = begin; i <= end; i++)
 		{
-			cout << "Problem " << i << " SUCCEEDED!" << endl;
+			ScopeTimer timer("", false);
+			try
+			{
+				if (checks[i]())
+				{
+					cout << "Problem " << i << " SUCCEEDED! ";
+				}
+				else
+				{
+					cout << "Problem " << i << " FAILED! ";
+				}
+			}
+			catch(const string& e)
+			{
+				cout << "BAD! An excpetion was thrown: " << e << endl;
+				cout << "Problem " << i << " FAILED! ";
+			}
+			catch(...)
+			{
+				cout << "Problem " << i << " FAILED! ";
+			}
+
+			int64 elapsed = timer.getElapsedMilliseconds();
+			cout << "(" << elapsed << " ms)" << endl;
+			total += elapsed;
+
+			if (elapsed > maxTime)
+			{
+				maxTime = elapsed;
+				maxProblem = i;
+			}
 		}
-		else
-		{
-			cout << "Problem " << i << " FAILED!" << endl;
-		}
+
+		cout << "Total time: " << total << " ms" << endl;
+		cout << "Average time: " << total / (end - begin + 1) << " ms" << endl;
+		cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")" << endl;
 	}
 }
 
 int32 main(int32 argc, const char **argv)
 {
-	ScopeTimer timer("Runtime");
 	try
 	{
 		verifyResults(34, 34);

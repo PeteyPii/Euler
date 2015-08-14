@@ -52,5 +52,6 @@ int32		problem31(int32 n);				// Number of ways to make n pence with British cur
 int32		problem32();					// Sum of all 1-9 pandigital multiplicand/multiplier/product identities.
 int32		problem33();					// Denominator of product of faulty division rule fractions.
 int32		problem34();					// Sum of all numbers which are equal to the sum of the factorial of their digits.
+int32		problem35(int32 n);				// Number of circular primes there are below n.
 
 #endif

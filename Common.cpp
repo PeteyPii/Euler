@@ -391,15 +391,20 @@ bool verifySieve(int64 n)
 	return true;
 }
 
-bool isPalindrome(int32 n)
+bool isPalindrome(int32 n, int32 base)
 {
+	if(base < 2)
+	{
+		throw "Base below 2 is invalid";
+	}
+
 	const int32 temp = n;
 	int32 x = 0;
 	while(n != 0)
 	{
-		x *= 10;
-		x += n % 10;
-		n /= 10;
+		x *= base;
+		x += n % base;
+		n /= base;
 	}
 
 	return temp == x;

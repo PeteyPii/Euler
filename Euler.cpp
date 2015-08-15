@@ -94,6 +94,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem34(), 40730); },
 		[] () -> bool { return checkEquality(problem35(1000000), 55); },
 
+		[] () -> bool { return checkEquality(problem36(1000000), 872187); },
+
 		[] () -> bool { return false; }
 	};
 
@@ -148,7 +150,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(35, 35);
+		verifyResults(36, 36);
 
 		return 0;
 	}
@@ -1231,7 +1233,7 @@ int32 problem32()
 	sort(permutation.begin(), permutation.end());
 	set<int32> pandigitalIdentities;
 
-	// Break up every permutation of "123456789" and check if a product is achieved. THe first part will be the
+	// Break up every permutation of "123456789" and check if a product is achieved. The first part will be the
 	// product and the second part will be split into two factors. The first factor can always be the smallest since
 	// we will eventually check the equivalent permutation where that factor is the second one
 	do
@@ -1380,6 +1382,19 @@ int32 problem35(int32 n)
 	}
 
 	return count;
+}
+int32 problem36(int32 n)
+{
+	int32 sum = 0;
+	for(int32 i = 1; i < n; i++)
+	{
+		if(isPalindrome(i, 10) && isPalindrome(i, 2))
+		{
+			sum += i;
+		}
+	}
+
+	return sum;
 }
 
 #ifdef _MSC_VER

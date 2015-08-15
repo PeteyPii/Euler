@@ -163,7 +163,7 @@ private:
 
 void sieveOfErotosthenes(int64 n, vector<bool>& isPrime);
 bool verifySieve(int64 n);
-bool isPalindrome(int32 n);
+bool isPalindrome(int32 n, int32 base = 10);
 void assertFileOpened(const ifstream& fin);
 bool isLeapYear(int32 year);
 void printProgress(uint64 current, uint64 total, int32 intervals);

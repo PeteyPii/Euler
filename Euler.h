@@ -55,5 +55,6 @@ int32		problem34();					// Sum of all numbers which are equal to the sum of the 
 int32		problem35(int32 n);				// Number of circular primes there are below n.
 
 int32		problem36(int32 n);				// Sum of all numbers, less than n, that are palindromic in base 2 and 10.
+int32		problem37();					// Sum of all eleven truncatable primes.
 
 #endif

@@ -168,7 +168,6 @@ void assertFileOpened(const ifstream& fin);
 bool isLeapYear(int32 year);
 void printProgress(uint64 current, uint64 total, int32 intervals);
 
-
 template <typename N>
 N stringToNumber(string s)
 {
@@ -522,6 +521,27 @@ template<typename T>
 T vectorProduct(const vector<T>& v)
 {
 	return accumulate(v.cbegin(), v.cend(), T(1), [] (T product, T item) -> T { return product * item; });
+}
+
+template <typename N>
+bool isPandigital(N n)
+{
+	string s = numberToString(n);
+
+	sort(s.begin(), s.end());
+
+	char c = s[0];
+	for(uint32 i = 1; i < s.length(); i++)
+	{
+		if(c + 1 != s[i])
+		{
+			return false;
+		}
+
+		c++;
+	}
+
+	return true;
 }
 
 

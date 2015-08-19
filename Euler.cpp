@@ -97,6 +97,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem36(1000000), 872187); },
 		[] () -> bool { return checkEquality(problem37(), 748317); },
 		[] () -> bool { return checkEquality(problem38(), 932718654); },
+		[] () -> bool { return checkEquality(problem39(1000), 840); },
 
 		[] () -> bool { return false; }
 	};
@@ -153,7 +154,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(38, 38);
+		verifyResults(39, 39);
 
 		return 0;
 	}
@@ -1453,13 +1454,56 @@ int32 problem38()
 	for(int32 i = 9000; i < 10000; i++)
 	{
 		int32 concatenatedProduct = i * 100000 + 2 * i;
-		if (concatenatedProduct > largest && isPandigital(concatenatedProduct))
+		if(concatenatedProduct > largest && isPandigital(concatenatedProduct))
 		{
 			largest = concatenatedProduct;
 		}
 	}
 
 	return largest;
+}
+int32 problem39(int32 n)
+{
+	// Use Euclid's formula for generating all unique Pythagorean triplets. It is the folllowing:
+	// a = k * (t^2 - s^2)
+	// b = k * 2 * s * t
+	// c = k * (s^2 + t^2)
+	// where s, t, and k are positive integers, gcd(s, t) = 1, t > s, and t - s is odd
+
+	// b < c and b + c < n so 2 * b < n
+	map<int32, int32> solutionCount;
+	for(int32 s = 1; 4 * s < n; s++)
+	{
+		int32 t = s + 1;
+		while(4 * s * t < n)
+		{
+			if(gcd(s, t) == 1)
+			{
+				int32 perimeter = 2 * t * (s + t);
+				int32 k = 1;
+				while(k * perimeter < n)
+				{
+					solutionCount[k * perimeter]++;
+					k++;
+				}
+			}
+
+			t += 2;
+		}
+	}
+
+	int32 maxCount = -1;
+	int32 maxPerimeter = -1;
+	for(auto item : solutionCount)
+	{
+		if(item.second > maxCount)
+		{
+			maxPerimeter = item.first;
+			maxCount = item.second;
+		}
+	}
+
+	return maxPerimeter;
 }
 
 #ifdef _MSC_VER

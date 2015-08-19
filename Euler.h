@@ -57,5 +57,6 @@ int32		problem35(int32 n);				// Number of circular primes there are below n.
 int32		problem36(int32 n);				// Sum of all numbers, less than n, that are palindromic in base 2 and 10.
 int32		problem37();					// Sum of all eleven truncatable primes.
 int32		problem38();					// Largest 1-9 pandigital number that can be formed as a concatenated product of an integer and (1,2,...,k).
+int32		problem39(int32 n);				// Value of p that is at most n, such that the number of right triangles with integer side lengths and perimeter p is maximised.
 
 #endif

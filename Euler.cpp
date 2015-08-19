@@ -98,6 +98,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem37(), 748317); },
 		[] () -> bool { return checkEquality(problem38(), 932718654); },
 		[] () -> bool { return checkEquality(problem39(1000), 840); },
+		[] () -> bool { return checkEquality(problem40(6), 210); },
 
 		[] () -> bool { return false; }
 	};
@@ -154,7 +155,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(39, 39);
+		verifyResults(40, 40);
 
 		return 0;
 	}
@@ -1504,6 +1505,50 @@ int32 problem39(int32 n)
 	}
 
 	return maxPerimeter;
+}
+int32 problem40(int32 n)
+{
+	if(n < 0)
+	{
+		throw string("10^n must be a postive integer");
+	}
+
+	int32 i = 0;
+	int32 digit = 1;
+
+	int32 bracketStart = 1;
+	int32 bracketEnd = 10;
+	int32 bracketWidth = 1;
+	int32 powerOfTen = 1;
+
+	int32 product = 1;
+	while(i <= n)
+	{
+		while(digit >= bracketEnd)
+		{
+			bracketWidth++;
+			powerOfTen *= 10;
+			bracketStart = bracketEnd;
+			bracketEnd += powerOfTen * bracketWidth * 9;
+		}
+
+		int32 x = (digit - bracketStart) / bracketWidth;
+		int32 y = bracketWidth - 1 - ((digit - bracketStart) % bracketWidth);
+
+		int32 number = powerOfTen + x;
+		while(y > 0)
+		{
+			number /= 10;
+			y--;
+		}
+
+		product *= number % 10;
+
+		i++;
+		digit *= 10;
+	}
+
+	return product;
 }
 
 #ifdef _MSC_VER

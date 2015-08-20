@@ -100,6 +100,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem39(1000), 840); },
 		[] () -> bool { return checkEquality(problem40(6), 210); },
 
+		[] () -> bool { return checkEquality(problem41(), 7652413); },
+
 		[] () -> bool { return false; }
 	};
 
@@ -155,7 +157,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(40, 40);
+		verifyResults(41, 41);
 
 		return 0;
 	}
@@ -855,13 +857,13 @@ string problem24(int32 n)
 {
 	if(n < 1)
 	{
-		throw string("Can't find the zero-th permuatation or a negative permutation");
+		throw string("Can't find the zero-th permutation or a negative permutation");
 		return "-1";
 	}
 
 	if(n > factorial(10))
 	{
-		throw string("Can't find the zero-th permuatation or a negative permutation");
+		throw string("Can't find the zero-th permutation or a negative permutation");
 		return "-1";
 	}
 
@@ -1549,6 +1551,25 @@ int32 problem40(int32 n)
 	}
 
 	return product;
+}
+int32 problem41()
+{
+	// The sum of the digits of a 9-digit pandigital number is 45 so it
+	// cannot be prime since it will always be divisible by three. Similarly
+	// for 8-digit pandigital numbers. So the largest pandigital number that
+	// is prime can be at most 7 digits long.
+	string permutation = "7654321";
+	do
+	{
+		int32 number = stringToNumber<int32>(permutation);
+		if(isNumberPrime(number))
+		{
+			return number;
+		}
+	}
+	while(prev_permutation(permutation.begin(), permutation.end()));
+
+	throw string("No 7-digit pandigital number that is prime exists");
 }
 
 #ifdef _MSC_VER

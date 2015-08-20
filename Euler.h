@@ -60,4 +60,6 @@ int32		problem38();					// Largest 1-9 pandigital number that can be formed as a
 int32		problem39(int32 n);				// Value of p that is at most n, such that the number of right triangles with integer side lengths and perimeter p is maximised.
 int32		problem40(int32 n);				// Value of d(1) * d(10) * ... * d(10^n) where d(n) is the nth digit of Champernowne's constant.
 
+int32		problem41();					// Largest number that is prime and pandigital.
+
 #endif

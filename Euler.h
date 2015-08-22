@@ -61,5 +61,6 @@ int32		problem39(int32 n);				// Value of p that is at most n, such that the num
 int32		problem40(int32 n);				// Value of d(1) * d(10) * ... * d(10^n) where d(n) is the nth digit of Champernowne's constant.
 
 int32		problem41();					// Largest number that is prime and pandigital.
+int32		problem42();					// Number of words with triangular number scores.
 
 #endif

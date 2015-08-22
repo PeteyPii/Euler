@@ -101,6 +101,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem40(6), 210); },
 
 		[] () -> bool { return checkEquality(problem41(), 7652413); },
+		[] () -> bool { return checkEquality(problem42(), 162); },
 
 		[] () -> bool { return false; }
 	};
@@ -157,7 +158,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(41, 41);
+		verifyResults(42, 42);
 
 		return 0;
 	}
@@ -1570,6 +1571,41 @@ int32 problem41()
 	while(prev_permutation(permutation.begin(), permutation.end()));
 
 	throw string("No 7-digit pandigital number that is prime exists");
+}
+int32 problem42()
+{
+	int32 nextAdd = 1;
+	int32 maxAdd = 0;
+	set<int32> triangleNumbers;
+
+	ifstream fin("p42.txt");
+	assertFileOpened(fin);
+
+	int32 count = 0;
+
+	string word;
+	while(fin >> word)
+	{
+		int32 score = 0;
+		for(char c : word)
+		{
+			score += c - 'A' + 1;
+		}
+
+		while(score > maxAdd)
+		{
+			maxAdd += nextAdd;
+			triangleNumbers.insert(maxAdd);
+			nextAdd++;
+		}
+
+		if(triangleNumbers.count(score) == 1)
+		{
+			count++;
+		}
+	}
+
+	return count;
 }
 
 #ifdef _MSC_VER

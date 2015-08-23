@@ -62,5 +62,6 @@ int32		problem40(int32 n);				// Value of d(1) * d(10) * ... * d(10^n) where d(n
 
 int32		problem41();					// Largest number that is prime and pandigital.
 int32		problem42();					// Number of words with triangular number scores.
+int64		problem43();					// Sum of all 0-9 pandigital numbers whose specific substrings satisfy certain divisibilities.
 
 #endif

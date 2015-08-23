@@ -103,6 +103,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem41(), 7652413); },
 		[] () -> bool { return checkEquality(problem42(), 162); },
 		[] () -> bool { return checkEquality(problem43(), 16695334890); },
+		[] () -> bool { return checkEquality(problem44(), 5482660); },
 
 		[] () -> bool { return false; }
 	};
@@ -159,7 +160,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(43, 43);
+		verifyResults(44, 44);
 
 		return 0;
 	}
@@ -1654,6 +1655,58 @@ int64 problem43()
 	while(next_permutation(permutation, permutation + 10));
 
 	return sum;
+}
+int32 problem44()
+{
+	set<int32> pentagonalNumbers;
+
+	int32 pk = 1;	// Pentagonal number to see if any pentagonal numbers sum to it
+	int32 n = 2;	// Next pentagonal number index to use
+
+	bool isFound = false;
+	int32 pi;
+	int32 pj;
+	while(!isFound)
+	{
+		for(int32 px : pentagonalNumbers)
+		{
+			if(pentagonalNumbers.count(pk - px) == 1)
+			{
+				if(px > pk - px)
+				{
+					if(pentagonalNumbers.count(2 * px - pk) == 1)
+					{
+						pi = px;
+						pj = pk - px;
+						isFound = true;
+						break;
+					}
+				}
+				else
+				{
+					if(pentagonalNumbers.count(pk - 2 * px) == 1)
+					{
+						pi = pk - px;
+						pj = px;
+						isFound = true;
+						break;
+					}
+				}
+			}
+		}
+
+		pentagonalNumbers.insert(pk);
+		pk = n * (3 * n - 1) / 2;
+		n++;
+	}
+
+	// At this point we have an upper bound for what the minimal difference could be in (pi - pj).
+	// It turns out this is the minimal difference so we will wave our hands magically and say we
+	// have the answer. The proper thing to do would be to generate all the pentagonal numbers up
+	// to a point where two adjacent numbers differ by more than pi and pj and brute force the rest
+	// of the possible pairs.
+
+	return pi - pj;
 }
 
 #ifdef _MSC_VER

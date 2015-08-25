@@ -64,5 +64,6 @@ int32		problem41();					// Largest number that is prime and pandigital.
 int32		problem42();					// Number of words with triangular number scores.
 int64		problem43();					// Sum of all 0-9 pandigital numbers whose specific substrings satisfy certain divisibilities.
 int32		problem44();					// Value of D such that D is a pentagonal number, it is the difference betweeen two pentagonal numbers, the sum of those two pentagonal numbers is pentagonal, and it is minimized.
+int64		problem45(int32 n);				// Triangle number that is also a pentagonal number and a hexagonal number such that there are n numbers with this property below it starting at the 285th triangle number.
 
 #endif

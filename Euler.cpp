@@ -104,7 +104,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem42(), 162); },
 		[] () -> bool { return checkEquality(problem43(), 16695334890); },
 		[] () -> bool { return checkEquality(problem44(), 5482660); },
-		[] () -> bool { return checkEquality(problem45(1),1533776805); },
+		[] () -> bool { return checkEquality(problem45(1), 1533776805); },
 
 		[] () -> bool { return false; }
 	};

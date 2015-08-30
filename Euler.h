@@ -66,4 +66,6 @@ int64		problem43();					// Sum of all 0-9 pandigital numbers whose specific subs
 int32		problem44();					// Value of D such that D is a pentagonal number, it is the difference betweeen two pentagonal numbers, the sum of those two pentagonal numbers is pentagonal, and it is minimized.
 int64		problem45(int32 n);				// Triangle number that is also a pentagonal number and a hexagonal number such that there are n numbers with this property below it starting at the 285th triangle number.
 
+int64		problem46(int32 n);				// Nth odd composite that cannot be written as the sum of a prime and twice a square
+
 #endif

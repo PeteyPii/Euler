@@ -106,6 +106,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem44(), 5482660); },
 		[] () -> bool { return checkEquality(problem45(1), 1533776805); },
 
+		[] () -> bool { return checkEquality(problem46(1), 5777); },
+
 		[] () -> bool { return false; }
 	};
 
@@ -161,7 +163,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(45, 45);
+		verifyResults(46, 46);
 
 		return 0;
 	}
@@ -1770,6 +1772,58 @@ int64 problem45(int32 n)
 	}
 
 	return vt;
+}
+int64 problem46(int32 n)
+{
+	set<int64> primes;
+	set<int64> squareDoubles;
+
+	squareDoubles.insert(2);
+	squareDoubles.insert(8);
+
+	int64 highestSquareDouble = 8;
+	int64 highestSquareIx = 2;
+
+	int64 lastNumberFound = -1;
+
+	int64 i = 3;
+
+	while(n > 0)
+	{
+		if(i > highestSquareDouble)
+		{
+			highestSquareIx++;
+			highestSquareDouble = 2 * highestSquareIx * highestSquareIx;
+			squareDoubles.insert(highestSquareDouble);
+		}
+
+		if(isNumberPrime(i))
+		{
+			primes.insert(i);
+		}
+		else
+		{
+			bool foundSum = false;
+			for(int64 squareDouble : squareDoubles)
+			{
+				if(primes.count(i - squareDouble) == 1)
+				{
+					foundSum = true;
+					break;
+				}
+			}
+
+			if(!foundSum)
+			{
+				n--;
+				lastNumberFound = i;
+			}
+		}
+
+		i += 2;
+	}
+
+	return lastNumberFound;
 }
 
 #ifdef _MSC_VER

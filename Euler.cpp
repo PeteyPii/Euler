@@ -107,22 +107,23 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem45(1), 1533776805); },
 
 		[] () -> bool { return checkEquality(problem46(1), 5777); },
+		[] () -> bool { return checkEquality(problem47(4), 134043); },
 
 		[] () -> bool { return false; }
 	};
 
-	if (end - begin + 1 > 0)
+	if(end - begin + 1 > 0)
 	{
 		int64 total = 0;
 		int64 maxTime = -1;
 		int32 maxProblem = -1;
 
-		for (int32 i = begin; i <= end; i++)
+		for(int32 i = begin; i <= end; i++)
 		{
 			ScopeTimer timer("", false);
 			try
 			{
-				if (checks[i]())
+				if(checks[i]())
 				{
 					cout << "Problem " << i << " SUCCEEDED! ";
 				}
@@ -146,7 +147,7 @@ void verifyResults(int32 begin, int32 end)
 			cout << "(" << elapsed << " ms)" << endl;
 			total += elapsed;
 
-			if (elapsed > maxTime)
+			if(elapsed > maxTime)
 			{
 				maxTime = elapsed;
 				maxProblem = i;
@@ -163,7 +164,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(46, 46);
+		verifyResults(47, 47);
 
 		return 0;
 	}
@@ -1473,6 +1474,11 @@ int32 problem38()
 }
 int32 problem39(int32 n)
 {
+	if(n <= 12)
+	{
+		throw string("There are no right triangles with integer side lengths with a perimeter below 12");
+	}
+
 	// Use Euclid's formula for generating all unique Pythagorean triplets. It is the folllowing:
 	// a = k * (t^2 - s^2)
 	// b = k * 2 * s * t
@@ -1713,6 +1719,11 @@ int32 problem44()
 }
 int64 problem45(int32 n)
 {
+	if(n < 0)
+	{
+		throw string("There are no matching triangle, pentagonal, hexagonal numbers before 40755");
+	}
+
 	int64 t = 285;
 	int64 p = 165;
 	int64 h = 143;
@@ -1775,6 +1786,11 @@ int64 problem45(int32 n)
 }
 int64 problem46(int32 n)
 {
+	if(n < 1)
+	{
+		throw string("N must be at least one since it denotes the nth occurrence");
+	}
+
 	set<int64> primes;
 	set<int64> squareDoubles;
 
@@ -1824,6 +1840,74 @@ int64 problem46(int32 n)
 	}
 
 	return lastNumberFound;
+}
+int32 problem47(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Cannot have a sequence of length less than one");
+	}
+
+	if(n == 1)
+	{
+		return 1;
+	}
+
+	vector<set<int32> > primeFactors;
+
+	primeFactors.push_back(set<int32>());
+	primeFactors.push_back(set<int32>({1}));
+	primeFactors.push_back(set<int32>({2}));
+	primeFactors.push_back(set<int32>({3}));
+
+	int32 i = 4;
+	int32 sequenceLength = 0;
+
+	while(sequenceLength < n)
+	{
+		if(i % 2 == 0)
+		{
+			set<int32> temp = primeFactors[i / 2];
+			temp.insert(2);
+			primeFactors.push_back(temp);
+		}
+		else
+		{
+			bool prime = true;
+			int32 factor = 3;
+			while(factor * factor <= i)
+			{
+				if(i % factor == 0)
+				{
+					set<int32> temp = primeFactors[i / factor];
+					temp.insert(factor);
+					primeFactors.push_back(temp);
+					prime = false;
+					break;
+				}
+
+				factor += 2;
+			}
+
+			if(prime)
+			{
+				primeFactors.push_back({i});
+			}
+		}
+
+		if(primeFactors.back().size() == static_cast<uint32>(n))
+		{
+			sequenceLength++;
+		}
+		else
+		{
+			sequenceLength = 0;
+		}
+
+		i++;
+	}
+
+	return i - n;
 }
 
 #ifdef _MSC_VER

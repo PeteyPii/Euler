@@ -68,5 +68,6 @@ int64		problem45(int32 n);				// Triangle number that is also a pentagonal numbe
 
 int64		problem46(int32 n);				// Nth odd composite that cannot be written as the sum of a prime and twice a square
 int32		problem47(int32 n);				// First number of the first sequence of n numbers with n unique factors
+int64		problem48(int32 n);				// Last ten digits of 1^1 + 2^2 + 3^3 + ... + n^n
 
 #endif

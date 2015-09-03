@@ -544,5 +544,46 @@ bool isPandigital(N n)
 	return true;
 }
 
+template <typename T, typename U>
+T power(T x, U y)
+{
+	// Computes x^y
+	T product(1);
+	while(y > 0)
+	{
+		if((y & 1) == 1)
+		{
+			product *= x;
+		}
+
+		y >>= 1;
+		x *= x;
+	}
+
+	return product;
+}
+
+template <typename T, typename U, typename V>
+T modPower(T x, U y, V m)
+{
+	// Computes x^y mod m
+	T product(1);
+	x %= m;
+	while(y > 0)
+	{
+		if((y & 1) == 1)
+		{
+			product *= x;
+			product %= m;
+		}
+
+		y >>= 1;
+		x *= x;
+		x %= m;
+	}
+
+	return product;
+}
+
 
 #endif

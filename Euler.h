@@ -70,5 +70,6 @@ int64		problem46(int32 n);				// Nth odd composite that cannot be written as the
 int32		problem47(int32 n);				// First number of the first sequence of n numbers with n unique factors
 int64		problem48(int32 n);				// Last ten digits of 1^1 + 2^2 + 3^3 + ... + n^n
 string		problem49();					// 12 digits of 3 4-digit primes in order with the primes spaced out equally and permutations of each other and is not 1487 4817 8147
+int32		problem50(int32 n);				// The lowest prime below n that is the sum of the most consecutive primes (more consecutive takes precedence over lower primes)
 
 #endif

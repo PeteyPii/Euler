@@ -110,6 +110,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return checkEquality(problem47(4), 134043); },
 		[] () -> bool { return checkEquality(problem48(1000), 9110846700); },
 		[] () -> bool { return checkEquality(problem49(), "296962999629"); },
+		[] () -> bool { return checkEquality(problem50(1000000), 997651); },
 
 		[] () -> bool { return false; }
 	};
@@ -166,7 +167,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(49, 49);
+		verifyResults(50, 50);
 
 		return 0;
 	}
@@ -1990,6 +1991,59 @@ string problem49()
 	}
 
 	throw string("Couldn't find prime sequence satisfying the requirements");
+}
+int32 problem50(int32 n)
+{
+	if(n <= 2)
+	{
+		throw string("There are no primes below 2");
+	}
+
+	vector<bool> isPrime;
+	sieveOfErotosthenes(n, isPrime);
+
+	vector<int64> primes;
+	for(uint32 i = 0; i < isPrime.size(); i++)
+	{
+		if(isPrime[i])
+		{
+			primes.push_back(i);
+		}
+	}
+
+	uint32 left = 0;
+	uint32 right = primes.size() - 1;
+	int64 sum = vectorSum(primes);
+
+	// Slide right index to the maximum number of consecutive primes based on sum
+	while(sum >= n)
+	{
+		sum -= primes[right];
+		right--;
+	}
+
+	while(true)	// Break on first find
+	{
+		int32 nextSum = sum - primes[right];
+		while(sum < n)
+		{
+			if(isPrime[static_cast<uint32>(sum)])
+			{
+				return sum;
+			}
+
+			sum -= primes[left];
+			left++;
+			right++;
+			sum += primes[right];
+		}
+
+		right = right - left - 1;
+		left = 0;
+		sum = nextSum;
+	}
+
+	throw string("Could not find prime successfully");
 }
 
 #ifdef _MSC_VER

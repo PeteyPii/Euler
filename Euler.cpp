@@ -31,17 +31,26 @@ using namespace std;
 
 *******************************************************************************/
 
-template <typename N, typename T>
-bool checkEquality(N a, T b)
+void verifyResults(int32 begin, int32 end);
+
+int32 main(int32 argc, const char **argv)
 {
-	if (a == b)
+	try
 	{
-		return true;
+		verifyResults(50, 50);
+
+		return 0;
 	}
-	else
+	catch(string e)
 	{
-		cout << "BAD! " << a << " != " << b << endl;
-		return false;
+		cout << "An exception has been thrown:" << endl;
+		cout << "  " << e << endl;
+		return 1;
+	}
+	catch(...)
+	{
+		cout << "An unknown exception has been thrown." << endl;
+		return 2;
 	}
 }
 
@@ -52,65 +61,65 @@ void verifyResults(int32 begin, int32 end)
 	{
 		[] () -> bool { return true; },
 
-		[] () -> bool { return checkEquality(problem1(1000), 233168); },
-		[] () -> bool { return checkEquality(problem2(4000000), 4613732); },
-		[] () -> bool { return checkEquality(problem3(600851475143), 6857); },
-		[] () -> bool { return checkEquality(problem4(3), 906609); },
-		[] () -> bool { return checkEquality(problem5(20), 232792560); },
+		[] () -> bool { return assertEquality(problem1(1000), 233168); },
+		[] () -> bool { return assertEquality(problem2(4000000), 4613732); },
+		[] () -> bool { return assertEquality(problem3(600851475143), 6857); },
+		[] () -> bool { return assertEquality(problem4(3), 906609); },
+		[] () -> bool { return assertEquality(problem5(20), 232792560); },
 
-		[] () -> bool { return checkEquality(problem6(100), 25164150); },
-		[] () -> bool { return checkEquality(problem7(10001), 104743); },
-		[] () -> bool { return checkEquality(problem8(13), 23514624000); },
-		[] () -> bool { return checkEquality(problem9(), 31875000); },
-		[] () -> bool { return checkEquality(problem10(2000000), 142913828922); },
+		[] () -> bool { return assertEquality(problem6(100), 25164150); },
+		[] () -> bool { return assertEquality(problem7(10001), 104743); },
+		[] () -> bool { return assertEquality(problem8(13), 23514624000); },
+		[] () -> bool { return assertEquality(problem9(), 31875000); },
+		[] () -> bool { return assertEquality(problem10(2000000), 142913828922); },
 
-		[] () -> bool { return checkEquality(problem11(4, 20), 70600674); },
-		[] () -> bool { return checkEquality(problem12(500), 76576500); },
-		[] () -> bool { return checkEquality(problem13(10), "5537376230"); },
-		[] () -> bool { return checkEquality(problem14(1000000), 837799); },
-		[] () -> bool { return checkEquality(problem15(20, 20), 137846528820); },
+		[] () -> bool { return assertEquality(problem11(4, 20), 70600674); },
+		[] () -> bool { return assertEquality(problem12(500), 76576500); },
+		[] () -> bool { return assertEquality(problem13(10), "5537376230"); },
+		[] () -> bool { return assertEquality(problem14(1000000), 837799); },
+		[] () -> bool { return assertEquality(problem15(20, 20), 137846528820); },
 
-		[] () -> bool { return checkEquality(problem16(1000), 1366); },
-		[] () -> bool { return checkEquality(problem17(1000), 21124); },
-		[] () -> bool { return checkEquality(problem18(15), 1074); },
-		[] () -> bool { return checkEquality(problem19(2000), 171); },
-		[] () -> bool { return checkEquality(problem20(100), 648); },
+		[] () -> bool { return assertEquality(problem16(1000), 1366); },
+		[] () -> bool { return assertEquality(problem17(1000), 21124); },
+		[] () -> bool { return assertEquality(problem18(15), 1074); },
+		[] () -> bool { return assertEquality(problem19(2000), 171); },
+		[] () -> bool { return assertEquality(problem20(100), 648); },
 
-		[] () -> bool { return checkEquality(problem21(10000), 31626); },
-		[] () -> bool { return checkEquality(problem22(), 871198282); },
-		[] () -> bool { return checkEquality(problem23(), 4179871); },
-		[] () -> bool { return checkEquality(problem24(1000000), "2783915460"); },
-		[] () -> bool { return checkEquality(problem25(1000), 4782); },
+		[] () -> bool { return assertEquality(problem21(10000), 31626); },
+		[] () -> bool { return assertEquality(problem22(), 871198282); },
+		[] () -> bool { return assertEquality(problem23(), 4179871); },
+		[] () -> bool { return assertEquality(problem24(1000000), "2783915460"); },
+		[] () -> bool { return assertEquality(problem25(1000), 4782); },
 
-		[] () -> bool { return checkEquality(problem26(1000), 983); },
-		[] () -> bool { return checkEquality(problem27(1000), -59231); },
-		[] () -> bool { return checkEquality(problem28(1001), 669171001); },
-		[] () -> bool { return checkEquality(problem29(100), 9183); },
-		[] () -> bool { return checkEquality(problem30(5), 443839); },
+		[] () -> bool { return assertEquality(problem26(1000), 983); },
+		[] () -> bool { return assertEquality(problem27(1000), -59231); },
+		[] () -> bool { return assertEquality(problem28(1001), 669171001); },
+		[] () -> bool { return assertEquality(problem29(100), 9183); },
+		[] () -> bool { return assertEquality(problem30(5), 443839); },
 
-		[] () -> bool { return checkEquality(problem31(200), 73682); },
-		[] () -> bool { return checkEquality(problem32(), 45228); },
-		[] () -> bool { return checkEquality(problem33(), 100); },
-		[] () -> bool { return checkEquality(problem34(), 40730); },
-		[] () -> bool { return checkEquality(problem35(1000000), 55); },
+		[] () -> bool { return assertEquality(problem31(200), 73682); },
+		[] () -> bool { return assertEquality(problem32(), 45228); },
+		[] () -> bool { return assertEquality(problem33(), 100); },
+		[] () -> bool { return assertEquality(problem34(), 40730); },
+		[] () -> bool { return assertEquality(problem35(1000000), 55); },
 
-		[] () -> bool { return checkEquality(problem36(1000000), 872187); },
-		[] () -> bool { return checkEquality(problem37(), 748317); },
-		[] () -> bool { return checkEquality(problem38(), 932718654); },
-		[] () -> bool { return checkEquality(problem39(1000), 840); },
-		[] () -> bool { return checkEquality(problem40(6), 210); },
+		[] () -> bool { return assertEquality(problem36(1000000), 872187); },
+		[] () -> bool { return assertEquality(problem37(), 748317); },
+		[] () -> bool { return assertEquality(problem38(), 932718654); },
+		[] () -> bool { return assertEquality(problem39(1000), 840); },
+		[] () -> bool { return assertEquality(problem40(6), 210); },
 
-		[] () -> bool { return checkEquality(problem41(), 7652413); },
-		[] () -> bool { return checkEquality(problem42(), 162); },
-		[] () -> bool { return checkEquality(problem43(), 16695334890); },
-		[] () -> bool { return checkEquality(problem44(), 5482660); },
-		[] () -> bool { return checkEquality(problem45(1), 1533776805); },
+		[] () -> bool { return assertEquality(problem41(), 7652413); },
+		[] () -> bool { return assertEquality(problem42(), 162); },
+		[] () -> bool { return assertEquality(problem43(), 16695334890); },
+		[] () -> bool { return assertEquality(problem44(), 5482660); },
+		[] () -> bool { return assertEquality(problem45(1), 1533776805); },
 
-		[] () -> bool { return checkEquality(problem46(1), 5777); },
-		[] () -> bool { return checkEquality(problem47(4), 134043); },
-		[] () -> bool { return checkEquality(problem48(1000), 9110846700); },
-		[] () -> bool { return checkEquality(problem49(), "296962999629"); },
-		[] () -> bool { return checkEquality(problem50(1000000), 997651); },
+		[] () -> bool { return assertEquality(problem46(1), 5777); },
+		[] () -> bool { return assertEquality(problem47(4), 134043); },
+		[] () -> bool { return assertEquality(problem48(1000), 9110846700); },
+		[] () -> bool { return assertEquality(problem49(), "296962999629"); },
+		[] () -> bool { return assertEquality(problem50(1000000), 997651); },
 
 		[] () -> bool { return false; }
 	};
@@ -160,27 +169,6 @@ void verifyResults(int32 begin, int32 end)
 		cout << "Total time: " << total << " ms" << endl;
 		cout << "Average time: " << total / (end - begin + 1) << " ms" << endl;
 		cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")" << endl;
-	}
-}
-
-int32 main(int32 argc, const char **argv)
-{
-	try
-	{
-		verifyResults(50, 50);
-
-		return 0;
-	}
-	catch(string e)
-	{
-		cout << "An exception has been thrown:" << endl;
-		cout << "  " << e << endl;
-		return 1;
-	}
-	catch(...)
-	{
-		cout << "An unknown exception has been thrown." << endl;
-		return 2;
 	}
 }
 

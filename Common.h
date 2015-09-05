@@ -585,5 +585,19 @@ T modPower(T x, U y, V m)
 	return product;
 }
 
+template <typename N, typename T>
+bool assertEquality(N a, T b)
+{
+	if (a == b)
+	{
+		return true;
+	}
+	else
+	{
+		cout << "BAD! " << a << " != " << b << endl;
+		return false;
+	}
+}
+
 
 #endif

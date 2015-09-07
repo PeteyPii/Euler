@@ -389,7 +389,7 @@ int32 problem11(int32 n, int32 m)
 	ifstream fin("p11.txt");
 	assertFileOpened(fin);
 
-	vector<vector<int32> > grid(m, vector<int32>(m, -1));
+	vector<vector<int32>> grid(m, vector<int32>(m, -1));
 
 	for(int32 y = 0; y < m; y++)
 	{
@@ -566,7 +566,7 @@ int64 problem15(int32 n, int32 m)
 		return -1;
 	}
 
-	vector<vector<int64> > paths(n + 1, vector<int64>(m + 1, 0));
+	vector<vector<int64>> paths(n + 1, vector<int64>(m + 1, 0));
 	paths[0][0] = 1;
 
 	for(int32 x = 0; x <= n; x++)
@@ -625,7 +625,7 @@ int32 problem18(int32 n)
 	ifstream fin("p18.txt");
 	assertFileOpened(fin);
 
-	vector<vector<int32> > triangle;
+	vector<vector<int32>> triangle;
 	for(int32 i = 0; i < n; i++)
 	{
 		triangle.push_back(vector<int32>());
@@ -1054,7 +1054,7 @@ int32 problem29(int32 n)
 		return -1;
 	}
 
-	vector<vector<int32> > primeFactor(n + 1, vector<int32>(n + 1, 0));
+	vector<vector<int32>> primeFactor(n + 1, vector<int32>(n + 1, 0));
 	for(int32 i = 2; i <= n; i++)
 	{
 		int32 remainder = i;
@@ -1075,7 +1075,7 @@ int32 problem29(int32 n)
 		}
 	}
 
-	unordered_set<vector<int32> > uniqueValues;
+	unordered_set<vector<int32>> uniqueValues;
 	for(int32 a = 2; a <= n; a++)
 	{
 		for(int32 b = 2; b <= n; b++)
@@ -1848,7 +1848,7 @@ int32 problem47(int32 n)
 		return 1;
 	}
 
-	vector<set<int32> > primeFactors;
+	vector<set<int32>> primeFactors;
 
 	primeFactors.push_back(set<int32>());
 	primeFactors.push_back(set<int32>({1}));

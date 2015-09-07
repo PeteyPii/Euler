@@ -482,7 +482,7 @@ struct hash_container
 namespace std
 {
     template<typename T, typename U>
-    struct hash<pair<T, U> >
+    struct hash<pair<T, U>>
     {
         size_t operator()(const pair<T,U>& v) const
         {
@@ -495,18 +495,18 @@ namespace std
 #ifndef _MSC_VER
 
     template<typename... T>
-    struct hash<vector<T...> > : hash_container<vector<T...> > {};
+    struct hash<vector<T...>> : hash_container<vector<T...>> {};
 
     template<typename... T>
-    struct hash<map<T...> > : hash_container<map<T...> > {};
+    struct hash<map<T...>> : hash_container<map<T...>> {};
 
 #else
 
 	template<typename T>
-	struct hash<vector<T> > : hash_container<vector<T> > {};
+	struct hash<vector<T>> : hash_container<vector<T>> {};
 
 	template<typename T, typename U>
-	struct hash<map<T, U> > : hash_container<map<T, U> > {};
+	struct hash<map<T, U>> : hash_container<map<T, U>> {};
 
 #endif
 }

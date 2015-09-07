@@ -492,23 +492,11 @@ namespace std
         }
     };
 
-#ifndef _MSC_VER
-
-    template<typename... T>
-    struct hash<vector<T...>> : hash_container<vector<T...>> {};
-
-    template<typename... T>
-    struct hash<map<T...>> : hash_container<map<T...>> {};
-
-#else
-
 	template<typename T>
 	struct hash<vector<T>> : hash_container<vector<T>> {};
 
 	template<typename T, typename U>
 	struct hash<map<T, U>> : hash_container<map<T, U>> {};
-
-#endif
 }
 
 template<typename T>

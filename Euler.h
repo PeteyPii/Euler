@@ -66,10 +66,12 @@ int64		problem43();					// Sum of all 0-9 pandigital numbers whose specific subs
 int32		problem44();					// Value of D such that D is a pentagonal number, it is the difference betweeen two pentagonal numbers, the sum of those two pentagonal numbers is pentagonal, and it is minimized.
 int64		problem45(int32 n);				// Triangle number that is also a pentagonal number and a hexagonal number such that there are n numbers with this property below it starting at the 285th triangle number.
 
-int64		problem46(int32 n);				// Nth odd composite that cannot be written as the sum of a prime and twice a square
-int32		problem47(int32 n);				// First number of the first sequence of n numbers with n unique factors
-int64		problem48(int32 n);				// Last ten digits of 1^1 + 2^2 + 3^3 + ... + n^n
-string		problem49();					// 12 digits of 3 4-digit primes in order with the primes spaced out equally and permutations of each other and is not 1487 4817 8147
-int32		problem50(int32 n);				// The lowest prime below n that is the sum of the most consecutive primes (more consecutive takes precedence over lower primes)
+int64		problem46(int32 n);				// Nth odd composite that cannot be written as the sum of a prime and twice a square.
+int32		problem47(int32 n);				// First number of the first sequence of n numbers with n unique factors.
+int64		problem48(int32 n);				// Last ten digits of 1^1 + 2^2 + 3^3 + ... + n^n.
+string		problem49();					// 12 digits of 3 4-digit primes in order with the primes spaced out equally and permutations of each other and is not 1487 4817 8147.
+int32		problem50(int32 n);				// The lowest prime below n that is the sum of the most consecutive primes (more consecutive takes precedence over lower primes).
+
+int32		problem51();					// The lowest prime where, by replacing part of the of it by the same digit, it is part of an eight prime value family.
 
 #endif

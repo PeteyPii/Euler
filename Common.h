@@ -167,6 +167,7 @@ bool isPalindrome(int32 n, int32 base = 10);
 void assertFileOpened(const ifstream& fin);
 bool isLeapYear(int32 year);
 void printProgress(uint64 current, uint64 total, int32 intervals);
+double logarithmicIntegralApprox(double x, int32 iterations = 50);
 
 template <typename N>
 N stringToNumber(string s)

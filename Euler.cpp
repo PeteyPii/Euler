@@ -296,7 +296,16 @@ int64 problem6(int64 n)
 }
 int64 problem7(int64 n)
 {
-	const int64 sieveSize = 1e8;
+	// Li(x) is approximately equal to pi(x) so use trial and
+	// error to find a vale where Li(x) >= n.
+	double pixUpperBound = 10;
+	while(logarithmicIntegralApprox(pixUpperBound) < n)
+	{
+		pixUpperBound *= 1.25;
+	}
+
+	// Add a bit on to be safe
+	const int64 sieveSize = static_cast<int64>(pixUpperBound * 1.5);
 	vector<bool> isPrime;
 
 	sieveOfErotosthenes(sieveSize, isPrime);

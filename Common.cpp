@@ -438,6 +438,20 @@ void printProgress(uint64 current, uint64 total, int32 intervals)
 	}
 }
 
+double logarithmicIntegralApprox(double x, int32 iterations)
+{
+	const double gamma = 0.57721566490;	// Euler-Mascheroni constant
+	const double lnx = log(x);
+
+	double sum = gamma + log(lnx);
+	for(int32 k = 1; k <= iterations; k++)
+	{
+		sum += pow(lnx, k) / (k * factorial(static_cast<double>(k)));
+	}
+
+	return sum;
+}
+
 #ifdef _MSC_VER
 #pragma warning( pop )
 #endif

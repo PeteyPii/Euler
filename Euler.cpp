@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(52, 52);
+		verifyResults(53, 53);
 
 		return 0;
 	}
@@ -123,6 +123,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem51(), 121313); },
 		[] () -> bool { return assertEquality(problem52(), 142857); },
+		[] () -> bool { return assertEquality(problem53(100, 1000000), 4075); },
 
 		[] () -> bool { return false; }
 	};
@@ -2201,6 +2202,61 @@ int32 problem52()
 
 	throw string("A number satisfying the conditions could not be found");
 }
+int64 problem53(int32 n, int64 m)
+{
+	if(n < 1)
+	{
+		return 0;
+	}
+
+	class Memoizer
+	{
+	public:
+		BigInteger& operator()(int32 x)
+		{
+			if(m_cMemory.count(x) == 0)
+			{
+				m_cMemory.insert(make_pair(x, factorial(BigInteger(x))));
+			}
+
+			return m_cMemory[x];
+		}
+	private:
+		map<int32, BigInteger> m_cMemory;
+	};
+
+	Memoizer factorialMemoizer;
+
+	int64 count = 0;
+	BigInteger limit(m);
+
+	while(n > 0)
+	{
+		BigInteger numerator = factorialMemoizer(n);
+
+		int32 left = n / 2;
+		int32 right = n - (n / 2);
+		while(factorialMemoizer(left) * factorialMemoizer(right) * limit < numerator)
+		{
+			left--;
+			right++;
+		}
+
+		if(left != right)
+		{
+			count += right - left - 1;
+		}
+		else
+		{
+			break;
+		}
+
+		n--;
+	}
+
+	return count;
+}
+
 
 #ifdef _MSC_VER
 #pragma warning( pop )

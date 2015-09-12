@@ -143,6 +143,40 @@ public:
 		return *this *= BigInteger(n, m_nBase);
 	}
 
+	bool operator<(const BigInteger& obj) const;
+	template <typename N>
+	bool operator<(const N& n) const
+	{
+		return *this < BigInteger(n, m_nBase);
+	}
+
+	bool operator>(const BigInteger& obj) const;
+	template <typename N>
+	bool operator>(const N& n) const
+	{
+		return *this < BigInteger(n, m_nBase);
+	}
+
+	bool operator<=(const BigInteger& obj) const
+	{
+		return !(*this > obj);
+	}
+	template <typename N>
+	bool operator<=(const N& n) const
+	{
+		return !(*this > BigInteger(n, m_nBase));
+	}
+
+	bool operator>=(const BigInteger& obj) const
+	{
+		return !(*this < obj);
+	}
+	template <typename N>
+	bool operator>=(const N& n) const
+	{
+		return !(*this < BigInteger(n, m_nBase));
+	}
+
 	friend ostream& operator<<(ostream& out, const BigInteger& n);
 	friend istream& operator>>(istream& in,  BigInteger& n);
 
@@ -160,6 +194,30 @@ private:
 	BigInteger& operator-(const BigInteger& n);
 	BigInteger& operator-=(const BigInteger& n);
 };
+
+template <typename N>
+bool operator<(const N& n, const BigInteger& right)
+{
+	return right > n;
+}
+
+template <typename N>
+bool operator<=(const N& n, const BigInteger& right)
+{
+	return right >= n;
+}
+
+template <typename N>
+bool operator>(const N& n, const BigInteger& right)
+{
+	return right < n;
+}
+
+template <typename N>
+bool operator>=(const N& n, const BigInteger& right)
+{
+	return right <= n;
+}
 
 void sieveOfErotosthenes(int64 n, vector<bool>& isPrime);
 bool verifySieve(int64 n);

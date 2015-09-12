@@ -74,5 +74,6 @@ int32		problem50(int32 n);				// Lowest prime below n that is the sum of the mos
 
 int32		problem51();					// Lowest prime where, by replacing part of the of it by the same digit, it is part of an eight prime value family.
 int32		problem52();					// Smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
+int64		problem53(int32 n, int64 m);	// Number of, not necessarily distinct, values of x choose r that exceed m where 1 <= x <= n.
 
 #endif

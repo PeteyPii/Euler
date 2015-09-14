@@ -18,6 +18,7 @@
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <numeric>
 #include <set>
@@ -95,7 +96,7 @@ private:
 
 public:
 	template <typename N>
-	BigInteger(N n, uint8 base = 10) :
+	explicit BigInteger(N n, uint8 base = 10) :
 	 	m_nBase(base),
 		m_vnDigits(1, 0),
 		m_bIsNegative(false)

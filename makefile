@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -std=c++11
 
 UNAME = $(shell uname)
 
-ifneq (,$(findstring MINGW32_NT,$(UNAME)))
+ifneq (,$(findstring MINGW,$(UNAME)))
 EXEC = Euler.exe
 else
 EXEC = Euler

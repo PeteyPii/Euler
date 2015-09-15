@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(54, 54);
+		verifyResults(55, 55);
 
 		return 0;
 	}
@@ -125,6 +125,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem52(), 142857); },
 		[] () -> bool { return assertEquality(problem53(100, 1000000), 4075); },
 		[] () -> bool { return assertEquality(problem54(), 376); },
+		[] () -> bool { return assertEquality(problem55(), 249); },
 
 		[] () -> bool { return false; }
 	};
@@ -2439,7 +2440,36 @@ int32 problem54()
 
 	return p1wins;
 }
+int32 problem55()
+{
+	const int32 CHECK_MAX = 10000;
+	const int32 ITERATION_LIMIT = 50;
 
+	int32 count = 0;
+	for(int32 n = 1; n < CHECK_MAX; n++)
+	{
+		int32 i = 0;
+		bool isLychrel = true;
+		BigInteger candidate(n);
+		while(i < ITERATION_LIMIT)
+		{
+			candidate = candidate + candidate.reverse();
+			if(candidate.isPalindrome())
+			{
+				isLychrel = false;
+				break;
+			}
+			i++;
+		}
+
+		if(isLychrel)
+		{
+			count++;
+		}
+	}
+
+	return count;
+}
 
 #ifdef _MSC_VER
 #pragma warning( pop )

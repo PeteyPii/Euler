@@ -125,6 +125,32 @@ int32 BigInteger::productOfDigits() const
 	return product;
 }
 
+bool BigInteger::isPalindrome() const
+{
+	uint32 left = m_vnDigits.size() - 1;
+	uint32 right = 0;
+	while(right < left)
+	{
+		if(m_vnDigits[right] != m_vnDigits[left])
+		{
+			return false;
+		}
+
+		right++;
+		left--;
+	}
+
+	return true;
+}
+
+BigInteger BigInteger::reverse() const
+{
+	BigInteger copy(*this);
+	std::reverse(copy.m_vnDigits.begin(), copy.m_vnDigits.end());
+	copy.trimZeros();
+	return copy;
+}
+
 BigInteger BigInteger::operator+(const BigInteger& obj) const
 {
 	assertSameBase(*this, obj);

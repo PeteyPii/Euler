@@ -82,7 +82,7 @@ private:
 		}
 
 		int32 i = 0;
-		while(m_bIsNegative ? n < 0 : n > 0)
+		while(n != 0)
 		{
 			m_vnDigits[i] = n % m_nBase;
 			n /= m_nBase;
@@ -115,6 +115,8 @@ public:
 	bool isZero() const;
 	int32 sumOfDigits() const;
 	int32 productOfDigits() const;
+	bool isPalindrome() const;
+	BigInteger reverse() const;
 
 
 	BigInteger operator+(const BigInteger& obj) const;

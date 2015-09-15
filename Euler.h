@@ -76,5 +76,6 @@ int32		problem51();					// Lowest prime where, by replacing part of the of it by
 int32		problem52();					// Smallest positive integer, x, such that 2x, 3x, 4x, 5x, and 6x, contain the same digits.
 int64		problem53(int32 n, int64 m);	// Number of, not necessarily distinct, values of x choose r that exceed m where 1 <= x <= n.
 int32		problem54();					// Number of poker hands player 1 wins.
+int32		problem55();					// Number of Lycherel numbers below ten-thousand.
 
 #endif

@@ -76,7 +76,6 @@ uint8 BigInteger::getNthDigitFromRight(int32 n) const	// n is zero based
 	if(n < 0)
 	{
 		throw string("Tried to get a negative digit");
-		return 0;
 	}
 
 	return m_vnDigits[n];
@@ -86,25 +85,12 @@ uint8 BigInteger::getNthDigitFromLeft(int32 n) const	// n is zero based
 {
 	if(n < 0)
 	{
-		throw string("Tried to get a negative digit");
 		return 0;
 	}
 
-	uint32 i = 0;
-	while(i < m_vnDigits.size() && m_vnDigits[m_vnDigits.size() - 1 - i] == 0)
+	if(n >= static_cast<int32>(m_vnDigits.size()))
 	{
-		i++;
-	}
-
-	if(i == m_vnDigits.size() && n == 0)
-	{
-		return 0;
-	}
-
-	if(n + i >= m_vnDigits.size())
-	{
-		throw string("Asked for too many digits");
-		return 0;
+		throw string("Tried to get a digit below the ones digit");
 	}
 
 	return m_vnDigits[m_vnDigits.size() - 1 - n];
@@ -112,15 +98,7 @@ uint8 BigInteger::getNthDigitFromLeft(int32 n) const	// n is zero based
 
 bool BigInteger::isZero() const
 {
-	for(uint32 i = 0; i < m_vnDigits.size(); i++)
-	{
-		if(m_vnDigits[i] != 0)
-		{
-			return false;
-		}
-	}
-
-	return true;
+	return m_vnDigits[0] == 0 && m_vnDigits.size() == 1;
 }
 
 int32 BigInteger::sumOfDigits() const
@@ -404,14 +382,15 @@ void BigInteger::assertSameBase(const BigInteger& a, const BigInteger& b) const
 
 void BigInteger::trimZeros()
 {
-	for(int i = m_vnDigits.size() - 1; i >= 1; i--)
+	if(m_vnDigits.size() > 1)
 	{
-		if(m_vnDigits[i] != 0)
+		uint32 i = m_vnDigits.size();
+		while(i > 1 && m_vnDigits[i - 1] == 0)
 		{
-			break;
+			i--;
 		}
 
-		m_vnDigits.erase(m_vnDigits.begin() + i);
+		m_vnDigits.erase(m_vnDigits.begin() + i, m_vnDigits.end());
 	}
 }
 

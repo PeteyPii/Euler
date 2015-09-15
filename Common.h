@@ -79,11 +79,10 @@ private:
 		if(n < 0)
 		{
 			m_bIsNegative = true;
-			n *= -1;
 		}
 
 		int32 i = 0;
-		while(n > 0)
+		while(m_bIsNegative ? n < 0 : n > 0)
 		{
 			m_vnDigits[i] = n % m_nBase;
 			n /= m_nBase;

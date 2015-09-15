@@ -307,28 +307,29 @@ int64 problem7(int64 n)
 	}
 
 	// Add a bit on to be safe
-	const int64 sieveSize = static_cast<int64>(pixUpperBound * 1.5);
+	int64 sieveSize = static_cast<int64>(pixUpperBound * 1.5);
 	vector<bool> isPrime;
 
-	sieveOfErotosthenes(sieveSize, isPrime);
-
 	int64 c = 0;
-
-	for(int64 i = 0; i <= sieveSize; i++)
+	while(true)
 	{
-		if(isPrime[i])
+		sieveOfErotosthenes(sieveSize, isPrime);
+		for(int64 i = 0; i <= sieveSize; i++)
 		{
-			c++;
-			if(c == n)
+			if(isPrime[i])
 			{
-				return i;
+				c++;
+				if(c == n)
+				{
+					return i;
+				}
 			}
 		}
+		sieveSize *= 3;
+		sieveSize /= 2;
 	}
 
 	throw string("Sieve too small");
-
-	return -1;
 }
 int64 problem8(int32 n)
 {
@@ -371,8 +372,6 @@ int32 problem9()
 	}
 
 	throw string("Unable to find a*b*c");
-
-	return -1;
 }
 int64 problem10(int64 n)
 {
@@ -411,7 +410,6 @@ int32 problem11(int32 n, int32 m)
 			if(!fin)
 			{
 				throw string("Bad file formatting");
-				return -1;
 			}
 		}
 	}
@@ -504,8 +502,6 @@ int64 problem12(int32 n)
 	}
 
 	throw string("Triangle number too big");
-
-	return -1;
 }
 string problem13(int32 n)
 {
@@ -528,7 +524,6 @@ int32 problem14(int32 n)
 	if(n < 1)
 	{
 		throw string("Can't do Collatz sequence starting from a number less than 1");
-		return -1;
 	}
 
 	if(n == 1)
@@ -575,7 +570,6 @@ int64 problem15(int32 n, int32 m)
 	if(n < 1 || m < 1)
 	{
 		throw string("Invalid grid size for lattice paths");
-		return -1;
 	}
 
 	vector<vector<int64>> paths(n + 1, vector<int64>(m + 1, 0));
@@ -603,7 +597,6 @@ int32 problem16(int32 n)
 	if(n < 0)
 	{
 		throw string("Negative exponent not implemented yet");
-		return -1;
 	}
 
 	BigInteger x(1);
@@ -650,7 +643,6 @@ int32 problem18(int32 n)
 			if(!fin)
 			{
 				throw string("Bad file formatting of triangle");
-				return -1;
 			}
 		}
 	}
@@ -658,7 +650,6 @@ int32 problem18(int32 n)
 	if(n < 1)
 	{
 		throw string("Cannot have a triangle that has less than one row");
-		return -1;
 	}
 
 	for(int32 i = 1; i < n; i++)
@@ -696,7 +687,6 @@ int32 problem19(int32 n)
 	if(n <= 1900)
 	{
 		throw string("Cannot count backwards in time");
-		return - 1;
 	}
 
 	int32 year = 1901;
@@ -762,7 +752,6 @@ int32 problem20(int32 n)
 	if(n < 0)
 	{
 		throw string("We shouldn't take the factorial of a negative number");
-		return -1;
 	}
 
 	BigInteger x(1);
@@ -778,7 +767,6 @@ int32 problem21(int32 n)
 	if(n < 1)
 	{
 		throw string("Cannot find amicable numbers less than 1");
-		return -1;
 	}
 
 	if(n == 1)
@@ -870,13 +858,11 @@ string problem24(int32 n)
 	if(n < 1)
 	{
 		throw string("Can't find the zero-th permutation or a negative permutation");
-		return "-1";
 	}
 
 	if(n > factorial(10))
 	{
 		throw string("Can't find the zero-th permutation or a negative permutation");
-		return "-1";
 	}
 
 	vector<char> digits(10);
@@ -903,7 +889,6 @@ int32 problem25(int32 n)
 	if(n < 1)
 	{
 		throw string("A number cannot be less than one digit long");
-		return -1;
 	}
 
 	if(n == 1)
@@ -931,7 +916,6 @@ int32 problem26(int32 n)
 	if(n < 1)
 	{
 		throw string("Bad number for counting reciprocal decimal digit period");
-		return -1;
 	}
 
 	if(n == 1)
@@ -978,7 +962,6 @@ int32 problem27(int32 n)
 	if(n < 1)
 	{
 		throw string("Bad restrictions on a and b (they belong to an empty set)");
-		return -1;
 	}
 
 	if(n == 1)
@@ -1046,13 +1029,11 @@ int32 problem28(int32 n)
 	if(n < 1)
 	{
 		throw string("Cannot have a spiral with a width less than one");
-		return -1;
 	}
 
 	if(n % 2 == 0)
 	{
 		throw string("Spiral with even side length is undefined");
-		return -1;
 	}
 
 	int32 x = (n - 1) / 2;
@@ -1063,7 +1044,6 @@ int32 problem29(int32 n)
 	if(n < 2)
 	{
 		throw string("A number cannot be at least 2 and less than 2 at the same time");
-		return -1;
 	}
 
 	vector<vector<int32>> primeFactor(n + 1, vector<int32>(n + 1, 0));
@@ -1106,20 +1086,9 @@ int32 problem29(int32 n)
 }
 int32 problem30(int32 n)
 {
-	if(n < 0)
-	{
-		throw string("Negative powers of digits is uninteresting; result is 0");
-		return 0;
-	}
-
-	if(n == 0)
+	if(n <= 1)
 	{
 		return 0;
-	}
-
-	if(n == 1)
-	{
-		return 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9;
 	}
 
 	int32 maxDigits = 1;

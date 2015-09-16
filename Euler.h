@@ -78,4 +78,6 @@ int64		problem53(int32 n, int64 m);	// Number of, not necessarily distinct, valu
 int32		problem54();					// Number of poker hands player 1 wins.
 int32		problem55();					// Number of Lycherel numbers below ten-thousand.
 
+int32		problem56(int32 n);				// Maximal digit sum of a^b where a, b < n.
+
 #endif

@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(55, 55);
+		verifyResults(56, 56);
 
 		return 0;
 	}
@@ -126,6 +126,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem53(100, 1000000), 4075); },
 		[] () -> bool { return assertEquality(problem54(), 376); },
 		[] () -> bool { return assertEquality(problem55(), 249); },
+
+		[] () -> bool { return assertEquality(problem56(100), 972); },
 
 		[] () -> bool { return false; }
 	};
@@ -2469,6 +2471,31 @@ int32 problem55()
 	}
 
 	return count;
+}
+int32 problem56(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Invalid set of integers to create powers");
+	}
+
+	int32 maximalSum = 0;
+	for(int32 a = 1; a < n; a++)
+	{
+		BigInteger bigPower(a);
+		for(int32 b = 1; b < n; b++)
+		{
+			int32 sum = bigPower.sumOfDigits();
+			if(sum > maximalSum)
+			{
+				maximalSum = sum;
+			}
+
+			bigPower *= a;
+		}
+	}
+
+	return maximalSum;
 }
 
 #ifdef _MSC_VER

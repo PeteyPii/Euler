@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(57, 57);
+		verifyResults(58, 58);
 
 		return 0;
 	}
@@ -129,6 +129,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem56(100), 972); },
 		[] () -> bool { return assertEquality(problem57(1000), 153); },
+		[] () -> bool { return assertEquality(problem58(1, 10), 26241); },
 
 		[] () -> bool { return false; }
 	};
@@ -2535,6 +2536,47 @@ int32 problem57(int32 n)
 	}
 
 	return count;
+}
+int32 problem58(int32 n, int32 m)
+{
+	if(n < 0 || m < 1)
+	{
+		throw string("Impossible ratio of primes to non-primes");
+	}
+
+	int32 numberCount = 5;
+	int32 primeCount = 3;
+	int32 lastNumber = 9;
+	int32 incrementer = 4;	// One less than the next spiral side-length
+
+	while(m * primeCount >= n * numberCount)
+	{
+		lastNumber += incrementer;
+		if(isNumberPrime(lastNumber))
+		{
+			primeCount++;
+		}
+
+		lastNumber += incrementer;
+		if(isNumberPrime(lastNumber))
+		{
+			primeCount++;
+		}
+
+		lastNumber += incrementer;
+		if(isNumberPrime(lastNumber))
+		{
+			primeCount++;
+		}
+
+		lastNumber += incrementer;
+		// Don't have to check the last number number because it's going to be an odd square
+
+		numberCount += 4;
+		incrementer += 2;
+	}
+
+	return incrementer - 1;
 }
 
 #ifdef _MSC_VER

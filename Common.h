@@ -50,6 +50,9 @@ typedef		int64_t		int64;
 
 using namespace std;
 
+const double PI			= 3.14159265358979;
+const double SQRT_2		= 1.41421356237310;
+
 class ScopeTimer
 {
 public:

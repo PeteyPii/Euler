@@ -79,5 +79,6 @@ int32		problem54();					// Number of poker hands player 1 wins.
 int32		problem55();					// Number of Lycherel numbers below ten-thousand.
 
 int32		problem56(int32 n);				// Maximal digit sum of a^b where a, b < n.
+int32		problem57(int32 n);				// Number of convergents of square root 2, where the convergent has a numerator with more digits than the denominator and the term is at most the n-th term.
 
 #endif

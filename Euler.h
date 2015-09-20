@@ -81,5 +81,6 @@ int32		problem55();					// Number of Lycherel numbers below ten-thousand.
 int32		problem56(int32 n);				// Maximal digit sum of a^b where a, b < n.
 int32		problem57(int32 n);				// Number of convergents of square root 2, where the convergent has a numerator with more digits than the denominator and the term is at most the n-th term.
 int32		problem58(int32 n, int32 m);	// Side length of spiral where, on the diagonals, the fraction of primes is under n / m.
+int32		problem59();					// Decrypt a message that uses a form of XOR encryption and find the sum of the ASCII values.
 
 #endif

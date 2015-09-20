@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(58, 58);
+		verifyResults(59, 59);
 
 		return 0;
 	}
@@ -130,6 +130,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem56(100), 972); },
 		[] () -> bool { return assertEquality(problem57(1000), 153); },
 		[] () -> bool { return assertEquality(problem58(1, 10), 26241); },
+		[] () -> bool { return assertEquality(problem59(), 107359); },
 
 		[] () -> bool { return false; }
 	};
@@ -2577,6 +2578,54 @@ int32 problem58(int32 n, int32 m)
 	}
 
 	return incrementer - 1;
+}
+int32 problem59()
+{
+	ifstream fin("p59.txt");
+	assertFileOpened(fin);
+
+	vector<int32> characters;
+	int32 temp;
+	while(fin >> temp)
+	{
+		characters.push_back(temp);
+	}
+
+	int32 charCounts[3][256] = {0};
+	for(uint32 i = 0; i < characters.size(); i++)
+	{
+		charCounts[i % 3][characters[i]]++;
+	}
+
+	int32 highestFreq[3] = {0};
+	int32 highestFreqChar[3] = {0};
+	for(uint32 i = 0; i < 3; i++)
+	{
+		for(uint32 j = 0; j < 256; j++)
+		{
+			if(charCounts[i][j] > highestFreq[i])
+			{
+				highestFreq[i] = charCounts[i][j];
+				highestFreqChar[i] = j;
+			}
+		}
+	}
+
+	int32 encryptionKeys[3];
+	for(uint32 i = 0; i < 3; i++)
+	{
+		// Space should be the most frequent character
+		encryptionKeys[i] = highestFreqChar[i] ^ ' ';
+	}
+
+	int32 asciiSum = 0;
+	for(uint32 i = 0; i < characters.size(); i++)
+	{
+		characters[i] ^= encryptionKeys[i % 3];
+		asciiSum += characters[i];
+	}
+
+	return asciiSum;
 }
 
 #ifdef _MSC_VER

@@ -16,6 +16,7 @@
 #include <chrono>
 #include <exception>
 #include <fstream>
+#include <functional>
 #include <iomanip>
 #include <iostream>
 #include <iterator>
@@ -651,5 +652,21 @@ bool assertEquality(N a, T b)
 	}
 }
 
+template <typename R, typename... Args>
+function<R (Args...)> memoized(R (*fn)(Args...))
+{
+	map<tuple<Args...>, R> memory;
+	return [fn, memory] (Args... args) mutable -> R
+	{
+		auto argt = make_tuple(args...);
+		auto it = memory.find(argt);
+		if(it == memory.end())
+		{
+			it = memory.insert(make_pair(argt, fn(args...))).first;
+		}
+
+		return it->second;
+	};
+}
 
 #endif

@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(59, 59);
+		verifyResults(60, 60);
 
 		return 0;
 	}
@@ -131,6 +131,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem57(1000), 153); },
 		[] () -> bool { return assertEquality(problem58(1, 10), 26241); },
 		[] () -> bool { return assertEquality(problem59(), 107359); },
+		[] () -> bool { return assertEquality(problem60(4), 0); },
 
 		[] () -> bool { return false; }
 	};
@@ -2185,7 +2186,7 @@ int64 problem53(int32 n, int64 m)
 		return 0;
 	}
 
-	class Memoizer
+	class FactorialMemoizer
 	{
 	public:
 		BigInteger& operator()(int32 x)
@@ -2201,7 +2202,7 @@ int64 problem53(int32 n, int64 m)
 		map<int32, BigInteger> m_cMemory;
 	};
 
-	Memoizer factorialMemoizer;
+	FactorialMemoizer factorialMemoizer;
 
 	int64 count = 0;
 	BigInteger limit(m);
@@ -2626,6 +2627,17 @@ int32 problem59()
 	}
 
 	return asciiSum;
+}
+int32 problem60(int32 n)
+{
+	if(n < 2)
+	{
+		throw string("Need at least two numbers to concatenate");
+	}
+
+	auto memoizedIsPrime = memoized(isNumberPrime<int32>);
+
+	return 0;
 }
 
 #ifdef _MSC_VER

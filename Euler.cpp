@@ -2637,7 +2637,134 @@ int32 problem60(int32 n)
 
 	auto memoizedIsPrime = memoized(isNumberPrime<int32>);
 
-	return 0;
+	// Ommit 2 and 5 since they cannot be a part of any prime family
+	vector<int32> primes = {3, 7};
+
+	set<tuple<int32, int32>> badMatches;
+
+	class PrimeTreeNode
+	{
+	public:
+		vector<PrimeTreeNode*> m_vpChildren;
+		uint32 m_nNextLowestPrimeIx;
+		int32 m_nSum;
+		set<int32> m_sFamily;
+
+		PrimeTreeNode() :
+			m_nNextLowestPrimeIx(0),
+			m_nSum(0)
+		{
+		}
+
+		~PrimeTreeNode()
+		{
+			for(auto node : m_vpChildren)
+			{
+				delete node;
+			}
+		}
+
+		vector<set<int32>> getSumsNSizeK(int32 k, int32 n)
+		{
+			vector<set<int32>> sets;
+			if(k == 0)
+			{
+				if(m_nSum == n)
+				{
+					sets.push_back(m_sFamily);
+				}
+			}
+			else
+			{
+				for(auto node : m_vpChildren)
+				{
+					auto setsReturned = node->getSumsNSizeK(k - 1, n);
+					sets.insert(sets.end(), setsReturned.begin(), setsReturned.end());
+				}
+			}
+
+			return sets;
+		}
+	};
+
+	class PrimeFamiliesSummingToN
+	{
+	public:
+		PrimeFamiliesSummingToN(vector<int32>& primes, const set<tuple<int32, int32>>& badMatches) :
+			m_vnPrimes(primes),
+			m_sBadMatches(badMatches)
+		{
+		}
+
+		vector<set<int32>> operator()(int32 k, int32 n)
+		{
+			int32 i = m_vnPrimes.back() + 1;
+			while(n > m_vnPrimes.back())
+			{
+				if(isNumberPrime(i))
+				{
+					m_vnPrimes.push_back(i);
+				}
+
+				i++;
+			}
+
+			PrimeTreeNode* root = new PrimeTreeNode();
+			buildTree(n, k, root);
+
+			vector<set<int32>> temp = root->getSumsNSizeK(k, n);
+			delete root;
+
+			return temp;
+		}
+
+	private:
+		vector<int32>& m_vnPrimes;
+		const set<tuple<int32, int32>>& m_sBadMatches;
+
+		void buildTree(int32 n, int32 k, PrimeTreeNode* root)
+		{
+			if(k > 0)
+			{
+				for(uint32 i = root->m_nNextLowestPrimeIx; i < m_vnPrimes.size(); i++)
+				{
+					int32 candidateSum = root->m_nSum + m_vnPrimes[i];
+					if(candidateSum <= n)
+					{
+						PrimeTreeNode* temp = new PrimeTreeNode();
+						temp->m_nSum = candidateSum;
+						temp->m_nNextLowestPrimeIx = i + 1;
+						temp->m_sFamily = root->m_sFamily;
+						temp->m_sFamily.insert(m_vnPrimes[i]);
+
+						root->m_vpChildren.push_back(temp);
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				for(auto node : root->m_vpChildren)
+				{
+					buildTree(n, k - 1, node);
+				}
+			}
+		}
+	};
+
+	PrimeFamiliesSummingToN familyGen(primes, badMatches);
+	vector<set<int32>> families = familyGen(n, 800);
+	for(auto family : families)
+	{
+		for(auto prime : family)
+		{
+			cout << prime << " ";
+		}
+		cout << endl;
+	}
+
+	return -1;
 }
 
 #ifdef _MSC_VER

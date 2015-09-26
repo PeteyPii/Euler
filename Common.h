@@ -576,6 +576,12 @@ T vectorProduct(const vector<T>& v)
 	return accumulate(v.cbegin(), v.cend(), T(1), [] (T product, T item) -> T { return product * item; });
 }
 
+template<typename T>
+T setSum(const set<T>& s)
+{
+	return accumulate(s.cbegin(), s.cend(), T(0));
+}
+
 template <typename N>
 bool isPandigital(N n)
 {

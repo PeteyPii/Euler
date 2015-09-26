@@ -131,7 +131,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem57(1000), 153); },
 		[] () -> bool { return assertEquality(problem58(1, 10), 26241); },
 		[] () -> bool { return assertEquality(problem59(), 107359); },
-		[] () -> bool { return assertEquality(problem60(5), 0); },
+		[] () -> bool { return assertEquality(problem60(5), 26033); },
 
 		[] () -> bool { return false; }
 	};
@@ -2635,202 +2635,149 @@ int32 problem60(int32 n)
 		throw string("Need at least two numbers to concatenate");
 	}
 
-	static auto memoizedIsPrime = memoized(isNumberPrime<int32>);
+	// Need to have an upper bound on what prime can be in the set (it's just a guess)
+	const int32 maxPrimeBound = 10000;
 
-	// Ommit 2 and 5 since they cannot be a part of any prime family
-	vector<int32> primes = {3, 7};
+	vector<bool> isPrime;
+	sieveOfErotosthenes(maxPrimeBound, isPrime);
 
-	set<tuple<int32, int32>> badMatches;
-
-	class PrimeTreeNode
+	struct Node
 	{
-	public:
-		vector<PrimeTreeNode*> m_vpChildren;
-		uint32 m_nNextLowestPrimeIx;
-		int32 m_nSum;
-		set<int32> m_sFamily;
-
-		PrimeTreeNode() :
-			m_nNextLowestPrimeIx(0),
-			m_nSum(0)
-		{
-		}
-
-		~PrimeTreeNode()
-		{
-			for(PrimeTreeNode* node : m_vpChildren)
-			{
-				delete node;
-			}
-		}
-
-		vector<set<int32>> getSumsNSizeK(int32 k, int32 n) const
-		{
-			vector<set<int32>> sets;
-			if(k == 0)
-			{
-				if(m_nSum == n)
-				{
-					sets.push_back(m_sFamily);
-				}
-			}
-			else
-			{
-				for(const PrimeTreeNode* node : m_vpChildren)
-				{
-					auto setsReturned = node->getSumsNSizeK(k - 1, n);
-					sets.insert(sets.end(), setsReturned.begin(), setsReturned.end());
-				}
-			}
-
-			return sets;
-		}
+		int32 val;
+		int32 power;
+		set<int32> adjacencies;
 	};
 
-	class PrimeFamiliesSummingToN
+	int32 power = 10;
+	vector<Node> nodes;
+	for(int32 i = 0; i < static_cast<int32>(isPrime.size()); i++)
+	{
+		if(i >= power)
+		{
+			power *= 10;
+		}
+
+		if(isPrime[i])
+		{
+			Node node;
+			node.power = power;
+			node.val = i;
+			nodes.push_back(node);
+		}
+	}
+
+	for(uint32 i = 0; i < nodes.size() - 1; i++)
+	{
+		for(uint32 j = i + 1; j < nodes.size(); j++)
+		{
+			if(isNumberPrime(nodes[j].val * nodes[i].power + nodes[i].val) && isNumberPrime(nodes[i].val * nodes[j].power + nodes[j].val))
+			{
+				nodes[i].adjacencies.insert(j);
+				nodes[j].adjacencies.insert(i);
+			}
+		}
+	}
+
+	// Things tend to have a lot of adjacencies (barring 2 and 5) so this is pretty pointless.
+	#if 0
+	auto it = remove_if(nodes.begin(), nodes.end(), [n](Node& node) -> bool {
+		return node.adjacencies.size() < static_cast<uint32>(n - 1);
+	});
+	nodes.erase(it, nodes.end());
+
+	// Recompute indices of adjacencies
+	#endif
+
+	class KNFinder
 	{
 	public:
-		PrimeFamiliesSummingToN(vector<int32>& primes, const set<tuple<int32, int32>>& badMatches) :
-			m_vnPrimes(primes),
-			m_sBadMatches(badMatches)
+		KNFinder(const vector<Node>& graph) :
+			m_vcGraph(graph)
 		{
 		}
 
-		vector<set<int32>> operator()(int32 k, int32 n)
+		vector<set<int32>> operator()(int32 n)
 		{
-			int32 i = m_vnPrimes.back() + 1;
-			while(n > m_vnPrimes.back())
-			{
-				if(memoizedIsPrime(i))
-				{
-					m_vnPrimes.push_back(i);
-				}
+			m_nN = n;
+			m_vsResults = vector<set<int32>>();
 
-				i++;
-			}
+			set<int32> placeholder;
+			recurse(placeholder, 0);
 
-			PrimeTreeNode* root = new PrimeTreeNode();
-			buildTree(n, k, root);
-
-			vector<set<int32>> temp = root->getSumsNSizeK(k, n);
-			delete root;
-
-			return temp;
+			return m_vsResults;
 		}
 
 	private:
-		vector<int32>& m_vnPrimes;
-		const set<tuple<int32, int32>>& m_sBadMatches;
+		const vector<Node>& m_vcGraph;
+		int32 m_nN;
+		vector<set<int32>> m_vsResults;
 
-		void buildTree(int32 n, int32 k, PrimeTreeNode* root)
+		void recurse(set<int32>& candidate, int32 minIx)
 		{
-			if(k > 0)
+			if(candidate.size() == static_cast<uint32>(m_nN))
 			{
-				for(uint32 i = root->m_nNextLowestPrimeIx; i < m_vnPrimes.size(); i++)
+				m_vsResults.push_back(candidate);
+				return;
+			}
+
+			for(uint32 i = minIx; i < m_vcGraph.size(); i++)
+			{
+				bool isValid = true;
+				for(int32 ix : candidate)
 				{
-					int32 candidateSum = root->m_nSum + m_vnPrimes[i];
-					if(candidateSum <= n)
+					if(m_vcGraph[i].adjacencies.count(ix) == 0)
 					{
-						bool isBadMatch = false;
-						for(const int32 lowerPrime : root->m_sFamily)
-						{
-							if(m_sBadMatches.count(make_pair(lowerPrime, m_vnPrimes[i])) == 1)
-							{
-								isBadMatch = true;
-								break;
-							}
-						}
-
-						if(!isBadMatch)
-						{
-							PrimeTreeNode* temp = new PrimeTreeNode();
-							temp->m_nSum = candidateSum;
-							temp->m_nNextLowestPrimeIx = i + 1;
-							temp->m_sFamily = root->m_sFamily;
-							temp->m_sFamily.insert(m_vnPrimes[i]);
-
-							root->m_vpChildren.push_back(temp);
-						}
-					}
-					else
-					{
+						isValid = false;
 						break;
 					}
 				}
 
-				for(PrimeTreeNode* node : root->m_vpChildren)
+				if(isValid)
 				{
-					buildTree(n, k - 1, node);
+					candidate.insert(i);
+					recurse(candidate, i + 1);
+					candidate.erase(i);
 				}
 			}
 		}
 	};
 
-	PrimeFamiliesSummingToN familyGen(primes, badMatches);
-	int32 i = n;
-	while(true)
+	KNFinder knFinder(nodes);
+	vector<set<int32>> validSets = knFinder(n);
+
+	if(validSets.size() == 0)
 	{
-		const vector<set<int32>> families = familyGen(n, i);
-		for(const set<int32>& family : families)
-		{
-			vector<int32> candidateFamily(family.begin(), family.end());
-			vector<int32> powerOfTen;
-			for(int32 j = 0; j < n; j++)
-			{
-				int32 power = 1;
-				int32 x = candidateFamily[j];
-				while(x > 0)
-				{
-					x /= 10;
-					power *= 10;
-				}
-
-				powerOfTen.push_back(power);
-			}
-
-			bool isGoodFamily = true;
-			for(int32 j = 0; j < n - 1; j++)
-			{
-				for(int32 k = j + 1; k < n; k++)
-				{
-					if(!memoizedIsPrime(candidateFamily[j] * powerOfTen[k] + candidateFamily[k]))
-					{
-						badMatches.insert(make_pair(candidateFamily[j], candidateFamily[k]));
-						isGoodFamily = false;
-						break;
-					}
-					else if(!memoizedIsPrime(candidateFamily[k] * powerOfTen[j] + candidateFamily[j]))
-					{
-						badMatches.insert(make_pair(candidateFamily[j], candidateFamily[k]));
-						isGoodFamily = false;
-						break;
-					}
-				}
-
-				if(!isGoodFamily)
-				{
-					break;
-				}
-			}
-
-			if(isGoodFamily)
-			{
-				for(int32 prime : candidateFamily)
-				{
-					cout << prime << " ";
-				}
-				cout << endl;
-				return i;
-			}
-		}
-
-		// Since 2 cannot be in the prime family, the prime family must be composed of
-		// only odd numbers. Thus, the sum of the set is always the same under modulus 2.
-		i += 2;
-		cout << i << endl;
+		throw string("Prime upper bound not set high enough to find a valid prime family");
 	}
 
-	throw string("Could not successfully find a valid prime family");
+	sort
+	(
+		validSets.begin(),
+		validSets.end(),
+		[&nodes] (const set<int32>& x, const set<int32>& y) -> bool
+		{
+			int32 xSum = 0;
+			for(int32 ix : x)
+			{
+				xSum += nodes[ix].val;
+			}
+
+			int32 ySum = 0;
+			for(int32 ix : y)
+			{
+				ySum += nodes[ix].val;
+			}
+
+			return xSum < ySum;
+		}
+	);
+
+	int32 sum = 0;
+	for(int32 ix : validSets[0])
+	{
+		sum += nodes[ix].val;
+	}
+	return sum;
 }
 
 #ifdef _MSC_VER

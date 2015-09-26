@@ -131,7 +131,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem57(1000), 153); },
 		[] () -> bool { return assertEquality(problem58(1, 10), 26241); },
 		[] () -> bool { return assertEquality(problem59(), 107359); },
-		[] () -> bool { return assertEquality(problem60(4), 0); },
+		[] () -> bool { return assertEquality(problem60(5), 0); },
 
 		[] () -> bool { return false; }
 	};
@@ -2635,7 +2635,7 @@ int32 problem60(int32 n)
 		throw string("Need at least two numbers to concatenate");
 	}
 
-	auto memoizedIsPrime = memoized(isNumberPrime<int32>);
+	static auto memoizedIsPrime = memoized(isNumberPrime<int32>);
 
 	// Ommit 2 and 5 since they cannot be a part of any prime family
 	vector<int32> primes = {3, 7};
@@ -2658,13 +2658,13 @@ int32 problem60(int32 n)
 
 		~PrimeTreeNode()
 		{
-			for(auto node : m_vpChildren)
+			for(PrimeTreeNode* node : m_vpChildren)
 			{
 				delete node;
 			}
 		}
 
-		vector<set<int32>> getSumsNSizeK(int32 k, int32 n)
+		vector<set<int32>> getSumsNSizeK(int32 k, int32 n) const
 		{
 			vector<set<int32>> sets;
 			if(k == 0)
@@ -2676,7 +2676,7 @@ int32 problem60(int32 n)
 			}
 			else
 			{
-				for(auto node : m_vpChildren)
+				for(const PrimeTreeNode* node : m_vpChildren)
 				{
 					auto setsReturned = node->getSumsNSizeK(k - 1, n);
 					sets.insert(sets.end(), setsReturned.begin(), setsReturned.end());
@@ -2701,7 +2701,7 @@ int32 problem60(int32 n)
 			int32 i = m_vnPrimes.back() + 1;
 			while(n > m_vnPrimes.back())
 			{
-				if(isNumberPrime(i))
+				if(memoizedIsPrime(i))
 				{
 					m_vnPrimes.push_back(i);
 				}
@@ -2745,7 +2745,7 @@ int32 problem60(int32 n)
 					}
 				}
 
-				for(auto node : root->m_vpChildren)
+				for(PrimeTreeNode* node : root->m_vpChildren)
 				{
 					buildTree(n, k - 1, node);
 				}
@@ -2754,17 +2754,70 @@ int32 problem60(int32 n)
 	};
 
 	PrimeFamiliesSummingToN familyGen(primes, badMatches);
-	vector<set<int32>> families = familyGen(n, 800);
-	for(auto family : families)
+	int32 i = n;
+	while(true)
 	{
-		for(auto prime : family)
+		const vector<set<int32>> families = familyGen(n, i);
+		for(const set<int32>& family : families)
 		{
-			cout << prime << " ";
+			vector<int32> candidateFamily(family.begin(), family.end());
+			vector<int32> powerOfTen;
+			for(int32 j = 0; j < n; j++)
+			{
+				int32 power = 1;
+				int32 x = candidateFamily[j];
+				while(x > 0)
+				{
+					x /= 10;
+					power *= 10;
+				}
+
+				powerOfTen.push_back(power);
+			}
+
+			bool isGoodFamily = true;
+			for(int32 j = 0; j < n - 1; j++)
+			{
+				for(int32 k = j + 1; k < n; k++)
+				{
+					if(!memoizedIsPrime(candidateFamily[j] * powerOfTen[k] + candidateFamily[k]))
+					{
+						badMatches.insert(make_pair(candidateFamily[j], candidateFamily[k]));
+						isGoodFamily = false;
+						break;
+					}
+					else if(!memoizedIsPrime(candidateFamily[k] * powerOfTen[j] + candidateFamily[j]))
+					{
+						badMatches.insert(make_pair(candidateFamily[j], candidateFamily[k]));
+						isGoodFamily = false;
+						break;
+					}
+				}
+
+				if(!isGoodFamily)
+				{
+					break;
+				}
+			}
+
+			if(isGoodFamily)
+			{
+				for(int32 prime : candidateFamily)
+				{
+					cout << prime << " ";
+				}
+				cout << endl;
+				return i;
+			}
 		}
-		cout << endl;
+
+		// Since 2 cannot be in the prime family, the prime family must be composed of
+		// only odd numbers. Thus, the sum of the set is always the same under modulus 2.
+		i += 2;
+		cout << i << endl;
 	}
 
-	return -1;
+	throw string("Could not successfully find a valid prime family");
 }
 
 #ifdef _MSC_VER

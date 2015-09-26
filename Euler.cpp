@@ -2731,13 +2731,26 @@ int32 problem60(int32 n)
 					int32 candidateSum = root->m_nSum + m_vnPrimes[i];
 					if(candidateSum <= n)
 					{
-						PrimeTreeNode* temp = new PrimeTreeNode();
-						temp->m_nSum = candidateSum;
-						temp->m_nNextLowestPrimeIx = i + 1;
-						temp->m_sFamily = root->m_sFamily;
-						temp->m_sFamily.insert(m_vnPrimes[i]);
+						bool isBadMatch = false;
+						for(const int32 lowerPrime : root->m_sFamily)
+						{
+							if(m_sBadMatches.count(make_pair(lowerPrime, m_vnPrimes[i])) == 1)
+							{
+								isBadMatch = true;
+								break;
+							}
+						}
 
-						root->m_vpChildren.push_back(temp);
+						if(!isBadMatch)
+						{
+							PrimeTreeNode* temp = new PrimeTreeNode();
+							temp->m_nSum = candidateSum;
+							temp->m_nNextLowestPrimeIx = i + 1;
+							temp->m_sFamily = root->m_sFamily;
+							temp->m_sFamily.insert(m_vnPrimes[i]);
+
+							root->m_vpChildren.push_back(temp);
+						}
 					}
 					else
 					{

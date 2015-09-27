@@ -84,4 +84,6 @@ int32		problem58(int32 n, int32 m);	// Side length of spiral where, on the diago
 int32		problem59();					// Decrypt a message that uses a form of XOR encryption and find the sum of the ASCII values.
 int32		problem60(int32 n);				// Minimum sum of a prime family of size n where concatenating any two of the primes forms a prime.
 
+int32		problem61();					// Sum of the only ordered set of six cyclic 4-digit figurate numbers of different types.
+
 #endif

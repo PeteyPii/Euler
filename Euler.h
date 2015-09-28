@@ -85,5 +85,6 @@ int32		problem59();					// Decrypt a message that uses a form of XOR encryption 
 int32		problem60(int32 n);				// Minimum sum of a prime family of size n where concatenating any two of the primes forms a prime.
 
 int32		problem61();					// Sum of the only ordered set of six cyclic 4-digit figurate numbers of different types.
+string		problem62(int32 n);				// Smallest cube whose digits are a permutation of exactly n cubes.
 
 #endif

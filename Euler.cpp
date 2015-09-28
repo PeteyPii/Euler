@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(61, 61);
+		verifyResults(62, 62);
 
 		return 0;
 	}
@@ -134,6 +134,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem60(5), 26033); },
 
 		[] () -> bool { return assertEquality(problem61(), 28684); },
+		[] () -> bool { return assertEquality(problem62(5), "127035954683"); },
 
 		[] () -> bool { return false; }
 	};
@@ -2955,6 +2956,42 @@ int32 problem61()
 
 	SpecialCycleFinder cycleFinder(graph);
 	return vectorSum(cycleFinder());
+}
+string problem62(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Must be at least one permutation");
+	}
+	else if(n == 1)
+	{
+		return "0";
+	}
+
+	map<string, pair<int32, string>> cubes;
+	int32 i = 0;
+	while(true)
+	{
+		BigInteger x(i);
+		string cube = numberToString(x * x * x);
+		string sorted = cube;
+		sort(sorted.begin(), sorted.end());
+		auto it = cubes.find(cube);
+		if(it == cubes.end())
+		{
+			it = cubes.insert(make_pair(sorted, make_pair(0, cube))).first;
+		}
+
+		it->second.first++;
+		if(it->second.first == n)
+		{
+			return it->second.second;
+		}
+
+		i++;
+	}
+
+	throw string("Unable to find enough permutations of a cube that are cube as well");
 }
 
 #ifdef _MSC_VER

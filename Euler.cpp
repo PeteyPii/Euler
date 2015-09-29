@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(62, 62);
+		verifyResults(63, 63);
 
 		return 0;
 	}
@@ -135,6 +135,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem61(), 28684); },
 		[] () -> bool { return assertEquality(problem62(5), "127035954683"); },
+		[] () -> bool { return assertEquality(problem63(), 49); },
 
 		[] () -> bool { return false; }
 	};
@@ -2992,6 +2993,29 @@ string problem62(int32 n)
 	}
 
 	throw string("Unable to find enough permutations of a cube that are cube as well");
+}
+int32 problem63()
+{
+	// Numbers greater than 9 cannot work since 10^1 is two digits, 10^2 is three digits,
+	// and so on. We can figure out the numbers that work by calculating powers of 1 digit numbers.
+	// Starting from one, once a number's power does not have the correct amount of digits, it will
+	// always be that way since the required number will get 10 times greater while the power will
+	// only get k <= 9 times greater.
+
+	set<BigInteger> successes;
+	for(int32 i = 1; i <= 9; i++)
+	{
+		BigInteger n(i);
+		BigInteger bound(1);
+		while(n >= bound)
+		{
+			successes.insert(n);
+			n *= i;
+			bound *= 10;
+		}
+	}
+
+	return successes.size();
 }
 
 #ifdef _MSC_VER

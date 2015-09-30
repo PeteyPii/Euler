@@ -87,5 +87,6 @@ int32		problem60(int32 n);				// Minimum sum of a prime family of size n where c
 int32		problem61();					// Sum of the only ordered set of six cyclic 4-digit figurate numbers of different types.
 string		problem62(int32 n);				// Smallest cube whose digits are a permutation of exactly n cubes.
 int32		problem63();					// Number of k-digit positive integers that are also a kth power.
+int32		problem64(int32 n);				// Number of continued fractions for irrational square roots of x <= n that have an odd period.
 
 #endif

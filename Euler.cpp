@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(64, 64);
+		verifyResults(65, 65);
 
 		return 0;
 	}
@@ -137,6 +137,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem62(5), "127035954683"); },
 		[] () -> bool { return assertEquality(problem63(), 49); },
 		[] () -> bool { return assertEquality(problem64(10000), 1322); },
+		[] () -> bool { return assertEquality(problem65(100), 272); },
 
 		[] () -> bool { return false; }
 	};
@@ -3063,6 +3064,41 @@ int32 problem64(int32 n)
 	}
 
 	return count;
+}
+int32 problem65(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Cannot have a non-positive indexed convergent of e");
+	}
+
+	vector<int32> ai(n);
+	ai[0] = 2;
+	for(int32 i = 1; i < n; i++)
+	{
+		if(i % 3 == 2)
+		{
+			ai[i] = (i + 1) / 3 * 2;
+		}
+		else
+		{
+			ai[i] = 1;
+		}
+	}
+
+	vector<BigInteger> pi;	// convergent numerators
+	pi.push_back(BigInteger(1) * ai[0]);
+	if(n > 1)
+	{
+		pi.push_back(pi[0] * ai[1] + 1);
+	}
+
+	for(int32 i = 2; i < n; i++)
+	{
+		pi.push_back(pi[i - 1] * ai[i] + pi[i - 2]);
+	}
+
+	return pi.back().sumOfDigits();
 }
 
 #ifdef _MSC_VER

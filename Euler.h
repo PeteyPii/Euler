@@ -90,4 +90,6 @@ int32		problem63();					// Number of k-digit positive integers that are also a k
 int32		problem64(int32 n);				// Number of continued fractions for irrational square roots of x <= n that have an odd period.
 int32		problem65(int32 n);				// Sum of digits in the numerator of the nth convergent of the continued fraction for e.
 
+int32		problem66(int32 n);				// Value of D that maximises x which is part of an minimized integer solution to x^2 - Dy^2 = 1 for D <= n.
+
 #endif

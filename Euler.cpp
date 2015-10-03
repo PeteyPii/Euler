@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(66, 66);
+		verifyResults(67, 67);
 
 		return 0;
 	}
@@ -81,7 +81,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem16(1000), 1366); },
 		[] () -> bool { return assertEquality(problem17(1000), 21124); },
-		[] () -> bool { return assertEquality(problem18(15), 1074); },
+		[] () -> bool { return assertEquality(problem18(), 1074); },
 		[] () -> bool { return assertEquality(problem19(2000), 171); },
 		[] () -> bool { return assertEquality(problem20(100), 648); },
 
@@ -140,6 +140,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem65(100), 272); },
 
 		[] () -> bool { return assertEquality(problem66(1000), 661); },
+		[] () -> bool { return assertEquality(problem67(), 7273); },
 
 		[] () -> bool { return false; }
 	};
@@ -640,36 +641,29 @@ int32 problem17(int32 n)
 
 	return sum;
 }
-int32 problem18(int32 n)
+int32 problem18()
 {
 	ifstream fin("p18.txt");
 	assertFileOpened(fin);
 
 	vector<vector<int32>> triangle;
-	for(int32 i = 0; i < n; i++)
+	string temp;
+	while(getline(fin, temp))
 	{
 		triangle.push_back(vector<int32>());
-		for(int32 j = 0; j <= i; j++)
-		{
-			int32 temp;
-			fin >> temp;
-			triangle[i].push_back(temp);
 
-			if(!fin)
-			{
-				throw string("Bad file formatting of triangle");
-			}
+		stringstream ss;
+		ss << temp;
+		int32 number;
+		while(ss >> number)
+		{
+			triangle.back().push_back(number);
 		}
 	}
 
-	if(n < 1)
+	for(uint32 i = 1; i < triangle.size(); i++)
 	{
-		throw string("Cannot have a triangle that has less than one row");
-	}
-
-	for(int32 i = 1; i < n; i++)
-	{
-		for(int32 j = 0; j <= i; j++)
+		for(uint32 j = 0; j <= i; j++)
 		{
 			if(j == 0)
 			{
@@ -686,12 +680,12 @@ int32 problem18(int32 n)
 		}
 	}
 
-	int32 max = triangle[0][0];
-	for(int32 i = 0; i < n; i++)
+	int32 max = triangle.back()[0];
+	for(uint32 i = 1; i < triangle.back().size(); i++)
 	{
-		if(triangle[n - 1][i] > max)
+		if(triangle.back()[i] > max)
 		{
-			max = triangle[n - 1][i];
+			max = triangle.back()[i];
 		}
 	}
 
@@ -3175,6 +3169,56 @@ int32 problem66(int32 n)
 	}
 
 	return maxD;
+}
+int32 problem67()
+{
+	ifstream fin("p67.txt");
+	assertFileOpened(fin);
+
+	vector<vector<int32>> triangle;
+	string temp;
+	while(getline(fin, temp))
+	{
+		triangle.push_back(vector<int32>());
+
+		stringstream ss;
+		ss << temp;
+		int32 number;
+		while(ss >> number)
+		{
+			triangle.back().push_back(number);
+		}
+	}
+
+	for(uint32 i = 1; i < triangle.size(); i++)
+	{
+		for(uint32 j = 0; j <= i; j++)
+		{
+			if(j == 0)
+			{
+				triangle[i][0] += triangle[i - 1][0];
+			}
+			else if(j == i)
+			{
+				triangle[i][j] += triangle[i - 1][j - 1];
+			}
+			else
+			{
+				triangle[i][j] += maxVal(triangle[i - 1][j - 1], triangle[i - 1][j]);
+			}
+		}
+	}
+
+	int32 max = triangle.back()[0];
+	for(uint32 i = 1; i < triangle.back().size(); i++)
+	{
+		if(triangle.back()[i] > max)
+		{
+			max = triangle.back()[i];
+		}
+	}
+
+	return max;
 }
 
 #ifdef _MSC_VER

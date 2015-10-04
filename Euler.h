@@ -63,7 +63,7 @@ int32		problem40(int32 n);				// Value of d(1) * d(10) * ... * d(10^n) where d(n
 int32		problem41();					// Largest number that is prime and pandigital.
 int32		problem42();					// Number of words with triangular number scores.
 int64		problem43();					// Sum of all 0-9 pandigital numbers whose specific substrings satisfy certain divisibilities.
-int32		problem44();					// Value of D such that D is a pentagonal number, it is the difference betweeen two pentagonal numbers, the sum of those two pentagonal numbers is pentagonal, and it is minimized.
+int32		problem44();					// Value of D such that D is a pentagonal number, it is the difference between two pentagonal numbers, the sum of those two pentagonal numbers is pentagonal, and it is minimized.
 int64		problem45(int32 n);				// Triangle number that is also a pentagonal number and a hexagonal number such that there are n numbers with this property below it starting at the 285th triangle number.
 
 int64		problem46(int32 n);				// Nth odd composite that cannot be written as the sum of a prime and twice a square.
@@ -93,5 +93,6 @@ int32		problem65(int32 n);				// Sum of digits in the numerator of the nth conve
 int32		problem66(int32 n);				// Value of D that maximises x which is part of an minimized integer solution to x^2 - Dy^2 = 1 for D <= n.
 int32		problem67();					// Max sum of a path through a taller triangle.
 string		problem68();					// Max 16-digit string from a solved magic 5-gon ring.
+int32		problem69(int32 n);				// Value of x that maximises x/phi(x) for x <= n.
 
 #endif

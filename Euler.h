@@ -32,7 +32,7 @@ int64		problem15(int32 n, int32 m);	// Number of lattice paths in an n*m grid.
 
 int32		problem16(int32 n);				// Sum of digits of 2^n.
 int32		problem17(int32 n);				// Total number of letters for each word from 1 to n.
-int32		problem18();					// Max sum of a path through a n row tall triangle.
+int32		problem18();					// Max sum of a path through a tall triangle.
 int32		problem19(int32 n);				// Number of Sunday 1sts from start of 1901 until end of year n.
 int32		problem20(int32 n);				// Sum of the digits of n!.
 
@@ -91,6 +91,7 @@ int32		problem64(int32 n);				// Number of continued fractions for irrational sq
 int32		problem65(int32 n);				// Sum of digits in the numerator of the nth convergent of the continued fraction for e.
 
 int32		problem66(int32 n);				// Value of D that maximises x which is part of an minimized integer solution to x^2 - Dy^2 = 1 for D <= n.
-int32		problem67();					// Max sum of a path through a n row tall triangle.
+int32		problem67();					// Max sum of a path through a taller triangle.
+string		problem68();					// Max 16-digit string from a solved magic 5-gon ring.
 
 #endif

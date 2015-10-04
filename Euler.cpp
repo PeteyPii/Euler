@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(69, 69);
+		verifyResults(70, 70);
 
 		return 0;
 	}
@@ -142,7 +142,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem66(1000), 661); },
 		[] () -> bool { return assertEquality(problem67(), 7273); },
 		[] () -> bool { return assertEquality(problem68(), "6531031914842725"); },
-		[] () -> bool { return assertEquality(problem69(1000000), 0); },
+		[] () -> bool { return assertEquality(problem69(1000000), 510510); },
+		[] () -> bool { return assertEquality(problem70(10000000), 8319823); },
 
 		[] () -> bool { return false; }
 	};
@@ -3326,6 +3327,62 @@ int32 problem69(int32 n)
 	}
 
 	return product;
+}
+int32 problem70(int32 n)
+{
+	if(n < 2)
+	{
+		throw string("Cannot compute minimum of an empty set");
+	}
+
+	vector<vector<int32>> sieve(n);
+	for(int32 i = 2; i < n; i++)
+	{
+		if(sieve[i].size() > 0)
+		{
+			continue;
+		}
+
+		for(int32 j = i; j < n; j += i)
+		{
+			sieve[j].push_back(i);
+		}
+	}
+
+	vector<int32> phi(n);
+	for(int32 i = 2; i < n; i++)
+	{
+		int32 totientVal = i;
+		for(int32 primeDivisor : sieve[i])
+		{
+			totientVal /= primeDivisor;
+			totientVal *= primeDivisor - 1;
+		}
+
+		phi[i] = totientVal;
+	}
+
+	int32 min = 10;		// Ratio should never exceed 10 since the numerator
+	int32 minPhi = 1;	// and denominator will have the same number of digits
+	for(int32 i = 2; i < n; i++)
+	{
+		string num = numberToString(i);
+		string denom = numberToString(phi[i]);
+
+		sort(num.begin(), num.end());
+		sort(denom.begin(), denom.end());
+
+		if(num == denom)
+		{
+			if(static_cast<int64>(i) * minPhi < static_cast<int64>(min) * phi[i])
+			{
+				min = i;
+				minPhi = phi[i];
+			}
+		}
+	}
+
+	return min;
 }
 
 #ifdef _MSC_VER

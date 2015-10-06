@@ -96,4 +96,6 @@ string		problem68();					// Max 16-digit string from a solved magic 5-gon ring.
 int32		problem69(int32 n);				// Value of x that maximises x/phi(x) for x <= n.
 int32		problem70(int32 n);				// Value of x that minimises x/phi(x) for x < n and for x such that x is a permutation of phi(x).
 
+int32		problem71(int32 n);				// Numerator of the reduced fraction that is just below 3/7 where the denominator is at most n.
+
 #endif

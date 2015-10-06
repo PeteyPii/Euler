@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(70, 70);
+		verifyResults(71, 71);
 
 		return 0;
 	}
@@ -144,6 +144,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem68(), "6531031914842725"); },
 		[] () -> bool { return assertEquality(problem69(1000000), 510510); },
 		[] () -> bool { return assertEquality(problem70(10000000), 8319823); },
+
+		[] () -> bool { return assertEquality(problem71(1000000), 428570); },
 
 		[] () -> bool { return false; }
 	};
@@ -3383,6 +3385,33 @@ int32 problem70(int32 n)
 	}
 
 	return min;
+}
+int32 problem71(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Denominator should be able to be positive");
+	}
+
+	int64 bestNum = 0;
+	int64 bestDenom = 1;
+
+	for(int32 i = 2; i <= n; i++)
+	{
+		int32 candidateNum = 3 * i / 7;
+		if(i % 7 == 0)
+		{
+			candidateNum -= 1;
+		}
+
+		if(candidateNum * bestDenom > bestNum * i)
+		{
+			bestNum = candidateNum;
+			bestDenom = i;
+		}
+	}
+
+	return bestNum / gcd(bestNum, bestDenom);
 }
 
 #ifdef _MSC_VER

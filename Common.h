@@ -675,4 +675,40 @@ function<R (Args...)> memoized(R (*fn)(Args...))
 	};
 }
 
+template <typename N>
+void totientValues(N n, vector<N>& values)
+{
+	vector<vector<N>> sieve(n + 1);
+	for(N i = 2; i <= n; i++)
+	{
+		if(sieve[i].size() > 0)
+		{
+			continue;
+		}
+
+		for(N j = i; j <= n; j += i)
+		{
+			sieve[j].push_back(i);
+		}
+	}
+
+	values = vector<N>(n + 1);
+
+	values[0] = 0;
+	values[1] = 1;
+
+	for(N i = 2; i <= n; i++)
+	{
+		N totientVal = i;
+		for(N primeDivisor : sieve[i])
+		{
+			totientVal /= primeDivisor;
+			totientVal *= primeDivisor - 1;
+		}
+
+		values[i] = totientVal;
+	}
+}
+
+
 #endif

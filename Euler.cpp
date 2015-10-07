@@ -3352,18 +3352,8 @@ int32 problem70(int32 n)
 		}
 	}
 
-	vector<int32> phi(n);
-	for(int32 i = 2; i < n; i++)
-	{
-		int32 totientVal = i;
-		for(int32 primeDivisor : sieve[i])
-		{
-			totientVal /= primeDivisor;
-			totientVal *= primeDivisor - 1;
-		}
-
-		phi[i] = totientVal;
-	}
+	vector<int32> phi;
+	totientValues(n - 1, phi);
 
 	int32 min = 10;		// Ratio should never exceed 10 since the numerator
 	int32 minPhi = 1;	// and denominator will have the same number of digits

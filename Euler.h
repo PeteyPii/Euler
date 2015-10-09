@@ -99,5 +99,6 @@ int32		problem70(int32 n);				// Value of x that minimises x/phi(x) for x < n an
 int32		problem71(int32 n);				// Numerator of the reduced fraction that is just below 3/7 where the denominator is at most n.
 int64		problem72(int64 n);				// Number of reduced proper fractions with a denominator at most n.
 int32		problem73(int32 n);				// Number of reduced proper fractions greater than 1/3 and below 1/2 with a denominator at most n.
+int32		problem74(int32 n, int32 m);	// Number of digit factorial chains with exactly m elements starting a number below n.
 
 #endif

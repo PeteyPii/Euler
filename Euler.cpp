@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(73, 73);
+		verifyResults(74, 74);
 
 		return 0;
 	}
@@ -148,6 +148,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem71(1000000), 428570); },
 		[] () -> bool { return assertEquality(problem72(1000000), 303963552391); },
 		[] () -> bool { return assertEquality(problem73(12000), 7295372); },
+		[] () -> bool { return assertEquality(problem74(1000000, 60), 402); },
 
 		[] () -> bool { return false; }
 	};
@@ -3433,6 +3434,41 @@ int32 problem73(int32 n)
 			{
 				count++;
 			}
+		}
+	}
+
+	return count;
+}
+int32 problem74(int32 n, int32 m)
+{
+	int32 fact[10];
+	for(int32 i = 0; i < 10; i++)
+	{
+		fact[i] = factorial(i);
+	}
+
+	int32 count = 0;
+	for(int32 i = 0; i < n; i++)
+	{
+		set<int32> chain;
+		int32 x = i;
+
+		do
+		{
+			chain.insert(x);
+			int32 sum = 0;
+			while(x > 0)
+			{
+				sum += fact[x % 10];
+				x /= 10;
+			}
+			x = sum;
+		}
+		while(chain.count(x) == 0);
+
+		if(chain.size() == static_cast<uint32>(m))
+		{
+			count++;
 		}
 	}
 

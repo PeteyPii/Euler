@@ -255,6 +255,11 @@ BigInteger& BigInteger::operator*=(const BigInteger& obj)
 	return *this;
 }
 
+bool BigInteger::operator==(const BigInteger& obj) const
+{
+	assertSameBase(*this, obj);
+	return m_vnDigits == obj.m_vnDigits;
+}
 
 bool BigInteger::operator<(const BigInteger& obj) const
 {
@@ -279,36 +284,6 @@ bool BigInteger::operator<(const BigInteger& obj) const
 			else if(m_vnDigits[leftDigits - i] > obj.m_vnDigits[leftDigits - i])
 			{
 				return false;
-			}
-		}
-	}
-
-	return false;
-}
-
-bool BigInteger::operator>(const BigInteger& obj) const
-{
-	uint32 leftDigits = numberOfDigits();
-	uint32 rightDigits = obj.numberOfDigits();
-	if(leftDigits < rightDigits)
-	{
-		return false;
-	}
-	else if(leftDigits > rightDigits)
-	{
-		return true;
-	}
-	else
-	{
-		for(uint32 i = 1; i <= leftDigits; i++)
-		{
-			if(m_vnDigits[leftDigits - i] < obj.m_vnDigits[leftDigits - i])
-			{
-				return false;
-			}
-			else if(m_vnDigits[leftDigits - i] > obj.m_vnDigits[leftDigits - i])
-			{
-				return true;
 			}
 		}
 	}

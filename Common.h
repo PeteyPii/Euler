@@ -206,7 +206,7 @@ private:
 	vector<uint8> m_vnDigits;
 	bool m_bIsNegative;
 
-	void assertSameBase(const BigInteger& a, const BigInteger& b) const;
+	void assertSameBase(const BigInteger& obj) const;
 	void trimZeros();
 
 	BigInteger& operator/(const BigInteger& n);

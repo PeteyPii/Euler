@@ -153,7 +153,7 @@ BigInteger BigInteger::reverse() const
 
 BigInteger BigInteger::operator+(const BigInteger& obj) const
 {
-	assertSameBase(*this, obj);
+	assertSameBase(obj);
 
 	BigInteger retVal(0, m_nBase);
 	vector<uint8>& digits = retVal.m_vnDigits;
@@ -180,7 +180,7 @@ BigInteger& BigInteger::operator+=(const BigInteger& obj)
 
 BigInteger BigInteger::operator*(const BigInteger& obj) const
 {
-	assertSameBase(*this, obj);
+	assertSameBase(obj);
 
 	if(m_vnDigits.size() < obj.m_vnDigits.size())
 	{
@@ -257,7 +257,7 @@ BigInteger& BigInteger::operator*=(const BigInteger& obj)
 
 bool BigInteger::operator==(const BigInteger& obj) const
 {
-	assertSameBase(*this, obj);
+	assertSameBase(obj);
 	return m_vnDigits == obj.m_vnDigits;
 }
 
@@ -373,9 +373,9 @@ istream& operator>>(istream& in, BigInteger& n)
 	return in;
 }
 
-void BigInteger::assertSameBase(const BigInteger& a, const BigInteger& b) const
+void BigInteger::assertSameBase(const BigInteger& obj) const
 {
-	if(a.m_nBase != b.m_nBase)
+	if(m_nBase != obj.m_nBase)
 	{
 		throw string("The base of two big integers do not match");
 	}

@@ -291,6 +291,113 @@ bool BigInteger::operator<(const BigInteger& obj) const
 	return false;
 }
 
+BigInteger BigInteger::operator|(const BigInteger& obj) const
+{
+	assertSameBase(obj);
+
+	if((m_nBase & (m_nBase - 1)) != 0)
+	{
+		throw string("Bitwise operators must be in a power of 2 base");
+	}
+
+	BigInteger retVal(0);
+	if(m_vnDigits.size() > obj.m_vnDigits.size())
+	{
+		retVal.m_vnDigits.resize(m_vnDigits.size());
+		for(uint32 i = 0; i < obj.m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i] | obj.m_vnDigits[i];
+		}
+		for(uint32 i = obj.m_vnDigits.size(); i < m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i];
+		}
+	}
+	else
+	{
+		retVal.m_vnDigits.resize(obj.m_vnDigits.size());
+		for(uint32 i = 0; i < m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i] | obj.m_vnDigits[i];
+		}
+		for(uint32 i = m_vnDigits.size(); i < obj.m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = obj.m_vnDigits[i];
+		}
+	}
+
+	return retVal;
+}
+
+BigInteger BigInteger::operator&(const BigInteger& obj) const
+{
+	assertSameBase(obj);
+
+	if((m_nBase & (m_nBase - 1)) != 0)
+	{
+		throw string("Bitwise operators must be in a power of 2 base");
+	}
+
+	BigInteger retVal(0);
+	if(m_vnDigits.size() < obj.m_vnDigits.size())
+	{
+		retVal.m_vnDigits.resize(m_vnDigits.size());
+	}
+	else
+	{
+		retVal.m_vnDigits.resize(obj.m_vnDigits.size());
+	}
+
+	for(uint32 i = 0; i < retVal.m_vnDigits.size(); i++)
+	{
+		retVal.m_vnDigits[i] = m_vnDigits[i] & obj.m_vnDigits[i];
+	}
+
+	retVal.trimZeros();
+
+	return retVal;
+}
+
+BigInteger BigInteger::operator^(const BigInteger& obj) const
+{
+	assertSameBase(obj);
+
+	if((m_nBase & (m_nBase - 1)) != 0)
+	{
+		throw string("Bitwise operators must be in a power of 2 base");
+	}
+
+	BigInteger retVal(0);
+	if(m_vnDigits.size() > obj.m_vnDigits.size())
+	{
+		retVal.m_vnDigits.resize(m_vnDigits.size());
+		for(uint32 i = 0; i < obj.m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i] ^ obj.m_vnDigits[i];
+		}
+		for(uint32 i = obj.m_vnDigits.size(); i < m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i];
+		}
+	}
+	else
+	{
+		retVal.m_vnDigits.resize(obj.m_vnDigits.size());
+		for(uint32 i = 0; i < m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = m_vnDigits[i] ^ obj.m_vnDigits[i];
+		}
+		for(uint32 i = m_vnDigits.size(); i < obj.m_vnDigits.size(); i++)
+		{
+			retVal.m_vnDigits[i] = obj.m_vnDigits[i];
+		}
+	}
+
+	retVal.trimZeros();
+
+	return retVal;
+}
+
 ostream& operator<<(ostream& out, const BigInteger& n)
 {
 	if(n.isZero())

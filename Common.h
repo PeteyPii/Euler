@@ -198,6 +198,54 @@ public:
 		return !(*this < BigInteger(n, m_nBase));
 	}
 
+	BigInteger operator|(const BigInteger& obj) const;
+	BigInteger& operator|=(const BigInteger& obj)
+	{
+		return *this = *this | obj;
+	}
+	template <typename N>
+	BigInteger operator|(const N& n) const
+	{
+		return *this | BigInteger(n, m_nBase);
+	}
+	template <typename N>
+	BigInteger& operator|=(const N& n) const
+	{
+		return *this |= BigInteger(n, m_nBase);
+	}
+
+	BigInteger operator&(const BigInteger& obj) const;
+	BigInteger& operator&=(const BigInteger& obj)
+	{
+		return *this = *this & obj;
+	}
+	template <typename N>
+	BigInteger operator&(const N& n) const
+	{
+		return *this & BigInteger(n, m_nBase);
+	}
+	template <typename N>
+	BigInteger& operator&=(const N& n) const
+	{
+		return *this &= BigInteger(n, m_nBase);
+	}
+
+	BigInteger operator^(const BigInteger& obj) const;
+	BigInteger& operator^=(const BigInteger& obj)
+	{
+		return *this = *this ^ obj;
+	}
+	template <typename N>
+	BigInteger operator^(const N& n) const
+	{
+		return *this ^ BigInteger(n, m_nBase);
+	}
+	template <typename N>
+	BigInteger& operator^=(const N& n) const
+	{
+		return *this ^= BigInteger(n, m_nBase);
+	}
+
 	friend ostream& operator<<(ostream& out, const BigInteger& n);
 	friend istream& operator>>(istream& in,  BigInteger& n);
 
@@ -209,11 +257,13 @@ private:
 	void assertSameBase(const BigInteger& obj) const;
 	void trimZeros();
 
-	BigInteger& operator/(const BigInteger& n);
-	BigInteger& operator/=(const BigInteger& n);
+	BigInteger operator-(const BigInteger& obj) const;
+	BigInteger& operator-=(const BigInteger& obj);
 
-	BigInteger& operator-(const BigInteger& n);
-	BigInteger& operator-=(const BigInteger& n);
+	BigInteger operator/(const BigInteger& obj) const;
+	BigInteger& operator/=(const BigInteger& obj);
+
+	BigInteger operator~() const;
 };
 
 template <typename N>

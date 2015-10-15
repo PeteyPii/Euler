@@ -124,7 +124,10 @@ public:
 
 
 	BigInteger operator+(const BigInteger& obj) const;
-	BigInteger& operator+=(const BigInteger& obj);
+	BigInteger& operator+=(const BigInteger& obj)
+	{
+		return *this = *this + obj;
+	}
 	template <typename N>
 	BigInteger operator+(const N& n) const
 	{
@@ -137,7 +140,10 @@ public:
 	}
 
 	BigInteger operator*(const BigInteger& obj) const;
-	BigInteger& operator*=(const BigInteger& obj);
+	BigInteger& operator*=(const BigInteger& obj)
+	{
+		return *this = *this * obj;
+	}
 	template <typename N>
 	BigInteger operator*(const N& n) const
 	{

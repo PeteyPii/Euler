@@ -172,12 +172,6 @@ BigInteger BigInteger::operator+(const BigInteger& obj) const
 	return retVal;
 }
 
-BigInteger& BigInteger::operator+=(const BigInteger& obj)
-{
-	*this = *this + obj;
-	return *this;
-}
-
 BigInteger BigInteger::operator*(const BigInteger& obj) const
 {
 	assertSameBase(obj);
@@ -247,12 +241,6 @@ BigInteger BigInteger::operator*(const BigInteger& obj) const
 	retVal.trimZeros();
 
 	return retVal;
-}
-
-BigInteger& BigInteger::operator*=(const BigInteger& obj)
-{
-	*this = (*this) * obj;
-	return *this;
 }
 
 bool BigInteger::operator==(const BigInteger& obj) const

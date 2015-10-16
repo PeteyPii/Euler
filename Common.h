@@ -269,6 +269,9 @@ private:
 	BigInteger operator/(const BigInteger& obj) const;
 	BigInteger& operator/=(const BigInteger& obj);
 
+	BigInteger operator%(const BigInteger& obj) const;
+	BigInteger& operator%=(const BigInteger& obj);
+
 	BigInteger operator~() const;
 };
 

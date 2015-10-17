@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(74, 74);
+		verifyResults(75, 75);
 
 		return 0;
 	}
@@ -149,6 +149,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem72(1000000), 303963552391); },
 		[] () -> bool { return assertEquality(problem73(12000), 7295372); },
 		[] () -> bool { return assertEquality(problem74(1000000, 60), 402); },
+		[] () -> bool { return assertEquality(problem75(1500000), 161667); },
 
 		[] () -> bool { return false; }
 	};
@@ -1470,7 +1471,7 @@ int32 problem39(int32 n)
 		throw string("There are no right triangles with integer side lengths with a perimeter below 12");
 	}
 
-	// Use Euclid's formula for generating all unique Pythagorean triplets. It is the folllowing:
+	// Use Euclid's formula for generating all unique Pythagorean triplets. It is the following:
 	// a = k * (t^2 - s^2)
 	// b = k * 2 * s * t
 	// c = k * (s^2 + t^2)
@@ -3467,6 +3468,41 @@ int32 problem74(int32 n, int32 m)
 		while(chain.count(x) == 0);
 
 		if(chain.size() == static_cast<uint32>(m))
+		{
+			count++;
+		}
+	}
+
+	return count;
+}
+int32 problem75(int32 n)
+{
+	// Use Euclid's formula to generate all integer sided right triangles
+	map<int64, int64> solutionCount;
+	for(int64 s = 1; 4 * s < n; s++)
+	{
+		int64 t = s + 1;
+		while(4 * s * t < n)
+		{
+			if(gcd(s, t) == 1)
+			{
+				int64 perimeter = 2 * t * (s + t);
+				int64 k = 1;
+				while(k * perimeter < n)
+				{
+					solutionCount[k * perimeter]++;
+					k++;
+				}
+			}
+
+			t += 2;
+		}
+	}
+
+	int32 count = 0;
+	for(auto it = solutionCount.begin(); it != solutionCount.end(); it++)
+	{
+		if(it->second == 1)
 		{
 			count++;
 		}

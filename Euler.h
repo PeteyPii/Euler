@@ -100,5 +100,6 @@ int32		problem71(int32 n);				// Numerator of the reduced fraction that is just 
 int64		problem72(int64 n);				// Number of reduced proper fractions with a denominator at most n.
 int32		problem73(int32 n);				// Number of reduced proper fractions greater than 1/3 and below 1/2 with a denominator at most n.
 int32		problem74(int32 n, int32 m);	// Number of digit factorial chains with exactly m elements starting a number below n.
+int32		problem75(int32 n);				// Number of integer sided right triangles with a unique perimeter at most n.
 
 #endif

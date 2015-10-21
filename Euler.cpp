@@ -3341,20 +3341,76 @@ int32 problem70(int32 n)
 		throw string("Cannot compute minimum of an empty set");
 	}
 
-	vector<int32> phi;
-	totientValues(n - 1, phi);
-
 	int64 min = 10;		// Ratio should never exceed 10 since the numerator
 	int64 minPhi = 1;	// and denominator will have the same number of digits
 	bool found = false;
 
-	// Loop down so that a good min is found earlier, preventing us from making excessive permutation checks
+	// Biggest phi(i) can be is ceil(sqrt(i) - 1)^2. Once the value of this creates
+	// a ratio bigger than one we have already found, there is no way we can find a
+	// better ratio, if we start with the largest numbers first.
+	int32 root = sqrt(n);
 	for(int32 i = n - 1; i >= 2; i--)
 	{
-		if(minPhi * i < min * phi[i])
+		if(root * root >= i)
+		{
+			root--;
+		}
+
+		if(root * root * min < minPhi * i)
+		{
+			break;
+		}
+
+		int32 phi = i;
+		int32 x = i;
+
+		if(x % 2 == 0)
+		{
+			phi /= 2;
+			x /= 2;
+		}
+		if(phi * min <= minPhi * i)
+		{
+			continue;
+		}
+		while(x % 2 == 0)
+		{
+			x /= 2;
+		}
+
+		int32 divisor = 3;
+		while(divisor * divisor <= x)
+		{
+			if(x % divisor == 0)
+			{
+				phi /= divisor;
+				phi *= divisor - 1;
+				if(phi * min <= minPhi * i)
+				{
+					break;
+				}
+				do
+				{
+					x /= divisor;
+				}
+				while(x % divisor == 0);
+			}
+
+			divisor += 2;
+		}
+
+		phi /= x;
+		phi *= x - 1;
+
+		if(phi == i - 1)
+		{
+			continue;
+		}
+
+		if(minPhi * i < min * phi)
 		{
 			string num = numberToString(i);
-			string denom = numberToString(phi[i]);
+			string denom = numberToString(phi);
 
 			sort(num.begin(), num.end());
 			sort(denom.begin(), denom.end());
@@ -3362,7 +3418,7 @@ int32 problem70(int32 n)
 			if(num == denom)
 			{
 				min = i;
-				minPhi = phi[i];
+				minPhi = phi;
 				found = true;
 			}
 		}

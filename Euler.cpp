@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(75, 75);
+		verifyResults(70, 70);
 
 		return 0;
 	}
@@ -3341,44 +3341,39 @@ int32 problem70(int32 n)
 		throw string("Cannot compute minimum of an empty set");
 	}
 
-	vector<vector<int32>> sieve(n);
-	for(int32 i = 2; i < n; i++)
-	{
-		if(sieve[i].size() > 0)
-		{
-			continue;
-		}
-
-		for(int32 j = i; j < n; j += i)
-		{
-			sieve[j].push_back(i);
-		}
-	}
-
 	vector<int32> phi;
 	totientValues(n - 1, phi);
 
-	int32 min = 10;		// Ratio should never exceed 10 since the numerator
-	int32 minPhi = 1;	// and denominator will have the same number of digits
-	for(int32 i = 2; i < n; i++)
+	int64 min = 10;		// Ratio should never exceed 10 since the numerator
+	int64 minPhi = 1;	// and denominator will have the same number of digits
+	bool found = false;
+
+	// Loop down so that a good min is found earlier, preventing us from making excessive permutation checks
+	for(int32 i = n - 1; i >= 2; i--)
 	{
-		string num = numberToString(i);
-		string denom = numberToString(phi[i]);
-
-		sort(num.begin(), num.end());
-		sort(denom.begin(), denom.end());
-
-		if(num == denom)
+		if(minPhi * i < min * phi[i])
 		{
-			if(static_cast<int64>(i) * minPhi < static_cast<int64>(min) * phi[i])
+			string num = numberToString(i);
+			string denom = numberToString(phi[i]);
+
+			sort(num.begin(), num.end());
+			sort(denom.begin(), denom.end());
+
+			if(num == denom)
 			{
 				min = i;
 				minPhi = phi[i];
+				found = true;
 			}
 		}
 	}
 
-	return min;
+	if(!found)
+	{
+		throw string("There is no number whose totient value is a permutation of itself in the domain");
+	}
+
+	return static_cast<int32>(min);
 }
 int32 problem71(int32 n)
 {

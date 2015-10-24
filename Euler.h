@@ -102,4 +102,6 @@ int32		problem73(int32 n);				// Number of reduced proper fractions greater than
 int32		problem74(int32 n, int32 m);	// Number of digit factorial chains with exactly m elements starting a number below n.
 int32		problem75(int32 n);				// Number of integer sided right triangles with a unique perimeter at most n.
 
+int32		problem76(int32 n);				// Number of different ways to write n as a sum of at least two positive integers.
+
 #endif

@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(77, 77);
+		verifyResults(78, 78);
 
 		return 0;
 	}
@@ -153,6 +153,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem76(100), 190569291); },
 		[] () -> bool { return assertEquality(problem77(5000), 71); },
+		[] () -> bool { return assertEquality(problem78(1000000), 55374); },
 
 		[] () -> bool { return false; }
 	};
@@ -3744,6 +3745,52 @@ int32 problem77(int32 n)
 	}
 
 	return sum;
+}
+int32 problem78(int32 n)
+{
+	if(n < 0)
+	{
+		n *= -1;
+	}
+	else if(n == 0)
+	{
+		return 0;
+	}
+	else if(n == 1)
+	{
+		return 1;
+	}
+
+	// Same strategy as problem 76 but track counts mod n.
+	// Let table[x][y] be the number of ways to sum to x where terms do not exceed y.
+	vector<vector<int32>> table;
+	table.push_back(vector<int32>());
+	table[0].push_back(1);
+
+	int32 number = 1;
+	while(true)
+	{
+		for(int32 i = 0; i < number; i++)
+		{
+			table[i].push_back(table[i].back());
+		}
+
+		table.push_back(vector<int32>());
+		table.back().push_back(0);
+		for(int32 i = 1; i <= number; i++)
+		{
+			table.back().push_back((table[number - i][i] + table[number][i - 1]) % n);
+		}
+
+		if(table[number][number] == 0)
+		{
+			break;
+		}
+
+		number++;
+	}
+
+	return number;
 }
 
 #ifdef _MSC_VER

@@ -3754,40 +3754,65 @@ int32 problem78(int32 n)
 	}
 	else if(n == 0)
 	{
-		return 0;
+		return -1;
 	}
 	else if(n == 1)
 	{
-		return 1;
+		return 0;
 	}
 
-	// Same strategy as problem 76 but track counts mod n.
-	// Let table[x][y] be the number of ways to sum to x where terms do not exceed y.
-	vector<vector<int32>> table;
-	table.push_back(vector<int32>());
-	table[0].push_back(1);
+	// Use the pentagonal number theorem and calculate all numbers under mod n.
+	vector<int32> p;
+	p.push_back(1);
 
-	int32 number = 1;
-	while(true)
+	int32 number = 0;
+	while(p[number] != 0)
 	{
-		for(int32 i = 0; i < number; i++)
-		{
-			table[i].push_back(table[i].back());
-		}
-
-		table.push_back(vector<int32>());
-		table.back().push_back(0);
-		for(int32 i = 1; i <= number; i++)
-		{
-			table.back().push_back((table[number - i][i] + table[number][i - 1]) % n);
-		}
-
-		if(table[number][number] == 0)
-		{
-			break;
-		}
-
 		number++;
+
+		int64 sum = 0;
+
+		int32 k = 1;
+		while(k * (3 * k - 1) / 2 <= number)
+		{
+			sum += p[number - k * (3 * k - 1) / 2];
+			k += 2;
+		}
+
+		k--;
+		if(k * (3 * k - 1) / 2 <= number)
+		{
+			sum -= p[number - k * (3 * k - 1) / 2];
+		}
+
+		k -= 2;
+		while(k > 0)
+		{
+			sum -= p[number - k * (3 * k - 1) / 2];
+			k -= 2;
+		}
+
+		k = -1;
+		while(k * (3 * k - 1) / 2 <= number)
+		{
+			sum += p[number - k * (3 * k - 1) / 2];
+			k -= 2;
+		}
+
+		k++;
+		if(k * (3 * k - 1) / 2 <= number)
+		{
+			sum -= p[number - k * (3 * k - 1) / 2];
+		}
+
+		k += 2;
+		while(k < 0)
+		{
+			sum -= p[number - k * (3 * k - 1) / 2];
+			k += 2;
+		}
+
+		p.push_back(sum % n);
 	}
 
 	return number;

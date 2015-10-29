@@ -151,6 +151,19 @@ BigInteger BigInteger::reverse() const
 	return copy;
 }
 
+BigInteger BigInteger::convertToBase(uint8 base) const
+{
+	BigInteger sum(0, base);
+	BigInteger digitValue(1, base);
+	for(uint32 i = 0; i < m_vnDigits.size(); i++)
+	{
+		sum += digitValue * m_vnDigits[i];
+		digitValue *= m_nBase;
+	}
+
+	return sum;
+}
+
 BigInteger BigInteger::operator+(const BigInteger& obj) const
 {
 	assertSameBase(obj);

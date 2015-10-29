@@ -123,6 +123,7 @@ public:
 	int32 productOfDigits() const;
 	bool isPalindrome() const;
 	BigInteger reverse() const;
+	BigInteger convertToBase(uint8 base) const;
 
 
 	BigInteger operator+(const BigInteger& obj) const;

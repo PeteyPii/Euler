@@ -399,6 +399,157 @@ BigInteger BigInteger::operator^(const BigInteger& obj) const
 	return retVal;
 }
 
+BigInteger BigInteger::operator<<(int32 n) const
+{
+	if(n < 0)
+	{
+		throw string("Negative bitshifts not allowed");
+	}
+	else if(n == 0)
+	{
+		return *this;
+	}
+
+	bool changedBase = false;
+	uint8 oldBase;
+	if((m_nBase & (m_nBase - 1)) != 0)
+	{
+		changedBase = true;
+		oldBase = m_nBase;
+	}
+
+	uint8 fullMask = changedBase ? 128 - 1 : m_nBase - 1;
+	uint8 bits = 0;
+	uint8 x = fullMask;
+	while(x > 0)
+	{
+		x >>= 1;
+		bits++;
+	}
+
+	BigInteger number = changedBase ? convertToBase(128) : *this;
+	vector<uint8> buffer(number.numberOfDigits() + n / bits + 1, 0);
+
+	int32 digitShift = n / bits;
+	for(uint32 i = 0; i < number.m_vnDigits.size(); i++)
+	{
+		buffer[i + digitShift] = number.m_vnDigits[i];
+	}
+
+	int32 bitShift = n % bits;
+	if(bitShift != 0)
+	{
+		uint8 carryFromMask = 0;
+		uint8 carryShiftCount = bits;
+
+		while(x < bitShift)
+		{
+			carryFromMask <<= 1;
+			carryFromMask |= 1;
+			carryShiftCount -= 1;
+			x++;
+		}
+
+		carryFromMask <<= carryShiftCount;
+
+		for(uint32 i = 0; i < buffer.size(); i++)
+		{
+			buffer[i] <<= bitShift;
+			buffer[i] &= fullMask;
+		}
+
+		for(uint32 i = 0; i < number.m_vnDigits.size(); i++)
+		{
+			buffer[i + digitShift + 1] |= (number.m_vnDigits[i] & carryFromMask) >> carryShiftCount;
+		}
+	}
+
+	number.m_vnDigits = buffer;
+	if(changedBase)
+	{
+		number = number.convertToBase(oldBase);
+	}
+	else
+	{
+		number.trimZeros();
+	}
+	return number;
+}
+
+BigInteger BigInteger::operator>>(int32 n) const
+{
+	if(n < 0)
+	{
+		throw string("Negative bitshifts not allowed");
+	}
+	else if(n == 0)
+	{
+		return *this;
+	}
+
+	bool changedBase = false;
+	uint8 oldBase;
+	if((m_nBase & (m_nBase - 1)) != 0)
+	{
+		changedBase = true;
+		oldBase = m_nBase;
+	}
+
+	uint8 fullMask = changedBase ? 128 - 1 : m_nBase - 1;
+	uint8 bits = 0;
+	uint8 x = fullMask;
+	while(x > 0)
+	{
+		x >>= 1;
+		bits++;
+	}
+
+	BigInteger number = changedBase ? convertToBase(128) : *this;
+	vector<uint8> buffer(max(number.numberOfDigits() - n / bits, 1), 0);
+
+	int32 digitShift = n / bits;
+	for(int32 i = 0; i < static_cast<int32>(number.m_vnDigits.size()) - digitShift; i++)
+	{
+		buffer[i] = number.m_vnDigits[i + digitShift];
+	}
+
+	int32 bitShift = n % bits;
+	if(bitShift != 0)
+	{
+		uint8 carryFromMask = 0;
+		uint8 carryShiftCount = bits;
+
+		while(x < bitShift)
+		{
+			carryFromMask <<= 1;
+			carryFromMask |= 1;
+			carryShiftCount -= 1;
+			x++;
+		}
+
+		for(uint32 i = 0; i < buffer.size(); i++)
+		{
+			buffer[i] >>= bitShift;
+		}
+
+		for(uint32 i = 0; i < buffer.size() && i + digitShift + 1 < number.m_vnDigits.size(); i++)
+		{
+			buffer[i] |= (number.m_vnDigits[i + digitShift + 1] & carryFromMask) << carryShiftCount;
+		}
+	}
+
+	number.m_vnDigits = buffer;
+	if(changedBase)
+	{
+		number = number.convertToBase(oldBase);
+	}
+	else
+	{
+		number.trimZeros();
+	}
+	return number;
+}
+
 ostream& operator<<(ostream& out, const BigInteger& n)
 {
 	if(n.isZero())

@@ -255,6 +255,9 @@ public:
 		return *this ^= BigInteger(n, m_nBase);
 	}
 
+	BigInteger operator<<(int32 n) const;
+	BigInteger operator>>(int32 n) const;
+
 	friend ostream& operator<<(ostream& out, const BigInteger& n);
 	friend istream& operator>>(istream& in,  BigInteger& n);
 

@@ -389,7 +389,7 @@ inline T minVal(const T& a, const T& b)
 template <typename T>
 inline T maxVal(const T& a, const T& b)
 {
-	return a > b ? a : b;
+	return b < a ? a : b;
 }
 
 template <typename N>
@@ -563,7 +563,7 @@ N sumOfDivisors(N n)
 	}
 
 	N sum = 1;
-	for(int32 i = 2; i * i <= n; i++)
+	for(N i = 2; i * i <= n; i++)
 	{
 		if(n % i == 0)
 		{

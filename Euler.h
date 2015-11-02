@@ -106,5 +106,6 @@ int32		problem76(int32 n);				// Number of different ways to write n as a sum of
 int32		problem77(int32 n);				// First number that can be written as the sum of primes in over n different ways.
 int32		problem78(int32 n);				// Smallest number that can be partitioned in a number of ways divisible by n.
 string		problem79();					// Find the shortest possible passcode from the ordered digits.
+int32		problem80(int32 n, int32 m);	// Sum of the digits of all irrational square roots from 0 to n with m digits.
 
 #endif

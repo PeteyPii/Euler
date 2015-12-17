@@ -108,4 +108,6 @@ int32		problem78(int32 n);				// Smallest number that can be partitioned in a nu
 string		problem79();					// Find the shortest possible passcode from the ordered digits.
 int32		problem80(int32 n, int32 m);	// Sum of the digits of all irrational square roots from 0 to n with m digits.
 
+int32		problem81(int32 n, int32 m);	// Minimum sum from the top-left to the bottom-right of an n by m matrix moving only right or down.
+
 #endif

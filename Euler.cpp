@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(80, 80);
+		verifyResults(81, 81);
 
 		return 0;
 	}
@@ -156,6 +156,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem78(1000000), 55374); },
 		[] () -> bool { return assertEquality(problem79(), "73162890"); },
 		[] () -> bool { return assertEquality(problem80(100, 100), 40886); },
+
+		[] () -> bool { return assertEquality(problem81(80, 80), 427337); },
 
 		[] () -> bool { return false; }
 	};
@@ -3985,6 +3987,132 @@ int32 problem80(int32 n, int32 m)
 	}
 
 	return sum;
+}
+int32 problem81(int32 n, int32 m)
+{
+	if (n < 1 || m < 1)
+	{
+		throw string("Matrix must be at least size 1x1");
+	}
+
+	static int32 idCounter = 0;
+	struct Node
+	{
+		Node(int32 weight) :
+			m_nId(idCounter++),
+			m_nWeight(weight),
+			m_nBest(INT32_MAX),
+			m_bVisited(false)
+		{
+		}
+
+		bool operator==(Node& other)
+		{
+			return m_nId == other.m_nId;
+		}
+
+		bool operator<(Node& other)
+		{
+			return m_nBest < other.m_nBest;
+		}
+
+		int32 m_nId;
+		int32 m_nWeight;
+		int32 m_nBest;
+		bool m_bVisited;
+		vector<int32> m_vnAdjacent;
+	};
+
+	ifstream fin("p81.txt");
+	assertFileOpened(fin);
+
+	vector<vector<Node>> nodes;
+	for(int32 j = 0; j < m; j++)
+	{
+		nodes.push_back(vector<Node>());
+		for(int32 i = 0; i < n; i++)
+		{
+			int32 weight;
+			fin >> weight;
+			nodes[j].push_back(Node(weight));
+		}
+	}
+
+	for(int32 j = 0; j < m; j++)
+	{
+		for(int32 i = 0; i < n - 1; i++)
+		{
+			nodes[j][i].m_vnAdjacent.push_back(nodes[j][i + 1].m_nId);
+		}
+	}
+
+	for(int32 j = 0; j < m - 1; j++)
+	{
+		for(int32 i = 0; i < n; i++)
+		{
+			nodes[j][i].m_vnAdjacent.push_back(nodes[j + 1][i].m_nId);
+		}
+	}
+
+	Node initial(0);
+	initial.m_vnAdjacent.push_back(nodes[0][0].m_nId);
+	initial.m_nBest = 0;
+	Node final(0);
+	nodes.back().back().m_vnAdjacent.push_back(final.m_nId);
+
+	map<int32, Node*> idToNode;
+	for(int32 j = 0; j < m; j++)
+	{
+		for(int32 i = 0; i < n; i++)
+		{
+			idToNode[nodes[j][i].m_nId] = &nodes[j][i];
+		}
+	}
+	idToNode[initial.m_nId] = &initial;
+	idToNode[final.m_nId] = &final;
+
+	map<int32, map<int32, Node*>> bestToIdToNode;
+	bestToIdToNode[initial.m_nBest][initial.m_nId] = &initial;
+	while(!bestToIdToNode.empty())
+	{
+		auto lowestBestIt = bestToIdToNode.begin();
+		Node* current = lowestBestIt->second.begin()->second;
+		if(*current == final)
+		{
+			return current->m_nBest;
+		}
+
+		for(int32 id : current->m_vnAdjacent)
+		{
+			Node* neighbour = idToNode[id];
+			if(neighbour->m_bVisited)
+			{
+				continue;
+			}
+
+			if(bestToIdToNode.count(neighbour->m_nBest) == 1 && bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1)
+			{
+				bestToIdToNode[neighbour->m_nBest].erase(neighbour->m_nId);
+				if(bestToIdToNode[neighbour->m_nBest].empty())
+				{
+					bestToIdToNode.erase(neighbour->m_nBest);
+				}
+			}
+
+			neighbour->m_nBest = min(neighbour->m_nBest, current->m_nBest + neighbour->m_nWeight);
+			bestToIdToNode[neighbour->m_nBest][neighbour->m_nId] = neighbour;
+		}
+
+		bestToIdToNode[current->m_nBest].erase(current->m_nId);
+		if(bestToIdToNode[current->m_nBest].empty())
+		{
+			bestToIdToNode.erase(current->m_nBest);
+		}
+
+		current->m_bVisited = true;
+	}
+
+	throw string("No path to end");
 }
 
 #ifdef _MSC_VER

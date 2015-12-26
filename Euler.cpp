@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(82, 82);
+		verifyResults(81, 81);
 
 		return 0;
 	}
@@ -3991,7 +3991,7 @@ int32 problem80(int32 n, int32 m)
 }
 int32 problem81(int32 n, int32 m)
 {
-	if (n < 1 || m < 1)
+	if(n < 1 || m < 1)
 	{
 		throw string("Matrix must be at least size 1x1");
 	}
@@ -4055,11 +4055,9 @@ int32 problem81(int32 n, int32 m)
 		}
 	}
 
-	Node initial(0);
-	initial.m_vnAdjacent.push_back(nodes[0][0].m_nId);
-	initial.m_nBest = 0;
-	Node final(0);
-	nodes.back().back().m_vnAdjacent.push_back(final.m_nId);
+	Node& initial(nodes.front().front());
+	Node& final(nodes.back().back());
+	initial.m_nBest = initial.m_nWeight;
 
 	map<int32, Node*> idToNode;
 	for(int32 j = 0; j < m; j++)
@@ -4069,15 +4067,13 @@ int32 problem81(int32 n, int32 m)
 			idToNode[nodes[j][i].m_nId] = &nodes[j][i];
 		}
 	}
-	idToNode[initial.m_nId] = &initial;
-	idToNode[final.m_nId] = &final;
 
 	map<int32, map<int32, Node*>> bestToIdToNode;
 	bestToIdToNode[initial.m_nBest][initial.m_nId] = &initial;
 	while(!bestToIdToNode.empty())
 	{
-		auto lowestBestIt = bestToIdToNode.begin();
-		Node* current = lowestBestIt->second.begin()->second;
+		// Get an unvisited node that is reachable in a minimal distance
+		Node* current = bestToIdToNode.begin()->second.begin()->second;
 		if(*current == final)
 		{
 			return current->m_nBest;

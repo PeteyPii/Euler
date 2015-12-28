@@ -110,5 +110,6 @@ int32		problem80(int32 n, int32 m);	// Sum of the digits of all irrational squar
 
 int32		problem81(int32 n, int32 m);	// Minimum sum from the top-left to the bottom-right of an n by m matrix moving only right or down.
 int32		problem82(int32 n, int32 m);	// Minimum sum from the left to the right of an n by m matrix moving only up, down, and right.
+int32		problem83(int32 n, int32 m);	// Minimum sum from the top-left to the bottom-right of an n by m matrix moving in any direction.
 
 #endif

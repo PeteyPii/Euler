@@ -4414,105 +4414,111 @@ string problem84(int32 n)
 			for(int32 d2 = 1; d2 <= n; d2++)
 			{
 				const int32 newSpot = (initialSpot + d1 + d2) % 40;
-				if (newSpot == 30)
+				if(newSpot == 30)
 				{
 					probabilities[10] += rollFrequency;
 				}
 				else if(d1 == d2)
 				{
-					array<double, 40> rerollProbabilities;
 					if(doubles + 1 == 3)
 					{
 						probabilities[10] += rollFrequency;
 					}
-					else if(chestSpaces.count(newSpot) == 1)
-					{
-						array<double, 40> tempProbabilities;
-						rerollProbabilities.fill(0.0);
-
-						// 1 / 16 to GO
-						tempProbabilities = rollProbability(0, doubles + 1);
-						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
-						transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
-
-						// 1 / 16 to JAIL
-						rerollProbabilities[10] += 1.0 / 16;
-
-						// 14 / 16 nothing special occurs
-						tempProbabilities = rollProbability(newSpot, doubles + 1);
-						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 14.0 / 16));
-						transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
-					}
-					else if(chanceSpaces.count(newSpot) == 1)
-					{
-						array<double, 40> tempProbabilities;
-						vector<int32> jumps;
-
-						// 1 / 16 to several certain spots (GO, C1, E3, H2, R1)
-						jumps.push_back(0);
-						jumps.push_back(11);
-						jumps.push_back(24);
-						jumps.push_back(39);
-						jumps.push_back(5);
-
-						// 6 / 16 ordinary behaviour
-						for(int32 i = 0; i < 6; i++)
-						{
-							jumps.push_back(newSpot);
-						}
-
-						// 2 / 16 to next railway
-						if(newSpot < 5 || newSpot >= 35)
-						{
-							jumps.push_back(5);
-							jumps.push_back(5);
-						}
-						else if(newSpot < 15)
-						{
-							jumps.push_back(15);
-							jumps.push_back(15);
-						}
-						else if(newSpot < 25)
-						{
-							jumps.push_back(25);
-							jumps.push_back(25);
-						}
-						else
-						{
-							jumps.push_back(35);
-							jumps.push_back(35);
-						}
-
-						// 1 / 16 to next utility
-						if(newSpot < 12 || newSpot >= 28)
-						{
-							jumps.push_back(12);
-						}
-						else
-						{
-							jumps.push_back(28);
-						}
-
-						// 1 / 16 to three spaces back
-						jumps.push_back((newSpot - 3 + 40) % 40);
-
-						for(int32 spot : jumps)
-						{
-							tempProbabilities = rollProbability(spot, doubles + 1);
-							transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
-							transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
-						}
-
-						// 1 / 16 to JAIL
-						rerollProbabilities[10] += 1.0 / 16;
-					}
 					else
 					{
-						rerollProbabilities = rollProbability(newSpot, doubles + 1);
-					}
+						array<double, 40> rerollProbabilities;
+						if(chestSpaces.count(newSpot) == 1)
+						{
+							array<double, 40> tempProbabilities;
+							rerollProbabilities.fill(0.0);
 
-					transform(rerollProbabilities.begin(), rerollProbabilities.end(), rerollProbabilities.begin(), bind(multiplies<double>(), _1, rollFrequency));
-					transform(probabilities.begin(), probabilities.end(), rerollProbabilities.begin(), probabilities.begin(), plus<double>());
+							// 1 / 16 to GO
+							tempProbabilities = rollProbability(0, doubles + 1);
+							transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
+							transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+
+							// 1 / 16 to JAIL
+							rerollProbabilities[10] += 1.0 / 16;
+
+							// 14 / 16 nothing special occurs
+							tempProbabilities = rollProbability(newSpot, doubles + 1);
+							transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 14.0 / 16));
+							transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+						}
+						else if(chanceSpaces.count(newSpot) == 1)
+						{
+							vector<int32> jumps;
+
+							// 1 / 16 to several certain spots (GO, C1, E3, H2, R1)
+							jumps.push_back(0);
+							jumps.push_back(11);
+							jumps.push_back(24);
+							jumps.push_back(39);
+							jumps.push_back(5);
+
+							// 6 / 16 ordinary behaviour
+							for(int32 i = 0; i < 6; i++)
+							{
+								jumps.push_back(newSpot);
+							}
+
+							// 2 / 16 to next railway
+							if(newSpot < 5 || newSpot >= 35)
+							{
+								jumps.push_back(5);
+								jumps.push_back(5);
+							}
+							else if(newSpot < 15)
+							{
+								jumps.push_back(15);
+								jumps.push_back(15);
+							}
+							else if(newSpot < 25)
+							{
+								jumps.push_back(25);
+								jumps.push_back(25);
+							}
+							else
+							{
+								jumps.push_back(35);
+								jumps.push_back(35);
+							}
+
+							// 1 / 16 to next utility
+							if(newSpot < 12 || newSpot >= 28)
+							{
+								jumps.push_back(12);
+							}
+							else
+							{
+								jumps.push_back(28);
+							}
+
+							// 1 / 16 to three spaces back
+							// Note: moving back onto a special space is not handled
+							jumps.push_back((newSpot - 3 + 40) % 40);
+
+							array<double, 40> tempProbabilities;
+							rerollProbabilities.fill(0.0);
+
+							for(int32 spot : jumps)
+							{
+								tempProbabilities = rollProbability(spot, doubles + 1);
+								transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
+								transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+							}
+
+							// 1 / 16 to JAIL
+							rerollProbabilities[10] += 1.0 / 16;
+						}
+						else
+						{
+							rerollProbabilities = rollProbability(newSpot, doubles + 1);
+						}
+
+						transform(rerollProbabilities.begin(), rerollProbabilities.end(), rerollProbabilities.begin(), bind(multiplies<double>(), _1, rollFrequency));
+						transform(probabilities.begin(), probabilities.end(), rerollProbabilities.begin(), probabilities.begin(), plus<double>());
+					}
 				}
 				else
 				{
@@ -4570,6 +4576,7 @@ string problem84(int32 n)
 						}
 
 						// 1 / 16 to three spaces back
+						// Note: moving back onto a special space is not handled
 						tempProbabilities[(newSpot - 3 + 40) % 40] += 1.0 / 16;
 
 						// 1 / 16 to JAIL
@@ -4580,7 +4587,7 @@ string problem84(int32 n)
 					}
 					else
 					{
-						probabilities[newSpot] = rollFrequency;
+						probabilities[newSpot] += rollFrequency;
 					}
 				}
 			}
@@ -4589,18 +4596,83 @@ string problem84(int32 n)
 		return probabilities;
 	};
 
-	array<double, 40> pVector;
-	pVector.fill(0.0);
-
 	array<array<double, 40>, 40> p;
-	p.fill(pVector);
 
 	for(int32 i = 0; i < 40; i++)
 	{
 		p[i] = rollProbability(i, 0);
 	}
 
-	return "";
+	for(int32 i = 1; i < 40; i++)
+	{
+		for(int32 j = i + 1; j < 40; j++)
+		{
+			swap(p[i][j], p[j][i]);
+		}
+	}
+
+	array<array<double, 41>, 40> augmentedMatrix;
+	for(int32 i = 0; i < 40; i++)
+	{
+		for(int32 j = 0; j < 40; j++)
+		{
+			augmentedMatrix[i][j] = p[i][j];
+		}
+		augmentedMatrix[i][i] -= 1;
+		augmentedMatrix[i][40] = 0;
+	}
+	augmentedMatrix[0].fill(1.0);
+
+	for(int32 i = 0; i < 40; i++)
+	{
+		sort
+		(
+			augmentedMatrix.begin() + i,
+			augmentedMatrix.end(),
+			[i] (const array<double, 41>& left, const array<double, 41>& right) -> bool { return abs(left[i]) > abs(right[i]); }
+		);
+
+		for(int32 j = i + 1; j < 40; j++)
+		{
+			double scalar = augmentedMatrix[j][i] / augmentedMatrix[i][i];
+			augmentedMatrix[j][i] = 0;
+			for(int32 k = i; k < 41; k++)
+			{
+				augmentedMatrix[j][k] -= scalar * augmentedMatrix[i][k];
+			}
+		}
+	}
+
+	array<pair<int32, double>, 40> pi;
+	for(int32 i = 0; i < 40; i++)
+	{
+		pi[i].first = i;
+	}
+
+	for(int32 i = 39; i >= 0; i--)
+	{
+		pi[i].second = augmentedMatrix[i][40];
+		for(int32 j = i + 1; j < 40; j++)
+		{
+			pi[i].second -= augmentedMatrix[i][j] * pi[j].second;
+		}
+		pi[i].second /= augmentedMatrix[i][i];
+		pi[30].second = 0;
+	}
+
+	sort(pi.begin(), pi.end(), [] (const pair<int32, double>& left, const pair<int32, double>& right) -> bool { return left.second > right.second; });
+
+	/*for(int32 i = 0; i < 40; i++)
+	{
+		cout << pi[i].first << " " << pi[i].second * 100 << endl;
+	}*/
+
+	stringstream ss;
+	ss.width(2);
+	ss.fill('0');
+	ss << pi[0].first << pi[1].first << pi[2].first;
+
+	return ss.str();
 }
 
 #ifdef _MSC_VER

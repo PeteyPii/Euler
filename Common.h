@@ -11,6 +11,7 @@
 #define COMMON_H
 
 #include <algorithm>
+#include <array>
 #include <cmath>
 #include <cstdint>
 #include <chrono>

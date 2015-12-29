@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(83, 83);
+		verifyResults(84, 84);
 
 		return 0;
 	}
@@ -160,6 +160,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem81(80, 80), 427337); },
 		[] () -> bool { return assertEquality(problem82(80, 80), 260324); },
 		[] () -> bool { return assertEquality(problem83(80, 80), 425185); },
+		[] () -> bool { return assertEquality(problem84(6), "UNDEFINED"); },
 
 		[] () -> bool { return false; }
 	};
@@ -4387,6 +4388,219 @@ int32 problem83(int32 n, int32 m)
 	}
 
 	throw string("No path to end");
+}
+string problem84(int32 n)
+{
+	if(n < 1)
+	{
+		throw string("Dice must have at least one side");
+	}
+
+	const set<int32> chestSpaces = {2, 17, 33};
+	const set<int32> chanceSpaces = {7, 22, 36};
+
+	const double rollFrequency = 1.0 / (n * n);
+
+	function<array<double, 40>(int32, int32)> rollProbability;
+	rollProbability = [n, chestSpaces, chanceSpaces, rollFrequency, &rollProbability] (int32 initialSpot, int32 doubles) -> array<double, 40>
+	{
+		array<double, 40> probabilities;
+		probabilities.fill(0.0);
+
+		using namespace std::placeholders;
+
+		for(int32 d1 = 1; d1 <= n; d1++)
+		{
+			for(int32 d2 = 1; d2 <= n; d2++)
+			{
+				const int32 newSpot = (initialSpot + d1 + d2) % 40;
+				if (newSpot == 30)
+				{
+					probabilities[10] += rollFrequency;
+				}
+				else if(d1 == d2)
+				{
+					array<double, 40> rerollProbabilities;
+					if(doubles + 1 == 3)
+					{
+						probabilities[10] += rollFrequency;
+					}
+					else if(chestSpaces.count(newSpot) == 1)
+					{
+						array<double, 40> tempProbabilities;
+						rerollProbabilities.fill(0.0);
+
+						// 1 / 16 to GO
+						tempProbabilities = rollProbability(0, doubles + 1);
+						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
+						transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+
+						// 1 / 16 to JAIL
+						rerollProbabilities[10] += 1.0 / 16;
+
+						// 14 / 16 nothing special occurs
+						tempProbabilities = rollProbability(newSpot, doubles + 1);
+						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 14.0 / 16));
+						transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+					}
+					else if(chanceSpaces.count(newSpot) == 1)
+					{
+						array<double, 40> tempProbabilities;
+						vector<int32> jumps;
+
+						// 1 / 16 to several certain spots (GO, C1, E3, H2, R1)
+						jumps.push_back(0);
+						jumps.push_back(11);
+						jumps.push_back(24);
+						jumps.push_back(39);
+						jumps.push_back(5);
+
+						// 6 / 16 ordinary behaviour
+						for(int32 i = 0; i < 6; i++)
+						{
+							jumps.push_back(newSpot);
+						}
+
+						// 2 / 16 to next railway
+						if(newSpot < 5 || newSpot >= 35)
+						{
+							jumps.push_back(5);
+							jumps.push_back(5);
+						}
+						else if(newSpot < 15)
+						{
+							jumps.push_back(15);
+							jumps.push_back(15);
+						}
+						else if(newSpot < 25)
+						{
+							jumps.push_back(25);
+							jumps.push_back(25);
+						}
+						else
+						{
+							jumps.push_back(35);
+							jumps.push_back(35);
+						}
+
+						// 1 / 16 to next utility
+						if(newSpot < 12 || newSpot >= 28)
+						{
+							jumps.push_back(12);
+						}
+						else
+						{
+							jumps.push_back(28);
+						}
+
+						// 1 / 16 to three spaces back
+						jumps.push_back((newSpot - 3 + 40) % 40);
+
+						for(int32 spot : jumps)
+						{
+							tempProbabilities = rollProbability(spot, doubles + 1);
+							transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, 1.0 / 16));
+							transform(rerollProbabilities.begin(), rerollProbabilities.end(), tempProbabilities.begin(), rerollProbabilities.begin(), plus<double>());
+						}
+
+						// 1 / 16 to JAIL
+						rerollProbabilities[10] += 1.0 / 16;
+					}
+					else
+					{
+						rerollProbabilities = rollProbability(newSpot, doubles + 1);
+					}
+
+					transform(rerollProbabilities.begin(), rerollProbabilities.end(), rerollProbabilities.begin(), bind(multiplies<double>(), _1, rollFrequency));
+					transform(probabilities.begin(), probabilities.end(), rerollProbabilities.begin(), probabilities.begin(), plus<double>());
+				}
+				else
+				{
+					if(chestSpaces.count(newSpot) == 1)
+					{
+						array<double, 40> tempProbabilities;
+						tempProbabilities.fill(0.0);
+
+						tempProbabilities[0] += 1.0 / 16;
+						tempProbabilities[10] += 1.0 / 16;
+						tempProbabilities[newSpot] += 14.0 / 16;
+
+						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, rollFrequency));
+						transform(probabilities.begin(), probabilities.end(), tempProbabilities.begin(), probabilities.begin(), plus<double>());
+					}
+					else if(chanceSpaces.count(newSpot) == 1)
+					{
+						array<double, 40> tempProbabilities;
+						tempProbabilities.fill(0.0);
+
+						tempProbabilities[0] += 1.0 / 16;
+						tempProbabilities[11] += 1.0 / 16;
+						tempProbabilities[24] += 1.0 / 16;
+						tempProbabilities[39] += 1.0 / 16;
+						tempProbabilities[5] += 1.0 / 16;
+
+						tempProbabilities[newSpot] += 6.0 / 16;
+
+						// 2 / 16 to next railway
+						if(newSpot < 5 || newSpot >= 35)
+						{
+							tempProbabilities[5] += 2.0 / 16;
+						}
+						else if(newSpot < 15)
+						{
+							tempProbabilities[15] += 2.0 / 16;
+						}
+						else if(newSpot < 25)
+						{
+							tempProbabilities[25] += 2.0 / 16;
+						}
+						else
+						{
+							tempProbabilities[35] += 2.0 / 16;
+						}
+
+						// 1 / 16 to next utility
+						if(newSpot < 12 || newSpot >= 28)
+						{
+							tempProbabilities[12] += 1.0 / 16;
+						}
+						else
+						{
+							tempProbabilities[28] += 1.0 / 16;
+						}
+
+						// 1 / 16 to three spaces back
+						tempProbabilities[(newSpot - 3 + 40) % 40] += 1.0 / 16;
+
+						// 1 / 16 to JAIL
+						tempProbabilities[10] += 1.0 / 16;
+
+						transform(tempProbabilities.begin(), tempProbabilities.end(), tempProbabilities.begin(), bind(multiplies<double>(), _1, rollFrequency));
+						transform(probabilities.begin(), probabilities.end(), tempProbabilities.begin(), probabilities.begin(), plus<double>());
+					}
+					else
+					{
+						probabilities[newSpot] = rollFrequency;
+					}
+				}
+			}
+		}
+
+		return probabilities;
+	};
+
+	array<double, 40> pVector;
+	pVector.fill(0.0);
+
+	array<array<double, 40>, 40> p;
+	p.fill(pVector);
+
+	for(int32 i = 0; i < 40; i++)
+	{
+		p[i] = rollProbability(i, 0);
+	}
+
+	return "";
 }
 
 #ifdef _MSC_VER

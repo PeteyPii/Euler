@@ -112,5 +112,6 @@ int32		problem81(int32 n, int32 m);	// Minimum sum from the top-left to the bott
 int32		problem82(int32 n, int32 m);	// Minimum sum from the left to the right of an n by m matrix moving only up, down, and right.
 int32		problem83(int32 n, int32 m);	// Minimum sum from the top-left to the bottom-right of an n by m matrix moving in any direction.
 string		problem84(int32 n);				// Three most frequent Monopoly spaces when rolling with n-sided dice.
+int64		problem85(int64 n);				// Area of rectangle that contains a number of rectangles that is closest to n.
 
 #endif

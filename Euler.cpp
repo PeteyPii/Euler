@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(85, 85);
+		verifyResults(86, 86);
 
 		return 0;
 	}
@@ -162,6 +162,8 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem83(80, 80), 425185); },
 		[] () -> bool { return assertEquality(problem84(4), "101524"); },
 		[] () -> bool { return assertEquality(problem85(2000000), 2772); },
+
+		[] () -> bool { return assertEquality(problem86(1000000), 1818); },
 
 		[] () -> bool { return false; }
 	};
@@ -4602,6 +4604,86 @@ int64 problem85(int64 n)
 	}
 
 	return closestArea;
+}
+int32 problem86(int32 n)
+{
+	if(n < 0)
+	{
+		return 0;
+	}
+
+	auto check = [] (int32 w, int32 h, int32 d) -> bool
+	{
+		int32* pW = &w;
+		int32* pH = &h;
+		int32* pD = &d;
+		int32 rotations = 0;
+		double minL = w + h + d;
+		while(rotations < 3)
+		{
+			if(*pH == *pD)
+			{
+				double l = 2 * sqrt((*pH * *pH) + static_cast<double>(*pW) * *pW / 4);
+				if(l < minL)
+				{
+					minL = l;
+				}
+			}
+			else if(*pH < *pD)
+			{
+				int32 sum = *pH + *pD;
+				double l = sqrt(*pW * *pW + sum * sum);
+				if(l < minL)
+				{
+					minL = l;
+				}
+			}
+			else
+			{
+				int32 sum = *pH + *pD;
+				double l = sqrt(*pW * *pW + sum * sum);
+				if(l < minL)
+				{
+					minL = l;
+				}
+
+				int32 difference = *pH - *pD;
+				l = static_cast<double>(sum) / difference * sqrt(*pW * *pW + difference * difference);
+				if(l < minL)
+				{
+					minL = l;
+				}
+			}
+
+			rotations++;
+			int32* temp = pW;
+			pW = pH;
+			pH = pD;
+			pD = temp;
+		}
+
+		const double epsilon = 0.00001;
+		return (minL - static_cast<int32>(minL) < epsilon);
+	};
+
+	int32 d = 0;
+	int32 cuboids = 0;
+	while(cuboids <= n)
+	{
+		d++;
+		for(int32 w = 1; w <= d; w++)
+		{
+			for(int32 h = w; h <= d; h++)
+			{
+				if(check(w, h, d))
+				{
+					cuboids++;
+				}
+			}
+		}
+	}
+
+	return d;
 }
 
 #ifdef _MSC_VER

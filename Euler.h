@@ -114,4 +114,6 @@ int32		problem83(int32 n, int32 m);	// Minimum sum from the top-left to the bott
 string		problem84(int32 n);				// Three most frequent Monopoly spaces when rolling with n-sided dice.
 int64		problem85(int64 n);				// Area of rectangle that contains a number of rectangles that is closest to n.
 
+int32		problem86(int32 n);				// Least value of M with more than n integral minimal cuboid routes for cuboids with maximum dimension M.
+
 #endif

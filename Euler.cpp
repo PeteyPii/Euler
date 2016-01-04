@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(86, 86);
+		verifyResults(87, 87);
 
 		return 0;
 	}
@@ -164,6 +164,7 @@ void verifyResults(int32 begin, int32 end)
 		[] () -> bool { return assertEquality(problem85(2000000), 2772); },
 
 		[] () -> bool { return assertEquality(problem86(1000000), 1818); },
+		[] () -> bool { return assertEquality(problem87(50000000), 1097343); },
 
 		[] () -> bool { return false; }
 	};
@@ -4629,6 +4630,58 @@ int32 problem86(int32 n)
 	}
 
 	return d;
+}
+int32 problem87(int32 n)
+{
+	if(n <= 28)
+	{
+		return 0;
+	}
+
+	int32 maxDouble = sqrt(n) + 1;
+	// int32 maxTriple = pow(n, 1.0 / 3) + 1;
+	// int32 maxFourth = sqrt(sqrt(n) + 1) + 1;
+
+	set<int32> sums;
+	vector<bool> isPrime;
+	sieveOfErotosthenes(maxDouble, isPrime);
+	vector<int32> primes;
+	for(uint32 i = 0; i < isPrime.size(); i++)
+	{
+		if(isPrime[i])
+		{
+			primes.push_back(i);
+		}
+	}
+
+	for(uint32 i = 0; i < primes.size(); i++)
+	{
+		int32 second = primes[i] * primes[i];
+		for(uint32 j = 0; j < primes.size(); j++)
+		{
+			int32 third = primes[j] * primes[j] * primes[j];
+			int32 twoAndThree = second + third;
+			if(twoAndThree >= n)
+			{
+				break;
+			}
+
+			for(uint32 k = 0; k < primes.size(); k++)
+			{
+				int32 fourth = primes[k] * primes[k];
+				fourth *= fourth;
+				int32 sum = twoAndThree + fourth;
+				if(sum >= n)
+				{
+					break;
+				}
+
+				sums.insert(sum);
+			}
+		}
+	}
+
+	return sums.size();
 }
 
 #ifdef _MSC_VER

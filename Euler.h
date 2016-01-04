@@ -115,5 +115,6 @@ string		problem84(int32 n);				// Three most frequent Monopoly spaces when rolli
 int64		problem85(int64 n);				// Area of rectangle that contains a number of rectangles that is closest to n.
 
 int32		problem86(int32 n);				// Least value of M with more than n integral minimal cuboid routes for cuboids with maximum dimension M.
+int32		problem87(int32 n);				// Number of numbers below n that can be written as a sum of a prime square, triple, and fourth power.
 
 #endif

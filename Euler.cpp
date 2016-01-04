@@ -37,7 +37,7 @@ int32 main(int32 argc, const char **argv)
 {
 	try
 	{
-		verifyResults(87, 87);
+		verifyResults(1, 87);
 
 		return 0;
 	}
@@ -2300,7 +2300,7 @@ int32 problem54()
 			suit = card[1];
 		}
 
-		bool operator<(const Card& other)
+		bool operator<(const Card& other) const
 		{
 			return value < other.value;
 		}
@@ -2459,7 +2459,7 @@ int32 problem54()
 			p2hand.push_back(card);
 		}
 
-		if(!fin.good())
+		if(!fin.good() || fin.peek() == EOF)
 		{
 			break;
 		}
@@ -3626,7 +3626,7 @@ int32 problem75(int32 n)
 
 	return count;
 }
-int32 problem76(int32 n)
+int64 problem76(int32 n)
 {
 	if(n < 2)
 	{
@@ -3643,8 +3643,8 @@ int32 problem76(int32 n)
 	{
 	public:
 		Counter(int32 max) :
-			m_nSize(max),
-			m_pCounts(new int32[(max + 1) * (max + 1)]),
+			m_nSize(max + 1),
+			m_pCounts(new int64[(max + 1) * (max + 1)]),
 			m_pCalced(new bool[(max + 1) * (max + 1)])
 		{
 			for(int32 i = 0; i < m_nSize; i++)
@@ -3662,7 +3662,7 @@ int32 problem76(int32 n)
 			delete[] m_pCalced;
 		}
 
-		int32 operator()(int32 sum, int32 maxTerm)
+		int64 operator()(int32 sum, int32 maxTerm)
 		{
 			if(m_pCalced[m_nSize * sum + maxTerm])
 			{
@@ -3696,7 +3696,7 @@ int32 problem76(int32 n)
 
 	private:
 		const int32 m_nSize;		// Max index of counts
-		int32* m_pCounts;			// Columns for max sum term, rows for sum value
+		int64* m_pCounts;			// Columns for max sum term, rows for sum value
 		bool* m_pCalced;
 	};
 

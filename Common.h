@@ -103,7 +103,7 @@ private:
 public:
 	template <typename N>
 	explicit BigInteger(N n, uint8 base = 10) :
-	 	m_nBase(base),
+		m_nBase(base),
 		m_vnDigits(1, 0),
 		m_bIsNegative(false)
 	{

@@ -4693,28 +4693,37 @@ int32 problem88(int32 n)
 
 	vector<bool> isFound(n + 1, false);
 	int32 foundCount = n - 2 + 1;
+	int32 minFound = 0;
+	int32 maxFound = n + 1;
 
-	vector<vector<int32>> divisors(n + 1);
+	vector<bool> isPrime;
+	sieveOfErotosthenes(n, isPrime);
+	vector<int32> primes;
 	for(int32 i = 2; i <= n; i++)
 	{
-		for(N j = i; j <= n; j += i)
+		if(isPrime[i])
 		{
-			divisors[j].push_back(i);
+			primes.push_back(i);
 		}
 	}
-
-	// Need to compute all sorted factorizations of a number
 
 	int32 candidate = 4;
 	while(true)
 	{
 		vector<vector<int32>> factorizations;
-		for(int32 i = 0; i < divisors[candidate].size() - 1; i++)
+
+		map<int32, int32> primeFactorization;
+		int32 remainder = candidate;
+		for(auto prime : primes)
 		{
-			vector<int32> temp;
-			temp.push_back(divisors[candidate][i]);
-			factorizations.push_back(temp);
+			while(remainder % prime == 0)
+			{
+				primeFactorization[prime] += 1;
+				remainder /= prime;
+			}
 		}
+
+
 
 		candidate++;
 	}

@@ -4785,8 +4785,7 @@ int32 problem88(int32 n)
 	vector<bool> isFound(n + 1, false);
 	set<int32> productSumNumbers;
 	int32 remaining = n - 2 + 1;
-	int32 minFound = 1;
-	int32 maxFound = n + 1;
+	int32 minNotFound = 2;
 
 	int32 candidate = 4;
 	while(remaining > 0)
@@ -4815,7 +4814,7 @@ int32 problem88(int32 n)
 			examinedFactorizations.insert(factorization);
 
 			int32 setSize = factorization.factorCount() + candidate - factorization.factorSum();
-			if(setSize <= minFound)
+			if(setSize < minNotFound)
 			{
 				searchQueue.pop_front();
 				continue;
@@ -4831,11 +4830,8 @@ int32 problem88(int32 n)
 					break;
 				}
 
-				while(isFound[minFound + 1]) {
-					minFound += 1;
-				}
-				while(isFound[maxFound - 1]) {
-					maxFound += 1;
+				while(isFound[minNotFound]) {
+					minNotFound++;
 				}
 			}
 

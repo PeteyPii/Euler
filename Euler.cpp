@@ -165,7 +165,7 @@ void verifyResults(int32 begin, int32 end)
 
 		[] () -> bool { return assertEquality(problem86(1000000), 1818); },
 		[] () -> bool { return assertEquality(problem87(50000000), 1097343); },
-		[] () -> bool { return assertEquality(problem88(12000), 0); },
+		[] () -> bool { return assertEquality(problem88(12000), 7587457); },
 
 		[] () -> bool { return false; }
 	};
@@ -4824,7 +4824,7 @@ int32 problem88(int32 n)
 			if(setSize <= n && !isFound[setSize])
 			{
 				isFound[setSize] = true;
-				productSumNumbers.insert(setSize);
+				productSumNumbers.insert(candidate);
 				remaining -= 1;
 				if(remaining == 0)
 				{

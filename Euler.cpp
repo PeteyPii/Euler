@@ -1,16 +1,16 @@
 /*******************************************************************************
 
-  Name:      Euler.cpp
-  Creator:     Patrick Wrobel
-  Date:      May 5th, 2014
+  Name:         Euler.cpp
+  Creator:      Patrick Wrobel
+  Date:         May 5th, 2014
   Description:  Solutions to the problems on Project Euler
 
 *******************************************************************************/
 
 #ifdef _MSC_VER
-#pragma warning( push )
-#pragma warning( disable : 4244 )  // conversion, possible loss of data
-#pragma warning( disable : 4018 )  // signed/unsigned mismatch
+#pragma warning(push)
+#pragma warning(disable : 4244) // conversion, possible loss of data
+#pragma warning(disable : 4018) // signed/unsigned mismatch
 #endif
 
 #include "Euler.h"
@@ -33,170 +33,151 @@ using namespace std;
 
 void verifyResults(int32 begin, int32 end);
 
-int32 main(int32 argc, const char **argv)
-{
-  try
-  {
+int32 main(int32 argc, const char** argv) {
+  try {
     verifyResults(88, 88);
 
     return 0;
-  }
-  catch(string e)
-  {
+  } catch (string e) {
     cout << "An exception has been thrown:" << endl;
     cout << "  " << e << endl;
     return 1;
-  }
-  catch(...)
-  {
+  } catch (...) {
     cout << "An unknown exception has been thrown." << endl;
     return 2;
   }
 }
 
-void verifyResults(int32 begin, int32 end)
-{
+void verifyResults(int32 begin, int32 end) {
   typedef bool (*fpCheck)();
-  const fpCheck checks[] =
-  {
-    [] () -> bool { return true; },
+  const fpCheck checks[] = {
+      []() -> bool { return true; },
 
-    [] () -> bool { return assertEquality(problem1(1000), 233168); },
-    [] () -> bool { return assertEquality(problem2(4000000), 4613732); },
-    [] () -> bool { return assertEquality(problem3(600851475143), 6857); },
-    [] () -> bool { return assertEquality(problem4(3), 906609); },
-    [] () -> bool { return assertEquality(problem5(20), 232792560); },
+      []() -> bool { return assertEquality(problem1(1000), 233168); },
+      []() -> bool { return assertEquality(problem2(4000000), 4613732); },
+      []() -> bool { return assertEquality(problem3(600851475143), 6857); },
+      []() -> bool { return assertEquality(problem4(3), 906609); },
+      []() -> bool { return assertEquality(problem5(20), 232792560); },
 
-    [] () -> bool { return assertEquality(problem6(100), 25164150); },
-    [] () -> bool { return assertEquality(problem7(10001), 104743); },
-    [] () -> bool { return assertEquality(problem8(13), 23514624000); },
-    [] () -> bool { return assertEquality(problem9(), 31875000); },
-    [] () -> bool { return assertEquality(problem10(2000000), 142913828922); },
+      []() -> bool { return assertEquality(problem6(100), 25164150); },
+      []() -> bool { return assertEquality(problem7(10001), 104743); },
+      []() -> bool { return assertEquality(problem8(13), 23514624000); },
+      []() -> bool { return assertEquality(problem9(), 31875000); },
+      []() -> bool { return assertEquality(problem10(2000000), 142913828922); },
 
-    [] () -> bool { return assertEquality(problem11(4, 20), 70600674); },
-    [] () -> bool { return assertEquality(problem12(500), 76576500); },
-    [] () -> bool { return assertEquality(problem13(10), "5537376230"); },
-    [] () -> bool { return assertEquality(problem14(1000000), 837799); },
-    [] () -> bool { return assertEquality(problem15(20, 20), 137846528820); },
+      []() -> bool { return assertEquality(problem11(4, 20), 70600674); },
+      []() -> bool { return assertEquality(problem12(500), 76576500); },
+      []() -> bool { return assertEquality(problem13(10), "5537376230"); },
+      []() -> bool { return assertEquality(problem14(1000000), 837799); },
+      []() -> bool { return assertEquality(problem15(20, 20), 137846528820); },
 
-    [] () -> bool { return assertEquality(problem16(1000), 1366); },
-    [] () -> bool { return assertEquality(problem17(1000), 21124); },
-    [] () -> bool { return assertEquality(problem18(), 1074); },
-    [] () -> bool { return assertEquality(problem19(2000), 171); },
-    [] () -> bool { return assertEquality(problem20(100), 648); },
+      []() -> bool { return assertEquality(problem16(1000), 1366); },
+      []() -> bool { return assertEquality(problem17(1000), 21124); },
+      []() -> bool { return assertEquality(problem18(), 1074); },
+      []() -> bool { return assertEquality(problem19(2000), 171); },
+      []() -> bool { return assertEquality(problem20(100), 648); },
 
-    [] () -> bool { return assertEquality(problem21(10000), 31626); },
-    [] () -> bool { return assertEquality(problem22(), 871198282); },
-    [] () -> bool { return assertEquality(problem23(), 4179871); },
-    [] () -> bool { return assertEquality(problem24(1000000), "2783915460"); },
-    [] () -> bool { return assertEquality(problem25(1000), 4782); },
+      []() -> bool { return assertEquality(problem21(10000), 31626); },
+      []() -> bool { return assertEquality(problem22(), 871198282); },
+      []() -> bool { return assertEquality(problem23(), 4179871); },
+      []() -> bool { return assertEquality(problem24(1000000), "2783915460"); },
+      []() -> bool { return assertEquality(problem25(1000), 4782); },
 
-    [] () -> bool { return assertEquality(problem26(1000), 983); },
-    [] () -> bool { return assertEquality(problem27(1000), -59231); },
-    [] () -> bool { return assertEquality(problem28(1001), 669171001); },
-    [] () -> bool { return assertEquality(problem29(100), 9183); },
-    [] () -> bool { return assertEquality(problem30(5), 443839); },
+      []() -> bool { return assertEquality(problem26(1000), 983); },
+      []() -> bool { return assertEquality(problem27(1000), -59231); },
+      []() -> bool { return assertEquality(problem28(1001), 669171001); },
+      []() -> bool { return assertEquality(problem29(100), 9183); },
+      []() -> bool { return assertEquality(problem30(5), 443839); },
 
-    [] () -> bool { return assertEquality(problem31(200), 73682); },
-    [] () -> bool { return assertEquality(problem32(), 45228); },
-    [] () -> bool { return assertEquality(problem33(), 100); },
-    [] () -> bool { return assertEquality(problem34(), 40730); },
-    [] () -> bool { return assertEquality(problem35(1000000), 55); },
+      []() -> bool { return assertEquality(problem31(200), 73682); },
+      []() -> bool { return assertEquality(problem32(), 45228); },
+      []() -> bool { return assertEquality(problem33(), 100); },
+      []() -> bool { return assertEquality(problem34(), 40730); },
+      []() -> bool { return assertEquality(problem35(1000000), 55); },
 
-    [] () -> bool { return assertEquality(problem36(1000000), 872187); },
-    [] () -> bool { return assertEquality(problem37(), 748317); },
-    [] () -> bool { return assertEquality(problem38(), 932718654); },
-    [] () -> bool { return assertEquality(problem39(1000), 840); },
-    [] () -> bool { return assertEquality(problem40(6), 210); },
+      []() -> bool { return assertEquality(problem36(1000000), 872187); },
+      []() -> bool { return assertEquality(problem37(), 748317); },
+      []() -> bool { return assertEquality(problem38(), 932718654); },
+      []() -> bool { return assertEquality(problem39(1000), 840); },
+      []() -> bool { return assertEquality(problem40(6), 210); },
 
-    [] () -> bool { return assertEquality(problem41(), 7652413); },
-    [] () -> bool { return assertEquality(problem42(), 162); },
-    [] () -> bool { return assertEquality(problem43(), 16695334890); },
-    [] () -> bool { return assertEquality(problem44(), 5482660); },
-    [] () -> bool { return assertEquality(problem45(1), 1533776805); },
+      []() -> bool { return assertEquality(problem41(), 7652413); },
+      []() -> bool { return assertEquality(problem42(), 162); },
+      []() -> bool { return assertEquality(problem43(), 16695334890); },
+      []() -> bool { return assertEquality(problem44(), 5482660); },
+      []() -> bool { return assertEquality(problem45(1), 1533776805); },
 
-    [] () -> bool { return assertEquality(problem46(1), 5777); },
-    [] () -> bool { return assertEquality(problem47(4), 134043); },
-    [] () -> bool { return assertEquality(problem48(1000), 9110846700); },
-    [] () -> bool { return assertEquality(problem49(), "296962999629"); },
-    [] () -> bool { return assertEquality(problem50(1000000), 997651); },
+      []() -> bool { return assertEquality(problem46(1), 5777); },
+      []() -> bool { return assertEquality(problem47(4), 134043); },
+      []() -> bool { return assertEquality(problem48(1000), 9110846700); },
+      []() -> bool { return assertEquality(problem49(), "296962999629"); },
+      []() -> bool { return assertEquality(problem50(1000000), 997651); },
 
-    [] () -> bool { return assertEquality(problem51(), 121313); },
-    [] () -> bool { return assertEquality(problem52(), 142857); },
-    [] () -> bool { return assertEquality(problem53(100, 1000000), 4075); },
-    [] () -> bool { return assertEquality(problem54(), 376); },
-    [] () -> bool { return assertEquality(problem55(), 249); },
+      []() -> bool { return assertEquality(problem51(), 121313); },
+      []() -> bool { return assertEquality(problem52(), 142857); },
+      []() -> bool { return assertEquality(problem53(100, 1000000), 4075); },
+      []() -> bool { return assertEquality(problem54(), 376); },
+      []() -> bool { return assertEquality(problem55(), 249); },
 
-    [] () -> bool { return assertEquality(problem56(100), 972); },
-    [] () -> bool { return assertEquality(problem57(1000), 153); },
-    [] () -> bool { return assertEquality(problem58(1, 10), 26241); },
-    [] () -> bool { return assertEquality(problem59(), 107359); },
-    [] () -> bool { return assertEquality(problem60(5), 26033); },
+      []() -> bool { return assertEquality(problem56(100), 972); },
+      []() -> bool { return assertEquality(problem57(1000), 153); },
+      []() -> bool { return assertEquality(problem58(1, 10), 26241); },
+      []() -> bool { return assertEquality(problem59(), 107359); },
+      []() -> bool { return assertEquality(problem60(5), 26033); },
 
-    [] () -> bool { return assertEquality(problem61(), 28684); },
-    [] () -> bool { return assertEquality(problem62(5), "127035954683"); },
-    [] () -> bool { return assertEquality(problem63(), 49); },
-    [] () -> bool { return assertEquality(problem64(10000), 1322); },
-    [] () -> bool { return assertEquality(problem65(100), 272); },
+      []() -> bool { return assertEquality(problem61(), 28684); },
+      []() -> bool { return assertEquality(problem62(5), "127035954683"); },
+      []() -> bool { return assertEquality(problem63(), 49); },
+      []() -> bool { return assertEquality(problem64(10000), 1322); },
+      []() -> bool { return assertEquality(problem65(100), 272); },
 
-    [] () -> bool { return assertEquality(problem66(1000), 661); },
-    [] () -> bool { return assertEquality(problem67(), 7273); },
-    [] () -> bool { return assertEquality(problem68(), "6531031914842725"); },
-    [] () -> bool { return assertEquality(problem69(1000000), 510510); },
-    [] () -> bool { return assertEquality(problem70(10000000), 8319823); },
+      []() -> bool { return assertEquality(problem66(1000), 661); },
+      []() -> bool { return assertEquality(problem67(), 7273); },
+      []() -> bool { return assertEquality(problem68(), "6531031914842725"); },
+      []() -> bool { return assertEquality(problem69(1000000), 510510); },
+      []() -> bool { return assertEquality(problem70(10000000), 8319823); },
 
-    [] () -> bool { return assertEquality(problem71(1000000), 428570); },
-    [] () -> bool { return assertEquality(problem72(1000000), 303963552391); },
-    [] () -> bool { return assertEquality(problem73(12000), 7295372); },
-    [] () -> bool { return assertEquality(problem74(1000000, 60), 402); },
-    [] () -> bool { return assertEquality(problem75(1500000), 161667); },
+      []() -> bool { return assertEquality(problem71(1000000), 428570); },
+      []() -> bool { return assertEquality(problem72(1000000), 303963552391); },
+      []() -> bool { return assertEquality(problem73(12000), 7295372); },
+      []() -> bool { return assertEquality(problem74(1000000, 60), 402); },
+      []() -> bool { return assertEquality(problem75(1500000), 161667); },
 
-    [] () -> bool { return assertEquality(problem76(100), 190569291); },
-    [] () -> bool { return assertEquality(problem77(5000), 71); },
-    [] () -> bool { return assertEquality(problem78(1000000), 55374); },
-    [] () -> bool { return assertEquality(problem79(), "73162890"); },
-    [] () -> bool { return assertEquality(problem80(100, 100), 40886); },
+      []() -> bool { return assertEquality(problem76(100), 190569291); },
+      []() -> bool { return assertEquality(problem77(5000), 71); },
+      []() -> bool { return assertEquality(problem78(1000000), 55374); },
+      []() -> bool { return assertEquality(problem79(), "73162890"); },
+      []() -> bool { return assertEquality(problem80(100, 100), 40886); },
 
-    [] () -> bool { return assertEquality(problem81(80, 80), 427337); },
-    [] () -> bool { return assertEquality(problem82(80, 80), 260324); },
-    [] () -> bool { return assertEquality(problem83(80, 80), 425185); },
-    [] () -> bool { return assertEquality(problem84(4), "101524"); },
-    [] () -> bool { return assertEquality(problem85(2000000), 2772); },
+      []() -> bool { return assertEquality(problem81(80, 80), 427337); },
+      []() -> bool { return assertEquality(problem82(80, 80), 260324); },
+      []() -> bool { return assertEquality(problem83(80, 80), 425185); },
+      []() -> bool { return assertEquality(problem84(4), "101524"); },
+      []() -> bool { return assertEquality(problem85(2000000), 2772); },
 
-    [] () -> bool { return assertEquality(problem86(1000000), 1818); },
-    [] () -> bool { return assertEquality(problem87(50000000), 1097343); },
-    [] () -> bool { return assertEquality(problem88(12000), 7587457); },
+      []() -> bool { return assertEquality(problem86(1000000), 1818); },
+      []() -> bool { return assertEquality(problem87(50000000), 1097343); },
+      []() -> bool { return assertEquality(problem88(12000), 7587457); },
 
-    [] () -> bool { return false; }
-  };
+      []() -> bool { return false; }};
 
-  if(end - begin + 1 > 0)
-  {
+  if (end - begin + 1 > 0) {
     int64 total = 0;
     int64 maxTime = -1;
     int32 maxProblem = -1;
 
-    for(int32 i = begin; i <= end; i++)
-    {
+    for (int32 i = begin; i <= end; i++) {
       ScopeTimer timer("", false);
-      try
-      {
-        if(checks[i]())
-        {
+      try {
+        if (checks[i]()) {
           cout << "Problem " << i << " SUCCEEDED! ";
-        }
-        else
-        {
+        } else {
           cout << "Problem " << i << " FAILED! ";
         }
-      }
-      catch(const string& e)
-      {
+      } catch (const string& e) {
         cout << "BAD! An excpetion was thrown: " << e << endl;
         cout << "Problem " << i << " FAILED! ";
-      }
-      catch(...)
-      {
+      } catch (...) {
         cout << "BAD! An unknown excpetion was thrown" << endl;
         cout << "Problem " << i << " FAILED! ";
       }
@@ -205,8 +186,7 @@ void verifyResults(int32 begin, int32 end)
       cout << "(" << elapsed << " ms)" << endl;
       total += elapsed;
 
-      if(elapsed > maxTime)
-      {
+      if (elapsed > maxTime) {
         maxTime = elapsed;
         maxProblem = i;
       }
@@ -214,7 +194,8 @@ void verifyResults(int32 begin, int32 end)
 
     cout << "Total time: " << total << " ms" << endl;
     cout << "Average time: " << total / (end - begin + 1) << " ms" << endl;
-    cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")" << endl;
+    cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")"
+         << endl;
   }
 }
 
@@ -230,51 +211,42 @@ void verifyResults(int32 begin, int32 end)
 
 *******************************************************************************/
 
-int32 problem1(int32 n)
-{
+int32 problem1(int32 n) {
   int32 sum = 0;
-  for(int32 i = 0; i < n; i++)
-  {
-    if(i % 3 == 0 || i % 5 == 0)
-    {
+  for (int32 i = 0; i < n; i++) {
+    if (i % 3 == 0 || i % 5 == 0) {
       sum += i;
     }
   }
 
   return sum;
 }
-int32 problem2(int32 n)
-{
+int32 problem2(int32 n) {
   int32 a = 1;
   int32 b = 2;
   int32 sum = 0;
   int32 temp;
 
-  while(b < n)
-  {
+  while (b < n) {
     sum += b;
     temp = 2 * b + a;
-    b = 3 * b + 2* a;
+    b = 3 * b + 2 * a;
     a = temp;
   }
 
   return sum;
 }
-int64 problem3(int64 n)
-{
+int64 problem3(int64 n) {
   int64 div = 3;
   int64 max = 0;
 
-  while(n % 2 == 0)
-  {
+  while (n % 2 == 0) {
     max = 2;
     n /= 2;
   }
 
-  while(div < n)
-  {
-    while(n % div != 0)
-    {
+  while (div < n) {
+    while (n % div != 0) {
       div++;
     }
     max = div;
@@ -283,20 +255,16 @@ int64 problem3(int64 n)
 
   return max;
 }
-int32 problem4(int32 n)
-{
+int32 problem4(int32 n) {
   int32 low = pow((double)10, n - 1);
   int32 high = pow((double)10, n);
   int32 max = 0;
   int32 product;
 
-  for(int32 x = low; x < high; x++)
-  {
-    for(int32 y = low; y < high; y++)
-    {
+  for (int32 x = low; x < high; x++) {
+    for (int32 y = low; y < high; y++) {
       product = x * y;
-      if(product > max && isPalindrome(product))
-      {
+      if (product > max && isPalindrome(product)) {
         max = product;
       }
     }
@@ -304,23 +272,18 @@ int32 problem4(int32 n)
 
   return max;
 }
-int64 problem5(int64 n)
-{
+int64 problem5(int64 n) {
   vector<bool> table(n, false);
 
   int64 multiple = 1;
 
-  for(int32 i = 1; i <= n; i++)
-  {
-    if(multiple % i == 0)
-    {
+  for (int32 i = 1; i <= n; i++) {
+    if (multiple % i == 0) {
       continue;
     }
 
-    for(int32 j = 1; j <= i; j++)
-    {
-      if((j * multiple) % i == 0)
-      {
+    for (int32 j = 1; j <= i; j++) {
+      if ((j * multiple) % i == 0) {
         multiple *= j;
         break;
       }
@@ -329,21 +292,18 @@ int64 problem5(int64 n)
 
   return multiple;
 }
-int64 problem6(int64 n)
-{
+int64 problem6(int64 n) {
   int64 sumOfSquares = n * (2 * n + 1) * (n + 1) / 6;
   int64 squareOfSum = n * (n + 1) / 2;
   squareOfSum *= squareOfSum;
 
   return squareOfSum - sumOfSquares;
 }
-int64 problem7(int64 n)
-{
+int64 problem7(int64 n) {
   // Li(x) is approximately equal to pi(x) so use trial and
   // error to find a vale where Li(x) >= n.
   double pixUpperBound = 10;
-  while(logarithmicIntegralApprox(pixUpperBound) < n)
-  {
+  while (logarithmicIntegralApprox(pixUpperBound) < n) {
     pixUpperBound *= 1.25;
   }
 
@@ -352,16 +312,12 @@ int64 problem7(int64 n)
   vector<bool> isPrime;
 
   int64 c = 0;
-  while(true)
-  {
+  while (true) {
     sieveOfErotosthenes(sieveSize, isPrime);
-    for(int64 i = 0; i <= sieveSize; i++)
-    {
-      if(isPrime[i])
-      {
+    for (int64 i = 0; i <= sieveSize; i++) {
+      if (isPrime[i]) {
         c++;
-        if(c == n)
-        {
+        if (c == n) {
           return i;
         }
       }
@@ -372,41 +328,33 @@ int64 problem7(int64 n)
 
   throw string("Sieve too small");
 }
-int64 problem8(int32 n)
-{
+int64 problem8(int32 n) {
   ifstream fin("p8.txt");
   assertFileOpened(fin);
 
   string full = "", temp;
 
-  while(fin >> temp)
-  {
+  while (fin >> temp) {
     full += temp;
   }
 
   int64 max = 0;
-  for(uint32 i = 0; i <= full.length() - n; i++)
-  {
+  for (uint32 i = 0; i <= full.length() - n; i++) {
     int64 x = productOfDigits(stringToNumber<int64>(full.substr(i, n)));
-    if(x > max)
-    {
+    if (x > max) {
       max = x;
     }
   }
 
   return max;
 }
-int32 problem9()
-{
-  for(int32 c = 1000; c > 0; c--)
-  {
-    for(int32 b = 1000 - c; b > 0; b--)
-    {
+int32 problem9() {
+  for (int32 c = 1000; c > 0; c--) {
+    for (int32 b = 1000 - c; b > 0; b--) {
 
       int32 a = 1000 - c - b;
 
-      if(c * c == b * b + a * a && a != 0)
-      {
+      if (c * c == b * b + a * a && a != 0) {
         return a * b * c;
       }
     }
@@ -414,26 +362,21 @@ int32 problem9()
 
   throw string("Unable to find a*b*c");
 }
-int64 problem10(int64 n)
-{
+int64 problem10(int64 n) {
   vector<bool> isPrime;
   sieveOfErotosthenes(n, isPrime);
   int64 sum = 0;
 
-  for(int64 i = 0; i <= n; i++)
-  {
-    if(isPrime[i])
-    {
+  for (int64 i = 0; i <= n; i++) {
+    if (isPrime[i]) {
       sum += i;
     }
   }
 
   return sum;
 }
-int32 problem11(int32 n, int32 m)
-{
-  if(n > m)
-  {
+int32 problem11(int32 n, int32 m) {
+  if (n > m) {
     throw string("Grid size is less than number of factors");
     return -1;
   }
@@ -443,73 +386,57 @@ int32 problem11(int32 n, int32 m)
 
   vector<vector<int32>> grid(m, vector<int32>(m, -1));
 
-  for(int32 y = 0; y < m; y++)
-  {
-    for(int32 x = 0; x < m; x++)
-    {
+  for (int32 y = 0; y < m; y++) {
+    for (int32 x = 0; x < m; x++) {
       fin >> grid[x][y];
-      if(!fin)
-      {
+      if (!fin) {
         throw string("Bad file formatting");
       }
     }
   }
 
   int32 max = 0;
-  for(int32 y = 0; y < m; y++)
-  {
-    for(int32 x = 0; x < m - n + 1; x++)
-    {
+  for (int32 y = 0; y < m; y++) {
+    for (int32 x = 0; x < m - n + 1; x++) {
       int32 product = 1;
-      for(int32 i = 0; i < n; i++)
-      {
+      for (int32 i = 0; i < n; i++) {
         product *= grid[x + i][y];
       }
 
-      if(product > max)
-      {
+      if (product > max) {
         max = product;
       }
     }
   }
 
-  for(int32 x = 0; x < m; x++)
-  {
-    for(int32 y = 0; y < m - n + 1; y++)
-    {
+  for (int32 x = 0; x < m; x++) {
+    for (int32 y = 0; y < m - n + 1; y++) {
       int32 product = 1;
-      for(int32 i = 0; i < n; i++)
-      {
+      for (int32 i = 0; i < n; i++) {
         product *= grid[x][y + i];
       }
 
-      if(product > max)
-      {
+      if (product > max) {
         max = product;
       }
     }
   }
 
-  for(int32 x = 0; x < m - n + 1; x++)
-  {
-    for(int32 y = 0; y < m - n + 1; y++)
-    {
+  for (int32 x = 0; x < m - n + 1; x++) {
+    for (int32 y = 0; y < m - n + 1; y++) {
       int32 forwardProduct = 1;
       int32 backwardProduct = 1;
 
-      for(int32 i = 0; i < n; i++)
-      {
+      for (int32 i = 0; i < n; i++) {
         forwardProduct *= grid[x + i][y + n - 1 - i];
         backwardProduct *= grid[x + i][y + i];
       }
 
-      if(forwardProduct > max)
-      {
+      if (forwardProduct > max) {
         max = forwardProduct;
       }
 
-      if(backwardProduct > max)
-      {
+      if (backwardProduct > max) {
         max = backwardProduct;
       }
     }
@@ -517,42 +444,34 @@ int32 problem11(int32 n, int32 m)
 
   return max;
 }
-int64 problem12(int32 n)
-{
-  if(n < 1)
-  {
+int64 problem12(int32 n) {
+  if (n < 1) {
     return 1;
   }
 
-  for(int32 i = 2; i < INT32_MAX; i++)
-  {
+  for (int32 i = 2; i < INT32_MAX; i++) {
     int64 x = i * (i + 1) / 2;
     int32 c = 2;
-    for(int32 j = 2; j * j <= x; j++)
-    {
-      if(x % j == 0)
-      {
+    for (int32 j = 2; j * j <= x; j++) {
+      if (x % j == 0) {
         c += 2;
       }
     }
 
-    if(c >= n)
-    {
+    if (c >= n) {
       return x;
     }
   }
 
   throw string("Triangle number too big");
 }
-string problem13(int32 n)
-{
+string problem13(int32 n) {
   ifstream fin("p13.txt");
   assertFileOpened(fin);
 
   BigInteger x(0);
   BigInteger temp;
-  while(fin >> temp)
-  {
+  while (fin >> temp) {
     x += temp;
   }
 
@@ -560,45 +479,35 @@ string problem13(int32 n)
   ss << x;
   return ss.str().substr(0, n);
 }
-int32 problem14(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem14(int32 n) {
+  if (n < 1) {
     throw string("Can't do Collatz sequence starting from a number less than 1");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 1;
   }
 
-  if(n == 2)
-  {
+  if (n == 2) {
     return 2;
   }
 
   int32 maxLength = 0;
   int32 maxNumber = 0;
 
-  for(int32 i = 2; i < n; i++)
-  {
+  for (int32 i = 2; i < n; i++) {
     int64 term = i;
     int32 c = 1;
-    while(term != 1)
-    {
-      if(term % 2 == 0)
-      {
+    while (term != 1) {
+      if (term % 2 == 0) {
         term /= 2;
-      }
-      else
-      {
+      } else {
         term = 3 * term + 1;
       }
       c++;
     }
 
-    if(c > maxLength)
-    {
+    if (c > maxLength) {
       maxLength = c;
       maxNumber = i;
     }
@@ -606,26 +515,20 @@ int32 problem14(int32 n)
 
   return maxNumber;
 }
-int64 problem15(int32 n, int32 m)
-{
-  if(n < 1 || m < 1)
-  {
+int64 problem15(int32 n, int32 m) {
+  if (n < 1 || m < 1) {
     throw string("Invalid grid size for lattice paths");
   }
 
   vector<vector<int64>> paths(n + 1, vector<int64>(m + 1, 0));
   paths[0][0] = 1;
 
-  for(int32 x = 0; x <= n; x++)
-  {
-    for(int32 y = 0; y <= m; y++)
-    {
-      if(x != 0)
-      {
+  for (int32 x = 0; x <= n; x++) {
+    for (int32 y = 0; y <= m; y++) {
+      if (x != 0) {
         paths[x][y] += paths[x - 1][y];
       }
-      if(y != 0)
-      {
+      if (y != 0) {
         paths[x][y] += paths[x][y - 1];
       }
     }
@@ -633,31 +536,25 @@ int64 problem15(int32 n, int32 m)
 
   return paths[n][m];
 }
-int32 problem16(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem16(int32 n) {
+  if (n < 0) {
     throw string("Negative exponent not implemented yet");
   }
 
   BigInteger x(1);
-  for(int32 i = 0; i < n; i++)
-  {
+  for (int32 i = 0; i < n; i++) {
     x = x + x;
   }
 
   return x.sumOfDigits();
 }
-int32 problem17(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem17(int32 n) {
+  if (n < 0) {
     return 0;
   }
 
   int32 sum = 0;
-  for(int32 i = 1; i <= n; i++)
-  {
+  for (int32 i = 1; i <= n; i++) {
     string temp = getEnglishWordFromNumber(i);
     temp.erase(remove(temp.begin(), temp.end(), ' '), temp.end());
     temp.erase(remove(temp.begin(), temp.end(), '-'), temp.end());
@@ -666,60 +563,46 @@ int32 problem17(int32 n)
 
   return sum;
 }
-int32 problem18()
-{
+int32 problem18() {
   ifstream fin("p18.txt");
   assertFileOpened(fin);
 
   vector<vector<int32>> triangle;
   string temp;
-  while(getline(fin, temp))
-  {
+  while (getline(fin, temp)) {
     triangle.push_back(vector<int32>());
 
     stringstream ss;
     ss << temp;
     int32 number;
-    while(ss >> number)
-    {
+    while (ss >> number) {
       triangle.back().push_back(number);
     }
   }
 
-  for(uint32 i = 1; i < triangle.size(); i++)
-  {
-    for(uint32 j = 0; j <= i; j++)
-    {
-      if(j == 0)
-      {
+  for (uint32 i = 1; i < triangle.size(); i++) {
+    for (uint32 j = 0; j <= i; j++) {
+      if (j == 0) {
         triangle[i][0] += triangle[i - 1][0];
-      }
-      else if(j == i)
-      {
+      } else if (j == i) {
         triangle[i][j] += triangle[i - 1][j - 1];
-      }
-      else
-      {
+      } else {
         triangle[i][j] += maxVal(triangle[i - 1][j - 1], triangle[i - 1][j]);
       }
     }
   }
 
   int32 max = triangle.back()[0];
-  for(uint32 i = 1; i < triangle.back().size(); i++)
-  {
-    if(triangle.back()[i] > max)
-    {
+  for (uint32 i = 1; i < triangle.back().size(); i++) {
+    if (triangle.back()[i] > max) {
       max = triangle.back()[i];
     }
   }
 
   return max;
 }
-int32 problem19(int32 n)
-{
-  if(n <= 1900)
-  {
+int32 problem19(int32 n) {
+  if (n <= 1900) {
     throw string("Cannot count backwards in time");
   }
 
@@ -727,41 +610,23 @@ int32 problem19(int32 n)
   int32 month = 0;
   int32 day = 0;
 
-  const int32 days[] = {
-    31,
-    28,
-    31,
-    30,
-    31,
-    30,
-    31,
-    31,
-    30,
-    31,
-    30,
-    31
-  };
+  const int32 days[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
   int32 totalSundays = 0;
   int32 totalDays = 1;
 
-  while(year <= n)
-  {
-    while(month < 12)
-    {
-      if(totalDays % 7 == 6)
-      {
+  while (year <= n) {
+    while (month < 12) {
+      if (totalDays % 7 == 6) {
         totalSundays++;
       }
 
-      while(day < days[month])
-      {
+      while (day < days[month]) {
         day++;
         totalDays++;
       }
 
-      if(isLeapYear(year) && month == 1)
-      {
+      if (isLeapYear(year) && month == 1) {
         day++;
         totalDays++;
       }
@@ -776,73 +641,60 @@ int32 problem19(int32 n)
 
   return totalSundays;
 }
-int32 problem20(int32 n)
-{
-  if(n == 0)
-  {
+int32 problem20(int32 n) {
+  if (n == 0) {
     return 1;
   }
 
-  if(n < 0)
-  {
+  if (n < 0) {
     throw string("We shouldn't take the factorial of a negative number");
   }
 
   BigInteger x(1);
-  for(int32 i = 1; i <= n; i++)
-  {
+  for (int32 i = 1; i <= n; i++) {
     x *= i;
   }
 
   return x.sumOfDigits();
 }
-int32 problem21(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem21(int32 n) {
+  if (n < 1) {
     throw string("Cannot find amicable numbers less than 1");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 0;
   }
 
   int32 sum = 0;
   // start at 2 since 1 isn't an amicable number
-  for(int32 i = 2; i < n; i++)
-  {
+  for (int32 i = 2; i < n; i++) {
     int32 x = sumOfDivisors(i);
 
-    if(x != i && sumOfDivisors(x) == i)
-    {
+    if (x != i && sumOfDivisors(x) == i) {
       sum += i;
     }
   }
 
   return sum;
 }
-int64 problem22()
-{
+int64 problem22() {
   ifstream fin("p22.txt");
   assertFileOpened(fin);
 
   string temp;
   vector<string> names;
-  while(fin >> temp)
-  {
+  while (fin >> temp) {
     names.push_back(temp);
   }
 
   sort(names.begin(), names.end());
 
   int64 totalScore = 0;
-  for(uint32 i = 0; i < names.size(); i++)
-  {
+  for (uint32 i = 0; i < names.size(); i++) {
     string& name = names[i];
     uint32 sum = 0;
-    for(uint32 j = 0; j < name.size(); j++)
-    {
+    for (uint32 j = 0; j < name.size(); j++) {
       sum += name[j] - 'A' + 1;
     }
 
@@ -851,24 +703,20 @@ int64 problem22()
 
   return totalScore;
 }
-int32 problem23()
-{
+int32 problem23() {
   vector<int32> abundantNumbers;
-  for(int32 i = 1; i <= 28123; i++)
-  {
-    if(sumOfDivisors(i) > i)
-    {
+  for (int32 i = 1; i <= 28123; i++) {
+    if (sumOfDivisors(i) > i) {
       abundantNumbers.push_back(i);
     }
   }
 
   vector<bool> hasSum(28123 + 1, false);
-  for(uint32 i = 0; i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123; i++)
-  {
-    for(uint32 j = i; j < abundantNumbers.size(); j++)
-    {
-      if(abundantNumbers[i] + abundantNumbers[j] > 28123)
-      {
+  for (uint32 i = 0;
+       i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123;
+       i++) {
+    for (uint32 j = i; j < abundantNumbers.size(); j++) {
+      if (abundantNumbers[i] + abundantNumbers[j] > 28123) {
         break;
       }
 
@@ -877,39 +725,32 @@ int32 problem23()
   }
 
   int32 sum = 0;
-  for(int32 i = 1; i <= 28123; i++)
-  {
-    if(!hasSum[i])
-    {
+  for (int32 i = 1; i <= 28123; i++) {
+    if (!hasSum[i]) {
       sum += i;
     }
   }
 
   return sum;
 }
-string problem24(int32 n)
-{
-  if(n < 1)
-  {
+string problem24(int32 n) {
+  if (n < 1) {
     throw string("Can't find the zero-th permutation or a negative permutation");
   }
 
-  if(n > factorial(10))
-  {
+  if (n > factorial(10)) {
     throw string("Can't find the zero-th permutation or a negative permutation");
   }
 
   vector<char> digits(10);
-  for(int32 i = 0; i < 10; i++)
-  {
+  for (int32 i = 0; i < 10; i++) {
     digits[i] = '0' + i;
   }
 
   n--;
 
   stringstream ss;
-  for(int32 i = 10; i > 0; i--)
-  {
+  for (int32 i = 10; i > 0; i--) {
     int32 f = factorial(i - 1);
     ss << digits[n / f];
     digits.erase(digits.begin() + (n / f));
@@ -918,15 +759,12 @@ string problem24(int32 n)
 
   return ss.str();
 }
-int32 problem25(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem25(int32 n) {
+  if (n < 1) {
     throw string("A number cannot be less than one digit long");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 1;
   }
 
@@ -935,8 +773,7 @@ int32 problem25(int32 n)
   BigInteger b(1);
   BigInteger temp;
 
-  while(b.numberOfDigits() < n)
-  {
+  while (b.numberOfDigits() < n) {
     temp = b;
     b = a + b;
     a = temp;
@@ -945,33 +782,27 @@ int32 problem25(int32 n)
 
   return c;
 }
-int32 problem26(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem26(int32 n) {
+  if (n < 1) {
     throw string("Bad number for counting reciprocal decimal digit period");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 1;
   }
 
   int32 highestRepeater = 1;
   int32 highestPeriod = -1;
 
-  for (int32 i = n; i > highestPeriod; i--)
-  {
+  for (int32 i = n; i > highestPeriod; i--) {
     int32 remainder = 1;
     vector<bool> hasSeen(i, false);
     vector<int32> whenSeen(i, -1);
 
     int32 c = 0;
-    while(true)
-    {
+    while (true) {
       int32 ix = remainder;
-      if(hasSeen[ix])
-      {
+      if (hasSeen[ix]) {
         break;
       }
 
@@ -982,8 +813,7 @@ int32 problem26(int32 n)
     }
 
     int32 period = c - whenSeen[remainder];
-    if(period > highestPeriod)
-    {
+    if (period > highestPeriod) {
       highestPeriod = period;
       highestRepeater = i;
     }
@@ -991,20 +821,16 @@ int32 problem26(int32 n)
 
   return highestRepeater;
 }
-int32 problem27(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem27(int32 n) {
+  if (n < 1) {
     throw string("Bad restrictions on a and b (they belong to an empty set)");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 0;
   }
 
-  if(n == 2)
-  {
+  if (n == 2) {
     // Every permutation does not generate any primes, so let's say a = b = 0
     return 0;
   }
@@ -1016,39 +842,31 @@ int32 problem27(int32 n)
   int32 bestB = 0;
   int32 bestPrimeCount = 0;
 
-  for(int32 b = 0; b < n; b++)
-  {
-    if(!isPrime[b])
-    {
+  for (int32 b = 0; b < n; b++) {
+    if (!isPrime[b]) {
       continue;
     }
 
-    for(int32 a = 1 + (b == 2 ? -1 : 0); a < n; a += 2)
-    {
+    for (int32 a = 1 + (b == 2 ? -1 : 0); a < n; a += 2) {
       int32 x = 0;
-      while(isNumberPrime(x * x + a * x + b))
-      {
+      while (isNumberPrime(x * x + a * x + b)) {
         x++;
       }
 
-      if(x > bestPrimeCount)
-      {
+      if (x > bestPrimeCount) {
         bestPrimeCount = x;
         bestA = a;
         bestB = b;
       }
     }
 
-    for(int32 a = 0; a < n; a++)
-    {
+    for (int32 a = 0; a < n; a++) {
       int32 x = 0;
-      while(isNumberPrime(x * x - a * x + b))
-      {
+      while (isNumberPrime(x * x - a * x + b)) {
         x++;
       }
 
-      if(x > bestPrimeCount)
-      {
+      if (x > bestPrimeCount) {
         bestPrimeCount = x;
         bestA = -a;
         bestB = b;
@@ -1058,57 +876,45 @@ int32 problem27(int32 n)
 
   return bestA * bestB;
 }
-int32 problem28(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem28(int32 n) {
+  if (n < 1) {
     throw string("Cannot have a spiral with a width less than one");
   }
 
-  if(n % 2 == 0)
-  {
+  if (n % 2 == 0) {
     throw string("Spiral with even side length is undefined");
   }
 
   int32 x = (n - 1) / 2;
-  return 4 * (4 * x * x * x + 12 * x * x + 11 * x + 3) / 3 - 6 * x * (x + 1) - 3;
+  return 4 * (4 * x * x * x + 12 * x * x + 11 * x + 3) / 3 - 6 * x * (x + 1) -
+         3;
 }
-int32 problem29(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem29(int32 n) {
+  if (n < 2) {
     throw string("A number cannot be at least 2 and less than 2 at the same time");
   }
 
   vector<vector<int32>> primeFactor(n + 1, vector<int32>(n + 1, 0));
-  for(int32 i = 2; i <= n; i++)
-  {
+  for (int32 i = 2; i <= n; i++) {
     int32 remainder = i;
     int32 j = 2;
 
-    while(j <= remainder)
-    {
-      if(remainder % j == 0)
-      {
+    while (j <= remainder) {
+      if (remainder % j == 0) {
         primeFactor[i][j]++;
         remainder /= j;
         j = 2;
-      }
-      else
-      {
+      } else {
         j++;
       }
     }
   }
 
   unordered_set<vector<int32>> uniqueValues;
-  for(int32 a = 2; a <= n; a++)
-  {
-    for(int32 b = 2; b <= n; b++)
-    {
+  for (int32 a = 2; a <= n; a++) {
+    for (int32 b = 2; b <= n; b++) {
       vector<int32> factors = primeFactor[a];
-      for(uint32 i = 0; i < factors.size(); i++)
-      {
+      for (uint32 i = 0; i < factors.size(); i++) {
         factors[i] *= b;
       }
 
@@ -1118,29 +924,24 @@ int32 problem29(int32 n)
 
   return uniqueValues.size();
 }
-int32 problem30(int32 n)
-{
-  if(n <= 1)
-  {
+int32 problem30(int32 n) {
+  if (n <= 1) {
     return 0;
   }
 
   int32 maxDigits = 1;
   double nLogNine = n * log10(9.0);
-  while(nLogNine >= maxDigits - log10(static_cast<double>(maxDigits)))
-  {
+  while (nLogNine >= maxDigits - log10(static_cast<double>(maxDigits))) {
     maxDigits++;
   }
 
   vector<int32> cachedPowers(10);
-  for(int32 i = 0; i < 10; i++)
-  {
+  for (int32 i = 0; i < 10; i++) {
     cachedPowers[i] = pow(static_cast<double>(i), n);
   }
 
   int32 iterationCount = 10;
-  for(int32 i = 11; i < 10 + maxDigits; i++)
-  {
+  for (int32 i = 11; i < 10 + maxDigits; i++) {
     iterationCount *= i;
   }
 
@@ -1148,61 +949,50 @@ int32 problem30(int32 n)
 
   vector<int32> goodNumbers;
   vector<int32> sortedNumber(maxDigits, 0);
-  for(int32 i = 0; i < iterationCount; i++)
-  {
+  for (int32 i = 0; i < iterationCount; i++) {
     int32 sum = 0;
-    for(uint32 j = 0; j < sortedNumber.size(); j++)
-    {
+    for (uint32 j = 0; j < sortedNumber.size(); j++) {
       sum += cachedPowers[sortedNumber[j]];
     }
 
     int32 tempSum = sum;
-    if(sum > 1)
-    {
+    if (sum > 1) {
       vector<int32> sortedSum(maxDigits);
-      for(uint32 j = 0; j < sortedSum.size(); j++)
-      {
+      for (uint32 j = 0; j < sortedSum.size(); j++) {
         sortedSum[j] = tempSum % 10;
         tempSum /= 10;
       }
 
       sort(sortedSum.begin(), sortedSum.end());
 
-      if(sortedNumber == sortedSum)
-      {
+      if (sortedNumber == sortedSum) {
         goodNumbers.push_back(sum);
       }
     }
 
     int32 ix = sortedNumber.size() - 1;
-    while(sortedNumber[ix] == 9)
-    {
+    while (sortedNumber[ix] == 9) {
       ix--;
-      if(ix < 0)
-      {
+      if (ix < 0) {
         ix = 0;
         break;
       }
     }
 
     sortedNumber[ix]++;
-    if(sortedNumber[ix] == 10)
-    {
+    if (sortedNumber[ix] == 10) {
       sortedNumber[ix] = 0;
     }
 
-    for(uint32 j = ix + 1; j < sortedNumber.size(); j++)
-    {
+    for (uint32 j = ix + 1; j < sortedNumber.size(); j++) {
       sortedNumber[j] = sortedNumber[ix];
     }
   }
 
   return vectorSum(goodNumbers);
 }
-int32 problem31(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem31(int32 n) {
+  if (n < 0) {
     throw string("Cannot make a negative amount of money with change");
   }
 
@@ -1213,19 +1003,17 @@ int32 problem31(int32 n)
 
   // Let generatingFunction represent a formal power series A(x)
   // Let fps be another formal power series B(x)
-  // The problem is a composition problem where parts can be 0. Each part corresponds
-  // to the number a certain coin to use and we create a generating function for this
-  // tuple of coin counts using the respective coin values as the weight. The generating
-  // function is simply 1 / ((1 - x)(1 - x^2)(1 - x^5)...) = 1 / B(x) = A(x) where the x powers
-  // are distinct coin values. [x^n] A(x) is then the number of different ways to get n
-  // value using a number of each coin. The code goes through the evaluation of B(x) and
-  // then its inverse, A(x), to get the coefficient values.
+  // The problem is a composition problem where parts can be 0. Each part corresponds to the
+  // number a certain coin to use and we create a generating function for this tuple of coin
+  // counts using the respective coin values as the weight. The generating function is simply
+  // 1 / ((1 - x)(1 - x^2)(1 - x^5)...) = 1 / B(x) = A(x) where the x powers are distinct
+  // coin values. [x^n] A(x) is then the number of different ways to get n value using a
+  // number of each coin. The code goes through the evaluation of B(x) and then its inverse,
+  // A(x), to get the coefficient values.
 
-  for(uint32 i = 0; i < coinValues.size(); i++)
-  {
+  for (uint32 i = 0; i < coinValues.size(); i++) {
     map<int32, int32> tempFps;
-    for(auto it = fps.begin(); it != fps.end(); it++)
-    {
+    for (auto it = fps.begin(); it != fps.end(); it++) {
       tempFps[it->first] += it->second;
       tempFps[it->first + coinValues[i]] -= it->second;
     }
@@ -1235,11 +1023,9 @@ int32 problem31(int32 n)
   generatingFunction.push_back(1);
   auto last = fps.end();
   last--;
-  for(int32 i = 1; i < last->first; i++)
-  {
+  for (int32 i = 1; i < last->first; i++) {
     int32 sum = 0;
-    for(int32 j = 0; j < i; j++)
-    {
+    for (int32 j = 0; j < i; j++) {
       sum += generatingFunction[j] * fps[i - j];
     }
     generatingFunction.push_back(-sum / fps[0]);
@@ -1249,8 +1035,7 @@ int32 problem31(int32 n)
   // to evalutate the n-th term of a recurrence relation defined by fps
   return generatingFunction[n];
 }
-int32 problem32()
-{
+int32 problem32() {
   string permutation = "123456789";
   sort(permutation.begin(), permutation.end());
   set<int32> pandigitalIdentities;
@@ -1258,32 +1043,27 @@ int32 problem32()
   // Break up every permutation of "123456789" and check if a product is achieved. The first part will be the
   // product and the second part will be split into two factors. The first factor can always be the smallest since
   // we will eventually check the equivalent permutation where that factor is the second one
-  do
-  {
+  do {
     int32 product;
     int32 multiplicand;
     int32 multiplier;
 
-    for(int32 j : {1, 2})
-    {
+    for (int32 j : {1, 2}) {
       // Product can only be 4 digits since 5 digits is above what can be multiplied to by a total of 4 digits
       // and 3 digits is below what can be multiplied to with a total of 6 digits
       product = stringToNumber<int32>(permutation.substr(0, 4));
       multiplicand = stringToNumber<int32>(permutation.substr(4, j));
       multiplier = stringToNumber<int32>(permutation.substr(4 + j));
 
-      if(product == multiplicand * multiplier)
-      {
+      if (product == multiplicand * multiplier) {
         pandigitalIdentities.insert(product);
       }
     }
-  }
-  while(next_permutation(permutation.begin(), permutation.end()));
+  } while (next_permutation(permutation.begin(), permutation.end()));
 
   return accumulate(pandigitalIdentities.begin(), pandigitalIdentities.end(), 0);
 }
-int32 problem33()
-{
+int32 problem33() {
   vector<int32> numerators;
   vector<int32> denominators;
 
@@ -1291,26 +1071,20 @@ int32 problem33()
   // and j is in [1, 9]. The digit we remove is from 1 to 9 and it cannot be
   // from both the ones or both the tens or else it is trvial. So we brute force
   // all these combinations and check them
-  for(int32 i = 1; i <= 8; i++)
-  {
-    for(int32 j = i + 1; j <= 9; j++)
-    {
-      for(int32 k = 1; k <= 9; k++)
-      {
-        // f1 = ki / jk, f2 = ik / kj
+  for (int32 i = 1; i <= 8; i++) {
+    for (int32 j = i + 1; j <= 9; j++) {
+      for (int32 k = 1; k <= 9; k++) {
         int32 num1 = 10 * k + i;
         int32 den1 = 10 * j + k;
         int32 num2 = 10 * i + k;
         int32 den2 = 10 * k + j;
 
-        if (num1 * j == den1 * i)
-        {
+        if (num1 * j == den1 * i) {
           numerators.push_back(i);
           denominators.push_back(j);
         }
 
-        if (num2 * j == den2 * i)
-        {
+        if (num2 * j == den2 * i) {
           numerators.push_back(i);
           denominators.push_back(j);
         }
@@ -1323,42 +1097,35 @@ int32 problem33()
 
   return productDenominator / gcd(productNumerator, productDenominator);
 }
-int32 problem34()
-{
+int32 problem34() {
   // 8 * 9! = 2903040 so less than 7 digits
   // 7 * 9! = 2540160 <-- highest number that could possibly work
 
   vector<int32> digitFactorials;
-  for(int32 i = 0; i < 10; i++)
-  {
+  for (int32 i = 0; i < 10; i++) {
     digitFactorials.push_back(factorial(i));
   }
 
   int32 total = 0;
 
   // Don't do one digit numbers as per the spec
-  for(int32 i = 10; i <= 2540160; i++)
-  {
+  for (int32 i = 10; i <= 2540160; i++) {
     int32 n = i;
     int32 sum = 0;
-    while(n > 0)
-    {
+    while (n > 0) {
       sum += digitFactorials[n % 10];
       n /= 10;
     }
 
-    if(sum == i)
-    {
+    if (sum == i) {
       total += sum;
     }
   }
 
   return total;
 }
-int32 problem35(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem35(int32 n) {
+  if (n < 2) {
     return 0;
   }
 
@@ -1369,35 +1136,29 @@ int32 problem35(int32 n)
   int32 nextBoundary = 10;
   int32 i = 2;
   int32 count = 0;
-  while(i < n)
-  {
-    if(isPrime[i])
-    {
+  while (i < n) {
+    if (isPrime[i]) {
       bool isCircular = true;
       int32 rotated = i;
 
-      for(int32 j = 0; j < digits - 1; j++)
-      {
+      for (int32 j = 0; j < digits - 1; j++) {
         int32 onesDigit = rotated % 10;
         rotated /= 10;
         rotated += onesDigit * (nextBoundary / 10);
 
-        if(!isPrime[rotated])
-        {
+        if (!isPrime[rotated]) {
           isCircular = false;
           break;
         }
       }
 
-      if(isCircular)
-      {
+      if (isCircular) {
         count++;
       }
     }
 
     i++;
-    if(i == nextBoundary)
-    {
+    if (i == nextBoundary) {
       digits++;
       nextBoundary *= 10;
     }
@@ -1405,39 +1166,32 @@ int32 problem35(int32 n)
 
   return count;
 }
-int32 problem36(int32 n)
-{
+int32 problem36(int32 n) {
   int32 sum = 0;
-  for(int32 i = 1; i < n; i++)
-  {
-    if(isPalindrome(i, 10) && isPalindrome(i, 2))
-    {
+  for (int32 i = 1; i < n; i++) {
+    if (isPalindrome(i, 10) && isPalindrome(i, 2)) {
       sum += i;
     }
   }
 
   return sum;
 }
-int32 problem37()
-{
+int32 problem37() {
   // Truncatable primes must begin and end with a prime. If an at least
   // 3-digit prime contains an even number or 5 then one truncation
   // will end with such a digit making that truncation composite.
   // We could generate the possible truncatable primes using these
   // ideas but it is simple to just brute force it.
   int32 sum = 0;
-  int32 i = 10;    // Single digit primes do not count
+  int32 i = 10; // Single digit primes do not count
   int32 count = 0;
-  while(count < 11)  // There are eleven truncatable primes
-  {
-    if(isNumberPrime(i))
-    {
+  while (count < 11) { // There are eleven truncatable primes
+    if (isNumberPrime(i)) {
       bool isTruncatable = true;
       int32 sliderFactor = 10;
-      while(i / sliderFactor > 0)
-      {
-        if(!isNumberPrime(i / sliderFactor) || !isNumberPrime(i % sliderFactor))
-        {
+      while (i / sliderFactor > 0) {
+        if (!isNumberPrime(i / sliderFactor) ||
+            !isNumberPrime(i % sliderFactor)) {
           isTruncatable = false;
           break;
         }
@@ -1445,8 +1199,7 @@ int32 problem37()
         sliderFactor *= 10;
       }
 
-      if(isTruncatable)
-      {
+      if (isTruncatable) {
         sum += i;
         count++;
       }
@@ -1457,8 +1210,7 @@ int32 problem37()
 
   return sum;
 }
-int32 problem38()
-{
+int32 problem38() {
   // We are given that 9 x (1,2,3,4,5) = 918273645, a 1-9 pandigital number.
   // So our number must begin with a 9 if it is larger. One digit numbers other
   // than 9 won't create a concatenated product starting with a 9. A two digit
@@ -1469,43 +1221,38 @@ int32 problem38()
   // Otherwise, 918273645 is the largest. So we check all 4-digit numbers
   // beginning with 9.
   int32 largest = 918273645;
-  for(int32 i = 9000; i < 10000; i++)
-  {
+  for (int32 i = 9000; i < 10000; i++) {
     int32 concatenatedProduct = i * 100000 + 2 * i;
-    if(concatenatedProduct > largest && isPandigital(concatenatedProduct))
-    {
+    if (concatenatedProduct > largest && isPandigital(concatenatedProduct)) {
       largest = concatenatedProduct;
     }
   }
 
   return largest;
 }
-int32 problem39(int32 n)
-{
-  if(n <= 12)
-  {
-    throw string("There are no right triangles with integer side lengths with a perimeter below 12");
+int32 problem39(int32 n) {
+  if (n <= 12) {
+    throw string("There are no right triangles with integer side lengths with "
+                 "a perimeter below 12");
   }
 
-  // Use Euclid's formula for generating all unique Pythagorean triplets. It is the following:
+  // Use Euclid's formula for generating all unique Pythagorean triplets. It is
+  // the following:
   // a = k * (t^2 - s^2)
   // b = k * 2 * s * t
   // c = k * (s^2 + t^2)
-  // where s, t, and k are positive integers, gcd(s, t) = 1, t > s, and t - s is odd
+  // where s, t, and k are positive integers, gcd(s, t) = 1, t > s, and t - s is
+  // odd
 
   // b < c and b + c < n so 2 * b < n
   map<int32, int32> solutionCount;
-  for(int32 s = 1; 4 * s < n; s++)
-  {
+  for (int32 s = 1; 4 * s < n; s++) {
     int32 t = s + 1;
-    while(4 * s * t < n)
-    {
-      if(gcd(s, t) == 1)
-      {
+    while (4 * s * t < n) {
+      if (gcd(s, t) == 1) {
         int32 perimeter = 2 * t * (s + t);
         int32 k = 1;
-        while(k * perimeter < n)
-        {
+        while (k * perimeter < n) {
           solutionCount[k * perimeter]++;
           k++;
         }
@@ -1517,10 +1264,8 @@ int32 problem39(int32 n)
 
   int32 maxCount = -1;
   int32 maxPerimeter = -1;
-  for(auto item : solutionCount)
-  {
-    if(item.second > maxCount)
-    {
+  for (auto item : solutionCount) {
+    if (item.second > maxCount) {
       maxPerimeter = item.first;
       maxCount = item.second;
     }
@@ -1528,10 +1273,8 @@ int32 problem39(int32 n)
 
   return maxPerimeter;
 }
-int32 problem40(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem40(int32 n) {
+  if (n < 0) {
     throw string("10^n must be a postive integer");
   }
 
@@ -1544,10 +1287,8 @@ int32 problem40(int32 n)
   int32 powerOfTen = 1;
 
   int32 product = 1;
-  while(i <= n)
-  {
-    while(digit >= bracketEnd)
-    {
+  while (i <= n) {
+    while (digit >= bracketEnd) {
       bracketWidth++;
       powerOfTen *= 10;
       bracketStart = bracketEnd;
@@ -1558,8 +1299,7 @@ int32 problem40(int32 n)
     int32 y = bracketWidth - 1 - ((digit - bracketStart) % bracketWidth);
 
     int32 number = powerOfTen + x;
-    while(y > 0)
-    {
+    while (y > 0) {
       number /= 10;
       y--;
     }
@@ -1572,27 +1312,22 @@ int32 problem40(int32 n)
 
   return product;
 }
-int32 problem41()
-{
+int32 problem41() {
   // The sum of the digits of a 9-digit pandigital number is 45 so it
   // cannot be prime since it will always be divisible by three. Similarly
   // for 8-digit pandigital numbers. So the largest pandigital number that
   // is prime can be at most 7 digits long.
   string permutation = "7654321";
-  do
-  {
+  do {
     int32 number = stringToNumber<int32>(permutation);
-    if(isNumberPrime(number))
-    {
+    if (isNumberPrime(number)) {
       return number;
     }
-  }
-  while(prev_permutation(permutation.begin(), permutation.end()));
+  } while (prev_permutation(permutation.begin(), permutation.end()));
 
   throw string("No 7-digit pandigital number that is prime exists");
 }
-int32 problem42()
-{
+int32 problem42() {
   int32 nextAdd = 1;
   int32 maxAdd = 0;
   set<int32> triangleNumbers;
@@ -1603,36 +1338,29 @@ int32 problem42()
   int32 count = 0;
 
   string word;
-  while(fin >> word)
-  {
+  while (fin >> word) {
     int32 score = 0;
-    for(char c : word)
-    {
+    for (char c : word) {
       score += c - 'A' + 1;
     }
 
-    while(score > maxAdd)
-    {
+    while (score > maxAdd) {
       maxAdd += nextAdd;
       triangleNumbers.insert(maxAdd);
       nextAdd++;
     }
 
-    if(triangleNumbers.count(score) == 1)
-    {
+    if (triangleNumbers.count(score) == 1) {
       count++;
     }
   }
 
   return count;
 }
-int64 problem43()
-{
-  class Substringifier
-  {
+int64 problem43() {
+  class Substringifier {
   public:
-    int32 operator() (char* start)
-    {
+    int32 operator()(char* start) {
       // Just hard-code it as a 3-digit substring. This is
       // pretty niche and better performance is nice.
       return start[0] * 100 + start[1] * 10 + start[2];
@@ -1641,21 +1369,20 @@ int64 problem43()
 
   Substringifier substringifier;
 
-  // Use integers instead of ASCII codes to make taking numerical substrings easier
+  // Use integers instead of ASCII codes to make taking numerical substrings
+  // easier
   char permutation[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
   int64 sum = 0;
 
-  do
-  {
-    if((substringifier(permutation + 1) % 2 == 0) &&
-      (substringifier(permutation + 2) % 3 == 0) &&
-      (substringifier(permutation + 3) % 5 == 0) &&
-      (substringifier(permutation + 4) % 7 == 0) &&
-      (substringifier(permutation + 5) % 11 == 0) &&
-      (substringifier(permutation + 6) % 13 == 0) &&
-      (substringifier(permutation + 7) % 17 == 0))
-    {
+  do {
+    if ((substringifier(permutation + 1) % 2 == 0) &&
+        (substringifier(permutation + 2) % 3 == 0) &&
+        (substringifier(permutation + 3) % 5 == 0) &&
+        (substringifier(permutation + 4) % 7 == 0) &&
+        (substringifier(permutation + 5) % 11 == 0) &&
+        (substringifier(permutation + 6) % 13 == 0) &&
+        (substringifier(permutation + 7) % 17 == 0)) {
       // Need to have LL constants, otherwise the multiplication
       // might overflow before being added. I'm doing it this way instead of
       // a loop since a loop would be a little slower.
@@ -1670,41 +1397,31 @@ int64 problem43()
       sum += permutation[8] * 10LL;
       sum += permutation[9];
     }
-  }
-  while(next_permutation(permutation, permutation + 10));
+  } while (next_permutation(permutation, permutation + 10));
 
   return sum;
 }
-int32 problem44()
-{
+int32 problem44() {
   set<int32> pentagonalNumbers;
 
-  int32 pk = 1;  // Pentagonal number to see if any pentagonal numbers sum to it
+  int32 pk = 1; // Pentagonal number to see if any pentagonal numbers sum to it
   int32 n = 2;  // Next pentagonal number index to use
 
   bool isFound = false;
   int32 pi;
   int32 pj;
-  while(!isFound)
-  {
-    for(int32 px : pentagonalNumbers)
-    {
-      if(pentagonalNumbers.count(pk - px) == 1)
-      {
-        if(px > pk - px)
-        {
-          if(pentagonalNumbers.count(2 * px - pk) == 1)
-          {
+  while (!isFound) {
+    for (int32 px : pentagonalNumbers) {
+      if (pentagonalNumbers.count(pk - px) == 1) {
+        if (px > pk - px) {
+          if (pentagonalNumbers.count(2 * px - pk) == 1) {
             pi = px;
             pj = pk - px;
             isFound = true;
             break;
           }
-        }
-        else
-        {
-          if(pentagonalNumbers.count(pk - 2 * px) == 1)
-          {
+        } else {
+          if (pentagonalNumbers.count(pk - 2 * px) == 1) {
             pi = pk - px;
             pj = px;
             isFound = true;
@@ -1727,11 +1444,10 @@ int32 problem44()
 
   return pi - pj;
 }
-int64 problem45(int32 n)
-{
-  if(n < 0)
-  {
-    throw string("There are no matching triangle, pentagonal, hexagonal numbers before 40755");
+int64 problem45(int32 n) {
+  if (n < 0) {
+    throw string("There are no matching triangle, pentagonal, hexagonal "
+                 "numbers before 40755");
   }
 
   int64 t = 285;
@@ -1748,37 +1464,25 @@ int64 problem45(int32 n)
   // we've found one number satisfying the property. If not, take the smallest number(s)
   // and find their next terms. The terms monotonically increase so this method will always
   // find any numbers that satisfy this property.
-  while(true)
-  {
-    if(vt < vp)
-    {
+  while (true) {
+    if (vt < vp) {
       t++;
       vt = t * (t + 1) / 2;
-    }
-    else if(vt > vp)
-    {
+    } else if (vt > vp) {
       p++;
       vp = p * (3 * p - 1) / 2;
-    }
-    else
-    {
-      if(vt < vh)
-      {
+    } else {
+      if (vt < vh) {
         t++;
         p++;
         vt = t * (t + 1) / 2;
         vp = p * (3 * p - 1) / 2;
-      }
-      else if(vt > vh)
-      {
+      } else if (vt > vh) {
         h++;
         vh = h * (2 * h - 1);
-      }
-      else
-      {
+      } else {
         n--;
-        if(n < 0)
-        {
+        if (n < 0) {
           break;
         }
 
@@ -1794,10 +1498,8 @@ int64 problem45(int32 n)
 
   return vt;
 }
-int64 problem46(int32 n)
-{
-  if(n < 1)
-  {
+int64 problem46(int32 n) {
+  if (n < 1) {
     throw string("N must be at least one since it denotes the nth occurrence");
   }
 
@@ -1814,33 +1516,25 @@ int64 problem46(int32 n)
 
   int64 i = 3;
 
-  while(n > 0)
-  {
-    if(i > highestSquareDouble)
-    {
+  while (n > 0) {
+    if (i > highestSquareDouble) {
       highestSquareIx++;
       highestSquareDouble = 2 * highestSquareIx * highestSquareIx;
       squareDoubles.insert(highestSquareDouble);
     }
 
-    if(isNumberPrime(i))
-    {
+    if (isNumberPrime(i)) {
       primes.insert(i);
-    }
-    else
-    {
+    } else {
       bool foundSum = false;
-      for(int64 squareDouble : squareDoubles)
-      {
-        if(primes.count(i - squareDouble) == 1)
-        {
+      for (int64 squareDouble : squareDoubles) {
+        if (primes.count(i - squareDouble) == 1) {
           foundSum = true;
           break;
         }
       }
 
-      if(!foundSum)
-      {
+      if (!foundSum) {
         n--;
         lastNumberFound = i;
       }
@@ -1851,15 +1545,12 @@ int64 problem46(int32 n)
 
   return lastNumberFound;
 }
-int32 problem47(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem47(int32 n) {
+  if (n < 1) {
     throw string("Cannot have a sequence of length less than one");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 1;
   }
 
@@ -1873,22 +1564,16 @@ int32 problem47(int32 n)
   int32 i = 4;
   int32 sequenceLength = 0;
 
-  while(sequenceLength < n)
-  {
-    if(i % 2 == 0)
-    {
+  while (sequenceLength < n) {
+    if (i % 2 == 0) {
       set<int32> temp = primeFactors[i / 2];
       temp.insert(2);
       primeFactors.push_back(temp);
-    }
-    else
-    {
+    } else {
       bool prime = true;
       int32 factor = 3;
-      while(factor * factor <= i)
-      {
-        if(i % factor == 0)
-        {
+      while (factor * factor <= i) {
+        if (i % factor == 0) {
           set<int32> temp = primeFactors[i / factor];
           temp.insert(factor);
           primeFactors.push_back(temp);
@@ -1899,18 +1584,14 @@ int32 problem47(int32 n)
         factor += 2;
       }
 
-      if(prime)
-      {
+      if (prime) {
         primeFactors.push_back({i});
       }
     }
 
-    if(primeFactors.back().size() == static_cast<uint32>(n))
-    {
+    if (primeFactors.back().size() == static_cast<uint32>(n)) {
       sequenceLength++;
-    }
-    else
-    {
+    } else {
       sequenceLength = 0;
     }
 
@@ -1919,10 +1600,8 @@ int32 problem47(int32 n)
 
   return i - n;
 }
-int64 problem48(int32 n)
-{
-  if(n < 1)
-  {
+int64 problem48(int32 n) {
+  if (n < 1) {
     return 0;
   }
 
@@ -1933,11 +1612,9 @@ int64 problem48(int32 n)
   // modulus exponent requires an integral type with more than
   // 64 bits (we need to be able to multiply two 10 digit numbers
   // together with the ideal way and 64 bits is not enough).
-  for(int64 i = 1; i <= static_cast<int64>(n); i++)
-  {
+  for (int64 i = 1; i <= static_cast<int64>(n); i++) {
     int64 product = i;
-    for(int64 j = 1; j < i; j++)
-    {
+    for (int64 j = 1; j < i; j++) {
       product *= i;
       product %= modulus;
     }
@@ -1948,32 +1625,25 @@ int64 problem48(int32 n)
 
   return sum;
 }
-string problem49()
-{
+string problem49() {
   const uint32 upperPrime = 9999;
   vector<uint32> primes;
   vector<bool> isPrime;
   sieveOfErotosthenes(upperPrime, isPrime);
-  for(uint32 i = 1000; i <= upperPrime; i++)
-  {
-    if(isPrime[i])
-    {
+  for (uint32 i = 1000; i <= upperPrime; i++) {
+    if (isPrime[i]) {
       primes.push_back(i);
     }
   }
 
-  for(uint32 i = 0; i < primes.size(); i++)
-  {
-    for(uint32 j = i + 1; j < primes.size(); j++)
-    {
+  for (uint32 i = 0; i < primes.size(); i++) {
+    for (uint32 j = i + 1; j < primes.size(); j++) {
       uint32 prime1 = primes[i];
       uint32 prime2 = primes[j];
       uint32 candidate = 2 * prime2 - prime1;
 
-      if(candidate <= upperPrime && isPrime[candidate])
-      {
-        if(prime1 == 1487 && prime2 == 4817)
-        {
+      if (candidate <= upperPrime && isPrime[candidate]) {
+        if (prime1 == 1487 && prime2 == 4817) {
           continue;
         }
 
@@ -1987,8 +1657,7 @@ string problem49()
         sort(sPrime2.begin(), sPrime2.end());
         sort(sPrime3.begin(), sPrime3.end());
 
-        if(sPrime1 == sPrime2 && sPrime2 == sPrime3)
-        {
+        if (sPrime1 == sPrime2 && sPrime2 == sPrime3) {
           return sequence;
         }
       }
@@ -1997,10 +1666,8 @@ string problem49()
 
   throw string("Couldn't find prime sequence satisfying the requirements");
 }
-int32 problem50(int32 n)
-{
-  if(n <= 2)
-  {
+int32 problem50(int32 n) {
+  if (n <= 2) {
     throw string("There are no primes below 2");
   }
 
@@ -2008,10 +1675,8 @@ int32 problem50(int32 n)
   sieveOfErotosthenes(n, isPrime);
 
   vector<int64> primes;
-  for(uint32 i = 0; i < isPrime.size(); i++)
-  {
-    if(isPrime[i])
-    {
+  for (uint32 i = 0; i < isPrime.size(); i++) {
+    if (isPrime[i]) {
       primes.push_back(i);
     }
   }
@@ -2021,19 +1686,15 @@ int32 problem50(int32 n)
   int64 sum = vectorSum(primes);
 
   // Slide right index to the maximum number of consecutive primes based on sum
-  while(sum >= n)
-  {
+  while (sum >= n) {
     sum -= primes[right];
     right--;
   }
 
-  while(true)  // Break on first find
-  {
+  while (true) { // Break on first find
     int32 nextSum = sum - primes[right];
-    while(sum < n)
-    {
-      if(isPrime[static_cast<uint32>(sum)])
-      {
+    while (sum < n) {
+      if (isPrime[static_cast<uint32>(sum)]) {
         return sum;
       }
 
@@ -2050,8 +1711,7 @@ int32 problem50(int32 n)
 
   throw string("Could not find prime successfully");
 }
-int32 problem51()
-{
+int32 problem51() {
   // Of the ten digits we can choose to replace with, in modulus 3, three of them
   // are equivalent to 0, three of them to 1, and three of them to 2. For an eight
   // prime family, we can only choose 2 digits not to use, so we always end up using
@@ -2074,13 +1734,11 @@ int32 problem51()
   // need to look for numbers with a bunch of 0s, 1s, or 2s digits.
 
   int32 i = 1000;
-  while(true)
-  {
+  while (true) {
     int32 digitCount[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     std::vector<int32> digits;
-    int32 n = i / 10;  // Skip last digit
-    while(n > 0)
-    {
+    int32 n = i / 10; // Skip last digit
+    while (n > 0) {
       digitCount[n % 10]++;
       digits.push_back(n % 10);
       n /= 10;
@@ -2089,42 +1747,33 @@ int32 problem51()
     // This is implicitly checked by the for loop above but it probably
     // eliminates the need to check if numbers are prime a good portion
     // of the time
-    if(digitCount[0] >= 3 || digitCount[1] >= 3 || digitCount[2] >= 3)
-    {
-      if(isNumberPrime(i))
-      {
+    if (digitCount[0] >= 3 || digitCount[1] >= 3 || digitCount[2] >= 3) {
+      if (isNumberPrime(i)) {
         // Replace 0s, then 1s, then 2s
-        for(int32 d = 0; d <= 2; d++)
-        {
+        for (int32 d = 0; d <= 2; d++) {
           // Replace k digits
-          for(int32 k = 3; k <= digitCount[d]; k += 3)
-          {
+          for (int32 k = 3; k <= digitCount[d]; k += 3) {
             // If there's c >= 3 digits and we only replace k of them, we need to try
             // every possible way of replacing k of them
             vector<int32> digitReplacePerm;
-            for(int32 x = 0; x < k; x++)
-            {
+            for (int32 x = 0; x < k; x++) {
               digitReplacePerm.push_back(1);
             }
-            for(int32 x = k; x < digitCount[d]; x++)
-            {
+            for (int32 x = k; x < digitCount[d]; x++) {
               digitReplacePerm.push_back(0);
             }
 
             // Sort the digit replacement permutation
             next_permutation(digitReplacePerm.begin(), digitReplacePerm.end());
-            do
-            {
+            do {
               // Prime family forms an arithmetic sequence so figuring out
               // the next prime to check is as easy as adding a constant
               // number every single time
               int32 difference = 0;
               int32 digitPower = 10;
               uint32 x = 0;
-              for(int32 digit : digits)
-              {
-                if(digit == d)
-                {
+              for (int32 digit : digits) {
+                if (digit == d) {
                   difference += digitReplacePerm[x] * digitPower;
                   x++;
                 }
@@ -2137,25 +1786,20 @@ int32 problem51()
               // invalid/composite
               int32 misses = d;
               bool found = true;
-              for(int32 y = 1; y <= 9 - d; y++)
-              {
-                if(!isNumberPrime(i + y * difference))
-                {
+              for (int32 y = 1; y <= 9 - d; y++) {
+                if (!isNumberPrime(i + y * difference)) {
                   misses++;
-                  if(misses >= 3)
-                  {
+                  if (misses >= 3) {
                     found = false;
                     break;
                   }
                 }
               }
 
-              if(found)
-              {
+              if (found) {
                 return i;
               }
-            }
-            while(next_permutation(digitReplacePerm.begin(), digitReplacePerm.end()));
+            } while (next_permutation(digitReplacePerm.begin(), digitReplacePerm.end()));
           }
         }
       }
@@ -2166,34 +1810,28 @@ int32 problem51()
 
   throw string("Could not find eight prime family successfully");
 }
-int32 problem52()
-{
+int32 problem52() {
   // Number cannot start with any digit but 1 since six times a number starting
   // with 2 will lead to a number that is one digit longer, which will be invalid.
   // We can extend this to the 2nd, 3rd, and 4th digits and so on.
   int32 nextPower = 100;
   int32 i = 10;
-  while(true)
-  {
-    while(6 * i < nextPower)
-    {
+  while (true) {
+    while (6 * i < nextPower) {
       string candidate = numberToString(i);
       sort(candidate.begin(), candidate.end());
       bool successful = true;
-      for(int32 multiplier = 2; multiplier <= 6; multiplier++)
-      {
+      for (int32 multiplier = 2; multiplier <= 6; multiplier++) {
         string sorted = numberToString(i * multiplier);
         sort(sorted.begin(), sorted.end());
 
-        if(sorted != candidate)
-        {
+        if (sorted != candidate) {
           successful = false;
           break;
         }
       }
 
-      if(successful)
-      {
+      if (successful) {
         return i;
       }
 
@@ -2206,25 +1844,21 @@ int32 problem52()
 
   throw string("A number satisfying the conditions could not be found");
 }
-int64 problem53(int32 n, int64 m)
-{
-  if(n < 1)
-  {
+int64 problem53(int32 n, int64 m) {
+  if (n < 1) {
     return 0;
   }
 
-  class FactorialMemoizer
-  {
+  class FactorialMemoizer {
   public:
-    BigInteger& operator()(int32 x)
-    {
-      if(m_cMemory.count(x) == 0)
-      {
+    BigInteger& operator()(int32 x) {
+      if (m_cMemory.count(x) == 0) {
         m_cMemory.insert(make_pair(x, factorial(BigInteger(x))));
       }
 
       return m_cMemory[x];
     }
+
   private:
     map<int32, BigInteger> m_cMemory;
   };
@@ -2234,24 +1868,20 @@ int64 problem53(int32 n, int64 m)
   int64 count = 0;
   BigInteger limit(m);
 
-  while(n > 0)
-  {
+  while (n > 0) {
     BigInteger numerator = factorialMemoizer(n);
 
     int32 left = n / 2;
     int32 right = n - (n / 2);
-    while(factorialMemoizer(left) * factorialMemoizer(right) * limit < numerator)
-    {
+    while (factorialMemoizer(left) * factorialMemoizer(right) * limit <
+           numerator) {
       left--;
       right++;
     }
 
-    if(left != right)
-    {
+    if (left != right) {
       count += right - left - 1;
-    }
-    else
-    {
+    } else {
       break;
     }
 
@@ -2260,8 +1890,7 @@ int64 problem53(int32 n, int64 m)
 
   return count;
 }
-int32 problem54()
-{
+int32 problem54() {
   static int32 cardVals[256];
 
   cardVals['2'] = 0;
@@ -2279,39 +1908,32 @@ int32 problem54()
   cardVals['A'] = 12;
 
   // Value of each rank
-  static const int32 HIGH_CARD    = 0;
-  static const int32 PAIR        = 1;
-  static const int32 TWO_PAIRS    = 2;
-  static const int32 THREE_KIND    = 3;
-  static const int32 STRAIGHT      = 4;
-  static const int32 FLUSH      = 5;
-  static const int32 FULL_HOUSE    = 6;
-  static const int32 FOUR_KIND    = 7;
-  static const int32 STRAIGHT_FLUSH  = 8;
+  static const int32 HIGH_CARD = 0;
+  static const int32 PAIR = 1;
+  static const int32 TWO_PAIRS = 2;
+  static const int32 THREE_KIND = 3;
+  static const int32 STRAIGHT = 4;
+  static const int32 FLUSH = 5;
+  static const int32 FULL_HOUSE = 6;
+  static const int32 FOUR_KIND = 7;
+  static const int32 STRAIGHT_FLUSH = 8;
 
-  class Card
-  {
+  class Card {
   public:
     int32 value;
     char suit;
 
-    Card(string card)
-    {
+    Card(string card) {
       value = cardVals[static_cast<int32>(card[0])];
       suit = card[1];
     }
 
-    bool operator<(const Card& other) const
-    {
-      return value < other.value;
-    }
+    bool operator<(const Card& other) const { return value < other.value; }
   };
 
-  class PokerHandEval
-  {
+  class PokerHandEval {
   public:
-    int32 operator()(const vector<string>& hand)
-    {
+    int32 operator()(const vector<string>& hand) {
       // This is pretty ugly. Basically we try to figure out the hand's best rank
       // (e.g. thrre of a kind) and the value of that rank (e.g. 3 queens). We also try
       // to find the best high card not part of that rank. Then we map those three values
@@ -2319,7 +1941,7 @@ int32 problem54()
       // the hand.
 
       vector<Card> cards;
-      transform(hand.begin(), hand.end(), back_inserter(cards), [] (const string& c) -> Card { return Card(c); });
+      transform(hand.begin(), hand.end(), back_inserter(cards), [](const string& c) -> Card { return Card(c); });
       sort(cards.begin(), cards.end());
 
       int32 straightStart = cards[0].value;
@@ -2331,15 +1953,12 @@ int32 problem54()
       bool hasFlush = true;
       bool hasStraight = true;
 
-      for(uint32 i = 1; i < 5; i++)
-      {
-        if(cards[i].suit != flushSuit)
-        {
+      for (uint32 i = 1; i < 5; i++) {
+        if (cards[i].suit != flushSuit) {
           hasFlush = false;
         }
 
-        if(cards[i].value != static_cast<int32>(straightStart + i))
-        {
+        if (cards[i].value != static_cast<int32>(straightStart + i)) {
           hasStraight = false;
         }
 
@@ -2357,10 +1976,8 @@ int32 problem54()
       int32 pairValue = 0;
       int32 secondPairValue = 0;
 
-      for(uint32 i = 0; i < 13; i++)
-      {
-        switch(cardCounts[i])
-        {
+      for (uint32 i = 0; i < 13; i++) {
+        switch (cardCounts[i]) {
           case 1:
             highCard = i;
             break;
@@ -2383,49 +2000,32 @@ int32 problem54()
 
       int32 rank = 0;
 
-      if(hasStraight && hasFlush)
-      {
-        rank = STRAIGHT_FLUSH;  // Royal flush is pretty irrelevent, its the best straight flush anyways
+      if (hasStraight && hasFlush) {
+        // Royal flush is pretty irrelevent, its the best straight flush anyways
+        rank = STRAIGHT_FLUSH;
         rankValue = straightStart;
-      }
-      else if(hasQuad)
-      {
+      } else if (hasQuad) {
         rank = FOUR_KIND;
-      }
-      else if(hasTriple && hasOnePair)
-      {
+      } else if (hasTriple && hasOnePair) {
         rank = FULL_HOUSE;
-      }
-      else if(hasFlush)
-      {
+      } else if (hasFlush) {
         rank = FLUSH;
-        for(auto it = cards.rbegin(); it != cards.rend(); it++)
-        {
+        for (auto it = cards.rbegin(); it != cards.rend(); it++) {
           rankValue *= 13;
           rankValue += it->value;
         }
-      }
-      else if(hasStraight)
-      {
+      } else if (hasStraight) {
         rank = STRAIGHT;
         rankValue = straightStart;
-      }
-      else if(hasTriple)
-      {
+      } else if (hasTriple) {
         rank = THREE_KIND;
-      }
-      else if(hasTwoPair)
-      {
+      } else if (hasTwoPair) {
         rank = TWO_PAIRS;
         rankValue = secondPairValue * 13 + pairValue;
-      }
-      else if(hasOnePair)
-      {
+      } else if (hasOnePair) {
         rank = PAIR;
         rankValue = pairValue;
-      }
-      else
-      {
+      } else {
         rank = HIGH_CARD;
         rankValue = 0;
       }
@@ -2442,83 +2042,68 @@ int32 problem54()
   assertFileOpened(fin);
 
   int32 p1wins = 0;
-  while(fin)
-  {
+  while (fin) {
     vector<string> p1hand;
     vector<string> p2hand;
 
     string card;
-    for(int32 i = 0; i < 5; i++)
-    {
+    for (int32 i = 0; i < 5; i++) {
       fin >> card;
       p1hand.push_back(card);
     }
 
-    for(int32 i = 0; i < 5; i++)
-    {
+    for (int32 i = 0; i < 5; i++) {
       fin >> card;
       p2hand.push_back(card);
     }
 
-    if(!fin.good() || fin.peek() == EOF)
-    {
+    if (!fin.good() || fin.peek() == EOF) {
       break;
     }
 
-    if(eval(p1hand) > eval(p2hand))
-    {
+    if (eval(p1hand) > eval(p2hand)) {
       p1wins++;
     }
   }
 
   return p1wins;
 }
-int32 problem55()
-{
+int32 problem55() {
   const int32 CHECK_MAX = 10000;
   const int32 ITERATION_LIMIT = 50;
 
   int32 count = 0;
-  for(int32 n = 1; n < CHECK_MAX; n++)
-  {
+  for (int32 n = 1; n < CHECK_MAX; n++) {
     int32 i = 0;
     bool isLychrel = true;
     BigInteger candidate(n);
-    while(i < ITERATION_LIMIT)
-    {
+    while (i < ITERATION_LIMIT) {
       candidate = candidate + candidate.reverse();
-      if(candidate.isPalindrome())
-      {
+      if (candidate.isPalindrome()) {
         isLychrel = false;
         break;
       }
       i++;
     }
 
-    if(isLychrel)
-    {
+    if (isLychrel) {
       count++;
     }
   }
 
   return count;
 }
-int32 problem56(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem56(int32 n) {
+  if (n < 1) {
     throw string("Invalid set of integers to create powers");
   }
 
   int32 maximalSum = 0;
-  for(int32 a = 1; a < n; a++)
-  {
+  for (int32 a = 1; a < n; a++) {
     BigInteger bigPower(a);
-    for(int32 b = 1; b < n; b++)
-    {
+    for (int32 b = 1; b < n; b++) {
       int32 sum = bigPower.sumOfDigits();
-      if(sum > maximalSum)
-      {
+      if (sum > maximalSum) {
         maximalSum = sum;
       }
 
@@ -2528,16 +2113,14 @@ int32 problem56(int32 n)
 
   return maximalSum;
 }
-int32 problem57(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem57(int32 n) {
+  if (n < 1) {
     return 0;
   }
 
   // Know that convergent terms for 2^(1/2) are [1; 2, ...]
-  vector<BigInteger> pi;  // convergent numerators
-  vector<BigInteger> qi;  // convergent denominators
+  vector<BigInteger> pi; // convergent numerators
+  vector<BigInteger> qi; // convergent denominators
 
   pi.push_back(BigInteger(1));
   qi.push_back(BigInteger(1));
@@ -2546,55 +2129,45 @@ int32 problem57(int32 n)
   qi.push_back(qi[0] * 2);
 
   int32 count = 0;
-  if(pi[0].numberOfDigits() > qi[0].numberOfDigits())
-  {
+  if (pi[0].numberOfDigits() > qi[0].numberOfDigits()) {
     count++;
   }
-  if(pi[1].numberOfDigits() > qi[1].numberOfDigits())
-  {
+  if (pi[1].numberOfDigits() > qi[1].numberOfDigits()) {
     count++;
   }
-  for(uint32 i = 2; i <= static_cast<uint32>(n); i++)
-  {
+  for (uint32 i = 2; i <= static_cast<uint32>(n); i++) {
     pi.push_back(pi[i - 1] * 2 + pi[i - 2]);
     qi.push_back(qi[i - 1] * 2 + qi[i - 2]);
-    if(pi[i].numberOfDigits() > qi[i].numberOfDigits())
-    {
+    if (pi[i].numberOfDigits() > qi[i].numberOfDigits()) {
       count++;
     }
   }
 
   return count;
 }
-int32 problem58(int32 n, int32 m)
-{
-  if(n < 0 || m < 1)
-  {
+int32 problem58(int32 n, int32 m) {
+  if (n < 0 || m < 1) {
     throw string("Impossible ratio of primes to non-primes");
   }
 
   int32 numberCount = 5;
   int32 primeCount = 3;
   int32 lastNumber = 9;
-  int32 incrementer = 4;  // One less than the next spiral side-length
+  int32 incrementer = 4; // One less than the next spiral side-length
 
-  while(m * primeCount >= n * numberCount)
-  {
+  while (m * primeCount >= n * numberCount) {
     lastNumber += incrementer;
-    if(isNumberPrime(lastNumber))
-    {
+    if (isNumberPrime(lastNumber)) {
       primeCount++;
     }
 
     lastNumber += incrementer;
-    if(isNumberPrime(lastNumber))
-    {
+    if (isNumberPrime(lastNumber)) {
       primeCount++;
     }
 
     lastNumber += incrementer;
-    if(isNumberPrime(lastNumber))
-    {
+    if (isNumberPrime(lastNumber)) {
       primeCount++;
     }
 
@@ -2607,32 +2180,26 @@ int32 problem58(int32 n, int32 m)
 
   return incrementer - 1;
 }
-int32 problem59()
-{
+int32 problem59() {
   ifstream fin("p59.txt");
   assertFileOpened(fin);
 
   vector<int32> characters;
   int32 temp;
-  while(fin >> temp)
-  {
+  while (fin >> temp) {
     characters.push_back(temp);
   }
 
   int32 charCounts[3][256] = {0};
-  for(uint32 i = 0; i < characters.size(); i++)
-  {
+  for (uint32 i = 0; i < characters.size(); i++) {
     charCounts[i % 3][characters[i]]++;
   }
 
   int32 highestFreq[3] = {0};
   int32 highestFreqChar[3] = {0};
-  for(uint32 i = 0; i < 3; i++)
-  {
-    for(uint32 j = 0; j < 256; j++)
-    {
-      if(charCounts[i][j] > highestFreq[i])
-      {
+  for (uint32 i = 0; i < 3; i++) {
+    for (uint32 j = 0; j < 256; j++) {
+      if (charCounts[i][j] > highestFreq[i]) {
         highestFreq[i] = charCounts[i][j];
         highestFreqChar[i] = j;
       }
@@ -2640,25 +2207,21 @@ int32 problem59()
   }
 
   int32 encryptionKeys[3];
-  for(uint32 i = 0; i < 3; i++)
-  {
+  for (uint32 i = 0; i < 3; i++) {
     // Space should be the most frequent character
     encryptionKeys[i] = highestFreqChar[i] ^ ' ';
   }
 
   int32 asciiSum = 0;
-  for(uint32 i = 0; i < characters.size(); i++)
-  {
+  for (uint32 i = 0; i < characters.size(); i++) {
     characters[i] ^= encryptionKeys[i % 3];
     asciiSum += characters[i];
   }
 
   return asciiSum;
 }
-int32 problem60(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem60(int32 n) {
+  if (n < 2) {
     throw string("Need at least two numbers to concatenate");
   }
 
@@ -2668,8 +2231,7 @@ int32 problem60(int32 n)
   vector<bool> isPrime;
   sieveOfErotosthenes(MAX_PRIME_BOUND, isPrime);
 
-  struct Node
-  {
+  struct Node {
     int32 val;
     int32 power;
     set<int32> adjacencies;
@@ -2677,15 +2239,12 @@ int32 problem60(int32 n)
 
   int32 power = 10;
   vector<Node> nodes;
-  for(int32 i = 0; i < static_cast<int32>(isPrime.size()); i++)
-  {
-    if(i >= power)
-    {
+  for (int32 i = 0; i < static_cast<int32>(isPrime.size()); i++) {
+    if (i >= power) {
       power *= 10;
     }
 
-    if(isPrime[i])
-    {
+    if (isPrime[i]) {
       Node node;
       node.power = power;
       node.val = i;
@@ -2693,38 +2252,31 @@ int32 problem60(int32 n)
     }
   }
 
-  for(uint32 i = 0; i < nodes.size() - 1; i++)
-  {
-    for(uint32 j = i + 1; j < nodes.size(); j++)
-    {
-      if(isNumberPrime(nodes[j].val * nodes[i].power + nodes[i].val) && isNumberPrime(nodes[i].val * nodes[j].power + nodes[j].val))
-      {
+  for (uint32 i = 0; i < nodes.size() - 1; i++) {
+    for (uint32 j = i + 1; j < nodes.size(); j++) {
+      if (isNumberPrime(nodes[j].val * nodes[i].power + nodes[i].val) &&
+          isNumberPrime(nodes[i].val * nodes[j].power + nodes[j].val)) {
         nodes[i].adjacencies.insert(j);
         nodes[j].adjacencies.insert(i);
       }
     }
   }
 
-  // Things tend to have a lot of adjacencies (barring 2 and 5) so this is pretty pointless.
-  #if 0
+// Things tend to have a lot of adjacencies (barring 2 and 5) so this is pretty pointless.
+#if 0
   auto it = remove_if(nodes.begin(), nodes.end(), [n](Node& node) -> bool {
     return node.adjacencies.size() < static_cast<uint32>(n - 1);
   });
   nodes.erase(it, nodes.end());
 
   // Recompute indices of adjacencies
-  #endif
+#endif
 
-  class KNFinder
-  {
+  class KNFinder {
   public:
-    KNFinder(const vector<Node>& graph) :
-      m_vcGraph(graph)
-    {
-    }
+    KNFinder(const vector<Node>& graph) : m_vcGraph(graph) {}
 
-    vector<set<int32>> operator()(int32 n)
-    {
+    vector<set<int32>> operator()(int32 n) {
       m_nN = n;
       m_vsResults = vector<set<int32>>();
 
@@ -2739,28 +2291,22 @@ int32 problem60(int32 n)
     int32 m_nN;
     vector<set<int32>> m_vsResults;
 
-    void recurse(set<int32>& candidate, int32 minIx)
-    {
-      if(candidate.size() == static_cast<uint32>(m_nN))
-      {
+    void recurse(set<int32>& candidate, int32 minIx) {
+      if (candidate.size() == static_cast<uint32>(m_nN)) {
         m_vsResults.push_back(candidate);
         return;
       }
 
-      for(uint32 i = minIx; i < m_vcGraph.size(); i++)
-      {
+      for (uint32 i = minIx; i < m_vcGraph.size(); i++) {
         bool isValid = true;
-        for(int32 ix : candidate)
-        {
-          if(m_vcGraph[i].adjacencies.count(ix) == 0)
-          {
+        for (int32 ix : candidate) {
+          if (m_vcGraph[i].adjacencies.count(ix) == 0) {
             isValid = false;
             break;
           }
         }
 
-        if(isValid)
-        {
+        if (isValid) {
           candidate.insert(i);
           recurse(candidate, i + 1);
           candidate.erase(i);
@@ -2772,173 +2318,136 @@ int32 problem60(int32 n)
   KNFinder knFinder(nodes);
   vector<set<int32>> validSets = knFinder(n);
 
-  if(validSets.size() == 0)
-  {
+  if (validSets.size() == 0) {
     throw string("Prime upper bound not set high enough to find a valid prime family");
   }
 
-  sort
-  (
-    validSets.begin(),
-    validSets.end(),
-    [&nodes] (const set<int32>& x, const set<int32>& y) -> bool
-    {
-      int32 xSum = 0;
-      for(int32 ix : x)
-      {
-        xSum += nodes[ix].val;
-      }
-
-      int32 ySum = 0;
-      for(int32 ix : y)
-      {
-        ySum += nodes[ix].val;
-      }
-
-      return xSum < ySum;
+  sort(validSets.begin(), validSets.end(), [&nodes](const set<int32>& x, const set<int32>& y) -> bool {
+    int32 xSum = 0;
+    for (int32 ix : x) {
+      xSum += nodes[ix].val;
     }
-  );
+
+    int32 ySum = 0;
+    for (int32 ix : y) {
+      ySum += nodes[ix].val;
+    }
+
+    return xSum < ySum;
+  });
 
   int32 sum = 0;
-  for(int32 ix : validSets[0])
-  {
+  for (int32 ix : validSets[0]) {
     sum += nodes[ix].val;
   }
   return sum;
 }
-int32 problem61()
-{
+int32 problem61() {
   int32 i;
 
   vector<int32> triangleNumbers;
   i = 0;
-  while(i * (i + 1) / 2 < 1000)
-  {
+  while (i * (i + 1) / 2 < 1000) {
     i++;
   }
-  while(i * (i + 1) / 2 < 10000)
-  {
+  while (i * (i + 1) / 2 < 10000) {
     triangleNumbers.push_back(i * (i + 1) / 2);
     i++;
   }
 
   vector<int32> squareNumbers;
   i = 0;
-  while(i * i < 1000)
-  {
+  while (i * i < 1000) {
     i++;
   }
-  while(i * i < 10000)
-  {
+  while (i * i < 10000) {
     squareNumbers.push_back(i * i);
     i++;
   }
 
   vector<int32> pentagonalNumbers;
   i = 0;
-  while(i * (3 * i - 1) / 2 < 1000)
-  {
+  while (i * (3 * i - 1) / 2 < 1000) {
     i++;
   }
-  while(i * (3 * i - 1) / 2 < 10000)
-  {
+  while (i * (3 * i - 1) / 2 < 10000) {
     pentagonalNumbers.push_back(i * (3 * i - 1) / 2);
     i++;
   }
 
   vector<int32> hexagonalNumbers;
   i = 0;
-  while(i * (2 * i - 1) < 1000)
-  {
+  while (i * (2 * i - 1) < 1000) {
     i++;
   }
-  while(i * (2 * i - 1) < 10000)
-  {
+  while (i * (2 * i - 1) < 10000) {
     hexagonalNumbers.push_back(i * (2 * i - 1));
     i++;
   }
 
   vector<int32> heptagonalNumbers;
   i = 0;
-  while(i * (5 * i - 3) / 2 < 1000)
-  {
+  while (i * (5 * i - 3) / 2 < 1000) {
     i++;
   }
-  while(i * (5 * i - 3) / 2 < 10000)
-  {
+  while (i * (5 * i - 3) / 2 < 10000) {
     heptagonalNumbers.push_back(i * (5 * i - 3) / 2);
     i++;
   }
 
   vector<int32> octagonalNumbers;
   i = 0;
-  while(i * (3 * i - 2) < 1000)
-  {
+  while (i * (3 * i - 2) < 1000) {
     i++;
   }
-  while(i * (3 * i - 2) < 10000)
-  {
+  while (i * (3 * i - 2) < 10000) {
     octagonalNumbers.push_back(i * (3 * i - 2));
     i++;
   }
 
-  static const int32 TYPE_TRIANGLE    = 0;
-  static const int32 TYPE_SQUARE      = 1;
-  static const int32 TYPE_PENTAGONAL    = 2;
-  static const int32 TYPE_HEXAGONAL    = 3;
-  static const int32 TYPE_HEPTAGONAL    = 4;
-  static const int32 TYPE_OCTAGONAL    = 5;
+  static const int32 TYPE_TRIANGLE = 0;
+  static const int32 TYPE_SQUARE = 1;
+  static const int32 TYPE_PENTAGONAL = 2;
+  static const int32 TYPE_HEXAGONAL = 3;
+  static const int32 TYPE_HEPTAGONAL = 4;
+  static const int32 TYPE_OCTAGONAL = 5;
 
   vector<vector<pair<int32, int32>>> graph(100);
-  for(int32 n : triangleNumbers)
-  {
+  for (int32 n : triangleNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_TRIANGLE, n % 100));
   }
-  for(int32 n : squareNumbers)
-  {
+  for (int32 n : squareNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_SQUARE, n % 100));
   }
-  for(int32 n : pentagonalNumbers)
-  {
+  for (int32 n : pentagonalNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_PENTAGONAL, n % 100));
   }
-  for(int32 n : hexagonalNumbers)
-  {
+  for (int32 n : hexagonalNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_HEXAGONAL, n % 100));
   }
-  for(int32 n : heptagonalNumbers)
-  {
+  for (int32 n : heptagonalNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_HEPTAGONAL, n % 100));
   }
-  for(int32 n : octagonalNumbers)
-  {
+  for (int32 n : octagonalNumbers) {
     graph[n / 100].push_back(make_pair(TYPE_OCTAGONAL, n % 100));
   }
 
-  class SpecialCycleFinder
-  {
+  class SpecialCycleFinder {
   public:
-    SpecialCycleFinder(const vector<vector<pair<int32, int32>>>& graph) :
-      m_vcGraph(graph)
-    {
-    }
+    SpecialCycleFinder(const vector<vector<pair<int32, int32>>>& graph)
+        : m_vcGraph(graph) {}
 
-    vector<int32> operator()()
-    {
+    vector<int32> operator()() {
       set<int32> usedTypes;
       usedTypes.insert(TYPE_TRIANGLE);
 
       vector<int32> result;
 
-      for(int32 i = 0; i < 100; i++)
-      {
-        for(auto adjacency : m_vcGraph[i])
-        {
-          if(adjacency.first == TYPE_TRIANGLE)
-          {
+      for (int32 i = 0; i < 100; i++) {
+        for (auto adjacency : m_vcGraph[i]) {
+          if (adjacency.first == TYPE_TRIANGLE) {
             result.push_back(i * 100 + adjacency.second);
-            if(recurse(result, usedTypes))
-            {
+            if (recurse(result, usedTypes)) {
               return result;
             }
             result.pop_back();
@@ -2952,21 +2461,16 @@ int32 problem61()
   private:
     const vector<vector<pair<int32, int32>>>& m_vcGraph;
 
-    bool recurse(vector<int32>& result, set<int32>& usedTypes)
-    {
-      if(result.size() == 6 && result.front() / 100 == result.back() % 100)
-      {
+    bool recurse(vector<int32>& result, set<int32>& usedTypes) {
+      if (result.size() == 6 && result.front() / 100 == result.back() % 100) {
         return true;
       }
 
-      for(auto adjacency : m_vcGraph[result.back() % 100])
-      {
-        if(usedTypes.count(adjacency.first) == 0)
-        {
+      for (auto adjacency : m_vcGraph[result.back() % 100]) {
+        if (usedTypes.count(adjacency.first) == 0) {
           usedTypes.insert(adjacency.first);
           result.push_back(result.back() % 100 * 100 + adjacency.second);
-          if(recurse(result, usedTypes))
-          {
+          if (recurse(result, usedTypes)) {
             return true;
           }
           result.pop_back();
@@ -2981,34 +2485,27 @@ int32 problem61()
   SpecialCycleFinder cycleFinder(graph);
   return vectorSum(cycleFinder());
 }
-string problem62(int32 n)
-{
-  if(n < 1)
-  {
+string problem62(int32 n) {
+  if (n < 1) {
     throw string("Must be at least one permutation");
-  }
-  else if(n == 1)
-  {
+  } else if (n == 1) {
     return "0";
   }
 
   map<string, pair<int32, string>> cubes;
   int32 i = 0;
-  while(true)
-  {
+  while (true) {
     BigInteger x(i);
     string cube = numberToString(x * x * x);
     string sorted = cube;
     sort(sorted.begin(), sorted.end());
     auto it = cubes.find(cube);
-    if(it == cubes.end())
-    {
+    if (it == cubes.end()) {
       it = cubes.insert(make_pair(sorted, make_pair(0, cube))).first;
     }
 
     it->second.first++;
-    if(it->second.first == n)
-    {
+    if (it->second.first == n) {
       return it->second.second;
     }
 
@@ -3017,8 +2514,7 @@ string problem62(int32 n)
 
   throw string("Unable to find enough permutations of a cube that are cube as well");
 }
-int32 problem63()
-{
+int32 problem63() {
   // Numbers greater than 9 cannot work since 10^1 is two digits, 10^2 is three digits,
   // and so on. We can figure out the numbers that work by calculating powers of 1 digit numbers.
   // Starting from one, once a number's power does not have the correct amount of digits, it will
@@ -3026,12 +2522,10 @@ int32 problem63()
   // only get k <= 9 times greater.
 
   set<BigInteger> successes;
-  for(int32 i = 1; i <= 9; i++)
-  {
+  for (int32 i = 1; i <= 9; i++) {
     BigInteger n(i);
     BigInteger bound(1);
-    while(n >= bound)
-    {
+    while (n >= bound) {
       successes.insert(n);
       n *= i;
       bound *= 10;
@@ -3040,27 +2534,22 @@ int32 problem63()
 
   return successes.size();
 }
-int32 problem64(int32 n)
-{
-  if(n <= 1)
-  {
+int32 problem64(int32 n) {
+  if (n <= 1) {
     return 0;
   }
 
   set<int32> perfectSquares;
   int32 i = 2;
-  while(i * i <= n)
-  {
+  while (i * i <= n) {
     perfectSquares.insert(i * i);
     i++;
   }
 
   int32 count = 0;
   int32 root = 1;
-  for(int32 x = 2; x <= n; x++)
-  {
-    if(x == (root + 1) * (root + 1))
-    {
+  for (int32 x = 2; x <= n; x++) {
+    if (x == (root + 1) * (root + 1)) {
       root++;
       continue;
     }
@@ -3068,11 +2557,9 @@ int32 problem64(int32 n)
     int32 a = root;
     int32 b = 1;
     set<pair<int32, int32>> seen;
-    while(true)
-    {
+    while (true) {
       pair<int32, int32> temp = make_pair(a, b);
-      if(seen.count(temp) == 1)
-      {
+      if (seen.count(temp) == 1) {
         count += seen.size() % 2 == 1 ? 1 : 0;
         break;
       }
@@ -3086,45 +2573,35 @@ int32 problem64(int32 n)
 
   return count;
 }
-int32 problem65(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem65(int32 n) {
+  if (n < 1) {
     throw string("Cannot have a non-positive indexed convergent of e");
   }
 
   vector<int32> ai(n);
   ai[0] = 2;
-  for(int32 i = 1; i < n; i++)
-  {
-    if(i % 3 == 2)
-    {
+  for (int32 i = 1; i < n; i++) {
+    if (i % 3 == 2) {
       ai[i] = (i + 1) / 3 * 2;
-    }
-    else
-    {
+    } else {
       ai[i] = 1;
     }
   }
 
-  vector<BigInteger> pi;  // convergent numerators
+  vector<BigInteger> pi; // convergent numerators
   pi.push_back(BigInteger(1) * ai[0]);
-  if(n > 1)
-  {
+  if (n > 1) {
     pi.push_back(pi[0] * ai[1] + 1);
   }
 
-  for(int32 i = 2; i < n; i++)
-  {
+  for (int32 i = 2; i < n; i++) {
     pi.push_back(pi[i - 1] * ai[i] + pi[i - 2]);
   }
 
   return pi.back().sumOfDigits();
 }
-int32 problem66(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem66(int32 n) {
+  if (n < 2) {
     throw string("Cannot find minimum of an empty set");
   }
 
@@ -3134,10 +2611,8 @@ int32 problem66(int32 n)
   // Minimal solution in x is found by getting a specific convergent
   // for the continued fraction of the square root of D.
   int32 root = 1;
-  for(int32 i = 2; i <= n; i++)
-  {
-    if(i == (root + 1) * (root + 1))
-    {
+  for (int32 i = 2; i <= n; i++) {
+    if (i == (root + 1) * (root + 1)) {
       root++;
       continue;
     }
@@ -3148,8 +2623,7 @@ int32 problem66(int32 n)
     int32 s = root;
     int32 t = 1;
 
-    while(ai.back() != ai.front() * 2)
-    {
+    while (ai.back() != ai.front() * 2) {
       t = (i - s * s) / t;
       ai.push_back((s + root) / t);
       s = ai.back() * t - s;
@@ -3160,33 +2634,25 @@ int32 problem66(int32 n)
     pi.push_back(BigInteger(ai[0] * ai[1] + 1));
 
     int32 r = ai.size() - 2;
-    if(r % 2 == 1)
-    {
-      for(int32 j = 2; j <= r; j++)
-      {
+    if (r % 2 == 1) {
+      for (int32 j = 2; j <= r; j++) {
         pi.push_back(pi[j - 1] * ai[j] + pi[j - 2]);
       }
 
-      if(pi[r] > largestX)
-      {
+      if (pi[r] > largestX) {
         largestX = pi[r];
         maxD = i;
       }
-    }
-    else
-    {
-      for(int32 j = 2; j <= r + 1; j++)
-      {
+    } else {
+      for (int32 j = 2; j <= r + 1; j++) {
         pi.push_back(pi[j - 1] * ai[j] + pi[j - 2]);
       }
 
-      for(int32 j = 1; j < r + 1; j++)
-      {
+      for (int32 j = 1; j < r + 1; j++) {
         pi.push_back(pi[j + r] * ai[j] + pi[j + r - 1]);
       }
 
-      if(pi[2 * r + 1] > largestX)
-      {
+      if (pi[2 * r + 1] > largestX) {
         largestX = pi[2 * r + 1];
         maxD = i;
       }
@@ -3195,58 +2661,45 @@ int32 problem66(int32 n)
 
   return maxD;
 }
-int32 problem67()
-{
+int32 problem67() {
   ifstream fin("p67.txt");
   assertFileOpened(fin);
 
   vector<vector<int32>> triangle;
   string temp;
-  while(getline(fin, temp))
-  {
+  while (getline(fin, temp)) {
     triangle.push_back(vector<int32>());
 
     stringstream ss;
     ss << temp;
     int32 number;
-    while(ss >> number)
-    {
+    while (ss >> number) {
       triangle.back().push_back(number);
     }
   }
 
-  for(uint32 i = 1; i < triangle.size(); i++)
-  {
-    for(uint32 j = 0; j <= i; j++)
-    {
-      if(j == 0)
-      {
+  for (uint32 i = 1; i < triangle.size(); i++) {
+    for (uint32 j = 0; j <= i; j++) {
+      if (j == 0) {
         triangle[i][0] += triangle[i - 1][0];
-      }
-      else if(j == i)
-      {
+      } else if (j == i) {
         triangle[i][j] += triangle[i - 1][j - 1];
-      }
-      else
-      {
+      } else {
         triangle[i][j] += maxVal(triangle[i - 1][j - 1], triangle[i - 1][j]);
       }
     }
   }
 
   int32 max = triangle.back()[0];
-  for(uint32 i = 1; i < triangle.back().size(); i++)
-  {
-    if(triangle.back()[i] > max)
-    {
+  for (uint32 i = 1; i < triangle.back().size(); i++) {
+    if (triangle.back()[i] > max) {
       max = triangle.back()[i];
     }
   }
 
   return max;
 }
-string problem68()
-{
+string problem68() {
   // It's easy to permute every possible magic 5-gon filling and then
   // check if it works. Each permutation has 4 other equivalent permutations
   // so we can represent the 5-gon as a 10 element array and assume the string
@@ -3263,60 +2716,48 @@ string problem68()
   int32 ring[10] = {6, 5, 10, 4, 9, 3, 8, 2, 7, 1};
 
   string max = "0";
-  do
-  {
-    if(ring[1] == 10)
-    {
+  do {
+    if (ring[1] == 10) {
       continue;
     }
 
-    do
-    {
-      if(ring[3] == 10 || ring[5] == 10 || ring[7] == 10 || ring[9] == 10)
-      {
+    do {
+      if (ring[3] == 10 || ring[5] == 10 || ring[7] == 10 || ring[9] == 10) {
         continue;
       }
 
-      if(ring[2] < ring[0] || ring[4] < ring[0] || ring[6] < ring[0] || ring[8] < ring[0])
-      {
+      if (ring[2] < ring[0] || ring[4] < ring[0] || ring[6] < ring[0] ||
+          ring[8] < ring[0]) {
         continue;
       }
 
       int32 sum = ring[0] + ring[1] + ring[3];
       bool sumsGood = true;
-      for(int32 i = 2; i < 10; i += 2)
-      {
-        if(ring[i] + ring[i + 1] + ring[(i + 3) % 10] != sum)
-        {
+      for (int32 i = 2; i < 10; i += 2) {
+        if (ring[i] + ring[i + 1] + ring[(i + 3) % 10] != sum) {
           sumsGood = false;
           break;
         }
       }
 
-      if(!sumsGood)
-      {
+      if (!sumsGood) {
         continue;
       }
 
       stringstream ss;
-      for(int32 i = 0; i < 10; i += 2)
-      {
+      for (int32 i = 0; i < 10; i += 2) {
         ss << ring[i] << ring[i + 1] << ring[(i + 3) % 10];
       }
 
-      if(ss.str() > max)
-      {
+      if (ss.str() > max) {
         max = ss.str();
       }
-    }
-    while(prev_permutation(ring + 2, ring + 10));
-  }
-  while(max == "0" && prev_permutation(ring, ring + 10));
+    } while (prev_permutation(ring + 2, ring + 10));
+  } while (max == "0" && prev_permutation(ring, ring + 10));
 
   return max;
 }
-int32 problem69(int32 n)
-{
+int32 problem69(int32 n) {
   // Consider a prime factorization of x and it's ratio x/phi(x) = r.
   // The resulting ratio of x multiplied by one of its prime factors is
   // no different. Thus, consider x with only unique prime factors. Changing
@@ -3326,22 +2767,19 @@ int32 problem69(int32 n)
   // value of x that maximizes its ratio is the product of the most sequential
   // primes beginning at 2 that does not exceed n.
 
-  if(n < 1)
-  {
-    throw string("The phi function must be well defined for values of within the interval and the interval must be non-empty");
+  if (n < 1) {
+    throw string("The phi function must be well defined for values of within "
+                 "the interval and the interval must be non-empty");
   }
 
-  if(n == 1)
-  {
+  if (n == 1) {
     return 1;
   }
 
   int32 product = 2;
   int32 i = 3;
-  while(product * i <= n)
-  {
-    if(isNumberPrime(i))
-    {
+  while (product * i <= n) {
+    if (isNumberPrime(i)) {
       product *= i;
     }
 
@@ -3350,66 +2788,53 @@ int32 problem69(int32 n)
 
   return product;
 }
-int32 problem70(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem70(int32 n) {
+  if (n < 2) {
     throw string("Cannot compute minimum of an empty set");
   }
 
-  int64 min = 10;    // Ratio should never exceed 10 since the numerator
-  int64 minPhi = 1;  // and denominator will have the same number of digits
+  int64 min = 10;   // Ratio should never exceed 10 since the numerator
+  int64 minPhi = 1; // and denominator will have the same number of digits
   bool found = false;
 
   // Biggest phi(i) can be is ceil(sqrt(i) - 1)^2. Once the value of this creates
   // a ratio bigger than one we have already found, there is no way we can find a
   // better ratio, if we start with the largest numbers first.
   int32 root = sqrt(n);
-  for(int32 i = n - 1; i >= 2; i--)
-  {
-    if(root * root >= i)
-    {
+  for (int32 i = n - 1; i >= 2; i--) {
+    if (root * root >= i) {
       root--;
     }
 
-    if(root * root * min < minPhi * i)
-    {
+    if (root * root * min < minPhi * i) {
       break;
     }
 
     int32 phi = i;
     int32 x = i;
 
-    if(x % 2 == 0)
-    {
+    if (x % 2 == 0) {
       phi /= 2;
       x /= 2;
     }
-    if(phi * min <= minPhi * i)
-    {
+    if (phi * min <= minPhi * i) {
       continue;
     }
-    while(x % 2 == 0)
-    {
+    while (x % 2 == 0) {
       x /= 2;
     }
 
     int32 divisor = 3;
-    while(divisor * divisor <= x)
-    {
-      if(x % divisor == 0)
-      {
+    while (divisor * divisor <= x) {
+      if (x % divisor == 0) {
         phi /= divisor;
         phi *= divisor - 1;
-        if(phi * min <= minPhi * i)
-        {
+        if (phi * min <= minPhi * i) {
           break;
         }
-        do
-        {
+        do {
           x /= divisor;
-        }
-        while(x % divisor == 0);
+        } while (x % divisor == 0);
       }
 
       divisor += 2;
@@ -3418,21 +2843,18 @@ int32 problem70(int32 n)
     phi /= x;
     phi *= x - 1;
 
-    if(phi == i - 1)
-    {
+    if (phi == i - 1) {
       continue;
     }
 
-    if(minPhi * i < min * phi)
-    {
+    if (minPhi * i < min * phi) {
       string num = numberToString(i);
       string denom = numberToString(phi);
 
       sort(num.begin(), num.end());
       sort(denom.begin(), denom.end());
 
-      if(num == denom)
-      {
+      if (num == denom) {
         min = i;
         minPhi = phi;
         found = true;
@@ -3440,33 +2862,27 @@ int32 problem70(int32 n)
     }
   }
 
-  if(!found)
-  {
+  if (!found) {
     throw string("There is no number whose totient value is a permutation of itself in the domain");
   }
 
   return static_cast<int32>(min);
 }
-int32 problem71(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem71(int32 n) {
+  if (n < 1) {
     throw string("Denominator should be able to be positive");
   }
 
   int64 bestNum = 0;
   int64 bestDenom = 1;
 
-  for(int32 i = 2; i <= n; i++)
-  {
+  for (int32 i = 2; i <= n; i++) {
     int32 candidateNum = 3 * i / 7;
-    if(i % 7 == 0)
-    {
+    if (i % 7 == 0) {
       candidateNum -= 1;
     }
 
-    if(candidateNum * bestDenom > bestNum * i)
-    {
+    if (candidateNum * bestDenom > bestNum * i) {
       bestNum = candidateNum;
       bestDenom = i;
     }
@@ -3474,10 +2890,8 @@ int32 problem71(int32 n)
 
   return bestNum / gcd(bestNum, bestDenom);
 }
-int64 problem72(int64 n)
-{
-  if(n < 1)
-  {
+int64 problem72(int64 n) {
+  if (n < 1) {
     throw string("Denominator should be able to be positive");
   }
 
@@ -3486,20 +2900,15 @@ int64 problem72(int64 n)
 
   return vectorSum(phi) - 1; // Minus 1 from phi(1) which should not be included
 }
-int32 problem73(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem73(int32 n) {
+  if (n < 1) {
     throw string("Denominator should be able to be positive");
   }
 
   int32 count = 0;
-  for(int32 d = 1; d <= n; d++)
-  {
-    for(int32 i = d / 3 + 1; i * 2 < d; i++)
-    {
-      if(gcd(i, d) == 1)
-      {
+  for (int32 d = 1; d <= n; d++) {
+    for (int32 i = d / 3 + 1; i * 2 < d; i++) {
+      if (gcd(i, d) == 1) {
         count++;
       }
     }
@@ -3507,17 +2916,14 @@ int32 problem73(int32 n)
 
   return count;
 }
-int32 problem74(int32 n, int32 m)
-{
-  if(n < 1)
-  {
+int32 problem74(int32 n, int32 m) {
+  if (n < 1) {
     return 0;
   }
 
   int32 fact[10];
   fact[0] = 1;
-  for(int32 i = 1; i < 10; i++)
-  {
+  for (int32 i = 1; i < 10; i++) {
     fact[i] = fact[i - 1] * i;
   }
 
@@ -3543,38 +2949,31 @@ int32 problem74(int32 n, int32 m)
   lengths[45362] = 2;
 
   vector<int32> chain;
-  for(int32 i = 0; i < n; i++)
-  {
-    if(lengths.count(i) == 0)
-    {
+  for (int32 i = 0; i < n; i++) {
+    if (lengths.count(i) == 0) {
       int32 x = i;
       unordered_map<int32, int32>::iterator it;
-      do
-      {
+      do {
         chain.push_back(x);
 
         int32 sum = 0;
-        while(x > 0)
-        {
+        while (x > 0) {
           sum += fact[x % 10];
           x /= 10;
         }
         x = sum;
 
-        if(x == chain.back())
-        {
+        if (x == chain.back()) {
           it = lengths.insert(make_pair(x, 1)).first;
           chain.pop_back();
           break;
         }
 
         it = lengths.find(x);
-      }
-      while(it == lengths.end());
+      } while (it == lengths.end());
 
       int32 length = it->second;
-      while(!chain.empty())
-      {
+      while (!chain.empty()) {
         lengths.insert(make_pair(chain.back(), length + 1));
         length++;
         chain.pop_back();
@@ -3583,30 +2982,23 @@ int32 problem74(int32 n, int32 m)
   }
 
   int32 count = 0;
-  for(auto it = lengths.begin(); it != lengths.end(); it++)
-  {
-    if(it->second == m && it->first < n)
-    {
+  for (auto it = lengths.begin(); it != lengths.end(); it++) {
+    if (it->second == m && it->first < n) {
       count++;
     }
   }
   return count;
 }
-int32 problem75(int32 n)
-{
+int32 problem75(int32 n) {
   // Use Euclid's formula to generate all integer sided right triangles
   map<int64, int64> solutionCount;
-  for(int64 s = 1; 4 * s < n; s++)
-  {
+  for (int64 s = 1; 4 * s < n; s++) {
     int64 t = s + 1;
-    while(4 * s * t < n)
-    {
-      if(gcd(s, t) == 1)
-      {
+    while (4 * s * t < n) {
+      if (gcd(s, t) == 1) {
         int64 perimeter = 2 * t * (s + t);
         int64 k = 1;
-        while(k * perimeter < n)
-        {
+        while (k * perimeter < n) {
           solutionCount[k * perimeter]++;
           k++;
         }
@@ -3617,20 +3009,16 @@ int32 problem75(int32 n)
   }
 
   int32 count = 0;
-  for(auto it = solutionCount.begin(); it != solutionCount.end(); it++)
-  {
-    if(it->second == 1)
-    {
+  for (auto it = solutionCount.begin(); it != solutionCount.end(); it++) {
+    if (it->second == 1) {
       count++;
     }
   }
 
   return count;
 }
-int64 problem76(int32 n)
-{
-  if(n < 2)
-  {
+int64 problem76(int32 n) {
+  if (n < 2) {
     return 0;
   }
 
@@ -3640,55 +3028,38 @@ int64 problem76(int32 n)
   // values by using the relation count(k, x) = count(k - x, x) + count(k, x - 1).
   // Thus, we just need to find the value of count(n, n - 1), since we do not allow
   // "n" to be one of the sums.
-  class Counter
-  {
+  class Counter {
   public:
-    Counter(int32 max) :
-      m_nSize(max + 1),
-      m_pCounts(new int64[(max + 1) * (max + 1)]),
-      m_pCalced(new bool[(max + 1) * (max + 1)])
-    {
-      for(int32 i = 0; i < m_nSize; i++)
-      {
-        for(int32 j = 0; j < m_nSize; j++)
-        {
+    Counter(int32 max)
+        : m_nSize(max + 1), m_pCounts(new int64[(max + 1) * (max + 1)]), m_pCalced(new bool[(max + 1) * (max + 1)]) {
+      for (int32 i = 0; i < m_nSize; i++) {
+        for (int32 j = 0; j < m_nSize; j++) {
           m_pCalced[m_nSize * j + i] = false;
         }
       }
     }
 
-    ~Counter()
-    {
+    ~Counter() {
       delete[] m_pCounts;
       delete[] m_pCalced;
     }
 
-    int64 operator()(int32 sum, int32 maxTerm)
-    {
-      if(m_pCalced[m_nSize * sum + maxTerm])
-      {
+    int64 operator()(int32 sum, int32 maxTerm) {
+      if (m_pCalced[m_nSize * sum + maxTerm]) {
         return m_pCounts[m_nSize * sum + maxTerm];
-      }
-      else if(maxTerm == 0)
-      {
+      } else if (maxTerm == 0) {
         m_pCounts[m_nSize * sum + maxTerm] = 0;
         m_pCalced[m_nSize * sum + maxTerm] = true;
         return 0;
-      }
-      else if(sum == 0)
-      {
+      } else if (sum == 0) {
         m_pCounts[m_nSize * sum + maxTerm] = 1;
         m_pCalced[m_nSize * sum + maxTerm] = true;
         return 1;
-      }
-      else if(maxTerm > sum)
-      {
+      } else if (maxTerm > sum) {
         m_pCounts[m_nSize * sum + maxTerm] = (*this)(sum, maxTerm - 1);
         m_pCalced[m_nSize * sum + maxTerm] = true;
         return m_pCounts[m_nSize * sum + maxTerm];
-      }
-      else
-      {
+      } else {
         m_pCounts[m_nSize * sum + maxTerm] = (*this)(sum - maxTerm, maxTerm) + (*this)(sum, maxTerm - 1);
         m_pCalced[m_nSize * sum + maxTerm] = true;
         return m_pCounts[m_nSize * sum + maxTerm];
@@ -3696,22 +3067,21 @@ int64 problem76(int32 n)
     }
 
   private:
-    const int32 m_nSize;    // Max index of counts
-    int64* m_pCounts;      // Columns for max sum term, rows for sum value
+    const int32 m_nSize; // Max index of counts
+    int64* m_pCounts;    // Columns for max sum term, rows for sum value
     bool* m_pCalced;
   };
 
   return Counter(n)(n, n - 1);
 }
-int32 problem77(int32 n)
-{
-  if(n < 1)
-  {
+int32 problem77(int32 n) {
+  if (n < 1) {
     return 4;
   }
 
   // Same strategy as problem 76 but we can only subtract primes from the sum.
-  // Let table[x][y] be the number of ways to sum to x where terms do not exceed y.
+  // Let table[x][y] be the number of ways to sum to x where terms do not exceed
+  // y.
   vector<vector<int32>> table;
   table.push_back(vector<int32>());
   table.push_back(vector<int32>());
@@ -3725,10 +3095,8 @@ int32 problem77(int32 n)
   isPrime.push_back(false);
 
   int32 sum = 2;
-  while(true)
-  {
-    for(int32 i = 0; i < sum; i++)
-    {
+  while (true) {
+    for (int32 i = 0; i < sum; i++) {
       table[i].push_back(table[i].back());
     }
 
@@ -3736,20 +3104,15 @@ int32 problem77(int32 n)
 
     table.push_back(vector<int32>());
     table.back().push_back(0);
-    for(int32 i = 1; i <= sum; i++)
-    {
-      if(isPrime[i])
-      {
+    for (int32 i = 1; i <= sum; i++) {
+      if (isPrime[i]) {
         table.back().push_back(table[sum - i][i] + table[sum][i - 1]);
-      }
-      else
-      {
+      } else {
         table.back().push_back(table[sum][i - 1]);
       }
     }
 
-    if(table[sum][sum] - (isPrime[sum] ? 1 : 0) > n)
-    {
+    if (table[sum][sum] - (isPrime[sum] ? 1 : 0) > n) {
       break;
     }
 
@@ -3758,18 +3121,12 @@ int32 problem77(int32 n)
 
   return sum;
 }
-int32 problem78(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem78(int32 n) {
+  if (n < 0) {
     n *= -1;
-  }
-  else if(n == 0)
-  {
+  } else if (n == 0) {
     return -1;
-  }
-  else if(n == 1)
-  {
+  } else if (n == 1) {
     return 0;
   }
 
@@ -3778,48 +3135,41 @@ int32 problem78(int32 n)
   p.push_back(1);
 
   int32 number = 0;
-  while(p[number] != 0)
-  {
+  while (p[number] != 0) {
     number++;
 
     int64 sum = 0;
 
     int32 k = 1;
-    while(k * (3 * k - 1) / 2 <= number)
-    {
+    while (k * (3 * k - 1) / 2 <= number) {
       sum += p[number - k * (3 * k - 1) / 2];
       k += 2;
     }
 
     k--;
-    if(k * (3 * k - 1) / 2 <= number)
-    {
+    if (k * (3 * k - 1) / 2 <= number) {
       sum -= p[number - k * (3 * k - 1) / 2];
     }
 
     k -= 2;
-    while(k > 0)
-    {
+    while (k > 0) {
       sum -= p[number - k * (3 * k - 1) / 2];
       k -= 2;
     }
 
     k = -1;
-    while(k * (3 * k - 1) / 2 <= number)
-    {
+    while (k * (3 * k - 1) / 2 <= number) {
       sum += p[number - k * (3 * k - 1) / 2];
       k -= 2;
     }
 
     k++;
-    if(k * (3 * k - 1) / 2 <= number)
-    {
+    if (k * (3 * k - 1) / 2 <= number) {
       sum -= p[number - k * (3 * k - 1) / 2];
     }
 
     k += 2;
-    while(k < 0)
-    {
+    while (k < 0) {
       sum -= p[number - k * (3 * k - 1) / 2];
       k += 2;
     }
@@ -3829,32 +3179,25 @@ int32 problem78(int32 n)
 
   return number;
 }
-string problem79()
-{
+string problem79() {
   ifstream fin("p79.txt");
 
   assertFileOpened(fin);
 
   vector<string> codes;
   string temp;
-  while(fin >> temp)
-  {
+  while (fin >> temp) {
     reverse(temp.begin(), temp.end());
     codes.push_back(temp);
   }
 
-  struct Node
-  {
-    Node(const vector<string>& codes, string path) :
-      m_vsCodes(codes),
-      m_sPath(path)
-    {
+  struct Node {
+    Node(const vector<string>& codes, string path)
+        : m_vsCodes(codes), m_sPath(path) {
       set<char> seen;
       m_nTotal = 0;
-      for(string& code : m_vsCodes)
-      {
-        for(char c : code)
-        {
+      for (string& code : m_vsCodes) {
+        for (char c : code) {
           seen.insert(c);
         }
         m_nTotal += code.length();
@@ -3862,22 +3205,16 @@ string problem79()
       m_nH = seen.size();
     }
 
-    bool operator<(const Node& n) const
-    {
+    bool operator<(const Node& n) const {
       // Need to invert return values since this will be for a priority queue
       // which puts higher values first and we want lower values prioritized.
       int32 cost = m_nH + m_sPath.length();
       int32 otherCost = n.m_nH + n.m_sPath.length();
-      if(cost < otherCost)
-      {
+      if (cost < otherCost) {
         return false;
-      }
-      else if(m_nH > n.m_nH)
-      {
+      } else if (m_nH > n.m_nH) {
         return true;
-      }
-      else
-      {
+      } else {
         return m_nTotal > n.m_nTotal;
       }
     }
@@ -3891,22 +3228,17 @@ string problem79()
   priority_queue<Node> candidates;
   candidates.push(Node(codes, ""));
 
-  while(candidates.top().m_nTotal > 0)
-  {
+  while (candidates.top().m_nTotal > 0) {
     Node n = candidates.top();
     candidates.pop();
 
     set<char> adjacencies;
 
-    for(string& oldCode : n.m_vsCodes)
-    {
-      if(oldCode.length() > 0 && adjacencies.insert(oldCode.back()).second)
-      {
+    for (string& oldCode : n.m_vsCodes) {
+      if (oldCode.length() > 0 && adjacencies.insert(oldCode.back()).second) {
         vector<string> newCodes = n.m_vsCodes;
-        for(string& newCode : newCodes)
-        {
-          if(newCode.length() > 0 && newCode.back() == oldCode.back())
-          {
+        for (string& newCode : newCodes) {
+          if (newCode.length() > 0 && newCode.back() == oldCode.back()) {
             newCode.pop_back();
           }
         }
@@ -3917,29 +3249,24 @@ string problem79()
 
   return candidates.top().m_sPath;
 }
-int32 problem80(int32 n, int32 m)
-{
-  if(n < 2)
-  {
+int32 problem80(int32 n, int32 m) {
+  if (n < 2) {
     return 0;
   }
 
-  if(m < 1)
-  {
+  if (m < 1) {
     throw string("Cannot have a number with less than 1 digit");
   }
 
   set<int32> squares;
   int32 i = 0;
-  while(i * i <= n)
-  {
+  while (i * i <= n) {
     squares.insert(i * i);
     i++;
   }
 
   BigInteger leftStart(1);
-  while(leftStart.numberOfDigits() < m)
-  {
+  while (leftStart.numberOfDigits() < m) {
     leftStart *= 10;
   }
   leftStart = leftStart.convertToBase(128);
@@ -3947,10 +3274,8 @@ int32 problem80(int32 n, int32 m)
 
   i = 0;
   int32 sum = 0;
-  while(i <= n)
-  {
-    if(squares.count(i) > 0)
-    {
+  while (i <= n) {
+    if (squares.count(i) > 0) {
       i++;
       continue;
     }
@@ -3958,33 +3283,22 @@ int32 problem80(int32 n, int32 m)
     BigInteger left = leftStart;
     BigInteger right = leftStart * 10;
     BigInteger goal(i, 128);
-    while(goal < leftStartSquared)
-    {
+    while (goal < leftStartSquared) {
       goal *= 100;
     }
 
-    while(left < right)
-    {
+    while (left < right) {
       BigInteger mid = (left + right) >> 1;
-      if(mid * mid < goal)
-      {
-        if(mid == left)
-        {
+      if (mid * mid < goal) {
+        if (mid == left) {
           right = left;
-        }
-        else
-        {
+        } else {
           left = mid;
         }
-      }
-      else
-      {
-        if(mid == right)
-        {
+      } else {
+        if (mid == right) {
           right = left;
-        }
-        else
-        {
+        } else {
           right = mid;
         }
       }
@@ -3996,33 +3310,19 @@ int32 problem80(int32 n, int32 m)
 
   return sum;
 }
-int32 problem81(int32 n, int32 m)
-{
-  if(n < 1 || m < 1)
-  {
+int32 problem81(int32 n, int32 m) {
+  if (n < 1 || m < 1) {
     throw string("Matrix must be at least size 1x1");
   }
 
   static int32 idCounter = 0;
-  struct Node
-  {
-    Node(int32 weight) :
-      m_nId(idCounter++),
-      m_nWeight(weight),
-      m_nBest(INT32_MAX),
-      m_bVisited(false)
-    {
-    }
+  struct Node {
+    Node(int32 weight)
+        : m_nId(idCounter++), m_nWeight(weight), m_nBest(INT32_MAX), m_bVisited(false) {}
 
-    bool operator==(Node& other)
-    {
-      return m_nId == other.m_nId;
-    }
+    bool operator==(Node& other) { return m_nId == other.m_nId; }
 
-    bool operator<(Node& other)
-    {
-      return m_nBest < other.m_nBest;
-    }
+    bool operator<(Node& other) { return m_nBest < other.m_nBest; }
 
     int32 m_nId;
     int32 m_nWeight;
@@ -4035,29 +3335,23 @@ int32 problem81(int32 n, int32 m)
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
-  for(int32 j = 0; j < m; j++)
-  {
+  for (int32 j = 0; j < m; j++) {
     nodes.push_back(vector<Node>());
-    for(int32 i = 0; i < n; i++)
-    {
+    for (int32 i = 0; i < n; i++) {
       int32 weight;
       fin >> weight;
       nodes[j].push_back(Node(weight));
     }
   }
 
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n - 1; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n - 1; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j][i + 1].m_nId);
     }
   }
 
-  for(int32 j = 0; j < m - 1; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m - 1; j++) {
+    for (int32 i = 0; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j + 1][i].m_nId);
     }
   }
@@ -4067,38 +3361,31 @@ int32 problem81(int32 n, int32 m)
   initial.m_nBest = initial.m_nWeight;
 
   map<int32, Node*> idToNode;
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n; i++) {
       idToNode[nodes[j][i].m_nId] = &nodes[j][i];
     }
   }
 
   map<int32, map<int32, Node*>> bestToIdToNode;
   bestToIdToNode[initial.m_nBest][initial.m_nId] = &initial;
-  while(!bestToIdToNode.empty())
-  {
+  while (!bestToIdToNode.empty()) {
     // Get an unvisited node that is reachable in a minimal distance
     Node* current = bestToIdToNode.begin()->second.begin()->second;
-    if(*current == final)
-    {
+    if (*current == final) {
       return current->m_nBest;
     }
 
-    for(int32 id : current->m_vnAdjacent)
-    {
+    for (int32 id : current->m_vnAdjacent) {
       Node* neighbour = idToNode[id];
-      if(neighbour->m_bVisited)
-      {
+      if (neighbour->m_bVisited) {
         continue;
       }
 
-      if(bestToIdToNode.count(neighbour->m_nBest) == 1 && bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1)
-      {
+      if (bestToIdToNode.count(neighbour->m_nBest) == 1 &&
+          bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1) {
         bestToIdToNode[neighbour->m_nBest].erase(neighbour->m_nId);
-        if(bestToIdToNode[neighbour->m_nBest].empty())
-        {
+        if (bestToIdToNode[neighbour->m_nBest].empty()) {
           bestToIdToNode.erase(neighbour->m_nBest);
         }
       }
@@ -4108,8 +3395,7 @@ int32 problem81(int32 n, int32 m)
     }
 
     bestToIdToNode[current->m_nBest].erase(current->m_nId);
-    if(bestToIdToNode[current->m_nBest].empty())
-    {
+    if (bestToIdToNode[current->m_nBest].empty()) {
       bestToIdToNode.erase(current->m_nBest);
     }
 
@@ -4118,33 +3404,19 @@ int32 problem81(int32 n, int32 m)
 
   throw string("No path to end");
 }
-int32 problem82(int32 n, int32 m)
-{
-  if(n < 1 || m < 1)
-  {
+int32 problem82(int32 n, int32 m) {
+  if (n < 1 || m < 1) {
     throw string("Matrix must be at least size 1x1");
   }
 
   static int32 idCounter = 0;
-  struct Node
-  {
-    Node(int32 weight) :
-      m_nId(idCounter++),
-      m_nWeight(weight),
-      m_nBest(INT32_MAX),
-      m_bVisited(false)
-    {
-    }
+  struct Node {
+    Node(int32 weight)
+        : m_nId(idCounter++), m_nWeight(weight), m_nBest(INT32_MAX), m_bVisited(false) {}
 
-    bool operator==(Node& other)
-    {
-      return m_nId == other.m_nId;
-    }
+    bool operator==(Node& other) { return m_nId == other.m_nId; }
 
-    bool operator<(Node& other)
-    {
-      return m_nBest < other.m_nBest;
-    }
+    bool operator<(Node& other) { return m_nBest < other.m_nBest; }
 
     int32 m_nId;
     int32 m_nWeight;
@@ -4157,37 +3429,29 @@ int32 problem82(int32 n, int32 m)
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
-  for(int32 j = 0; j < m; j++)
-  {
+  for (int32 j = 0; j < m; j++) {
     nodes.push_back(vector<Node>());
-    for(int32 i = 0; i < n; i++)
-    {
+    for (int32 i = 0; i < n; i++) {
       int32 weight;
       fin >> weight;
       nodes[j].push_back(Node(weight));
     }
   }
 
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n - 1; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n - 1; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j][i + 1].m_nId);
     }
   }
 
-  for(int32 j = 0; j < m - 1; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m - 1; j++) {
+    for (int32 i = 0; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j + 1][i].m_nId);
     }
   }
 
-  for(int32 j = 1; j < m; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 1; j < m; j++) {
+    for (int32 i = 0; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j - 1][i].m_nId);
     }
   }
@@ -4196,47 +3460,39 @@ int32 problem82(int32 n, int32 m)
   initial.m_nBest = 0;
   Node final(0);
 
-  for(int32 j = 0; j < m; j++)
-  {
+  for (int32 j = 0; j < m; j++) {
     initial.m_vnAdjacent.push_back(nodes[j].front().m_nId);
     nodes[j].back().m_vnAdjacent.push_back(final.m_nId);
   }
 
   map<int32, Node*> idToNode;
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n; i++) {
       idToNode[nodes[j][i].m_nId] = &nodes[j][i];
     }
   }
   idToNode[initial.m_nId] = &initial;
-  idToNode[final.m_nId] = &final;
+  idToNode[final.m_nId] = & final;
 
   map<int32, map<int32, Node*>> bestToIdToNode;
   bestToIdToNode[initial.m_nBest][initial.m_nId] = &initial;
-  while(!bestToIdToNode.empty())
-  {
+  while (!bestToIdToNode.empty()) {
     // Get an unvisited node that is reachable in a minimal distance
     Node* current = bestToIdToNode.begin()->second.begin()->second;
-    if(*current == final)
-    {
+    if (*current == final) {
       return current->m_nBest;
     }
 
-    for(int32 id : current->m_vnAdjacent)
-    {
+    for (int32 id : current->m_vnAdjacent) {
       Node* neighbour = idToNode[id];
-      if(neighbour->m_bVisited)
-      {
+      if (neighbour->m_bVisited) {
         continue;
       }
 
-      if(bestToIdToNode.count(neighbour->m_nBest) == 1 && bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1)
-      {
+      if (bestToIdToNode.count(neighbour->m_nBest) == 1 &&
+          bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1) {
         bestToIdToNode[neighbour->m_nBest].erase(neighbour->m_nId);
-        if(bestToIdToNode[neighbour->m_nBest].empty())
-        {
+        if (bestToIdToNode[neighbour->m_nBest].empty()) {
           bestToIdToNode.erase(neighbour->m_nBest);
         }
       }
@@ -4246,8 +3502,7 @@ int32 problem82(int32 n, int32 m)
     }
 
     bestToIdToNode[current->m_nBest].erase(current->m_nId);
-    if(bestToIdToNode[current->m_nBest].empty())
-    {
+    if (bestToIdToNode[current->m_nBest].empty()) {
       bestToIdToNode.erase(current->m_nBest);
     }
 
@@ -4256,33 +3511,19 @@ int32 problem82(int32 n, int32 m)
 
   throw string("No path to end");
 }
-int32 problem83(int32 n, int32 m)
-{
-  if(n < 1 || m < 1)
-  {
+int32 problem83(int32 n, int32 m) {
+  if (n < 1 || m < 1) {
     throw string("Matrix must be at least size 1x1");
   }
 
   static int32 idCounter = 0;
-  struct Node
-  {
-    Node(int32 weight) :
-      m_nId(idCounter++),
-      m_nWeight(weight),
-      m_nBest(INT32_MAX),
-      m_bVisited(false)
-    {
-    }
+  struct Node {
+    Node(int32 weight)
+        : m_nId(idCounter++), m_nWeight(weight), m_nBest(INT32_MAX), m_bVisited(false) {}
 
-    bool operator==(Node& other)
-    {
-      return m_nId == other.m_nId;
-    }
+    bool operator==(Node& other) { return m_nId == other.m_nId; }
 
-    bool operator<(Node& other)
-    {
-      return m_nBest < other.m_nBest;
-    }
+    bool operator<(Node& other) { return m_nBest < other.m_nBest; }
 
     int32 m_nId;
     int32 m_nWeight;
@@ -4295,45 +3536,35 @@ int32 problem83(int32 n, int32 m)
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
-  for(int32 j = 0; j < m; j++)
-  {
+  for (int32 j = 0; j < m; j++) {
     nodes.push_back(vector<Node>());
-    for(int32 i = 0; i < n; i++)
-    {
+    for (int32 i = 0; i < n; i++) {
       int32 weight;
       fin >> weight;
       nodes[j].push_back(Node(weight));
     }
   }
 
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n - 1; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n - 1; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j][i + 1].m_nId);
     }
   }
 
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 1; i < n; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 1; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j][i - 1].m_nId);
     }
   }
 
-  for(int32 j = 0; j < m - 1; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m - 1; j++) {
+    for (int32 i = 0; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j + 1][i].m_nId);
     }
   }
 
-  for(int32 j = 1; j < m; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 1; j < m; j++) {
+    for (int32 i = 0; i < n; i++) {
       nodes[j][i].m_vnAdjacent.push_back(nodes[j - 1][i].m_nId);
     }
   }
@@ -4343,38 +3574,31 @@ int32 problem83(int32 n, int32 m)
   initial.m_nBest = initial.m_nWeight;
 
   map<int32, Node*> idToNode;
-  for(int32 j = 0; j < m; j++)
-  {
-    for(int32 i = 0; i < n; i++)
-    {
+  for (int32 j = 0; j < m; j++) {
+    for (int32 i = 0; i < n; i++) {
       idToNode[nodes[j][i].m_nId] = &nodes[j][i];
     }
   }
 
   map<int32, map<int32, Node*>> bestToIdToNode;
   bestToIdToNode[initial.m_nBest][initial.m_nId] = &initial;
-  while(!bestToIdToNode.empty())
-  {
+  while (!bestToIdToNode.empty()) {
     // Get an unvisited node that is reachable in a minimal distance
     Node* current = bestToIdToNode.begin()->second.begin()->second;
-    if(*current == final)
-    {
+    if (*current == final) {
       return current->m_nBest;
     }
 
-    for(int32 id : current->m_vnAdjacent)
-    {
+    for (int32 id : current->m_vnAdjacent) {
       Node* neighbour = idToNode[id];
-      if(neighbour->m_bVisited)
-      {
+      if (neighbour->m_bVisited) {
         continue;
       }
 
-      if(bestToIdToNode.count(neighbour->m_nBest) == 1 && bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1)
-      {
+      if (bestToIdToNode.count(neighbour->m_nBest) == 1 &&
+          bestToIdToNode[neighbour->m_nBest].count(neighbour->m_nId) == 1) {
         bestToIdToNode[neighbour->m_nBest].erase(neighbour->m_nId);
-        if(bestToIdToNode[neighbour->m_nBest].empty())
-        {
+        if (bestToIdToNode[neighbour->m_nBest].empty()) {
           bestToIdToNode.erase(neighbour->m_nBest);
         }
       }
@@ -4384,8 +3608,7 @@ int32 problem83(int32 n, int32 m)
     }
 
     bestToIdToNode[current->m_nBest].erase(current->m_nId);
-    if(bestToIdToNode[current->m_nBest].empty())
-    {
+    if (bestToIdToNode[current->m_nBest].empty()) {
       bestToIdToNode.erase(current->m_nBest);
     }
 
@@ -4394,10 +3617,8 @@ int32 problem83(int32 n, int32 m)
 
   throw string("No path to end");
 }
-string problem84(int32 n)
-{
-  if(n < 1)
-  {
+string problem84(int32 n) {
+  if (n < 1) {
     throw string("Dice must have at least one side");
   }
 
@@ -4409,84 +3630,59 @@ string problem84(int32 n)
   const double rollFrequency = 1.0 / (n * n);
 
   array<array<double, MAX_DOUBLES * SPACES>, MAX_DOUBLES * SPACES> p;
-  for(int32 doubles = 0; doubles < MAX_DOUBLES; doubles++)
-  {
-    for(int32 space = 0; space < SPACES; space++)
-    {
+  for (int32 doubles = 0; doubles < MAX_DOUBLES; doubles++) {
+    for (int32 space = 0; space < SPACES; space++) {
       p[doubles * SPACES + space].fill(0.0);
-      for(int32 d1 = 1; d1 <= n; d1++)
-      {
-        for(int32 d2 = 1; d2 <= n; d2++)
-        {
+      for (int32 d1 = 1; d1 <= n; d1++) {
+        for (int32 d2 = 1; d2 <= n; d2++) {
           const int32 newSpace = (space + d1 + d2) % SPACES;
-          if(newSpace == 30 || (doubles + 1 == MAX_DOUBLES && d1 == d2))
-          {
+          if (newSpace == 30 || (doubles + 1 == MAX_DOUBLES && d1 == d2)) {
             p[doubles * SPACES + space][10] += rollFrequency;
-          }
-          else
-          {
+          } else {
             int32 doublesOffset = (d1 == d2 ? (doubles + 1) * SPACES : 0);
-            if(COMMUNITY_CHEST_SPACES.count(newSpace) == 1)
-            {
+            if (COMMUNITY_CHEST_SPACES.count(newSpace) == 1) {
               p[doubles * SPACES + space][doublesOffset + newSpace] += rollFrequency * 14 / 16;
               p[doubles * SPACES + space][doublesOffset + 0] += rollFrequency * 1 / 16;
               p[doubles * SPACES + space][10] += rollFrequency * 1 / 16;
-            }
-            else if(CHANCE_SPACES.count(newSpace) == 1)
-            {
+            } else if (CHANCE_SPACES.count(newSpace) == 1) {
               int32 nextRailwaySpace = -1;
               int32 nextUtilitySpace = -1;
               int32 backThreeSpace = (newSpace - 3 + SPACES) % SPACES;
 
-              if(newSpace < 5 || newSpace >= 35)
-              {
+              if (newSpace < 5 || newSpace >= 35) {
                 nextRailwaySpace = 5;
-              }
-              else if(newSpace < 15)
-              {
+              } else if (newSpace < 15) {
                 nextRailwaySpace = 15;
-              }
-              else if(newSpace < 25)
-              {
+              } else if (newSpace < 25) {
                 nextRailwaySpace = 25;
-              }
-              else
-              {
+              } else {
                 nextRailwaySpace = 35;
               }
 
-              if(newSpace < 12 || newSpace >= 28)
-              {
+              if (newSpace < 12 || newSpace >= 28) {
                 nextUtilitySpace = 12;
-              }
-              else
-              {
+              } else {
                 nextUtilitySpace = 28;
               }
 
               p[doubles * SPACES + space][doublesOffset + newSpace] += rollFrequency * 6 / 16;
               p[doubles * SPACES + space][doublesOffset + nextRailwaySpace] += rollFrequency * 2 / 16;
               p[doubles * SPACES + space][doublesOffset + nextUtilitySpace] += rollFrequency * 1 / 16;
-              p[doubles * SPACES + space][doublesOffset +  0] += rollFrequency * 1 / 16;
+              p[doubles * SPACES + space][doublesOffset + 0] += rollFrequency * 1 / 16;
               p[doubles * SPACES + space][doublesOffset + 11] += rollFrequency * 1 / 16;
               p[doubles * SPACES + space][doublesOffset + 24] += rollFrequency * 1 / 16;
               p[doubles * SPACES + space][doublesOffset + 39] += rollFrequency * 1 / 16;
-              p[doubles * SPACES + space][doublesOffset +  5] += rollFrequency * 1 / 16;
+              p[doubles * SPACES + space][doublesOffset + 5] += rollFrequency * 1 / 16;
               p[doubles * SPACES + space][10] += rollFrequency * 1 / 16;
 
-              if(COMMUNITY_CHEST_SPACES.count(backThreeSpace) == 1)
-              {
+              if (COMMUNITY_CHEST_SPACES.count(backThreeSpace) == 1) {
                 p[doubles * SPACES + space][doublesOffset + backThreeSpace] += rollFrequency * 1 / 16 * 14 / 16;
                 p[doubles * SPACES + space][doublesOffset + 0] += rollFrequency * 1 / 16 * 1 / 16;
                 p[doubles * SPACES + space][10] += rollFrequency * 1 / 16 * 1 / 16;
-              }
-              else
-              {
+              } else {
                 p[doubles * SPACES + space][doublesOffset + backThreeSpace] += rollFrequency * 1 / 16;
               }
-            }
-            else
-            {
+            } else {
               p[doubles * SPACES + space][doublesOffset + newSpace] += rollFrequency;
             }
           }
@@ -4498,14 +3694,11 @@ string problem84(int32 n)
   array<double, MAX_DOUBLES * SPACES> pi;
   pi.fill(1.0 / (MAX_DOUBLES * SPACES));
   const int32 FIXED_POINT_ITERATIONS = 200;
-  for(int32 count = 0; count < FIXED_POINT_ITERATIONS; count++)
-  {
+  for (int32 count = 0; count < FIXED_POINT_ITERATIONS; count++) {
     array<double, MAX_DOUBLES * SPACES> dotProduct;
     dotProduct.fill(0.0);
-    for(int32 i = 0; i < MAX_DOUBLES * SPACES; i++)
-    {
-      for(int32 j = 0; j < MAX_DOUBLES * SPACES; j++)
-      {
+    for (int32 i = 0; i < MAX_DOUBLES * SPACES; i++) {
+      for (int32 j = 0; j < MAX_DOUBLES * SPACES; j++) {
         dotProduct[i] += pi[j] * p[j][i];
       }
     }
@@ -4514,20 +3707,17 @@ string problem84(int32 n)
   }
 
   array<pair<int32, double>, SPACES> squashedPi;
-  for(int32 space = 0; space < SPACES; space++)
-  {
+  for (int32 space = 0; space < SPACES; space++) {
     squashedPi[space].first = space;
     squashedPi[space].second = 0.0;
   }
-  for(int32 doubles = 0; doubles < MAX_DOUBLES; doubles++)
-  {
-    for(int32 space = 0; space < SPACES; space++)
-    {
+  for (int32 doubles = 0; doubles < MAX_DOUBLES; doubles++) {
+    for (int32 space = 0; space < SPACES; space++) {
       squashedPi[space].second += pi[doubles * SPACES + space];
     }
   }
 
-  sort(squashedPi.begin(), squashedPi.end(), [] (const pair<int32, double>& left, const pair<int32, double>& right) -> bool { return left.second > right.second; });
+  sort(squashedPi.begin(), squashedPi.end(), [](const pair<int32, double>& left, const pair<int32, double>& right) -> bool { return left.second > right.second; });
 
   stringstream ss;
   ss.fill('0');
@@ -4540,10 +3730,8 @@ string problem84(int32 n)
 
   return ss.str();
 }
-int64 problem85(int64 n)
-{
-  if(n <= 1)
-  {
+int64 problem85(int64 n) {
+  if (n <= 1) {
     return 1;
   }
 
@@ -4552,43 +3740,35 @@ int64 problem85(int64 n)
 
   int64 L = 1;
   int64 count = -1;
-  do
-  {
+  do {
     L++;
     int64 L2 = L * L;
     int64 L3 = L2 * L;
     int64 L4 = L3 * L;
 
     count = L4 + 2 * L3 + L2 - L3 * (L + 1) + L2 * (L + 1) * (L + 1) / 4 - L2 * (L + 1);
-  }
-  while(count < n);
+  } while (count < n);
 
   int64 upperBound = sqrt(2 * n);
-  for(int64 W = 1; W <= L; W++)
-  {
+  for (int64 W = 1; W <= L; W++) {
     int64 leftH = 1;
     int64 rightH = upperBound;
     int64 W2 = W * W;
     int64 sumW = W * (W + 1) / 2;
-    while(leftH < rightH)
-    {
+    while (leftH < rightH) {
       int64 H = (leftH + rightH) / 2;
       int64 H2 = H * H;
       int64 sumH = H * (H + 1) / 2;
       count = W2 * H2 + W2 * H + W * H2 + W * H - W2 * sumH - sumW * H2 - sumW * H - W * sumH + sumW * sumH;
 
-      if(count > n || H == leftH)
-      {
+      if (count > n || H == leftH) {
         rightH = H;
-      }
-      else
-      {
+      } else {
         leftH = H;
       }
     }
 
-    if(n - count < closestCount)
-    {
+    if (n - count < closestCount) {
       closestCount = n - count;
       closestArea = W * leftH;
     }
@@ -4598,8 +3778,7 @@ int64 problem85(int64 n)
     int64 sumH = H * (H + 1) / 2;
     count = W2 * H2 + W2 * H + W * H2 + W * H - W2 * sumH - sumW * H2 - sumW * H - W * sumH + sumW * sumH;
 
-    if(count - n < closestCount)
-    {
+    if (count - n < closestCount) {
       closestCount = count - n;
       closestArea = W * H;
     }
@@ -4607,24 +3786,19 @@ int64 problem85(int64 n)
 
   return closestArea;
 }
-int32 problem86(int32 n)
-{
-  if(n < 0)
-  {
+int32 problem86(int32 n) {
+  if (n < 0) {
     return 0;
   }
 
   int32 d = 0;
   int32 cuboids = 0;
-  while(cuboids <= n)
-  {
+  while (cuboids <= n) {
     d++;
-    for(int32 sum = 2; sum <= 2 * d; sum++)
-    {
+    for (int32 sum = 2; sum <= 2 * d; sum++) {
       double root = sqrt(d * d + sum * sum);
       const double epsilon = 0.00001;
-      if(root - static_cast<int32>(root) < epsilon)
-      {
+      if (root - static_cast<int32>(root) < epsilon) {
         cuboids += (sum > d + 1) ? sum / 2 - sum + d + 1 : sum / 2;
       }
     }
@@ -4632,10 +3806,8 @@ int32 problem86(int32 n)
 
   return d;
 }
-int32 problem87(int32 n)
-{
-  if(n <= 28)
-  {
+int32 problem87(int32 n) {
+  if (n <= 28) {
     return 0;
   }
 
@@ -4647,33 +3819,26 @@ int32 problem87(int32 n)
   vector<bool> isPrime;
   sieveOfErotosthenes(maxDouble, isPrime);
   vector<int32> primes;
-  for(uint32 i = 0; i < isPrime.size(); i++)
-  {
-    if(isPrime[i])
-    {
+  for (uint32 i = 0; i < isPrime.size(); i++) {
+    if (isPrime[i]) {
       primes.push_back(i);
     }
   }
 
-  for(uint32 i = 0; i < primes.size(); i++)
-  {
+  for (uint32 i = 0; i < primes.size(); i++) {
     int32 second = primes[i] * primes[i];
-    for(uint32 j = 0; j < primes.size(); j++)
-    {
+    for (uint32 j = 0; j < primes.size(); j++) {
       int32 third = primes[j] * primes[j] * primes[j];
       int32 twoAndThree = second + third;
-      if(twoAndThree >= n)
-      {
+      if (twoAndThree >= n) {
         break;
       }
 
-      for(uint32 k = 0; k < primes.size(); k++)
-      {
+      for (uint32 k = 0; k < primes.size(); k++) {
         int32 fourth = primes[k] * primes[k];
         fourth *= fourth;
         int32 sum = twoAndThree + fourth;
-        if(sum >= n)
-        {
+        if (sum >= n) {
           break;
         }
 
@@ -4684,49 +3849,40 @@ int32 problem87(int32 n)
 
   return sums.size();
 }
-int32 problem88(int32 n)
-{
-  if(n < 2)
-  {
+int32 problem88(int32 n) {
+  if (n < 2) {
     return 0;
   }
 
   struct FactorizationHasher;
-  class Factorization
-  {
+  class Factorization {
   public:
     Factorization(const map<int32, int32>& factors)
-      : m_factors(factors), m_factorCount(0), m_factorSum(0)
-    {
-      for(auto x : factors)
-      {
+        : m_factors(factors), m_factorCount(0), m_factorSum(0) {
+      for (auto x : factors) {
         m_factorCount += x.second;
         m_factorSum += x.first * x.second;
       }
     }
 
     Factorization(map<int32, int32>&& factors, int32 factorCount, int32 factorSum)
-      : m_factors(factors), m_factorCount(factorCount), m_factorSum(factorSum) {}
+        : m_factors(factors), m_factorCount(factorCount), m_factorSum(factorSum) {}
 
     Factorization(const Factorization& other) = default;
     Factorization& operator=(const Factorization& other) = default;
     Factorization(Factorization&& other) = default;
     Factorization& operator=(Factorization&& other) = default;
 
-    bool operator==(const Factorization& other) const
-    {
+    bool operator==(const Factorization& other) const {
       return m_factors == other.m_factors;
     }
 
-    vector<Factorization> nextFactorizations()
-    {
+    vector<Factorization> nextFactorizations() {
       vector<Factorization> newFactorizations;
-      for(auto first = m_factors.begin(); first != m_factors.end(); ++first)
-      {
-        for(auto second = first; second != m_factors.end(); ++second)
-        {
-          if((first->first == second->first && first->second >= 2) || first->first != second->first)
-          {
+      for (auto first = m_factors.begin(); first != m_factors.end(); ++first) {
+        for (auto second = first; second != m_factors.end(); ++second) {
+          if ((first->first == second->first && first->second >= 2) ||
+              first->first != second->first) {
             map<int32, int32> factors = m_factors;
 
             factors[first->first] -= 1;
@@ -4734,14 +3890,12 @@ int32 problem88(int32 n)
             factors[first->first * second->first] += 1;
 
             auto it = factors.find(first->first);
-            if(it->second == 0)
-            {
+            if (it->second == 0) {
               factors.erase(it);
             }
 
             it = factors.find(second->first);
-            if(it != factors.end() && it->second == 0)
-            {
+            if (it != factors.end() && it->second == 0) {
               factors.erase(it);
             }
 
@@ -4763,10 +3917,8 @@ int32 problem88(int32 n)
     int32 m_factorSum;
   };
 
-  struct FactorizationHasher
-  {
-    size_t operator()(const Factorization& factorization) const
-    {
+  struct FactorizationHasher {
+    size_t operator()(const Factorization& factorization) const {
       return hash<map<int32, int32>>()(factorization.getFactors());
     }
   };
@@ -4774,10 +3926,8 @@ int32 problem88(int32 n)
   vector<bool> isPrime;
   sieveOfErotosthenes(n, isPrime);
   vector<int32> primes;
-  for(int32 i = 2; i <= n; i++)
-  {
-    if(isPrime[i])
-    {
+  for (int32 i = 2; i <= n; i++) {
+    if (isPrime[i]) {
       primes.push_back(i);
     }
   }
@@ -4788,14 +3938,11 @@ int32 problem88(int32 n)
   int32 minNotFound = 2;
 
   int32 candidate = 4;
-  while(remaining > 0)
-  {
+  while (remaining > 0) {
     map<int32, int32> primeFactorization;
     int32 remainder = candidate;
-    for(auto prime : primes)
-    {
-      while(remainder % prime == 0)
-      {
+    for (auto prime : primes) {
+      while (remainder % prime == 0) {
         primeFactorization[prime] += 1;
         remainder /= prime;
       }
@@ -4804,40 +3951,35 @@ int32 problem88(int32 n)
     unordered_set<Factorization, FactorizationHasher> examinedFactorizations;
     deque<Factorization> searchQueue;
     searchQueue.emplace_back(primeFactorization);
-    while(!searchQueue.empty()) {
+    while (!searchQueue.empty()) {
       Factorization& factorization = searchQueue.front();
-      if(examinedFactorizations.count(factorization))
-      {
+      if (examinedFactorizations.count(factorization)) {
         searchQueue.pop_front();
         continue;
       }
       examinedFactorizations.insert(factorization);
 
       int32 setSize = factorization.factorCount() + candidate - factorization.factorSum();
-      if(setSize < minNotFound)
-      {
+      if (setSize < minNotFound) {
         searchQueue.pop_front();
         continue;
       }
 
-      if(setSize <= n && !isFound[setSize])
-      {
+      if (setSize <= n && !isFound[setSize]) {
         isFound[setSize] = true;
         productSumNumbers.insert(candidate);
         remaining -= 1;
-        if(remaining == 0)
-        {
+        if (remaining == 0) {
           break;
         }
 
-        while(isFound[minNotFound]) {
+        while (isFound[minNotFound]) {
           minNotFound++;
         }
       }
 
       vector<Factorization> nextFactorizations = factorization.nextFactorizations();
-      for(auto& nextFactorization : nextFactorizations)
-      {
+      for (auto& nextFactorization : nextFactorizations) {
         searchQueue.emplace_back(move(nextFactorization));
       }
 
@@ -4852,5 +3994,5 @@ int32 problem88(int32 n)
 }
 
 #ifdef _MSC_VER
-#pragma warning( pop )
+#pragma warning(pop)
 #endif

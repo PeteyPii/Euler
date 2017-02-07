@@ -1,8 +1,8 @@
 /*******************************************************************************
 
-  Name:      Euler.h
-  Creator:     Patrick Wrobel
-  Date:      May 5th, 2014
+  Name:         Euler.h
+  Creator:      Patrick Wrobel
+  Date:         May 5th, 2014
   Description:  Solutions to the problems on Project Euler
 
 *******************************************************************************/
@@ -12,6 +12,7 @@
 
 #include "Common.h"
 
+// clang-format off
 int32    problem1(int32 n);                       // Sum of all multiples of 3 and 5 less than n.
 int32    problem2(int32 n);                       // Sum of even Fibonacci numbers less than n.
 int64    problem3(int64 n);                       // Largest prime factor of n.
@@ -26,7 +27,7 @@ int64    problem10(int64 n);                      // Sum of every prime up to n.
 
 int32    problem11(int32 n, int32 m);             // Max product of n adjacent numbers in m*m grid.
 int64    problem12(int32 n);                      // Smallest triangle number with at least n divisors.
-string    problem13(int32 n);                     // First n digits of the sum of many very long numbers.
+string   problem13(int32 n);                      // First n digits of the sum of many very long numbers.
 int32    problem14(int32 n);                      // Longest Collatz sequence for a number less than n.
 int64    problem15(int32 n, int32 m);             // Number of lattice paths in an n*m grid.
 
@@ -39,7 +40,7 @@ int32    problem20(int32 n);                      // Sum of the digits of n!.
 int32    problem21(int32 n);                      // Sum of all amicable numbers under n.
 int64    problem22();                             // Sum of word scores of many names.
 int32    problem23();                             // Sum of all positive numbers that cannot a be sum of two abundant numbers.
-string    problem24(int32 n);                     // Nth lexicographical permutation of 0123456789.
+string   problem24(int32 n);                      // Nth lexicographical permutation of 0123456789.
 int32    problem25(int32 n);                      // Term number of the first n-digit Fibonacci number.
 
 int32    problem26(int32 n);                      // Number betweeen 1 and n (inclusive) that has the longest reciprocal cycle (in decimal).
@@ -69,7 +70,7 @@ int64    problem45(int32 n);                      // Triangle number that is als
 int64    problem46(int32 n);                      // Nth odd composite that cannot be written as the sum of a prime and twice a square.
 int32    problem47(int32 n);                      // First number of the first sequence of n numbers with n unique factors.
 int64    problem48(int32 n);                      // Last ten digits of 1^1 + 2^2 + 3^3 + ... + n^n.
-string    problem49();                            // 12 digits of 3 4-digit primes in order with the primes spaced out equally and permutations of each other and is not 1487 4817 8147.
+string   problem49();                             // 12 digits of 3 4-digit primes in order with the primes spaced out equally and permutations of each other and is not 1487 4817 8147.
 int32    problem50(int32 n);                      // Lowest prime below n that is the sum of the most consecutive primes (more consecutive takes precedence over lower primes).
 
 int32    problem51();                             // Lowest prime where, by replacing part of the of it by the same digit, it is part of an eight prime value family.
@@ -85,14 +86,14 @@ int32    problem59();                             // Decrypt a message that uses
 int32    problem60(int32 n);                      // Minimum sum of a prime family of size n where concatenating any two of the primes forms a prime.
 
 int32    problem61();                             // Sum of the only ordered set of six cyclic 4-digit figurate numbers of different types.
-string    problem62(int32 n);                     // Smallest cube whose digits are a permutation of exactly n cubes.
+string   problem62(int32 n);                      // Smallest cube whose digits are a permutation of exactly n cubes.
 int32    problem63();                             // Number of k-digit positive integers that are also a kth power.
 int32    problem64(int32 n);                      // Number of continued fractions for irrational square roots of x <= n that have an odd period.
 int32    problem65(int32 n);                      // Sum of digits in the numerator of the nth convergent of the continued fraction for e.
 
 int32    problem66(int32 n);                      // Value of D that maximises x which is part of an minimized integer solution to x^2 - Dy^2 = 1 for D <= n.
 int32    problem67();                             // Max sum of a path through a taller triangle.
-string    problem68();                            // Max 16-digit string from a solved magic 5-gon ring.
+string   problem68();                             // Max 16-digit string from a solved magic 5-gon ring.
 int32    problem69(int32 n);                      // Value of x that maximises x/phi(x) for x <= n.
 int32    problem70(int32 n);                      // Value of x that minimises x/phi(x) for x < n and for x such that x is a permutation of phi(x).
 
@@ -105,17 +106,18 @@ int32    problem75(int32 n);                      // Number of integer sided rig
 int64    problem76(int32 n);                      // Number of different ways to write n as a sum of at least two positive integers.
 int32    problem77(int32 n);                      // First number that can be written as the sum of primes in over n different ways.
 int32    problem78(int32 n);                      // Smallest number that can be partitioned in a number of ways divisible by n.
-string    problem79();                            // Find the shortest possible passcode from the ordered digits.
+string   problem79();                             // Find the shortest possible passcode from the ordered digits.
 int32    problem80(int32 n, int32 m);             // Sum of the digits of all irrational square roots from 0 to n with m digits.
 
 int32    problem81(int32 n, int32 m);             // Minimum sum from the top-left to the bottom-right of an n by m matrix moving only right or down.
 int32    problem82(int32 n, int32 m);             // Minimum sum from the left to the right of an n by m matrix moving only up, down, and right.
 int32    problem83(int32 n, int32 m);             // Minimum sum from the top-left to the bottom-right of an n by m matrix moving in any direction.
-string    problem84(int32 n);                     // Three most frequent Monopoly spaces when rolling with n-sided dice.
+string   problem84(int32 n);                      // Three most frequent Monopoly spaces when rolling with n-sided dice.
 int64    problem85(int64 n);                      // Area of rectangle that contains a number of rectangles that is closest to n.
 
 int32    problem86(int32 n);                      // Least value of M with more than n integral minimal cuboid routes for cuboids with maximum dimension M.
 int32    problem87(int32 n);                      // Number of numbers below n that can be written as a sum of a prime square, triple, and fourth power.
 int32    problem88(int32 n);                      // Sum of all minimal product-sum numbers of size 2 through n.
+// clang-format on
 
 #endif

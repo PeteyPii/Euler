@@ -17,5 +17,8 @@ $(EXEC): Euler.cpp Euler.h Common.cpp Common.h
 test: $(EXEC)
 	$(EXEC)
 
+format:
+	clang-format -i -style=file Euler.cpp Euler.h Common.cpp Common.h
+
 clean:
-	rm -f $(EXEC)
+	rm -f $(EXEC) *.TMP

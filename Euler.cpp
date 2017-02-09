@@ -35,7 +35,7 @@ void verifyResults(int32 begin, int32 end);
 
 int32 main(int32 argc, const char** argv) {
   try {
-    verifyResults(88, 88);
+    verifyResults(89, 89);
 
     return 0;
   } catch (string e) {
@@ -158,6 +158,7 @@ void verifyResults(int32 begin, int32 end) {
       []() -> bool { return assertEquality(problem86(1000000), 1818); },
       []() -> bool { return assertEquality(problem87(50000000), 1097343); },
       []() -> bool { return assertEquality(problem88(12000), 7587457); },
+      []() -> bool { return assertEquality(problem89(), 0); },
 
       []() -> bool { return false; }};
 
@@ -3991,6 +3992,82 @@ int32 problem88(int32 n) {
 
   int32 sum = setSum(productSumNumbers);
   return sum;
+}
+int32 problem89() {
+  ifstream fin("p89.txt");
+  assertFileOpened(fin);
+
+  map<char, int32> values = {
+    {'I', 1},
+    {'V', 5},
+    {'X', 10},
+    {'L', 50},
+    {'C', 100},
+    {'D', 500},
+    {'M', 1000},
+  };
+
+  string numeral;
+  int32 savings = 0;
+  while (fin >> numeral) {
+    int32 value = 0;
+    if (numeral.find("IV") != string::npos) {
+      value += -2;
+    }
+    if (numeral.find("IX") != string::npos) {
+      value += -2;
+    }
+    if (numeral.find("XL") != string::npos) {
+      value += -20;
+    }
+    if (numeral.find("IX") != string::npos) {
+      value += -20;
+    }
+    if (numeral.find("IX") != string::npos) {
+      value += -200;
+    }
+
+    for (char c : numeral) {
+      value += values[c];
+    }
+
+    int32 digitsProcessed = 0;
+    int32 digitCount = 0;
+    while (value > 0) {
+      switch (value % 10) {
+        case 0:
+          break;
+        case 1:
+        case 5:
+        case 9:
+          digitCount += 1;
+          break;
+        case 2:
+        case 4:
+        case 6:
+          digitCount += 2;
+          break;
+        case 3:
+        case 7:
+          digitCount += 3;
+          break;
+        case 8:
+          digitCount += 4;
+          break;
+      }
+
+      value /= 10;
+      digitsProcessed++;
+      if (digitsProcessed == 3) {
+        digitCount += value;
+        break;
+      }
+    }
+
+    savings += numeral.length() - digitCount;
+  }
+
+  return savings;
 }
 
 #ifdef _MSC_VER

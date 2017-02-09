@@ -158,7 +158,7 @@ void verifyResults(int32 begin, int32 end) {
       []() -> bool { return assertEquality(problem86(1000000), 1818); },
       []() -> bool { return assertEquality(problem87(50000000), 1097343); },
       []() -> bool { return assertEquality(problem88(12000), 7587457); },
-      []() -> bool { return assertEquality(problem89(), 0); },
+      []() -> bool { return assertEquality(problem89(), 743); },
 
       []() -> bool { return false; }};
 
@@ -3998,13 +3998,13 @@ int32 problem89() {
   assertFileOpened(fin);
 
   map<char, int32> values = {
-    {'I', 1},
-    {'V', 5},
-    {'X', 10},
-    {'L', 50},
-    {'C', 100},
-    {'D', 500},
-    {'M', 1000},
+      {'I', 1},
+      {'V', 5},
+      {'X', 10},
+      {'L', 50},
+      {'C', 100},
+      {'D', 500},
+      {'M', 1000},
   };
 
   string numeral;
@@ -4020,10 +4020,13 @@ int32 problem89() {
     if (numeral.find("XL") != string::npos) {
       value += -20;
     }
-    if (numeral.find("IX") != string::npos) {
+    if (numeral.find("XC") != string::npos) {
       value += -20;
     }
-    if (numeral.find("IX") != string::npos) {
+    if (numeral.find("CD") != string::npos) {
+      value += -200;
+    }
+    if (numeral.find("CM") != string::npos) {
       value += -200;
     }
 
@@ -4039,12 +4042,12 @@ int32 problem89() {
           break;
         case 1:
         case 5:
-        case 9:
           digitCount += 1;
           break;
         case 2:
         case 4:
         case 6:
+        case 9:
           digitCount += 2;
           break;
         case 3:

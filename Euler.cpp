@@ -35,7 +35,7 @@ void verifyResults(int32 begin, int32 end);
 
 int32 main(int32 argc, const char** argv) {
   try {
-    verifyResults(91, 91);
+    verifyResults(92, 92);
 
     return 0;
   } catch (string e) {
@@ -162,6 +162,7 @@ void verifyResults(int32 begin, int32 end) {
       []() -> bool { return assertEquality(problem90(), 1217); },
 
       []() -> bool { return assertEquality(problem91(50), 14234); },
+      []() -> bool { return assertEquality(problem92(10000000), 8581146); },
 
       []() -> bool { return false; }};
 
@@ -4160,6 +4161,40 @@ int32 problem91(int32 n) {
   }
 
   return total;
+}
+int32 problem92(int32 n) {
+  if (n < 1) {
+    return 0;
+  }
+
+  set<int32> bads = {1};
+  set<int32> goods = {89};
+  int32 candidate = 1;
+  while (candidate < n) {
+    int32 sum = candidate;
+    int32 value;
+    do {
+      value = sum;
+      sum = 0;
+
+      while (value > 0) {
+        sum += (value % 10) * (value % 10);
+        value /= 10;
+      }
+
+
+    } while (bads.count(sum) == 0 && goods.count(sum) == 0);
+
+    if (bads.count(sum) == 0) {
+      goods.insert(candidate);
+    } else {
+      bads.insert(candidate);
+    }
+
+    candidate++;
+  }
+
+  return goods.size();
 }
 
 #ifdef _MSC_VER

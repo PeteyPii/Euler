@@ -122,6 +122,7 @@ int32    problem89();                             // Sum of characters saved by 
 int32    problem90();                             // Number of distinct arrangements of number cubes that form all of the 2-digit squares.
 
 int32    problem91(int32 n);                      // Number of right triangles rooted at the origin in an n by n grid with integer coordinates.
+int32    problem92(int32 n);                      // How many numbers below n go to 89 when recursively summing the squares of the digits.
 // clang-format on
 
 #endif

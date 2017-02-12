@@ -35,7 +35,7 @@ void verifyResults(int32 begin, int32 end);
 
 int32 main(int32 argc, const char** argv) {
   try {
-    verifyResults(90, 90);
+    verifyResults(91, 91);
 
     return 0;
   } catch (string e) {
@@ -160,6 +160,8 @@ void verifyResults(int32 begin, int32 end) {
       []() -> bool { return assertEquality(problem88(12000), 7587457); },
       []() -> bool { return assertEquality(problem89(), 743); },
       []() -> bool { return assertEquality(problem90(), 1217); },
+
+      []() -> bool { return assertEquality(problem91(50), 14234); },
 
       []() -> bool { return false; }};
 
@@ -4134,6 +4136,30 @@ int32 problem90() {
   }
 
   return uniquePairs.size();
+}
+int32 problem91(int32 n) {
+  if (n < 1) {
+    throw string("Invalid grid size");
+  }
+
+  int32 total = 3 * n * n;
+  for (int32 x1 = 1; x1 <= n; x1++) {
+    for (int32 y1 = 1; y1 <= n; y1++) {
+      for (int32 x2 = 0; x2 <= n; x2++) {
+        for (int32 y2 = 0; y2 <= n; y2++) {
+          if (x1 == x2 && y1 == y2) {
+            continue;
+          }
+
+          if (x1 * (x2 - x1) + y1 * (y2 - y1) == 0) {
+            total += 1;
+          }
+        }
+      }
+    }
+  }
+
+  return total;
 }
 
 #ifdef _MSC_VER

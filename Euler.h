@@ -120,6 +120,8 @@ int32    problem87(int32 n);                      // Number of numbers below n t
 int32    problem88(int32 n);                      // Sum of all minimal product-sum numbers of size 2 through n.
 int32    problem89();                             // Sum of characters saved by rewriting roman numerals optimally.
 int32    problem90();                             // Number of distinct arrangements of number cubes that form all of the 2-digit squares.
+
+int32    problem91(int32 n);                      // Number of right triangles rooted at the origin in an n by n grid with integer coordinates.
 // clang-format on
 
 #endif

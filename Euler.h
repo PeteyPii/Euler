@@ -119,6 +119,7 @@ int32    problem86(int32 n);                      // Least value of M with more 
 int32    problem87(int32 n);                      // Number of numbers below n that can be written as a sum of a prime square, triple, and fourth power.
 int32    problem88(int32 n);                      // Sum of all minimal product-sum numbers of size 2 through n.
 int32    problem89();                             // Sum of characters saved by rewriting roman numerals optimally.
+int32    problem90();                             // Number of distinct arrangements of number cubes that form all of the 2-digit squares.
 // clang-format on
 
 #endif

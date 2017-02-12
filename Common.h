@@ -485,6 +485,9 @@ struct hash<pair<T, U>> {
 template <typename T>
 struct hash<vector<T>> : hash_container<vector<T>> {};
 
+template <typename T>
+struct hash<set<T>> : hash_container<set<T>> {};
+
 template <typename T, typename U>
 struct hash<map<T, U>> : hash_container<map<T, U>> {};
 }
@@ -608,6 +611,29 @@ void totientValues(N n, vector<N>& values) {
 
     values[i] = totientVal;
   }
+}
+
+template <typename N, typename Iterator>
+vector<vector<N>> combinations(const Iterator& begin, const Iterator& end, N k) {
+  if (k == 1) {
+    vector<vector<N>> results;
+    for (auto it = begin; it != end; ++it) {
+      results.push_back(vector<N>(1, *it));
+    }
+    return results;
+  }
+
+  vector<vector<N>> results;
+  for (auto it = begin; it != end - k + 1; ++it) {
+    const N& n = *it;
+    vector<vector<N>> combos = combinations(it + 1, end, k - 1);
+    vector<vector<N>> newCombos(combos.size(), vector<N>(1, n));
+    for (uint32 i = 0; i < combos.size(); i++) {
+      newCombos[i].insert(newCombos[i].end(), combos[i].begin(), combos[i].end());
+    }
+    results.insert(results.end(), newCombos.begin(), newCombos.end());
+  }
+  return results;
 }
 
 #endif

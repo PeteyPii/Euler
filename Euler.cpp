@@ -31,7 +31,7 @@ using namespace std;
 
 *******************************************************************************/
 
-void verifyResults(int32 begin, int32 end);
+void verifyResults();
 
 int32 main(int32 argc, const char** argv) {
   try {
@@ -51,8 +51,6 @@ int32 main(int32 argc, const char** argv) {
 void verifyResults() {
   typedef bool (*fpCheck)();
   const fpCheck checks[] = {
-      []() -> bool { return true; },
-
       []() -> bool { return assertEquality(problem1(1000), 233168); },
       []() -> bool { return assertEquality(problem2(4000000), 4613732); },
       []() -> bool { return assertEquality(problem3(600851475143), 6857); },
@@ -163,29 +161,44 @@ void verifyResults() {
 
       []() -> bool { return assertEquality(problem91(50), 14234); },
       []() -> bool { return assertEquality(problem92(10000000), 8581146); },
-
-      []() -> bool { return false; }
   };
 
-  if (end - begin + 1 > 0) {
+  ifstream fin("run.txt");
+  assertFileOpened(fin);
+
+  string line;
+  set<int32> problems;
+  while (getline(fin, line)) {
+    if (line.length() > 0 && line[0] != '#') {
+      problems.insert(stringToNumber<int32>(line));
+    }
+  }
+
+  if (problems.size() > 0) {
     int64 total = 0;
     int64 maxTime = -1;
     int32 maxProblem = -1;
 
-    for (int32 i = begin; i <= end; i++) {
+    for (auto problem : problems) {
+      if (problem < 1 || static_cast<uint32>(problem - 1) > sizeof(checks) / sizeof(fpCheck)) {
+        stringstream ss;
+        ss << "Problem " << problem << " does not exist or has not been solved";
+        throw string(ss.str());
+      }
+
       ScopeTimer timer("", false);
       try {
-        if (checks[i]()) {
-          cout << "Problem " << i << " SUCCEEDED! ";
+        if (checks[problem - 1]()) {
+          cout << "Problem " << problem << " SUCCEEDED! ";
         } else {
-          cout << "Problem " << i << " FAILED! ";
+          cout << "Problem " << problem << " FAILED! ";
         }
       } catch (const string& e) {
         cout << "BAD! An excpetion was thrown: " << e << endl;
-        cout << "Problem " << i << " FAILED! ";
+        cout << "Problem " << problem << " FAILED! ";
       } catch (...) {
         cout << "BAD! An unknown excpetion was thrown" << endl;
-        cout << "Problem " << i << " FAILED! ";
+        cout << "Problem " << problem << " FAILED! ";
       }
 
       int64 elapsed = timer.getElapsedMilliseconds();
@@ -194,14 +207,13 @@ void verifyResults() {
 
       if (elapsed > maxTime) {
         maxTime = elapsed;
-        maxProblem = i;
+        maxProblem = problem;
       }
     }
 
     cout << "Total time: " << total << " ms" << endl;
-    cout << "Average time: " << total / (end - begin + 1) << " ms" << endl;
-    cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")"
-         << endl;
+    cout << "Average time: " << total / problems.size() << " ms" << endl;
+    cout << "Worst time: " << maxTime << " ms (problem " << maxProblem << ")" << endl;
   }
 }
 
@@ -335,7 +347,7 @@ int64 problem7(int64 n) {
   throw string("Sieve too small");
 }
 int64 problem8(int32 n) {
-  ifstream fin("p8.txt");
+  ifstream fin("p008.txt");
   assertFileOpened(fin);
 
   string full = "", temp;
@@ -387,7 +399,7 @@ int32 problem11(int32 n, int32 m) {
     return -1;
   }
 
-  ifstream fin("p11.txt");
+  ifstream fin("p011.txt");
   assertFileOpened(fin);
 
   vector<vector<int32>> grid(m, vector<int32>(m, -1));
@@ -472,7 +484,7 @@ int64 problem12(int32 n) {
   throw string("Triangle number too big");
 }
 string problem13(int32 n) {
-  ifstream fin("p13.txt");
+  ifstream fin("p013.txt");
   assertFileOpened(fin);
 
   BigInteger x(0);
@@ -570,7 +582,7 @@ int32 problem17(int32 n) {
   return sum;
 }
 int32 problem18() {
-  ifstream fin("p18.txt");
+  ifstream fin("p018.txt");
   assertFileOpened(fin);
 
   vector<vector<int32>> triangle;
@@ -685,7 +697,7 @@ int32 problem21(int32 n) {
   return sum;
 }
 int64 problem22() {
-  ifstream fin("p22.txt");
+  ifstream fin("p022.txt");
   assertFileOpened(fin);
 
   string temp;
@@ -1338,7 +1350,7 @@ int32 problem42() {
   int32 maxAdd = 0;
   set<int32> triangleNumbers;
 
-  ifstream fin("p42.txt");
+  ifstream fin("p042.txt");
   assertFileOpened(fin);
 
   int32 count = 0;
@@ -2044,7 +2056,7 @@ int32 problem54() {
 
   PokerHandEval eval;
 
-  ifstream fin("p54.txt");
+  ifstream fin("p054.txt");
   assertFileOpened(fin);
 
   int32 p1wins = 0;
@@ -2187,7 +2199,7 @@ int32 problem58(int32 n, int32 m) {
   return incrementer - 1;
 }
 int32 problem59() {
-  ifstream fin("p59.txt");
+  ifstream fin("p059.txt");
   assertFileOpened(fin);
 
   vector<int32> characters;
@@ -2668,7 +2680,7 @@ int32 problem66(int32 n) {
   return maxD;
 }
 int32 problem67() {
-  ifstream fin("p67.txt");
+  ifstream fin("p067.txt");
   assertFileOpened(fin);
 
   vector<vector<int32>> triangle;
@@ -3186,7 +3198,7 @@ int32 problem78(int32 n) {
   return number;
 }
 string problem79() {
-  ifstream fin("p79.txt");
+  ifstream fin("p079.txt");
 
   assertFileOpened(fin);
 
@@ -3337,7 +3349,7 @@ int32 problem81(int32 n, int32 m) {
     vector<int32> m_vnAdjacent;
   };
 
-  ifstream fin("p81.txt");
+  ifstream fin("p081.txt");
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
@@ -3431,7 +3443,7 @@ int32 problem82(int32 n, int32 m) {
     vector<int32> m_vnAdjacent;
   };
 
-  ifstream fin("p82.txt");
+  ifstream fin("p082.txt");
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
@@ -3538,7 +3550,7 @@ int32 problem83(int32 n, int32 m) {
     vector<int32> m_vnAdjacent;
   };
 
-  ifstream fin("p83.txt");
+  ifstream fin("p083.txt");
   assertFileOpened(fin);
 
   vector<vector<Node>> nodes;
@@ -3999,7 +4011,7 @@ int32 problem88(int32 n) {
   return sum;
 }
 int32 problem89() {
-  ifstream fin("p89.txt");
+  ifstream fin("p089.txt");
   assertFileOpened(fin);
 
   map<char, int32> values = {
@@ -4168,13 +4180,13 @@ int32 problem92(int32 n) {
     return 0;
   }
 
-  set<int32> bads = {1};
-  set<int32> goods = {89};
+  unordered_set<int32> bads = {1};
+  unordered_set<int32> goods = {89};
   int32 candidate = 1;
   while (candidate < n) {
     int32 sum = candidate;
     int32 value;
-    do {
+    while (true) {
       value = sum;
       sum = 0;
 
@@ -4183,12 +4195,13 @@ int32 problem92(int32 n) {
         value /= 10;
       }
 
-    } while (bads.count(sum) == 0 && goods.count(sum) == 0);
-
-    if (bads.count(sum) == 0) {
-      goods.insert(candidate);
-    } else {
-      bads.insert(candidate);
+      if (bads.count(sum) == 1) {
+        bads.insert(candidate);
+        break;
+      } else if (goods.count(sum) == 1) {
+        goods.insert(candidate);
+        break;
+      }
     }
 
     candidate++;

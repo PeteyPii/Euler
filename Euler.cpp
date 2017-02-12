@@ -35,7 +35,7 @@ void verifyResults(int32 begin, int32 end);
 
 int32 main(int32 argc, const char** argv) {
   try {
-    verifyResults(92, 92);
+    verifyResults();
 
     return 0;
   } catch (string e) {
@@ -48,7 +48,7 @@ int32 main(int32 argc, const char** argv) {
   }
 }
 
-void verifyResults(int32 begin, int32 end) {
+void verifyResults() {
   typedef bool (*fpCheck)();
   const fpCheck checks[] = {
       []() -> bool { return true; },
@@ -164,7 +164,8 @@ void verifyResults(int32 begin, int32 end) {
       []() -> bool { return assertEquality(problem91(50), 14234); },
       []() -> bool { return assertEquality(problem92(10000000), 8581146); },
 
-      []() -> bool { return false; }};
+      []() -> bool { return false; }
+  };
 
   if (end - begin + 1 > 0) {
     int64 total = 0;
@@ -4181,7 +4182,6 @@ int32 problem92(int32 n) {
         sum += (value % 10) * (value % 10);
         value /= 10;
       }
-
 
     } while (bads.count(sum) == 0 && goods.count(sum) == 0);
 

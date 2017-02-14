@@ -123,6 +123,7 @@ int32    problem90();                             // Number of distinct arrangem
 
 int32    problem91(int32 n);                      // Number of right triangles rooted at the origin in an n by n grid with integer coordinates.
 int32    problem92(int32 n);                      // How many numbers below n go to 89 when recursively summing the squares of the digits.
+int32    problem93();                             // Four digits which can produce the most consecutive integers starting from 1 using arithmetic operations.
 // clang-format on
 
 #endif

@@ -21,6 +21,7 @@
 #include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <limits>
 #include <map>
 #include <numeric>
 #include <queue>
@@ -634,6 +635,18 @@ vector<vector<N>> combinations(const Iterator& begin, const Iterator& end, N k) 
     results.insert(results.end(), newCombos.begin(), newCombos.end());
   }
   return results;
+}
+
+template <typename N>
+bool fpEqual(N f1, N f2) {
+  return (fabs(f1 - f2) <= numeric_limits<N>::epsilon() * fmax(fabs(f1), fabs(f2)));
+}
+
+template <typename N>
+bool isIntegral(N n) {
+  N m;
+  n = modf(n, &m);
+  return abs(n) < std::numeric_limits<N>::epsilon();
 }
 
 #endif

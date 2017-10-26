@@ -3161,38 +3161,35 @@ int32 problem78(int32 n) {
     int64 sum = 0;
 
     int32 k = 1;
-    while (k * (3 * k - 1) / 2 <= number) {
+    do {
+      int32 ix = number - k * (3 * k - 1) / 2;
+      if (ix < 0 || ix > number) {
+        break;
+      }
       sum += p[number - k * (3 * k - 1) / 2];
-      k += 2;
-    }
+      k = -k;
 
-    k--;
-    if (k * (3 * k - 1) / 2 <= number) {
-      sum -= p[number - k * (3 * k - 1) / 2];
-    }
-
-    k -= 2;
-    while (k > 0) {
-      sum -= p[number - k * (3 * k - 1) / 2];
-      k -= 2;
-    }
-
-    k = -1;
-    while (k * (3 * k - 1) / 2 <= number) {
+      ix = number - k * (3 * k - 1) / 2;
+      if (ix < 0 || ix > number) {
+        break;
+      }
       sum += p[number - k * (3 * k - 1) / 2];
-      k -= 2;
-    }
+      k = -k + 1;
 
-    k++;
-    if (k * (3 * k - 1) / 2 <= number) {
+      ix = number - k * (3 * k - 1) / 2;
+      if (ix < 0 || ix > number) {
+        break;
+      }
       sum -= p[number - k * (3 * k - 1) / 2];
-    }
+      k = -k;
 
-    k += 2;
-    while (k < 0) {
+      ix = number - k * (3 * k - 1) / 2;
+      if (ix < 0 || ix > number) {
+        break;
+      }
       sum -= p[number - k * (3 * k - 1) / 2];
-      k += 2;
-    }
+      k = -k + 1;
+    } while (true);
 
     p.push_back(sum % n);
   }

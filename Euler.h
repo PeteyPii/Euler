@@ -125,6 +125,7 @@ int32    problem91(int32 n);                      // Number of right triangles r
 int32    problem92(int32 n);                      // How many numbers below n go to 89 when recursively summing the squares of the digits.
 int32    problem93();                             // Four digits which can produce the most consecutive integers starting from 1 using arithmetic operations.
 int64    problem94(int64 n);                      // The sum of the perimeters of all almost equilateral triangles with integral side lengths and area and whose perimeters do not exceed n.
+int32    problem95(int32 n);                      // The smallest member of the longest amicable chain with no element exceeding n.
 // clang-format on
 
 #endif

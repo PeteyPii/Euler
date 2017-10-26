@@ -17,6 +17,7 @@
 *.rc
 *.res
 *.sdf
+*.stackdump
 *.sublime-workspace
 *.suo
 *.tlog

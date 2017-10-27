@@ -167,6 +167,7 @@ void verifyResults() {
       []() -> bool { return assertEquality(problem95(1000000), 14316); },
 
       []() -> bool { return assertEquality(problem96(), 24702); },
+      []() -> bool { return assertEquality(problem97(28433, 7830457), 8739992577); },
   };
 
   ifstream fin("run.txt");
@@ -4701,6 +4702,11 @@ int32 problem96() {
   }
 
   return total;
+}
+int64 problem97(int64 n, int64 m) {
+  int64 result = stringToNumber<int64>(numberToString(modPower(BigInteger(2, 10), BigInteger(m, 128), 10000000000)));
+  result = ((result * n) + 1) % 10000000000;
+  return result;
 }
 
 #ifdef _MSC_VER

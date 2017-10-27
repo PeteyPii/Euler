@@ -28,6 +28,7 @@
 #include <set>
 #include <sstream>
 #include <string>
+#include <type_traits>
 #include <unordered_map>
 #include <unordered_set>
 #include <utility>
@@ -138,6 +139,24 @@ public:
     return *this *= BigInteger(n, m_nBase);
   }
 
+  template <typename N>
+  BigInteger operator%(const N& n) {
+    static_assert(!is_same<N, BigInteger>::value, "Cannot mod by BigInteger");
+    N total = 0;
+    uint64 coefficient = 1;
+    for (uint64 i = 0; i < m_vnDigits.size(); i++) {
+      total += coefficient * m_vnDigits[i];
+      total %= n;
+      coefficient *= m_nBase;
+      coefficient %= n;
+    }
+    return BigInteger(total, m_nBase);
+  }
+  template <typename N>
+  BigInteger& operator%=(const N& n) {
+    return *this = *this % n;
+  }
+
   bool operator==(const BigInteger& obj) const;
   template <typename N>
   bool operator==(const N& n) const {
@@ -156,7 +175,7 @@ public:
   bool operator>(const BigInteger& obj) const { return obj < *this; }
   template <typename N>
   bool operator>(const N& n) const {
-    return *this < BigInteger(n, m_nBase);
+    return *this > BigInteger(n, m_nBase);
   }
   bool operator<=(const BigInteger& obj) const { return !(*this > obj); }
   template <typename N>
@@ -203,7 +222,13 @@ public:
   }
 
   BigInteger operator<<(int32 n) const;
+  BigInteger& operator<<=(int32 n) {
+    return *this = *this << n;
+  }
   BigInteger operator>>(int32 n) const;
+  BigInteger& operator>>=(int32 n) {
+    return *this = *this >> n;
+  }
 
   friend ostream& operator<<(ostream& out, const BigInteger& n);
   friend istream& operator>>(istream& in, BigInteger& n);

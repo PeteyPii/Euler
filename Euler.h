@@ -128,6 +128,7 @@ int64    problem94(int64 n);                      // The sum of the perimeters o
 int32    problem95(int32 n);                      // The smallest member of the longest amicable chain with no element exceeding n.
 
 int32    problem96();                             // Sum of the first 3-digit numbers in each Sudoku puzzle.
+int64    problem97(int64 n, int64 m);             // Last 10 digits of n * 2^m + 1.
 // clang-format on
 
 #endif

@@ -126,6 +126,8 @@ int32    problem92(int32 n);                      // How many numbers below n go
 int32    problem93();                             // Four digits which can produce the most consecutive integers starting from 1 using arithmetic operations.
 int64    problem94(int64 n);                      // The sum of the perimeters of all almost equilateral triangles with integral side lengths and area and whose perimeters do not exceed n.
 int32    problem95(int32 n);                      // The smallest member of the longest amicable chain with no element exceeding n.
+
+int32    problem96();                             // Sum of the first 3-digit numbers in each Sudoku puzzle.
 // clang-format on
 
 #endif

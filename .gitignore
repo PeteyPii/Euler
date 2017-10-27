@@ -13,6 +13,7 @@
 *.obj
 *.opendb
 *.opensdf
+*.out
 *.pdb
 *.rc
 *.res

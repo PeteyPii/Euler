@@ -9,8 +9,9 @@
 
 #ifdef _MSC_VER
 #pragma warning(push)
-#pragma warning(disable : 4244) // conversion, possible loss of data
 #pragma warning(disable : 4018) // signed/unsigned mismatch
+#pragma warning(disable : 4244) // conversion, possible loss of data
+#pragma warning(disable : 4267) // possible loss of data when converting from size_t
 #endif
 
 #include "Euler.h"
@@ -164,6 +165,8 @@ void verifyResults() {
       []() -> bool { return assertEquality(problem93(), 1258); },
       []() -> bool { return assertEquality(problem94(1000000000), 518408346); },
       []() -> bool { return assertEquality(problem95(1000000), 14316); },
+
+      []() -> bool { return assertEquality(problem96(), 0); },
   };
 
   ifstream fin("run.txt");
@@ -4427,6 +4430,195 @@ int32 problem95(int32 n) {
     }
   }
   return bestItem;
+}
+int32 problem96() {
+  ifstream fin("p096.txt");
+  assertFileOpened(fin);
+
+  int32 total = 0;
+  int32 puzzleCount = 0;
+  int32 squaresUnsolved = 0;
+  while (fin) {
+    puzzleCount += 1;
+    string rows[9];
+    for (int32 i = 0; i < 9; i++) {
+      fin >> rows[i];
+      if (rows[i].length() != 9) {
+        break;
+      }
+    }
+    if (!fin) {
+      break;
+    }
+
+    char grid[9][9];
+    for (int32 j = 0; j < 9; j++) {
+      for (int32 i = 0; i < 9; i++) {
+        grid[i][j] = rows[j][i] - '0';
+      }
+    }
+
+    int32 unsolvedCount = 0;
+    for (int32 i = 0; i < 9; i++) {
+      for (int32 j = 0; j < 9; j++) {
+        if (grid[i][j] == 0) {
+          unsolvedCount++;
+        }
+      }
+    }
+    int32 prevUnsolvedCount = unsolvedCount;
+    do {
+      prevUnsolvedCount = unsolvedCount;
+      set<char> possibleValues[9][9];
+      // First step.
+      for (int32 i = 0; i < 9; i++) {
+        for (int32 j = 0; j < 9; j++) {
+          if (grid[i][j] != 0) {
+            continue;
+          }
+
+          possibleValues[i][j] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+          for (int32 row = 0; row < 9; row++) {
+            possibleValues[i][j].erase(grid[i][row]);
+          }
+          for (int32 col = 0; col < 9; col++) {
+            possibleValues[i][j].erase(grid[col][j]);
+          }
+          int32 iRoot = i / 3 * 3;
+          int32 jRoot = j / 3 * 3;
+          for (int32 iOffset = 0; iOffset < 3; iOffset++) {
+            for (int32 jOffset = 0; jOffset < 3; jOffset++) {
+              possibleValues[i][j].erase(grid[iRoot + iOffset][jRoot + jOffset]);
+            }
+          }
+
+          if (possibleValues[i][j].size() == 0) {
+            throw string("Unsolvable Sudoku puzzle");
+          }
+          if (possibleValues[i][j].size() == 1) {
+            grid[i][j] = *possibleValues[i][j].begin();
+            unsolvedCount -= 1;
+          }
+        }
+      }
+
+      // Second step.
+      for (int32 col = 0; col < 9; col++) {
+        char valCounts[10];
+        for (int32 i = 1; i <= 9; i++) {
+          valCounts[i] = 0;
+        }
+        for (int32 row = 0; row < 9; row++) {
+          for (int32 possibleVal : possibleValues[col][row]) {
+            valCounts[possibleVal] += 1;
+          }
+        }
+        set<char> found;
+        for (int32 i = 1; i <= 9; i++) {
+          if (valCounts[i] == 1) {
+            found.insert(i);
+          }
+        }
+        for (char valToInsert : found) {
+          for (int32 row = 0; row < 9; row++) {
+            if (possibleValues[col][row].count(valToInsert) == 1) {
+              if (grid[col][row] == 0) {
+                grid[col][row] = valToInsert;
+                unsolvedCount -= 1;
+              }
+              break;
+            }
+          }
+        }
+      }
+      for (int32 row = 0; row < 9; row++) {
+        char valCounts[10];
+        for (int32 i = 1; i <= 9; i++) {
+          valCounts[i] = 0;
+        }
+        for (int32 col = 0; col < 9; col++) {
+          for (int32 possibleVal : possibleValues[col][row]) {
+            valCounts[possibleVal] += 1;
+          }
+        }
+        set<char> found;
+        for (int32 i = 1; i <= 9; i++) {
+          if (valCounts[i] == 1) {
+            found.insert(i);
+          }
+        }
+        for (char valToInsert : found) {
+          for (int32 col = 0; col < 9; col++) {
+            if (possibleValues[col][row].count(valToInsert) == 1) {
+              if (grid[col][row] == 0) {
+                grid[col][row] = valToInsert;
+                unsolvedCount -= 1;
+              }
+              break;
+            }
+          }
+        }
+      }
+      for (int32 iBox = 0; iBox < 9; iBox += 3) {
+        for (int32 jBox = 0; jBox < 9; jBox += 3) {
+          char valCounts[10];
+          for (int32 i = 1; i <= 9; i++) {
+            valCounts[i] = 0;
+          }
+          for (int32 iOffset = 0; iOffset < 3; iOffset++) {
+            for (int32 jOffset = 0; jOffset < 3; jOffset++) {
+              for (int32 possibleVal : possibleValues[iBox + iOffset][jBox + jOffset]) {
+                valCounts[possibleVal] += 1;
+              }
+            }
+          }
+          set<char> found;
+          for (int32 i = 1; i <= 9; i++) {
+            if (valCounts[i] == 1) {
+              found.insert(i);
+            }
+          }
+          for (char valToInsert : found) {
+            for (int32 iOffset = 0; iOffset < 3; iOffset++) {
+              for (int32 jOffset = 0; jOffset < 3; jOffset++) {
+                if (possibleValues[iBox + iOffset][jBox + jOffset].count(valToInsert) == 1) {
+                  if (grid[iBox + iOffset][jBox + jOffset] == 0) {
+                    grid[iBox + iOffset][jBox + jOffset] = valToInsert;
+                    unsolvedCount -= 1;
+                  }
+                  break;
+                }
+              }
+            }
+          }
+        }
+      }
+    } while (prevUnsolvedCount != unsolvedCount);
+
+    squaresUnsolved += unsolvedCount;
+
+    cout << "Puzzle: " << puzzleCount << " -> " << unsolvedCount << endl;
+    for (int32 j = 0; j < 9; j++) {
+      for (int32 i = 0; i < 9; i++) {
+        if (grid[i][j] != 0) {
+          cout << static_cast<char>(grid[i][j] + '0');
+        } else {
+          cout << ' ';
+        }
+        if (i % 3 == 2) {
+          cout << " ";
+        }
+      }
+      cout << endl;
+      if (j % 3 == 2) {
+        cout << endl;
+      }
+    }
+  }
+
+  cout << "Unsolved squares = " << squaresUnsolved << endl;
+
+  return total;
 }
 
 #ifdef _MSC_VER

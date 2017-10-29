@@ -15,8 +15,7 @@ string problem79() {
   }
 
   struct Node {
-    Node(const vector<string>& codes, string path)
-        : m_vsCodes(codes), m_sPath(path) {
+    Node(const vector<string>& codes, string path) : m_vsCodes(codes), m_sPath(path) {
       set<char> seen;
       m_nTotal = 0;
       for (string& code : m_vsCodes) {

@@ -29,8 +29,7 @@ string problem68() {
         continue;
       }
 
-      if (ring[2] < ring[0] || ring[4] < ring[0] || ring[6] < ring[0] ||
-          ring[8] < ring[0]) {
+      if (ring[2] < ring[0] || ring[4] < ring[0] || ring[6] < ring[0] || ring[8] < ring[0]) {
         continue;
       }
 

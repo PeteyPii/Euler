@@ -16,8 +16,7 @@ int32 problem37() {
       bool isTruncatable = true;
       int32 sliderFactor = 10;
       while (i / sliderFactor > 0) {
-        if (!isNumberPrime(i / sliderFactor) ||
-            !isNumberPrime(i % sliderFactor)) {
+        if (!isNumberPrime(i / sliderFactor) || !isNumberPrime(i % sliderFactor)) {
           isTruncatable = false;
           break;
         }

@@ -32,8 +32,7 @@ int64 problem53(int32 n, int64 m) {
 
     int32 left = n / 2;
     int32 right = n - (n / 2);
-    while (factorialMemoizer(left) * factorialMemoizer(right) * limit <
-           numerator) {
+    while (factorialMemoizer(left) * factorialMemoizer(right) * limit < numerator) {
       left--;
       right++;
     }

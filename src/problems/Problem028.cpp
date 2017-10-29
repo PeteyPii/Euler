@@ -12,8 +12,7 @@ int32 problem28(int32 n) {
   }
 
   int32 x = (n - 1) / 2;
-  return 4 * (4 * x * x * x + 12 * x * x + 11 * x + 3) / 3 - 6 * x * (x + 1) -
-         3;
+  return 4 * (4 * x * x * x + 12 * x * x + 11 * x + 3) / 3 - 6 * x * (x + 1) - 3;
 }
 
 #include "SourceSuffix.h"

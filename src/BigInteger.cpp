@@ -2,7 +2,8 @@
 
 #include "BigInteger.h"
 
-BigInteger::~BigInteger() {}
+BigInteger::~BigInteger() {
+}
 
 int32 BigInteger::numberOfDigits() const {
   int32 c = m_vnDigits.size();
@@ -375,9 +376,7 @@ BigInteger BigInteger::operator>>(int32 n) const {
   vector<uint8> buffer(max(number.numberOfDigits() - n / bits, 1), 0);
 
   int32 digitShift = n / bits;
-  for (int32 i = 0;
-       i < static_cast<int32>(number.m_vnDigits.size()) - digitShift;
-       i++) {
+  for (int32 i = 0; i < static_cast<int32>(number.m_vnDigits.size()) - digitShift; i++) {
     buffer[i] = number.m_vnDigits[i + digitShift];
   }
 
@@ -397,11 +396,8 @@ BigInteger BigInteger::operator>>(int32 n) const {
       buffer[i] >>= bitShift;
     }
 
-    for (uint32 i = 0;
-         i < buffer.size() && i + digitShift + 1 < number.m_vnDigits.size();
-         i++) {
-      buffer[i] |= (number.m_vnDigits[i + digitShift + 1] & carryFromMask)
-                   << carryShiftCount;
+    for (uint32 i = 0; i < buffer.size() && i + digitShift + 1 < number.m_vnDigits.size(); i++) {
+      buffer[i] |= (number.m_vnDigits[i + digitShift + 1] & carryFromMask) << carryShiftCount;
     }
   }
 

@@ -56,7 +56,8 @@ int32 problem60(int32 n) {
 
   class KNFinder {
   public:
-    KNFinder(const vector<Node>& graph) : m_vcGraph(graph) {}
+    KNFinder(const vector<Node>& graph) : m_vcGraph(graph) {
+    }
 
     vector<set<int32>> operator()(int32 n) {
       m_nN = n;

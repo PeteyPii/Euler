@@ -28,11 +28,11 @@ private:
 
 public:
   template <typename N>
-  explicit BigInteger(N n, uint8 base = 10)
-      : m_nBase(base), m_vnDigits(1, 0), m_bIsNegative(false) {
+  explicit BigInteger(N n, uint8 base = 10) : m_nBase(base), m_vnDigits(1, 0), m_bIsNegative(false) {
     init(n);
   }
-  BigInteger() : BigInteger(0) {}
+  BigInteger() : BigInteger(0) {
+  }
 
   ~BigInteger();
 
@@ -47,7 +47,9 @@ public:
   BigInteger convertToBase(uint8 base) const;
 
   BigInteger operator+(const BigInteger& obj) const;
-  BigInteger& operator+=(const BigInteger& obj) { return *this = *this + obj; }
+  BigInteger& operator+=(const BigInteger& obj) {
+    return *this = *this + obj;
+  }
   template <typename N>
   BigInteger operator+(const N& n) const {
     return *this + BigInteger(n, m_nBase);
@@ -58,7 +60,9 @@ public:
   }
 
   BigInteger operator*(const BigInteger& obj) const;
-  BigInteger& operator*=(const BigInteger& obj) { return *this = *this * obj; }
+  BigInteger& operator*=(const BigInteger& obj) {
+    return *this = *this * obj;
+  }
   template <typename N>
   BigInteger operator*(const N& n) const {
     return (*this) * BigInteger(n, m_nBase);
@@ -91,7 +95,9 @@ public:
   bool operator==(const N& n) const {
     return *this == BigInteger(n, m_nBase);
   }
-  bool operator!=(const BigInteger& obj) const { return !(*this == obj); }
+  bool operator!=(const BigInteger& obj) const {
+    return !(*this == obj);
+  }
   template <typename N>
   bool operator!=(const N& n) const {
     return *this != BigInteger(n, m_nBase);
@@ -101,24 +107,32 @@ public:
   bool operator<(const N& n) const {
     return *this < BigInteger(n, m_nBase);
   }
-  bool operator>(const BigInteger& obj) const { return obj < *this; }
+  bool operator>(const BigInteger& obj) const {
+    return obj < *this;
+  }
   template <typename N>
   bool operator>(const N& n) const {
     return *this > BigInteger(n, m_nBase);
   }
-  bool operator<=(const BigInteger& obj) const { return !(*this > obj); }
+  bool operator<=(const BigInteger& obj) const {
+    return !(*this > obj);
+  }
   template <typename N>
   bool operator<=(const N& n) const {
     return !(*this > BigInteger(n, m_nBase));
   }
-  bool operator>=(const BigInteger& obj) const { return !(*this < obj); }
+  bool operator>=(const BigInteger& obj) const {
+    return !(*this < obj);
+  }
   template <typename N>
   bool operator>=(const N& n) const {
     return !(*this < BigInteger(n, m_nBase));
   }
 
   BigInteger operator|(const BigInteger& obj) const;
-  BigInteger& operator|=(const BigInteger& obj) { return *this = *this | obj; }
+  BigInteger& operator|=(const BigInteger& obj) {
+    return *this = *this | obj;
+  }
   template <typename N>
   BigInteger operator|(const N& n) const {
     return *this | BigInteger(n, m_nBase);
@@ -129,7 +143,9 @@ public:
   }
 
   BigInteger operator&(const BigInteger& obj) const;
-  BigInteger& operator&=(const BigInteger& obj) { return *this = *this & obj; }
+  BigInteger& operator&=(const BigInteger& obj) {
+    return *this = *this & obj;
+  }
   template <typename N>
   BigInteger operator&(const N& n) const {
     return *this & BigInteger(n, m_nBase);
@@ -140,7 +156,9 @@ public:
   }
 
   BigInteger operator^(const BigInteger& obj) const;
-  BigInteger& operator^=(const BigInteger& obj) { return *this = *this ^ obj; }
+  BigInteger& operator^=(const BigInteger& obj) {
+    return *this = *this ^ obj;
+  }
   template <typename N>
   BigInteger operator^(const N& n) const {
     return *this ^ BigInteger(n, m_nBase);

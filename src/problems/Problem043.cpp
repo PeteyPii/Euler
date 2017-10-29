@@ -21,12 +21,9 @@ int64 problem43() {
   int64 sum = 0;
 
   do {
-    if ((substringifier(permutation + 1) % 2 == 0) &&
-        (substringifier(permutation + 2) % 3 == 0) &&
-        (substringifier(permutation + 3) % 5 == 0) &&
-        (substringifier(permutation + 4) % 7 == 0) &&
-        (substringifier(permutation + 5) % 11 == 0) &&
-        (substringifier(permutation + 6) % 13 == 0) &&
+    if ((substringifier(permutation + 1) % 2 == 0) && (substringifier(permutation + 2) % 3 == 0) &&
+        (substringifier(permutation + 3) % 5 == 0) && (substringifier(permutation + 4) % 7 == 0) &&
+        (substringifier(permutation + 5) % 11 == 0) && (substringifier(permutation + 6) % 13 == 0) &&
         (substringifier(permutation + 7) % 17 == 0)) {
       // Need to have LL constants, otherwise the multiplication
       // might overflow before being added. I'm doing it this way instead of

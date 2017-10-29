@@ -13,8 +13,7 @@ ScopeTimer::ScopeTimer(string name, bool isVerbose)
 
 ScopeTimer::~ScopeTimer() {
   if (m_bIsVerbose) {
-    cout << m_sName << " timer finished after " << getElapsedMilliseconds()
-         << " ms." << endl;
+    cout << m_sName << " timer finished after " << getElapsedMilliseconds() << " ms." << endl;
   }
 }
 

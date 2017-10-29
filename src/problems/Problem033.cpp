@@ -1,6 +1,5 @@
 #include "SourcePrefix.h"
 
-
 #include "Common.h"
 
 int32 problem33() {

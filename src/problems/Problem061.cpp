@@ -94,8 +94,8 @@ int32 problem61() {
 
   class SpecialCycleFinder {
   public:
-    SpecialCycleFinder(const vector<vector<pair<int32, int32>>>& graph)
-        : m_vcGraph(graph) {}
+    SpecialCycleFinder(const vector<vector<pair<int32, int32>>>& graph) : m_vcGraph(graph) {
+    }
 
     vector<int32> operator()() {
       set<int32> usedTypes;

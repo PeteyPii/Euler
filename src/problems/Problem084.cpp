@@ -102,7 +102,12 @@ string problem84(int32 n) {
     }
   }
 
-  sort(squashedPi.begin(), squashedPi.end(), [](const pair<int32, double>& left, const pair<int32, double>& right) -> bool { return left.second > right.second; });
+  sort(
+      squashedPi.begin(),
+      squashedPi.end(),
+      [](const pair<int32, double>& left, const pair<int32, double>& right) -> bool {
+        return left.second > right.second;
+      });
 
   stringstream ss;
   ss.fill('0');

@@ -144,7 +144,8 @@ bool isNumberPrime(N n) {
 template <typename N>
 string getEnglishWordFromNumber(N n) {
   const string singles[] = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
-  const string teens[] = {"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
+  const string teens[] = {
+      "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"};
   const string tens[] = {"", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"};
   const string triplets[] = {"", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"};
 
@@ -241,7 +242,9 @@ N factorial(N n) {
 }
 
 template <typename T>
-size_t make_hash(const T& v) { return hash<T>()(v); }
+size_t make_hash(const T& v) {
+  return hash<T>()(v);
+}
 
 // adapted from boost::hash_combine
 inline void hash_combine(size_t& h, const size_t& v) {

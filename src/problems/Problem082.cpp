@@ -9,12 +9,16 @@ int32 problem82(int32 n, int32 m) {
 
   static int32 idCounter = 0;
   struct Node {
-    Node(int32 weight)
-        : m_nId(idCounter++), m_nWeight(weight), m_nBest(INT32_MAX), m_bVisited(false) {}
+    Node(int32 weight) : m_nId(idCounter++), m_nWeight(weight), m_nBest(INT32_MAX), m_bVisited(false) {
+    }
 
-    bool operator==(Node& other) { return m_nId == other.m_nId; }
+    bool operator==(Node& other) {
+      return m_nId == other.m_nId;
+    }
 
-    bool operator<(Node& other) { return m_nBest < other.m_nBest; }
+    bool operator<(Node& other) {
+      return m_nBest < other.m_nBest;
+    }
 
     int32 m_nId;
     int32 m_nWeight;

@@ -10,8 +10,7 @@ int32 problem88(int32 n) {
   struct FactorizationHasher;
   class Factorization {
   public:
-    Factorization(const map<int32, int32>& factors)
-        : m_factors(factors), m_factorCount(0), m_factorSum(0) {
+    Factorization(const map<int32, int32>& factors) : m_factors(factors), m_factorCount(0), m_factorSum(0) {
       for (auto x : factors) {
         m_factorCount += x.second;
         m_factorSum += x.first * x.second;
@@ -19,7 +18,8 @@ int32 problem88(int32 n) {
     }
 
     Factorization(map<int32, int32>&& factors, int32 factorCount, int32 factorSum)
-        : m_factors(factors), m_factorCount(factorCount), m_factorSum(factorSum) {}
+        : m_factors(factors), m_factorCount(factorCount), m_factorSum(factorSum) {
+    }
 
     Factorization(const Factorization& other) = default;
     Factorization& operator=(const Factorization& other) = default;
@@ -34,8 +34,7 @@ int32 problem88(int32 n) {
       vector<Factorization> newFactorizations;
       for (auto first = m_factors.begin(); first != m_factors.end(); ++first) {
         for (auto second = first; second != m_factors.end(); ++second) {
-          if ((first->first == second->first && first->second >= 2) ||
-              first->first != second->first) {
+          if ((first->first == second->first && first->second >= 2) || first->first != second->first) {
             map<int32, int32> factors = m_factors;
 
             factors[first->first] -= 1;
@@ -52,7 +51,10 @@ int32 problem88(int32 n) {
               factors.erase(it);
             }
 
-            newFactorizations.emplace_back(move(factors), m_factorCount - 1, m_factorSum - first->first - second->first + first->first * second->first);
+            newFactorizations.emplace_back(
+                move(factors),
+                m_factorCount - 1,
+                m_factorSum - first->first - second->first + first->first * second->first);
           }
         }
       }
@@ -60,9 +62,15 @@ int32 problem88(int32 n) {
       return newFactorizations;
     }
 
-    const map<int32, int32>& getFactors() const { return m_factors; }
-    int32 factorCount() { return m_factorCount; }
-    int32 factorSum() { return m_factorSum; }
+    const map<int32, int32>& getFactors() const {
+      return m_factors;
+    }
+    int32 factorCount() {
+      return m_factorCount;
+    }
+    int32 factorSum() {
+      return m_factorSum;
+    }
 
   private:
     map<int32, int32> m_factors;

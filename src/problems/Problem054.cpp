@@ -40,7 +40,9 @@ int32 problem54() {
       suit = card[1];
     }
 
-    bool operator<(const Card& other) const { return value < other.value; }
+    bool operator<(const Card& other) const {
+      return value < other.value;
+    }
   };
 
   class PokerHandEval {

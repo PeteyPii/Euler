@@ -1,8 +1,11 @@
 ---
 AlignAfterOpenBracket: AlwaysBreak
+AlignOperands: false
+AllowShortFunctionsOnASingleLine: None
+AlwaysBreakTemplateDeclarations: true
 BinPackArguments: false
 BinPackParameters: false
-ColumnLimit: 0
+ColumnLimit: 120
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 ConstructorInitializerIndentWidth: 4
 IndentCaseLabels: true

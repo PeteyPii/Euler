@@ -11,9 +11,7 @@ int32 problem23() {
   }
 
   vector<bool> hasSum(28123 + 1, false);
-  for (uint32 i = 0;
-       i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123;
-       i++) {
+  for (uint32 i = 0; i < abundantNumbers.size() && abundantNumbers[i] * 2 <= 28123; i++) {
     for (uint32 j = i; j < abundantNumbers.size(); j++) {
       if (abundantNumbers[i] + abundantNumbers[j] > 28123) {
         break;

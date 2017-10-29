@@ -1,14 +1,4 @@
-/*******************************************************************************
-
-  Name:         Euler.h
-  Creator:      Patrick Wrobel
-  Date:         May 5th, 2014
-  Description:  Solutions to the problems on Project Euler
-
-*******************************************************************************/
-
-#ifndef EULER_H
-#define EULER_H
+#pragma once
 
 #include "Common.h"
 
@@ -130,5 +120,3 @@ int32    problem95(int32 n);                      // The smallest member of the 
 int32    problem96();                             // Sum of the first 3-digit numbers in each Sudoku puzzle.
 int64    problem97(int64 n, int64 m);             // Last 10 digits of n * 2^m + 1.
 // clang-format on
-
-#endif

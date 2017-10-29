@@ -27,4 +27,5 @@
 *.user
 .tags*
 bin/
+build/
 obj/

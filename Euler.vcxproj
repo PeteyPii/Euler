@@ -18,6 +18,117 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BigInteger.cpp" />
+    <ClCompile Include="src\Common.cpp" />
+    <ClCompile Include="src\problems\Problem001.cpp" />
+    <ClCompile Include="src\problems\Problem002.cpp" />
+    <ClCompile Include="src\problems\Problem003.cpp" />
+    <ClCompile Include="src\problems\Problem004.cpp" />
+    <ClCompile Include="src\problems\Problem005.cpp" />
+    <ClCompile Include="src\problems\Problem006.cpp" />
+    <ClCompile Include="src\problems\Problem007.cpp" />
+    <ClCompile Include="src\problems\Problem008.cpp" />
+    <ClCompile Include="src\problems\Problem009.cpp" />
+    <ClCompile Include="src\problems\Problem010.cpp" />
+    <ClCompile Include="src\problems\Problem011.cpp" />
+    <ClCompile Include="src\problems\Problem012.cpp" />
+    <ClCompile Include="src\problems\Problem013.cpp" />
+    <ClCompile Include="src\problems\Problem014.cpp" />
+    <ClCompile Include="src\problems\Problem015.cpp" />
+    <ClCompile Include="src\problems\Problem016.cpp" />
+    <ClCompile Include="src\problems\Problem017.cpp" />
+    <ClCompile Include="src\problems\Problem018.cpp" />
+    <ClCompile Include="src\problems\Problem019.cpp" />
+    <ClCompile Include="src\problems\Problem020.cpp" />
+    <ClCompile Include="src\problems\Problem021.cpp" />
+    <ClCompile Include="src\problems\Problem022.cpp" />
+    <ClCompile Include="src\problems\Problem023.cpp" />
+    <ClCompile Include="src\problems\Problem024.cpp" />
+    <ClCompile Include="src\problems\Problem025.cpp" />
+    <ClCompile Include="src\problems\Problem026.cpp" />
+    <ClCompile Include="src\problems\Problem027.cpp" />
+    <ClCompile Include="src\problems\Problem028.cpp" />
+    <ClCompile Include="src\problems\Problem029.cpp" />
+    <ClCompile Include="src\problems\Problem030.cpp" />
+    <ClCompile Include="src\problems\Problem031.cpp" />
+    <ClCompile Include="src\problems\Problem032.cpp" />
+    <ClCompile Include="src\problems\Problem033.cpp" />
+    <ClCompile Include="src\problems\Problem034.cpp" />
+    <ClCompile Include="src\problems\Problem035.cpp" />
+    <ClCompile Include="src\problems\Problem036.cpp" />
+    <ClCompile Include="src\problems\Problem037.cpp" />
+    <ClCompile Include="src\problems\Problem038.cpp" />
+    <ClCompile Include="src\problems\Problem039.cpp" />
+    <ClCompile Include="src\problems\Problem040.cpp" />
+    <ClCompile Include="src\problems\Problem041.cpp" />
+    <ClCompile Include="src\problems\Problem042.cpp" />
+    <ClCompile Include="src\problems\Problem043.cpp" />
+    <ClCompile Include="src\problems\Problem044.cpp" />
+    <ClCompile Include="src\problems\Problem045.cpp" />
+    <ClCompile Include="src\problems\Problem046.cpp" />
+    <ClCompile Include="src\problems\Problem047.cpp" />
+    <ClCompile Include="src\problems\Problem048.cpp" />
+    <ClCompile Include="src\problems\Problem049.cpp" />
+    <ClCompile Include="src\problems\Problem050.cpp" />
+    <ClCompile Include="src\problems\Problem051.cpp" />
+    <ClCompile Include="src\problems\Problem052.cpp" />
+    <ClCompile Include="src\problems\Problem053.cpp" />
+    <ClCompile Include="src\problems\Problem054.cpp" />
+    <ClCompile Include="src\problems\Problem055.cpp" />
+    <ClCompile Include="src\problems\Problem056.cpp" />
+    <ClCompile Include="src\problems\Problem057.cpp" />
+    <ClCompile Include="src\problems\Problem058.cpp" />
+    <ClCompile Include="src\problems\Problem059.cpp" />
+    <ClCompile Include="src\problems\Problem060.cpp" />
+    <ClCompile Include="src\problems\Problem061.cpp" />
+    <ClCompile Include="src\problems\Problem062.cpp" />
+    <ClCompile Include="src\problems\Problem063.cpp" />
+    <ClCompile Include="src\problems\Problem064.cpp" />
+    <ClCompile Include="src\problems\Problem065.cpp" />
+    <ClCompile Include="src\problems\Problem066.cpp" />
+    <ClCompile Include="src\problems\Problem067.cpp" />
+    <ClCompile Include="src\problems\Problem068.cpp" />
+    <ClCompile Include="src\problems\Problem069.cpp" />
+    <ClCompile Include="src\problems\Problem070.cpp" />
+    <ClCompile Include="src\problems\Problem071.cpp" />
+    <ClCompile Include="src\problems\Problem072.cpp" />
+    <ClCompile Include="src\problems\Problem073.cpp" />
+    <ClCompile Include="src\problems\Problem074.cpp" />
+    <ClCompile Include="src\problems\Problem075.cpp" />
+    <ClCompile Include="src\problems\Problem076.cpp" />
+    <ClCompile Include="src\problems\Problem077.cpp" />
+    <ClCompile Include="src\problems\Problem078.cpp" />
+    <ClCompile Include="src\problems\Problem079.cpp" />
+    <ClCompile Include="src\problems\Problem080.cpp" />
+    <ClCompile Include="src\problems\Problem081.cpp" />
+    <ClCompile Include="src\problems\Problem082.cpp" />
+    <ClCompile Include="src\problems\Problem083.cpp" />
+    <ClCompile Include="src\problems\Problem084.cpp" />
+    <ClCompile Include="src\problems\Problem085.cpp" />
+    <ClCompile Include="src\problems\Problem086.cpp" />
+    <ClCompile Include="src\problems\Problem087.cpp" />
+    <ClCompile Include="src\problems\Problem088.cpp" />
+    <ClCompile Include="src\problems\Problem089.cpp" />
+    <ClCompile Include="src\problems\Problem090.cpp" />
+    <ClCompile Include="src\problems\Problem091.cpp" />
+    <ClCompile Include="src\problems\Problem092.cpp" />
+    <ClCompile Include="src\problems\Problem093.cpp" />
+    <ClCompile Include="src\problems\Problem094.cpp" />
+    <ClCompile Include="src\problems\Problem095.cpp" />
+    <ClCompile Include="src\problems\Problem096.cpp" />
+    <ClCompile Include="src\problems\Problem097.cpp" />
+    <ClCompile Include="src\ScopeTimer.cpp" />
+    <ClCompile Include="src\targets\euler.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\BigInteger.h" />
+    <ClInclude Include="src\Common.h" />
+    <ClInclude Include="src\Problems.h" />
+    <ClInclude Include="src\ScopeTimer.h" />
+    <ClInclude Include="src\SourcePrefix.h" />
+    <ClInclude Include="src\SourceSuffix.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{9CC9F9EE-8611-4B38-BBEA-82A84E1AD30A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -109,6 +220,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +253,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -149,14 +262,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="Common.h" />
-    <ClInclude Include="Euler.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Common.cpp" />
-    <ClCompile Include="Euler.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -119,4 +119,5 @@ int32    problem95(int32 n);                      // The smallest member of the 
 
 int32    problem96();                             // Sum of the first 3-digit numbers in each Sudoku puzzle.
 int64    problem97(int64 n, int64 m);             // Last 10 digits of n * 2^m + 1.
+int32    problem98();                             // Largest square number formed by substituting letters in a pair of words to create a pair of anagramic squares.
 // clang-format on

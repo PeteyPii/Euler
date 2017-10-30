@@ -121,4 +121,5 @@ int32    problem96();                             // Sum of the first 3-digit nu
 int64    problem97(int64 n, int64 m);             // Last 10 digits of n * 2^m + 1.
 int32    problem98();                             // Largest square number formed by substituting letters in a pair of words to create a pair of anagramic squares.
 int32    problem99();                             // Determine the line of the largest exponential value in a file.
+int64    problem100(int64 n);                     // First y >= n such that x(x-1)/y/(y-1)=1/2 where x and y are positive integers.
 // clang-format on

@@ -25,7 +25,9 @@
 *.tmp
 *.unsuccessfulbuild
 *.user
+.idea/
 .tags*
 bin/
 build/
+cmake-build-debug/
 obj/

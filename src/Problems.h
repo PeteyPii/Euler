@@ -124,4 +124,5 @@ int32    problem99();                             // Determine the line of the l
 int64    problem100(int64 n);                     // First y >= n such that x(x-1)/y/(y-1)=1/2 where x and y are positive integers.
 
 int64    problem101(int64 n);                     // Find the sum of FITs for the BOPs for the polynomial 1 - x + x^2 - x^3 + ... + x^n.
+int32    problem102();                            // Number of triangles that surround the origin.
 // clang-format on

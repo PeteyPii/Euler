@@ -7,8 +7,8 @@ int64 problem101(int64 n) {
     return 0;
   }
 
-  vector<vector<int64>> diffs((uint32) n + 1, vector<int64>((uint32) n + 1, -1));
-  vector<int64> terms((uint32) n + 1);
+  vector<vector<int64>> diffs((uint32)n + 1, vector<int64>((uint32)n + 1, -1));
+  vector<int64> terms((uint32)n + 1);
   for (int64 x = 1; x <= n; x++) {
     int64 sum = 0;
     for (int64 i = 0; i <= n; i++) {

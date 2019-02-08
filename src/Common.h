@@ -281,7 +281,7 @@ struct hash<set<T>> : hash_container<set<T>> {};
 
 template <typename T, typename U>
 struct hash<map<T, U>> : hash_container<map<T, U>> {};
-}
+} // namespace std
 
 template <typename T>
 T vectorSum(const vector<T>& v) {

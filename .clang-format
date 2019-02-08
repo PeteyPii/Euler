@@ -11,6 +11,6 @@ ConstructorInitializerIndentWidth: 4
 IndentCaseLabels: true
 IndentWidth: 2
 PointerAlignment: Left
-ReflowComments: false
+ReflowComments: true
 SortIncludes: true
 ...

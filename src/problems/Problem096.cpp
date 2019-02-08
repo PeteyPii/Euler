@@ -164,7 +164,7 @@ int32 problem96() {
 
     function<bool(array<array<char, 9>, 9>&, int32&, int32)> bruteForce;
     bruteForce = [&deduce, &bruteForce](
-        array<array<char, 9>, 9>& grid, int32& unsolvedCount, int32 remainingRecursions) -> bool {
+                     array<array<char, 9>, 9>& grid, int32& unsolvedCount, int32 remainingRecursions) -> bool {
       deduce(grid, unsolvedCount);
       if (unsolvedCount == 0) {
         return true;

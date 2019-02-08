@@ -122,4 +122,6 @@ int64    problem97(int64 n, int64 m);             // Last 10 digits of n * 2^m +
 int32    problem98();                             // Largest square number formed by substituting letters in a pair of words to create a pair of anagramic squares.
 int32    problem99();                             // Determine the line of the largest exponential value in a file.
 int64    problem100(int64 n);                     // First y >= n such that x(x-1)/y/(y-1)=1/2 where x and y are positive integers.
+
+int64    problem101(int64 n);                     // Find the sum of FITs for the BOPs for the polynomial 1 - x + x^2 - x^3 + ... + x^n.
 // clang-format on

@@ -46,6 +46,15 @@ bool isLeapYear(int32 year);
 void printProgress(uint64 current, uint64 total, int32 intervals);
 double logarithmicIntegralApprox(double x, int32 iterations = 50);
 
+// Sorted sequences of positive integers that sum to x.
+vector<vector<int32>> partitions(int32 x);
+
+// Sorted sequences of positive integers of length n that sum to x.
+vector<vector<int32>> partitionsOfSizeN(int32 x, int32 n);
+
+// Sorted sets (i.e. no repeats) of positive integers of cardinality n that sum to x.
+vector<vector<int32>> partitionSetsOfSizeN(int32 x, int32 n, int32 min = 1);
+
 template <typename N>
 N stringToNumber(string s) {
   stringstream ss;

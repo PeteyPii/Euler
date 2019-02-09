@@ -17,9 +17,13 @@ int32 main(int32 argc, const char** argv) {
     cout << "An exception has been thrown:" << endl;
     cout << "  " << e << endl;
     return 1;
+  } catch (const exception& e) {
+    cout << "An exception has been thrown:" << endl;
+    cout << "  " << e.what() << endl;
+    return 2;
   } catch (...) {
     cout << "An unknown exception has been thrown." << endl;
-    return 2;
+    return 3;
   }
 }
 
@@ -148,6 +152,7 @@ void verifyResults() {
 
       []() -> bool { return assertEquality(problem101(10), 37076114526); },
       []() -> bool { return assertEquality(problem102(), 228); },
+      []() -> bool { return assertEquality(problem103(7), "20313839404245"); },
   };
 
   ifstream fin("run.txt");

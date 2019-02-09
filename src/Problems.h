@@ -125,4 +125,5 @@ int64    problem100(int64 n);                     // First y >= n such that x(x-
 
 int64    problem101(int64 n);                     // Find the sum of FITs for the BOPs for the polynomial 1 - x + x^2 - x^3 + ... + x^n.
 int32    problem102();                            // Number of triangles that surround the origin.
+string   problem103(int32 n);                     // Set string of the optimum special sum set of size n.
 // clang-format on

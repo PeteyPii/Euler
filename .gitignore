@@ -29,5 +29,5 @@
 .tags*
 bin/
 build/
-cmake-build-debug/
+cmake-build-*/
 obj/

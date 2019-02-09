@@ -79,3 +79,82 @@ double logarithmicIntegralApprox(double x, int32 iterations) {
 
   return sum;
 }
+
+void partitionsRecurse(vector<vector<int32>>* result, const vector<int32>& prefix, int32 remaining) {
+  if (remaining == 0) {
+    result->push_back(prefix);
+    return;
+  }
+
+  int32 max = remaining;
+  if (!prefix.empty()) {
+    if (prefix.back() < max) {
+      max = prefix.back();
+    }
+  }
+  for (int32 i = max; i >= 1; i--) {
+    vector<int32> newPrefix = prefix;
+    newPrefix.push_back(i);
+    partitionsRecurse(result, newPrefix, remaining - i);
+  }
+}
+
+vector<vector<int32>> partitions(int32 x) {
+  vector<vector<int32>> result;
+  partitionsRecurse(&result, {}, x);
+  return result;
+}
+
+void partitionsOfSizeNRecurse(vector<vector<int32>>* result, const vector<int32>& prefix, int32 remaining, int32 n) {
+  if (prefix.size() == (uint32)n) {
+    if (remaining == 0) {
+      result->push_back(prefix);
+    }
+    return;
+  }
+
+  int32 max = remaining;
+  if (!prefix.empty()) {
+    if (prefix.back() < max) {
+      max = prefix.back();
+    }
+  }
+  for (int32 i = max; i >= 1; i--) {
+    vector<int32> newPrefix = prefix;
+    newPrefix.push_back(i);
+    partitionsOfSizeNRecurse(result, newPrefix, remaining - i, n);
+  }
+}
+
+vector<vector<int32>> partitionsOfSizeN(int32 x, int32 n) {
+  vector<vector<int32>> result;
+  partitionsOfSizeNRecurse(&result, {}, x, n);
+  return result;
+}
+
+void partitionSetsOfSizeNRecurse(
+    vector<vector<int32>>* result, const vector<int32>& prefix, int32 remaining, int32 n, int32 startMin) {
+  if (prefix.size() == (uint32)n) {
+    if (remaining == 0) {
+      result->push_back(prefix);
+    }
+    return;
+  }
+
+  int32 min = startMin;
+  int32 max = remaining / (n - prefix.size()) + 1;
+  if (!prefix.empty()) {
+    min = prefix.back() + 1;
+  }
+  for (int32 i = min; i <= max; i++) {
+    vector<int32> newPrefix = prefix;
+    newPrefix.push_back(i);
+    partitionSetsOfSizeNRecurse(result, newPrefix, remaining - i, n, startMin);
+  }
+}
+
+vector<vector<int32>> partitionSetsOfSizeN(int32 x, int32 n, int32 startMin) {
+  vector<vector<int32>> result;
+  partitionSetsOfSizeNRecurse(&result, {}, x, n, startMin);
+  return result;
+}

@@ -158,3 +158,27 @@ vector<vector<int32>> partitionSetsOfSizeN(int32 x, int32 n, int32 startMin) {
   partitionSetsOfSizeNRecurse(&result, {}, x, n, startMin);
   return result;
 }
+
+bool isStringPandigital(const string& s) {
+  if (s.empty()) {
+    return true;
+  }
+
+  string temp(s);
+  sort(temp.begin(), temp.end());
+
+  if (temp[0] != '1') {
+    return false;
+  }
+
+  char c = temp[0];
+  for (uint32 i = 1; i < temp.length(); i++) {
+    if (c + 1 != temp[i]) {
+      return false;
+    }
+
+    c++;
+  }
+
+  return true;
+}

@@ -307,22 +307,17 @@ T setSum(const set<T>& s) {
   return accumulate(s.cbegin(), s.cend(), T(0));
 }
 
+bool isStringPandigital(const string& s);
+
 template <typename N>
-bool isPandigital(N n) {
+bool isPandigital(const N& n) {
   string s = numberToString(n);
+  return isStringPandigital(s);
+}
 
-  sort(s.begin(), s.end());
-
-  char c = s[0];
-  for (uint32 i = 1; i < s.length(); i++) {
-    if (c + 1 != s[i]) {
-      return false;
-    }
-
-    c++;
-  }
-
-  return true;
+template<>
+inline bool isPandigital<string>(const string& s) {
+  return isStringPandigital(s);
 }
 
 template <typename T, typename U>

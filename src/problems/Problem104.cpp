@@ -31,3 +31,5 @@ int32 problem104() {
     }
   }
 }
+
+#include "SourceSuffix.h"

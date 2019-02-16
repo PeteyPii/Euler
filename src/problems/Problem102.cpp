@@ -28,3 +28,5 @@ int32 problem102() {
 
   return count;
 }
+
+#include "SourceSuffix.h"

@@ -126,5 +126,8 @@ int64    problem100(int64 n);                     // First y >= n such that x(x-
 int64    problem101(int64 n);                     // Find the sum of FITs for the BOPs for the polynomial 1 - x + x^2 - x^3 + ... + x^n.
 int32    problem102();                            // Number of triangles that surround the origin.
 string   problem103(int32 n);                     // Set string of the optimum special sum set of size n.
-int32    problem104();                            // Find the k-th Fibonacci number where .
+int32    problem104();                            // Find the k-th Fibonacci number where the first and last 9 digits are 1-9 pandigital.
+int32    problem105();                            // Identify the special subset sum sets and find their total sum.
+
+int32    problem106(int32 n);                     // How many subset pairs need to be checked for the inequality condition of special subset sums.
 // clang-format on

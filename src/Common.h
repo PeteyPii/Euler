@@ -315,7 +315,7 @@ bool isPandigital(const N& n) {
   return isStringPandigital(s);
 }
 
-template<>
+template <>
 inline bool isPandigital<string>(const string& s) {
   return isStringPandigital(s);
 }

@@ -130,4 +130,5 @@ int32    problem104();                            // Find the k-th Fibonacci num
 int32    problem105();                            // Identify the special subset sum sets and find their total sum.
 
 int32    problem106(int32 n);                     // How many subset pairs need to be checked for the inequality condition of special subset sums.
+int32    problem107();                            // Total weight of edges saved by turning a graph into a minimum spanning tree.
 // clang-format on

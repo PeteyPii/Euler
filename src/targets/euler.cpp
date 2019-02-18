@@ -157,6 +157,7 @@ void verifyResults() {
       []() -> bool { return assertEquality(problem105(), 73702); },
 
       []() -> bool { return assertEquality(problem106(12), 21384); },
+      []() -> bool { return assertEquality(problem107(), 259679); },
   };
 
   ifstream fin("run.txt");
